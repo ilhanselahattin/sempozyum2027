@@ -4,6 +4,7 @@
 > İşaretler: [x] bitti · [~] kod hazır, gerçek veri/dosya/karar bekliyor · [ ] yapılmadı · (+) = AI'ın eklediği madde
 
 ## Proje
+- Canlı: https://ilhanselahattin.github.io/sempozyum2027/ · Repo: github.com/ilhanselahattin/sempozyum2027 (main'e push = otomatik yayın, ~1 dk)
 - Amaç: Akademik sempozyum (örnek ad: ISSDT 2027) için tek sayfalık site → GitHub Pages.
 - Build yok. Dosyalar: `index.html` (tüm site + veri), `404.html`, `favicon.ico`, `robots.txt`, `sitemap.xml`, `.nojekyll`,
   `assets/img/` (favicon.svg, apple-touch-icon.png, og-image.png), `assets/src/og-image.html` (OG görsel kaynağı), `memory.md`.
@@ -43,7 +44,7 @@
 - [x] (+) Tarihe göre otomatik faz geçişi (cfp/live/archive) + `?phase=` önizleme.
 - [ ] (+) Yayın öncesi performans/KVKK: Tailwind CDN yerine derlenmiş CSS (CDN konsola "production'da kullanma" uyarısı basar) ve Google Fonts'u self-host (IP aktarımı KVKK riski).
 - [ ] (+) Analitik gerekiyorsa çerezsiz bir araç (GoatCounter/Plausible) → çerez banner'ı gerekmez.
-- [ ] Git deposu GitHub'a gönderilecek (yerel commit hazır; kullanıcıdan repo URL'si bekleniyor, `gh` CLI yüklü değil).
+- [x] GitHub'a gönderildi + Pages açık (main / root). Repo: https://github.com/ilhanselahattin/sempozyum2027 · Canlı: https://ilhanselahattin.github.io/sempozyum2027/ (`gh` CLI yok; push HTTPS ile çalışıyor).
 
 ### Faz 2 — Çağrı ve Bildiri Toplama (2–4 ay önce)
 - [~] Gönderim sistemi entegrasyonu: butonlar `meta.submissionUrl`'e bağlı (şu an genel easychair.org). Sistem seçilince gerçek link girilecek.
@@ -78,3 +79,4 @@
 - 2026-10-23 · Adım 1: `index.html` ilk sürüm (9 bölüm + SSS, TR/EN). Node ile mantık testi OK; Lucide ikonları doğrulandı.
 - 2026-10-23 · Adım 2: git init + ilk commit (b618515). GitHub push bekliyor (repo URL yok, gh CLI yok).
 - 2026-10-23 · Adım 3: Yol haritası eklendi ve değerlendirildi. index.html v2: faz sistemi, duyuru şeridi, uzatma modu, teşvik kartı, kayıt/ücret/IBAN, kabul edilen bildiriler, sunum kuralları, 6 indirme, ulaşım+konaklama, galeri+ışık kutusu, KVKK modalı, "Daha Fazla" menüsü, SEO/OG/JSON-LD. 404/robots/sitemap/.nojekyll, favicon + OG görseli üretildi. Node ile 5 tarih senaryosu test edildi, headless Chrome ile masaüstü/mobil/canlı mod ekran görüntüleri kontrol edildi.
+- 2026-10-23 · Adım 4: GitHub'a push (repo sempozyum2027), Pages açıldı. Canlı kontrol: index/favicon/og/robots/sitemap 200, 404 sayfası çalışıyor, 4 CDN 200, headless Chrome ile JS render (geri sayım, ikonlar, tüm bölümler) doğrulandı. assets/docs/ dosyaları hâlâ 404 (beklenen).
