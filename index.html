@@ -4,8 +4,58 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ISSDT 2027 · Uluslararası Sürdürülebilir Dijital Dönüşüm Sempozyumu</title>
-  <meta name="description" content="ISSDT 2027 — Uluslararası Sürdürülebilir Dijital Dönüşüm Sempozyumu, 13–14 Mayıs 2027, Ankara." />
+  <meta name="description" content="ISSDT 2027 — 3. Uluslararası Sürdürülebilir Dijital Dönüşüm Sempozyumu, 13–14 Mayıs 2027, Ankara. Bildiri çağrısı, önemli tarihler, program ve kayıt bilgileri." />
   <meta name="theme-color" content="#0B0F19" />
+  <!-- Alan adı kesinleşince SITE_URL değerlerini güncelleyin (canonical, og:url, og:image, JSON-LD) -->
+  <link rel="canonical" href="https://sempozyum2027.example.edu.tr/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+
+  <!-- Open Graph / sosyal medya önizlemesi (1200x630) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:site_name" content="ISSDT 2027" />
+  <meta property="og:title" content="ISSDT 2027 · Uluslararası Sürdürülebilir Dijital Dönüşüm Sempozyumu" />
+  <meta property="og:description" content="13–14 Mayıs 2027 · Ankara. Bildiri çağrısı açık — özet gönderimi, önemli tarihler ve program." />
+  <meta property="og:url" content="https://sempozyum2027.example.edu.tr/" />
+  <meta property="og:image" content="https://sempozyum2027.example.edu.tr/assets/img/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="ISSDT 2027 sempozyum afişi" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ISSDT 2027 · Sustainable Digital Transformation Symposium" />
+  <meta name="twitter:description" content="13–14 May 2027 · Ankara, Türkiye. Call for papers is open." />
+  <meta name="twitter:image" content="https://sempozyum2027.example.edu.tr/assets/img/og-image.png" />
+
+  <!-- Arama motorları için yapılandırılmış veri (schema.org Event) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "3. Uluslararası Sürdürülebilir Dijital Dönüşüm Sempozyumu (ISSDT 2027)",
+    "alternateName": "3rd International Symposium on Sustainable Digital Transformation",
+    "startDate": "2027-05-13T08:30:00+03:00",
+    "endDate": "2027-05-14T16:30:00+03:00",
+    "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "location": [
+      {
+        "@type": "Place",
+        "name": "Kuzey Ufuk Üniversitesi Kongre ve Kültür Merkezi",
+        "address": { "@type": "PostalAddress", "streetAddress": "Üniversiteler Mah. Bilim Cad. No: 12", "addressLocality": "Çankaya", "addressRegion": "Ankara", "postalCode": "06800", "addressCountry": "TR" }
+      },
+      { "@type": "VirtualLocation", "url": "https://sempozyum2027.example.edu.tr/#program" }
+    ],
+    "image": ["https://sempozyum2027.example.edu.tr/assets/img/og-image.png"],
+    "description": "Yapay zekâ, veri bilimi, yeşil teknolojiler ve dijital toplum alanlarında hakemli uluslararası sempozyum.",
+    "organizer": { "@type": "Organization", "name": "Kuzey Ufuk Üniversitesi", "url": "https://sempozyum2027.example.edu.tr/" },
+    "inLanguage": ["tr", "en"]
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,6 +100,8 @@
       .btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2; }
       .btn-ghost { @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2; }
       .tab { @apply relative whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600; }
+      .chip { @apply rounded-full border border-slate-200 bg-paper px-2.5 py-1 text-xs text-slate-600; }
+      .search-input { @apply w-full rounded-full border border-slate-200 bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-slate-400 focus:border-brand-600 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-600/10; }
     }
   </style>
   <style>
@@ -86,16 +138,36 @@
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 </head>
 
-<body x-data="symposiumApp()" x-init="init()" class="font-sans text-slate-700 antialiased selection:bg-brand-100 selection:text-brand-900">
+<body x-data="symposiumApp()" x-init="init()"
+      x-effect="document.body.classList.toggle('overflow-hidden', kvkkOpen || lightbox !== null)"
+      class="font-sans text-slate-700 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <a href="#top" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-white" x-text="L('a11y.skip')"></a>
+
+  <!-- ============================== DUYURU ŞERİDİ ============================== -->
+  <div x-show="announcementVisible" x-cloak class="relative z-50 bg-accent-600 text-white">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 text-sm sm:px-6 lg:px-8">
+      <a :href="data.announcement.href" class="flex min-w-0 items-center gap-2 font-medium hover:underline">
+        <span class="shrink-0" x-html="icon('megaphone', 'h-4 w-4')"></span>
+        <span class="truncate" x-text="t(data.announcement.text)"></span>
+      </a>
+      <button type="button" @click="dismissAnnouncement()" class="grid h-7 w-7 shrink-0 place-items-center rounded-full hover:bg-white/15" :aria-label="L('a11y.close')">
+        <span x-html="icon('x', 'h-4 w-4')"></span>
+      </button>
+    </div>
+  </div>
 
   <!-- ============================== NAVBAR ============================== -->
   <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
     <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8" aria-label="Ana menü">
       <!-- Logo -->
       <a href="#top" class="flex shrink-0 items-center gap-3" aria-label="Ana sayfa">
-        <span class="grid h-9 w-9 place-items-center rounded-lg bg-ink font-display text-sm font-extrabold text-white">
-          <span x-text="data.meta.monogram"></span>
-        </span>
+        <template x-if="data.meta.logo">
+          <img :src="data.meta.logo" :alt="data.meta.acronym" class="h-9 w-auto" />
+        </template>
+        <template x-if="!data.meta.logo">
+          <span class="grid h-9 w-9 place-items-center rounded-lg bg-ink font-display text-sm font-extrabold text-white" x-text="data.meta.monogram"></span>
+        </template>
         <span class="leading-tight">
           <span class="block font-display text-sm font-bold text-ink" x-text="data.meta.acronym"></span>
           <span class="hidden font-mono text-[10px] uppercase tracking-widest text-slate-500 sm:block" x-text="t(data.meta.shortDate)"></span>
@@ -103,15 +175,33 @@
       </a>
 
       <!-- Masaüstü linkler -->
-      <ul class="hidden items-center gap-1 lg:flex">
-        <template x-for="link in navLinks" :key="link.id">
+      <ul class="hidden items-center gap-0.5 xl:flex">
+        <template x-for="link in primaryNav" :key="link.id">
           <li>
             <a :href="'#' + link.id"
                class="rounded-full px-3 py-2 text-sm font-medium transition"
-               :class="activeSection === link.id ? 'text-ink bg-slate-100' : 'text-slate-600 hover:text-ink'"
+               :class="activeSection === link.id ? 'bg-slate-100 text-ink' : 'text-slate-600 hover:text-ink'"
                x-text="L(link.key)"></a>
           </li>
         </template>
+        <li x-data="{ more: false }" class="relative" @click.outside="more = false" @keydown.escape="more = false">
+          <button type="button" @click="more = !more" :aria-expanded="more"
+                  class="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition"
+                  :class="secondaryNav.some(l => l.id === activeSection) ? 'bg-slate-100 text-ink' : 'text-slate-600 hover:text-ink'">
+            <span x-text="L('nav.more')"></span>
+            <span class="transition" :class="more && 'rotate-180'" x-html="icon('chevron-down', 'h-3.5 w-3.5')"></span>
+          </button>
+          <div x-show="more" x-cloak x-transition.origin.top.duration.150ms class="absolute right-0 top-full mt-2 w-56 rounded-2xl border border-slate-200 bg-white p-1.5">
+            <template x-for="link in secondaryNav" :key="link.id">
+              <a :href="'#' + link.id" @click="more = false"
+                 class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm transition"
+                 :class="activeSection === link.id ? 'bg-slate-100 text-ink' : 'text-slate-600 hover:bg-slate-50 hover:text-ink'">
+                <span class="text-slate-400" x-html="icon(link.icon, 'h-4 w-4')"></span>
+                <span x-text="L(link.key)"></span>
+              </a>
+            </template>
+          </div>
+        </li>
       </ul>
 
       <div class="flex items-center gap-2">
@@ -120,13 +210,15 @@
           <button type="button" @click="setLang('tr')" class="rounded-full px-2.5 py-1 transition" :class="lang === 'tr' ? 'bg-ink text-white' : 'text-slate-500 hover:text-ink'" :aria-pressed="lang === 'tr'">TR</button>
           <button type="button" @click="setLang('en')" class="rounded-full px-2.5 py-1 transition" :class="lang === 'en' ? 'bg-ink text-white' : 'text-slate-500 hover:text-ink'" :aria-pressed="lang === 'en'">EN</button>
         </div>
-        <!-- CTA -->
-        <a :href="data.meta.submissionUrl" target="_blank" rel="noopener" class="hidden items-center gap-2 rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700 sm:inline-flex">
-          <span x-text="L('cta.abstract')"></span>
-          <span x-html="icon('arrow-up-right', 'h-4 w-4')"></span>
+        <!-- CTA (faza göre değişir) -->
+        <a :href="cta.href" :target="cta.external ? '_blank' : null" :rel="cta.external ? 'noopener' : null"
+           class="hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white transition sm:inline-flex"
+           :class="phase === 'live' ? 'bg-rose-600 hover:bg-rose-700' : 'bg-brand-600 hover:bg-brand-700'">
+          <span x-text="L(cta.key)"></span>
+          <span x-html="icon(cta.icon, 'h-4 w-4')"></span>
         </a>
         <!-- Mobil menü butonu -->
-        <button type="button" @click="mobileMenu = !mobileMenu" class="grid h-9 w-9 place-items-center rounded-full border border-slate-200 bg-white text-ink lg:hidden" :aria-expanded="mobileMenu" aria-label="Menü">
+        <button type="button" @click="mobileMenu = !mobileMenu" class="grid h-9 w-9 place-items-center rounded-full border border-slate-200 bg-white text-ink xl:hidden" :aria-expanded="mobileMenu" :aria-label="L('a11y.menu')">
           <span x-show="!mobileMenu" x-html="icon('menu', 'h-4 w-4')"></span>
           <span x-show="mobileMenu" x-cloak x-html="icon('x', 'h-4 w-4')"></span>
         </button>
@@ -134,20 +226,20 @@
     </nav>
 
     <!-- Mobil menü -->
-    <div x-show="mobileMenu" x-cloak x-transition.opacity.duration.200ms @click.outside="mobileMenu = false" class="border-t border-slate-200 bg-white/95 backdrop-blur-md lg:hidden">
-      <ul class="mx-auto grid max-w-7xl gap-1 px-4 py-4 sm:px-6">
-        <template x-for="link in navLinks" :key="link.id">
+    <div x-show="mobileMenu" x-cloak x-transition.opacity.duration.200ms @click.outside="mobileMenu = false" class="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-slate-200 bg-white/95 backdrop-blur-md xl:hidden">
+      <ul class="mx-auto grid max-w-7xl gap-1 px-4 py-4 sm:grid-cols-2 sm:px-6">
+        <template x-for="link in primaryNav.concat(secondaryNav)" :key="link.id">
           <li>
-            <a :href="'#' + link.id" @click="mobileMenu = false" class="flex items-center justify-between rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-slate-100">
+            <a :href="'#' + link.id" @click="mobileMenu = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-slate-100">
+              <span class="text-slate-400" x-html="icon(link.icon, 'h-4 w-4')"></span>
               <span x-text="L(link.key)"></span>
-              <span class="text-slate-400" x-html="icon('chevron-right', 'h-4 w-4')"></span>
             </a>
           </li>
         </template>
-        <li class="pt-2">
-          <a :href="data.meta.submissionUrl" target="_blank" rel="noopener" class="btn-primary w-full">
-            <span x-text="L('cta.abstract')"></span>
-            <span x-html="icon('arrow-up-right', 'h-4 w-4')"></span>
+        <li class="pt-2 sm:col-span-2">
+          <a :href="cta.href" :target="cta.external ? '_blank' : null" :rel="cta.external ? 'noopener' : null" class="btn-primary w-full">
+            <span x-text="L(cta.key)"></span>
+            <span x-html="icon(cta.icon, 'h-4 w-4')"></span>
           </a>
         </li>
       </ul>
@@ -159,20 +251,30 @@
     <section class="relative overflow-hidden border-b border-slate-200">
       <div class="pointer-events-none absolute inset-0 bg-grid mask-fade" aria-hidden="true"></div>
       <div class="relative mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 sm:pt-20 lg:px-8 lg:pb-24 lg:pt-28">
-        <!-- Rozet -->
+        <!-- Rozetler -->
         <div class="flex flex-wrap items-center gap-2">
-          <span class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-ink">
+          <span class="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1.5 text-xs font-medium text-ink"
+                :class="phase === 'live' ? 'border-rose-200' : 'border-slate-200'">
             <span class="relative flex h-2 w-2">
-              <span class="ping-soft absolute inline-flex h-full w-full rounded-full bg-brand-500"></span>
-              <span class="relative inline-flex h-2 w-2 rounded-full bg-brand-600"></span>
+              <span class="ping-soft absolute inline-flex h-full w-full rounded-full" :class="phase === 'live' ? 'bg-rose-500' : 'bg-brand-500'"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full" :class="phase === 'live' ? 'bg-rose-600' : 'bg-brand-600'"></span>
             </span>
-            <span class="font-mono tabular" x-text="t(data.meta.dateRange)"></span>
+            <template x-if="phase === 'live'">
+              <span class="font-mono font-semibold uppercase tracking-[0.14em] text-rose-700" x-text="L('live.badge') + ' · ' + L('program.day') + ' ' + (liveDayIndex + 1)"></span>
+            </template>
+            <template x-if="phase !== 'live'">
+              <span class="font-mono tabular" x-text="t(data.meta.dateRange)"></span>
+            </template>
             <span class="text-slate-300">/</span>
             <span x-text="t(data.meta.city)"></span>
           </span>
           <span class="inline-flex items-center gap-1.5 rounded-full border border-accent-200 bg-accent-50 px-3 py-1.5 text-xs font-medium text-accent-800">
             <span x-html="icon('sparkles', 'h-3.5 w-3.5')"></span>
             <span x-text="t(data.meta.edition)"></span>
+          </span>
+          <span x-show="phase === 'archive'" x-cloak class="inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1.5 text-xs font-medium text-white">
+            <span x-html="icon('archive', 'h-3.5 w-3.5')"></span>
+            <span x-text="L('archive.badge')"></span>
           </span>
         </div>
 
@@ -181,13 +283,14 @@
           <span x-text="t(data.meta.titleLead)"></span>
           <span class="text-brand-600" x-text="t(data.meta.titleAccent)"></span>
         </h1>
-        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600" x-text="t(data.meta.tagline)"></p>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600"
+           x-text="phase === 'archive' ? t(data.archive.thanks) : t(data.meta.tagline)"></p>
 
-        <!-- Butonlar -->
-        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
-          <a :href="data.meta.submissionUrl" target="_blank" rel="noopener" class="btn-primary">
-            <span x-html="icon('send', 'h-4 w-4')"></span>
-            <span x-text="L('cta.paper')"></span>
+        <!-- Butonlar: Çağrı dönemi -->
+        <div x-show="phase === 'cfp'" class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <a :href="cta.href" :target="cta.external ? '_blank' : null" :rel="cta.external ? 'noopener' : null" class="btn-primary">
+            <span x-html="icon(cta.icon, 'h-4 w-4')"></span>
+            <span x-text="L(cta.key === 'cta.abstract' ? 'cta.paper' : cta.key)"></span>
           </a>
           <a :href="data.downloads[0].href" download class="btn-ghost">
             <span x-html="icon('file-down', 'h-4 w-4')"></span>
@@ -195,13 +298,40 @@
           </a>
         </div>
 
-        <!-- Geri sayım -->
+        <!-- Butonlar: Canlı mod -->
+        <div x-show="phase === 'live'" x-cloak class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <button type="button" @click="goToDay(liveDayIndex)" class="btn-primary bg-rose-600 hover:bg-rose-700 focus-visible:ring-rose-600">
+            <span x-html="icon('radio', 'h-4 w-4')"></span>
+            <span x-text="L('live.dayProgram').replace('{n}', liveDayIndex + 1)"></span>
+          </button>
+          <a :href="data.meta.programPdf" download class="btn-ghost">
+            <span x-html="icon('file-down', 'h-4 w-4')"></span>
+            <span x-text="L('live.pdf')"></span>
+          </a>
+        </div>
+
+        <!-- Butonlar: Arşiv modu (bildiri kitapları en büyük buton) -->
+        <div x-show="phase === 'archive'" x-cloak class="mt-10 grid gap-3 sm:grid-cols-2 lg:max-w-4xl">
+          <template x-for="(book, bi) in data.proceedings" :key="book.isbn">
+            <a :href="book.url" download class="group flex items-center gap-4 rounded-2xl p-5 transition hover:-translate-y-1"
+               :class="bi === 0 ? 'bg-brand-600 text-white hover:bg-brand-700' : 'border border-slate-200 bg-white text-ink hover:border-brand-600'">
+              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl" :class="bi === 0 ? 'bg-white/15' : 'bg-brand-50 text-brand-700'" x-html="icon('book-down', 'h-6 w-6')"></span>
+              <span class="min-w-0">
+                <span class="block font-display text-lg font-bold" x-text="L('archive.download') + ' ' + t(book.title)"></span>
+                <span class="block font-mono text-xs tabular" :class="bi === 0 ? 'text-brand-100' : 'text-slate-500'" x-text="'ISBN: ' + book.isbn + ' · ' + book.size"></span>
+              </span>
+            </a>
+          </template>
+        </div>
+
+        <!-- Alt panel -->
         <div class="mt-14 grid gap-4 lg:grid-cols-12">
-          <div class="relative overflow-hidden rounded-2xl bg-ink p-6 text-white sm:p-8 lg:col-span-8">
+          <!-- Geri sayım (çağrı dönemi) -->
+          <div x-show="phase === 'cfp'" class="relative overflow-hidden rounded-2xl bg-ink p-6 text-white sm:p-8 lg:col-span-8">
             <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
             <div class="relative flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-400" x-text="countdown.finished ? L('countdown.live') : L('countdown.label')"></p>
+                <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-400" x-text="L('countdown.label')"></p>
                 <p class="mt-1 text-sm text-slate-400" x-text="t(data.meta.openingNote)"></p>
               </div>
               <span class="hidden font-mono text-xs text-slate-500 sm:block">UTC+03:00</span>
@@ -215,8 +345,60 @@
               </template>
             </div>
           </div>
+
+          <!-- Şu an / sıradaki (canlı mod) -->
+          <div x-show="phase === 'live'" x-cloak class="relative overflow-hidden rounded-2xl bg-ink p-6 text-white sm:p-8 lg:col-span-8">
+            <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
+            <div class="relative flex items-center justify-between">
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-rose-400" x-text="L('live.now')"></p>
+              <span class="font-mono text-sm tabular text-slate-300" x-text="istanbulNow.time + ' TSİ'"></span>
+            </div>
+            <div class="relative mt-5 space-y-3">
+              <template x-for="(s, si) in liveNow" :key="'now-' + si">
+                <div class="rounded-xl border border-rose-500/40 bg-rose-500/10 p-4">
+                  <p class="font-mono text-xs tabular text-rose-300" x-text="s.start + '–' + s.end + (s.hall ? ' · ' + t(s.hall) : '')"></p>
+                  <p class="mt-1 font-display font-semibold" x-text="t(s.title)"></p>
+                  <a x-show="hallLink(s)" :href="hallLink(s)" target="_blank" rel="noopener" class="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-rose-300 hover:text-white">
+                    <span x-html="icon('video', 'h-3.5 w-3.5')"></span><span x-text="L('program.joinOnline')"></span>
+                  </a>
+                </div>
+              </template>
+              <p x-show="liveNow.length === 0" class="text-sm text-slate-400" x-text="L('live.nothingNow')"></p>
+              <template x-if="liveNext">
+                <div class="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                  <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400" x-text="L('live.next')"></p>
+                  <p class="mt-1 font-mono text-xs tabular text-slate-300" x-text="liveNext.start + '–' + liveNext.end + (liveNext.hall ? ' · ' + t(liveNext.hall) : '')"></p>
+                  <p class="mt-1 font-display font-semibold" x-text="t(liveNext.title)"></p>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <!-- Sertifika & özet (arşiv modu) -->
+          <div x-show="phase === 'archive'" x-cloak class="relative overflow-hidden rounded-2xl bg-ink p-6 text-white sm:p-8 lg:col-span-8">
+            <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
+            <div class="relative grid gap-6 sm:grid-cols-2">
+              <div>
+                <span class="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-400" x-html="icon('award', 'h-5 w-5')"></span>
+                <h2 class="mt-4 font-display text-xl font-bold" x-text="L('archive.certTitle')"></h2>
+                <p class="mt-2 text-sm leading-relaxed text-slate-400" x-text="t(data.certificates.note)"></p>
+                <a :href="data.certificates.url" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-brand-50">
+                  <span x-html="icon('download', 'h-4 w-4')"></span><span x-text="L('archive.certButton')"></span>
+                </a>
+              </div>
+              <dl class="grid grid-cols-2 gap-px self-start overflow-hidden rounded-xl border border-white/10 bg-white/10">
+                <template x-for="st in data.archive.stats" :key="st.value">
+                  <div class="bg-ink p-4">
+                    <dt class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400" x-text="t(st.label)"></dt>
+                    <dd class="mt-1 font-mono text-2xl font-semibold tabular" x-text="st.value"></dd>
+                  </div>
+                </template>
+              </dl>
+            </div>
+          </div>
+
           <!-- Kısa bilgiler -->
-          <div class="grid grid-cols-2 gap-4 lg:col-span-4 lg:grid-cols-1">
+          <div class="grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 lg:col-span-4 lg:grid-cols-1">
             <template x-for="fact in data.meta.facts" :key="fact.icon">
               <div class="card flex items-start gap-3 p-4 sm:p-5">
                 <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-700" x-html="icon(fact.icon, 'h-4 w-4')"></span>
@@ -255,7 +437,7 @@
                   <p class="leading-relaxed" x-text="t(p)"></p>
                 </template>
               </div>
-              <dl class="mt-auto grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 pt-0 sm:grid-cols-4 lg:mt-10">
+              <dl class="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-4 lg:mt-auto">
                 <template x-for="stat in aboutStats" :key="stat.key">
                   <div class="bg-ink p-4">
                     <dt class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400" x-text="L(stat.key)"></dt>
@@ -271,13 +453,13 @@
             <article class="card group relative flex flex-col p-6" :class="track.span">
               <div class="flex items-start justify-between">
                 <span class="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-paper text-ink transition group-hover:border-brand-600 group-hover:bg-brand-600 group-hover:text-white" x-html="icon(track.icon, 'h-5 w-5')"></span>
-                <span class="font-mono text-xs text-slate-400 tabular" x-text="'T' + String(i + 1).padStart(2, '0')"></span>
+                <span class="font-mono text-xs tabular text-slate-400" x-text="trackCode(i)"></span>
               </div>
               <h3 class="mt-5 font-display text-lg font-bold text-ink" :class="track.featured && 'sm:text-xl'" x-text="t(track.title)"></h3>
               <p class="mt-2 text-sm leading-relaxed text-slate-600" x-text="t(track.desc)"></p>
               <ul x-show="track.featured" class="mt-auto flex flex-wrap gap-2 pt-5">
                 <template x-for="kw in (t(track.keywords) || [])" :key="kw">
-                  <li class="rounded-full border border-slate-200 bg-paper px-2.5 py-1 text-xs text-slate-600" x-text="kw"></li>
+                  <li class="chip" x-text="kw"></li>
                 </template>
               </ul>
             </article>
@@ -290,6 +472,35 @@
               <p class="font-mono text-xs uppercase tracking-[0.16em] text-accent-800" x-text="L('about.publication')"></p>
             </div>
             <p class="text-sm leading-relaxed text-accent-900" x-text="t(data.about.publication)"></p>
+          </article>
+
+          <!-- Akademik Teşvik & Doçentlik kartı -->
+          <article id="incentive" class="card relative overflow-hidden p-6 sm:col-span-2 sm:p-8 lg:col-span-12">
+            <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
+              <div class="lg:col-span-5">
+                <div class="flex items-center gap-3">
+                  <span class="grid h-11 w-11 place-items-center rounded-xl bg-ink text-white" x-html="icon('badge-check', 'h-5 w-5')"></span>
+                  <p class="font-mono text-xs uppercase tracking-[0.16em] text-brand-700" x-text="L('incentive.eyebrow')"></p>
+                </div>
+                <h3 class="mt-5 font-display text-2xl font-bold text-ink" x-text="t(data.incentive.title)"></h3>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600" x-text="t(data.incentive.text)"></p>
+                <p class="mt-4 flex gap-2 text-xs leading-relaxed text-slate-500">
+                  <span class="mt-0.5 shrink-0" x-html="icon('info', 'h-3.5 w-3.5')"></span>
+                  <span x-text="t(data.incentive.disclaimer)"></span>
+                </p>
+              </div>
+              <ul class="grid gap-3 sm:grid-cols-2 lg:col-span-7">
+                <template x-for="f in incentiveFacts" :key="f.key">
+                  <li class="flex items-start gap-3 rounded-xl border border-slate-200 bg-paper p-4">
+                    <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-600 text-white" x-html="icon('check', 'h-3.5 w-3.5')"></span>
+                    <span>
+                      <span class="block font-mono text-lg font-semibold tabular text-ink" x-text="f.value"></span>
+                      <span class="block text-sm text-slate-600" x-text="L(f.key)"></span>
+                    </span>
+                  </li>
+                </template>
+              </ul>
+            </div>
           </article>
         </div>
       </div>
@@ -327,9 +538,9 @@
         </div>
 
         <!-- Zaman çizelgesi -->
-        <ol class="relative lg:col-span-8" role="list">
-          <div class="absolute bottom-3 left-[15px] top-3 w-px bg-white/10" aria-hidden="true"></div>
-          <template x-for="(item, i) in timeline" :key="item.date">
+        <ol class="relative lg:col-span-8">
+          <li class="absolute bottom-3 left-[15px] top-3 w-px bg-white/10" aria-hidden="true"></li>
+          <template x-for="(item, i) in timeline" :key="item.key">
             <li class="relative pb-6 pl-12 last:pb-0">
               <!-- Düğüm -->
               <span class="absolute left-0 top-5 grid h-[31px] w-[31px] place-items-center rounded-full border"
@@ -354,7 +565,14 @@
                      'border-white/10 bg-white/[0.03] hover:-translate-y-1 hover:border-brand-500': item.status === 'upcoming'
                    }">
                 <div class="flex flex-wrap items-center justify-between gap-3">
-                  <time class="font-mono text-sm font-medium tabular" :class="item.status === 'active' ? 'text-brand-300' : 'text-slate-300'" :datetime="item.date" x-text="formatDate(item.date)"></time>
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <!-- Uzatıldıysa eski tarih üstü çizili -->
+                    <del x-show="item.isExtended && item.oldDate" class="font-mono text-sm tabular text-slate-500 decoration-accent-500 decoration-2" x-text="formatDate(item.oldDate || item.date)"></del>
+                    <time class="font-mono text-sm font-medium tabular" :class="item.status === 'active' ? 'text-brand-300' : 'text-slate-300'" :datetime="item.date" x-text="formatDate(item.date)"></time>
+                    <span x-show="item.isExtended" class="inline-flex items-center gap-1 rounded-full bg-accent-500 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-ink">
+                      <span x-html="icon('calendar-clock', 'h-3 w-3')"></span><span x-text="L('dates.extended')"></span>
+                    </span>
+                  </div>
                   <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]"
                         :class="{
                           'bg-white/5 text-slate-400': item.status === 'done',
@@ -424,7 +642,7 @@
                 <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate-500" x-text="t(sp.title)"></p>
                 <h3 class="mt-1 font-display text-lg font-bold text-ink" x-text="sp.name"></h3>
                 <p class="mt-1 flex items-center gap-1.5 text-sm text-slate-600">
-                  <span class="text-slate-400" x-html="icon('building-2', 'h-3.5 w-3.5')"></span>
+                  <span class="shrink-0 text-slate-400" x-html="icon('building-2', 'h-3.5 w-3.5')"></span>
                   <span x-text="t(sp.affiliation)"></span>
                 </p>
                 <button type="button" @click="open = !open" class="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-700 lg:hidden">
@@ -463,8 +681,7 @@
           <!-- Bilim kurulu arama -->
           <div x-show="committeeTab === 'scientific'" x-transition.opacity class="relative w-full sm:w-80">
             <span class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" x-html="icon('search', 'h-4 w-4')"></span>
-            <input type="search" x-model="search" :placeholder="L('committees.search')" :aria-label="L('committees.search')"
-                   class="w-full rounded-full border border-slate-200 bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-slate-400 focus:border-brand-600 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-600/10" />
+            <input type="search" x-model="search" :placeholder="L('committees.search')" :aria-label="L('committees.search')" class="search-input" />
           </div>
         </div>
 
@@ -486,9 +703,10 @@
 
         <!-- Bilim kurulu -->
         <div x-show="committeeTab === 'scientific'" x-transition.opacity.duration.250ms class="mt-8" role="tabpanel">
-          <p class="mb-4 font-mono text-xs text-slate-500 tabular">
+          <p class="mb-4 font-mono text-xs tabular text-slate-500">
             <span x-text="scientificFiltered.length"></span> / <span x-text="data.committees.scientific.length"></span>
             <span x-text="L('committees.members')"></span>
+            · <span x-text="countryCount + ' ' + L('committees.countries')"></span>
           </p>
           <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <template x-for="m in scientificFiltered" :key="m.name">
@@ -505,7 +723,7 @@
           <div x-show="scientificFiltered.length === 0" x-cloak class="rounded-2xl border border-dashed border-slate-300 p-10 text-center">
             <span class="mx-auto grid h-10 w-10 place-items-center rounded-full bg-paper text-slate-400" x-html="icon('search-x', 'h-5 w-5')"></span>
             <p class="mt-3 text-sm text-slate-600" x-text="L('committees.empty')"></p>
-            <button type="button" @click="search = ''" class="mt-3 text-sm font-semibold text-brand-700 hover:underline" x-text="L('committees.clear')"></button>
+            <button type="button" @click="search = ''" class="mt-3 text-sm font-semibold text-brand-700 hover:underline" x-text="L('common.clear')"></button>
           </div>
         </div>
       </div>
@@ -520,7 +738,12 @@
             <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('program.eyebrow')"></span></span>
             <h2 class="section-title mt-4" x-text="L('program.title')"></h2>
           </div>
-          <p class="max-w-md text-slate-600" x-text="L('program.lead')"></p>
+          <div class="max-w-md">
+            <p class="text-slate-600" x-text="L('program.lead')"></p>
+            <a :href="data.meta.programPdf" download class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline">
+              <span x-html="icon('file-down', 'h-4 w-4')"></span><span x-text="L('live.pdf')"></span>
+            </a>
+          </div>
         </div>
 
         <div class="mt-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -530,7 +753,10 @@
               <button type="button" role="tab" @click="dayTab = i" :aria-selected="dayTab === i"
                       class="flex flex-col items-start rounded-2xl border px-5 py-3 text-left transition"
                       :class="dayTab === i ? 'border-ink bg-ink text-white' : 'border-slate-200 bg-white text-ink hover:border-brand-600'">
-                <span class="font-mono text-[10px] uppercase tracking-[0.16em]" :class="dayTab === i ? 'text-brand-400' : 'text-slate-500'" x-text="L('program.day') + ' ' + (i + 1)"></span>
+                <span class="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em]" :class="dayTab === i ? 'text-brand-400' : 'text-slate-500'">
+                  <span x-text="L('program.day') + ' ' + (i + 1)"></span>
+                  <span x-show="phase === 'live' && liveDayIndex === i" class="rounded bg-rose-600 px-1 text-white" x-text="L('live.badge')"></span>
+                </span>
                 <span class="font-display text-sm font-semibold" x-text="formatDate(day.date, true)"></span>
               </button>
             </template>
@@ -538,10 +764,11 @@
           <!-- Salon filtresi -->
           <div class="no-scrollbar -mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
             <div class="inline-flex gap-1 rounded-full border border-slate-200 bg-white p-1">
-              <template x-for="h in halls" :key="h.id">
+              <button type="button" @click="hallFilter = 'all'" class="tab text-xs" :class="hallFilter === 'all' ? 'bg-brand-600 text-white' : 'text-slate-600 hover:text-ink'" x-text="L('hall.all')"></button>
+              <template x-for="h in data.halls.filter(h => h.parallel)" :key="h.id">
                 <button type="button" @click="hallFilter = h.id" class="tab text-xs"
                         :class="hallFilter === h.id ? 'bg-brand-600 text-white' : 'text-slate-600 hover:text-ink'"
-                        x-text="t(h.label)"></button>
+                        x-text="t(h.name)"></button>
               </template>
             </div>
           </div>
@@ -549,7 +776,7 @@
 
         <!-- Akış -->
         <ol class="mt-8 space-y-3" role="tabpanel">
-          <template x-for="(s, i) in programItems" :key="dayTab + '-' + i + '-' + s.start">
+          <template x-for="(s, i) in programItems" :key="dayTab + '-' + i + '-' + s.start + '-' + (s.hallId || '')">
             <li class="grid grid-cols-1 gap-2 sm:grid-cols-[120px_1fr] sm:gap-6">
               <!-- Saat -->
               <div class="flex items-center gap-2 pt-1 sm:flex-col sm:items-end sm:gap-0 sm:pt-5">
@@ -558,8 +785,11 @@
               </div>
               <!-- Kart -->
               <div class="rounded-2xl border p-5 transition duration-300 sm:p-6"
-                   :class="s.type === 'break' ? 'border-dashed border-slate-200 bg-transparent' : 'border-slate-200 bg-white hover:-translate-y-1 hover:border-brand-600'">
+                   :class="isLiveSession(s) ? 'border-rose-500 bg-white ring-4 ring-rose-500/10' : (s.type === 'break' ? 'border-dashed border-slate-200 bg-transparent' : 'border-slate-200 bg-white hover:-translate-y-1 hover:border-brand-600')">
                 <div class="flex flex-wrap items-center gap-2">
+                  <span x-show="isLiveSession(s)" class="inline-flex items-center gap-1.5 rounded-full bg-rose-600 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
+                    <span class="h-1.5 w-1.5 rounded-full bg-white"></span><span x-text="L('live.badge')"></span>
+                  </span>
                   <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]" :class="typeStyle(s.type)">
                     <span x-html="icon(typeIcon(s.type), 'h-3 w-3')"></span>
                     <span x-text="L('type.' + s.type)"></span>
@@ -568,6 +798,10 @@
                     <span x-html="icon('map-pin', 'h-3 w-3')"></span>
                     <span x-text="t(s.hall)"></span>
                   </span>
+                  <a x-show="hallLink(s)" :href="hallLink(s)" target="_blank" rel="noopener" class="inline-flex items-center gap-1 rounded-full border border-sky-200 bg-sky-50 px-2.5 py-1 text-xs font-medium text-sky-800 hover:border-sky-400">
+                    <span x-html="icon('video', 'h-3 w-3')"></span>
+                    <span x-text="L('program.joinOnline')"></span>
+                  </a>
                 </div>
                 <h3 class="mt-3 font-display font-bold" :class="s.type === 'break' ? 'text-base text-slate-500' : 'text-lg text-ink'" x-text="t(s.title)"></h3>
                 <p x-show="s.speaker" class="mt-1 text-sm text-slate-600" x-text="s.speaker"></p>
@@ -588,9 +822,62 @@
           </template>
         </ol>
         <p class="mt-8 flex items-center gap-2 text-xs text-slate-500">
-          <span x-html="icon('info', 'h-3.5 w-3.5')"></span>
+          <span class="shrink-0" x-html="icon('info', 'h-3.5 w-3.5')"></span>
           <span x-text="L('program.note')"></span>
         </p>
+      </div>
+    </section>
+
+    <!-- ============================== KABUL EDİLEN BİLDİRİLER ============================== -->
+    <section id="accepted" x-show="data.acceptedPapers.list.length > 0" class="border-y border-slate-200 bg-white py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-2xl">
+            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('accepted.eyebrow')"></span></span>
+            <h2 class="section-title mt-4" x-text="L('accepted.title')"></h2>
+          </div>
+          <a x-show="data.acceptedPapers.pdf" :href="data.acceptedPapers.pdf" download class="btn-ghost self-start lg:self-auto">
+            <span x-html="icon('file-down', 'h-4 w-4')"></span><span x-text="L('accepted.pdf')"></span>
+          </a>
+        </div>
+
+        <div class="mt-10 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div class="relative w-full lg:w-96">
+            <span class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" x-html="icon('search', 'h-4 w-4')"></span>
+            <input type="search" x-model="paperSearch" :placeholder="L('accepted.search')" :aria-label="L('accepted.search')" class="search-input" />
+          </div>
+          <div class="no-scrollbar -mx-4 overflow-x-auto px-4 lg:mx-0 lg:px-0">
+            <div class="inline-flex gap-1 rounded-full border border-slate-200 bg-paper p-1">
+              <button type="button" @click="paperTrack = 'all'" class="tab text-xs" :class="paperTrack === 'all' ? 'bg-ink text-white' : 'text-slate-600 hover:text-ink'" x-text="L('accepted.allTracks')"></button>
+              <template x-for="(tr, ti) in data.tracks" :key="'f-' + tr.id">
+                <button type="button" @click="paperTrack = tr.id" class="tab text-xs" :class="paperTrack === tr.id ? 'bg-ink text-white' : 'text-slate-600 hover:text-ink'" :title="t(tr.title)" x-text="trackCode(ti)"></button>
+              </template>
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-5 font-mono text-xs tabular text-slate-500" x-text="papersFiltered.length + ' / ' + data.acceptedPapers.list.length + ' ' + L('accepted.count')"></p>
+        <ul class="mt-3 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200">
+          <template x-for="p in papersFiltered" :key="p.id">
+            <li class="flex flex-col gap-2 bg-white p-4 transition hover:bg-paper sm:flex-row sm:items-center sm:gap-5 sm:p-5">
+              <span class="w-28 shrink-0 font-mono text-xs font-semibold tabular text-brand-700" x-text="p.id"></span>
+              <div class="min-w-0 flex-1">
+                <p class="font-display text-[15px] font-semibold leading-snug text-ink" x-text="p.title"></p>
+                <p class="mt-0.5 text-sm text-slate-500" x-text="p.authors"></p>
+              </div>
+              <div class="flex shrink-0 items-center gap-2">
+                <span class="chip font-mono" x-text="trackCode(data.tracks.findIndex(tr => tr.id === p.track))"></span>
+                <span class="rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.12em]"
+                      :class="{ 'bg-brand-50 text-brand-800': p.type === 'oral', 'bg-sky-50 text-sky-800': p.type === 'poster', 'bg-violet-50 text-violet-800': p.type === 'online' }"
+                      x-text="L('paperType.' + p.type)"></span>
+              </div>
+            </li>
+          </template>
+          <li x-show="papersFiltered.length === 0" class="bg-white p-10 text-center text-sm text-slate-600">
+            <span x-text="L('accepted.empty')"></span>
+            <button type="button" @click="paperSearch = ''; paperTrack = 'all'" class="ml-1 font-semibold text-brand-700 hover:underline" x-text="L('common.clear')"></button>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -609,10 +896,10 @@
             <article class="card-dark p-6 sm:p-8">
               <div class="flex items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
-                  <span class="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-400" x-html="icon(g.icon, 'h-5 w-5')"></span>
+                  <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-400" x-html="icon(g.icon, 'h-5 w-5')"></span>
                   <h3 class="font-display text-xl font-bold" x-text="t(g.title)"></h3>
                 </div>
-                <span class="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-400 tabular" x-text="t(g.limit)"></span>
+                <span class="shrink-0 rounded-full border border-white/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] tabular text-slate-400" x-text="t(g.limit)"></span>
               </div>
               <ul class="mt-6 space-y-3">
                 <template x-for="(rule, ri) in g.rules" :key="ri">
@@ -626,15 +913,37 @@
           </template>
         </div>
 
+        <!-- Sunum kuralları -->
+        <h3 class="mt-16 font-mono text-xs uppercase tracking-[0.18em] text-slate-400" x-text="L('guide.presentation')"></h3>
+        <div class="mt-4 grid gap-4 md:grid-cols-3">
+          <template x-for="pr in data.presentationRules" :key="pr.icon">
+            <article class="card-dark p-6">
+              <div class="flex items-start justify-between gap-3">
+                <span class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-accent-400" x-html="icon(pr.icon, 'h-5 w-5')"></span>
+                <span class="font-mono text-lg font-semibold tabular text-white" x-text="t(pr.value)"></span>
+              </div>
+              <h4 class="mt-5 font-display text-lg font-bold" x-text="t(pr.title)"></h4>
+              <ul class="mt-3 space-y-2">
+                <template x-for="(d, di) in pr.details" :key="di">
+                  <li class="flex gap-2 text-sm leading-relaxed text-slate-400">
+                    <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-500"></span><span x-text="t(d)"></span>
+                  </li>
+                </template>
+              </ul>
+            </article>
+          </template>
+        </div>
+
         <!-- İndirme kartları -->
-        <div class="mt-4 grid gap-4 sm:grid-cols-3">
+        <h3 class="mt-16 font-mono text-xs uppercase tracking-[0.18em] text-slate-400" x-text="L('guide.downloads')"></h3>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <template x-for="d in data.downloads" :key="d.href">
             <a :href="d.href" download class="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white p-6 text-ink transition duration-300 hover:-translate-y-1 hover:border-brand-500">
               <div class="flex items-start justify-between">
                 <span class="grid h-12 w-12 place-items-center rounded-xl" :class="d.tone" x-html="icon(d.icon, 'h-6 w-6')"></span>
                 <span class="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-slate-400" x-text="d.ext"></span>
               </div>
-              <h3 class="mt-6 font-display text-lg font-bold" x-text="t(d.title)"></h3>
+              <h4 class="mt-6 font-display text-lg font-bold" x-text="t(d.title)"></h4>
               <p class="mt-1 text-sm text-slate-500" x-text="t(d.desc)"></p>
               <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
                 <span class="font-mono text-xs tabular text-slate-500" x-text="d.size"></span>
@@ -644,6 +953,184 @@
                 </span>
               </div>
             </a>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== KAYIT & ÜCRETLER ============================== -->
+    <section id="registration" class="py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-2xl">
+            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('reg.eyebrow')"></span></span>
+            <h2 class="section-title mt-4" x-text="L('reg.title')"></h2>
+          </div>
+          <p class="max-w-md text-slate-600" x-text="t(data.registration.lead)"></p>
+        </div>
+
+        <!-- Ücretsiz -->
+        <div x-show="data.registration.isFree" x-cloak class="mt-12 rounded-2xl border-2 border-brand-600 bg-brand-50 p-10 text-center sm:p-16">
+          <span class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-brand-600 text-white" x-html="icon('party-popper', 'h-7 w-7')"></span>
+          <p class="mt-6 font-display text-4xl font-extrabold tracking-tight text-brand-800 sm:text-6xl" x-text="L('reg.free')"></p>
+          <p class="mx-auto mt-4 max-w-xl text-brand-900" x-text="L('reg.freeNote')"></p>
+        </div>
+
+        <!-- Ücretli -->
+        <div x-show="!data.registration.isFree" class="mt-12 grid gap-4 lg:grid-cols-12">
+          <!-- Ücret tablosu (kartlar) -->
+          <div class="lg:col-span-7">
+            <div class="grid gap-3 sm:grid-cols-2">
+              <template x-for="fee in data.registration.fees" :key="fee.id">
+                <div class="card p-5">
+                  <p class="font-display font-semibold text-ink" x-text="t(fee.category)"></p>
+                  <p x-show="fee.note" class="mt-0.5 text-xs text-slate-500" x-text="t(fee.note)"></p>
+                  <div class="mt-4 grid grid-cols-2 gap-2">
+                    <div class="rounded-xl p-3" :class="earlyBird ? 'bg-brand-600 text-white' : 'bg-paper text-slate-400'">
+                      <p class="font-mono text-[10px] uppercase tracking-[0.14em]" :class="earlyBird ? 'text-brand-100' : ''" x-text="L('reg.early')"></p>
+                      <p class="mt-1 font-mono text-lg font-semibold tabular" :class="!earlyBird && 'line-through'" x-text="fee.early"></p>
+                    </div>
+                    <div class="rounded-xl p-3" :class="!earlyBird ? 'bg-brand-600 text-white' : 'bg-paper text-ink'">
+                      <p class="font-mono text-[10px] uppercase tracking-[0.14em]" :class="!earlyBird ? 'text-brand-100' : 'text-slate-500'" x-text="L('reg.late')"></p>
+                      <p class="mt-1 font-mono text-lg font-semibold tabular" x-text="fee.late"></p>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <p class="mt-4 flex items-start gap-2 text-sm text-slate-600">
+              <span class="mt-0.5 shrink-0 text-brand-700" x-html="icon('calendar-check', 'h-4 w-4')"></span>
+              <span x-text="L('reg.earlyUntil') + ' ' + formatDate(dateOf('earlyreg'))"></span>
+            </p>
+            <div class="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
+              <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500" x-text="L('reg.includes')"></p>
+              <ul class="mt-3 grid gap-2 sm:grid-cols-2">
+                <template x-for="(inc, ii) in data.registration.includes" :key="ii">
+                  <li class="flex items-center gap-2 text-sm text-slate-700">
+                    <span class="text-brand-600" x-html="icon('check', 'h-4 w-4')"></span><span x-text="t(inc)"></span>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Banka & dekont -->
+          <div class="relative overflow-hidden rounded-2xl bg-ink p-6 text-white sm:p-8 lg:col-span-5">
+            <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
+            <div class="relative">
+              <div class="flex items-center gap-3">
+                <span class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-400" x-html="icon('landmark', 'h-5 w-5')"></span>
+                <p class="font-display text-lg font-bold" x-text="L('reg.bank')"></p>
+              </div>
+              <dl class="mt-6 space-y-4 text-sm">
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400" x-text="L('reg.holder')"></dt>
+                  <dd class="mt-1 text-slate-200" x-text="t(data.registration.bank.holder)"></dd>
+                </div>
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400" x-text="L('reg.bankName')"></dt>
+                  <dd class="mt-1 text-slate-200" x-text="t(data.registration.bank.name)"></dd>
+                </div>
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400">IBAN</dt>
+                  <dd class="mt-1 flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.04] p-3">
+                    <span class="break-all font-mono text-sm tabular text-white" x-text="data.registration.bank.iban"></span>
+                    <button type="button" @click="copy(data.registration.bank.iban.replace(/\s/g, ''), 'iban')" class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold transition hover:border-brand-400 hover:text-brand-300">
+                      <span x-html="icon(copied === 'iban' ? 'check' : 'copy', 'h-3.5 w-3.5')"></span>
+                      <span x-text="copied === 'iban' ? L('common.copied') : L('common.copy')"></span>
+                    </button>
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400" x-text="L('reg.description')"></dt>
+                  <dd class="mt-1 rounded-xl border border-dashed border-accent-500/50 bg-accent-500/10 p-3 font-mono text-sm text-accent-200" x-text="t(data.registration.bank.descriptionTemplate)"></dd>
+                </div>
+              </dl>
+              <a :href="data.registration.receiptFormUrl" target="_blank" rel="noopener" class="btn-primary mt-6 w-full">
+                <span x-html="icon('upload', 'h-4 w-4')"></span><span x-text="L('reg.upload')"></span>
+              </a>
+              <p class="mt-3 text-xs leading-relaxed text-slate-400">
+                <span x-text="L('reg.kvkkNote')"></span>
+                <button type="button" @click="kvkkOpen = true" class="font-semibold text-brand-400 underline-offset-2 hover:underline" x-text="L('legal.kvkk')"></button>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== ULAŞIM & KONAKLAMA ============================== -->
+    <section id="travel" class="border-y border-slate-200 bg-white py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-2xl">
+            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('travel.eyebrow')"></span></span>
+            <h2 class="section-title mt-4" x-text="L('travel.title')"></h2>
+          </div>
+          <div class="max-w-md">
+            <p class="font-display font-semibold text-ink" x-text="t(data.venue.name)"></p>
+            <p class="mt-1 text-sm text-slate-600" x-text="t(data.venue.address)"></p>
+          </div>
+        </div>
+
+        <div class="mt-12 grid gap-4 lg:grid-cols-12">
+          <!-- Harita -->
+          <div class="overflow-hidden rounded-2xl border border-slate-200 lg:col-span-7">
+            <iframe :src="data.venue.mapEmbed" :title="t(data.venue.name)" class="h-72 w-full lg:h-full lg:min-h-[420px]" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <!-- Ulaşım -->
+          <div class="grid gap-3 lg:col-span-5">
+            <template x-for="tr in data.venue.transport" :key="tr.icon">
+              <div class="card flex gap-4 p-5">
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700" x-html="icon(tr.icon, 'h-5 w-5')"></span>
+                <div>
+                  <p class="font-display font-semibold text-ink" x-text="t(tr.title)"></p>
+                  <p class="mt-1 text-sm leading-relaxed text-slate-600" x-text="t(tr.desc)"></p>
+                </div>
+              </div>
+            </template>
+            <a :href="data.venue.mapLink" target="_blank" rel="noopener" class="btn-ghost">
+              <span x-html="icon('navigation', 'h-4 w-4')"></span><span x-text="L('footer.directions')"></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Konaklama -->
+        <h3 class="mt-16 font-mono text-xs uppercase tracking-[0.18em] text-slate-500" x-text="L('travel.hotels')"></h3>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <template x-for="h in data.hotels" :key="h.name">
+            <a :href="h.url" target="_blank" rel="noopener" class="card group flex flex-col p-5">
+              <div class="flex items-center justify-between">
+                <span class="chip" x-text="t(h.type)"></span>
+                <span class="font-mono text-xs tabular text-slate-500" x-text="h.distance"></span>
+              </div>
+              <p class="mt-4 font-display font-semibold text-ink" x-text="h.name"></p>
+              <p class="mt-1 text-sm text-slate-600" x-text="t(h.note)"></p>
+              <div class="mt-auto flex items-center justify-between pt-5">
+                <span class="font-mono text-sm font-semibold tabular text-ink" x-text="t(h.price)"></span>
+                <span class="text-slate-400 transition group-hover:text-brand-600" x-html="icon('arrow-up-right', 'h-4 w-4')"></span>
+              </div>
+            </a>
+          </template>
+        </div>
+        <p class="mt-4 flex items-start gap-2 text-xs text-slate-500">
+          <span class="mt-0.5 shrink-0" x-html="icon('info', 'h-3.5 w-3.5')"></span>
+          <span x-text="t(data.hotelsNote)"></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== GALERİ (yalnızca fotoğraf eklenince görünür) ============================== -->
+    <section id="gallery" x-show="data.gallery.length > 0" x-cloak class="py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('gallery.eyebrow')"></span></span>
+        <h2 class="section-title mt-4" x-text="L('gallery.title')"></h2>
+        <div class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
+          <template x-for="(img, gi) in data.gallery" :key="img.src">
+            <button type="button" @click="lightbox = gi" class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-100"
+                    :class="gi % 5 === 0 ? 'col-span-2 row-span-2 aspect-square' : 'aspect-square'">
+              <img :src="img.src" :alt="t(img.alt)" loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+            </button>
           </template>
         </div>
       </div>
@@ -685,7 +1172,7 @@
       <!-- Düzenleyen kurumlar -->
       <div>
         <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500" x-text="L('footer.organizers')"></p>
-        <div class="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4">
+        <div class="mt-5 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 md:grid-cols-4">
           <template x-for="org in data.organizers" :key="org.short">
             <a :href="org.url" target="_blank" rel="noopener" class="group flex h-24 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 transition hover:border-brand-500">
               <template x-if="org.logo">
@@ -702,9 +1189,9 @@
         </div>
       </div>
 
-      <div class="mt-14 grid gap-10 border-t border-white/10 pt-14 lg:grid-cols-12">
+      <div class="mt-14 grid gap-10 border-t border-white/10 pt-14 sm:grid-cols-2 lg:grid-cols-12">
         <!-- Marka & iletişim -->
-        <div class="lg:col-span-4">
+        <div class="lg:col-span-5">
           <div class="flex items-center gap-3">
             <span class="grid h-10 w-10 place-items-center rounded-lg bg-white font-display text-sm font-extrabold text-ink" x-text="data.meta.monogram"></span>
             <div>
@@ -712,7 +1199,7 @@
               <p class="text-xs text-slate-500" x-text="t(data.meta.dateRange)"></p>
             </div>
           </div>
-          <p class="mt-5 text-sm leading-relaxed" x-text="t(data.meta.fullTitle)"></p>
+          <p class="mt-5 max-w-sm text-sm leading-relaxed" x-text="t(data.meta.fullTitle)"></p>
           <div class="mt-6 space-y-3 text-sm">
             <a :href="'mailto:' + data.contact.email" class="flex items-center gap-2.5 text-white hover:text-brand-400">
               <span x-html="icon('mail', 'h-4 w-4')"></span><span x-text="data.contact.email"></span>
@@ -728,46 +1215,90 @@
           </div>
         </div>
 
-        <!-- Mekan & ulaşım -->
+        <!-- Mekân -->
         <div class="lg:col-span-4">
           <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500" x-text="L('footer.venue')"></p>
           <p class="mt-4 font-display font-semibold text-white" x-text="t(data.venue.name)"></p>
           <p class="mt-1 text-sm" x-text="t(data.venue.address)"></p>
-          <ul class="mt-6 space-y-4">
-            <template x-for="tr in data.venue.transport" :key="tr.icon">
-              <li class="flex gap-3 text-sm">
-                <span class="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/10 text-brand-400" x-html="icon(tr.icon, 'h-4 w-4')"></span>
-                <span>
-                  <span class="block font-medium text-slate-200" x-text="t(tr.title)"></span>
-                  <span class="block text-xs leading-relaxed" x-text="t(tr.desc)"></span>
-                </span>
-              </li>
-            </template>
-          </ul>
+          <a href="#travel" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-400 hover:text-brand-300">
+            <span x-text="L('footer.travelGuide')"></span>
+            <span x-html="icon('arrow-right', 'h-4 w-4')"></span>
+          </a>
         </div>
 
-        <!-- Harita -->
-        <div class="lg:col-span-4">
-          <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500" x-text="L('footer.map')"></p>
-          <div class="mt-4 overflow-hidden rounded-2xl border border-white/10">
-            <iframe :src="data.venue.mapEmbed" :title="t(data.venue.name)" class="h-56 w-full grayscale invert-[.92] hue-rotate-180" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-          <a :href="data.venue.mapLink" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-400 hover:text-brand-300">
-            <span x-text="L('footer.directions')"></span>
-            <span x-html="icon('arrow-up-right', 'h-4 w-4')"></span>
-          </a>
+        <!-- Hızlı bağlantılar -->
+        <div class="lg:col-span-3">
+          <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500" x-text="L('footer.quick')"></p>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <template x-for="link in primaryNav" :key="'f-' + link.id">
+              <li><a :href="'#' + link.id" class="hover:text-white" x-text="L(link.key)"></a></li>
+            </template>
+            <li><button type="button" @click="kvkkOpen = true" class="hover:text-white" x-text="L('legal.kvkk')"></button></li>
+          </ul>
         </div>
       </div>
 
       <div class="mt-14 flex flex-col gap-3 border-t border-white/10 py-8 text-xs sm:flex-row sm:items-center sm:justify-between">
-        <p>© <span class="font-mono tabular" x-text="new Date().getFullYear()"></span> <span x-text="data.meta.acronym"></span> · <span x-text="L('footer.rights')"></span></p>
-        <a href="#top" class="inline-flex items-center gap-1.5 hover:text-white">
-          <span x-text="L('footer.top')"></span>
-          <span x-html="icon('arrow-up', 'h-3.5 w-3.5')"></span>
-        </a>
+        <p>© <span class="font-mono tabular" x-text="new Date().getFullYear()"></span> <span x-text="t(data.meta.copyrightHolder)"></span> · <span x-text="L('footer.rights')"></span></p>
+        <div class="flex items-center gap-5">
+          <button type="button" @click="kvkkOpen = true" class="inline-flex items-center gap-1.5 hover:text-white">
+            <span x-html="icon('shield-check', 'h-3.5 w-3.5')"></span><span x-text="L('legal.kvkk')"></span>
+          </button>
+          <a href="#top" class="inline-flex items-center gap-1.5 hover:text-white">
+            <span x-text="L('footer.top')"></span>
+            <span x-html="icon('arrow-up', 'h-3.5 w-3.5')"></span>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <!-- ============================== KVKK MODALI ============================== -->
+  <div x-show="kvkkOpen" x-cloak class="fixed inset-0 z-[60] flex items-end justify-center sm:items-center sm:p-6"
+       role="dialog" aria-modal="true" aria-labelledby="kvkk-title" @keydown.escape.window="kvkkOpen = false">
+    <div x-show="kvkkOpen" x-transition.opacity class="absolute inset-0 bg-ink/60 backdrop-blur-sm" @click="kvkkOpen = false"></div>
+    <div x-show="kvkkOpen" x-transition x-effect="kvkkOpen && $nextTick(() => $refs.kvkkClose.focus())"
+         class="relative flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl bg-white sm:rounded-2xl">
+      <div class="flex items-start justify-between gap-4 border-b border-slate-200 p-6">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-700" x-text="L('legal.law')"></p>
+          <h2 id="kvkk-title" class="mt-1 font-display text-xl font-bold text-ink" x-text="t(data.legal.kvkk.title)"></h2>
+          <p class="mt-1 font-mono text-xs text-slate-500" x-text="L('legal.updated') + ' ' + formatDate(data.legal.kvkk.updated)"></p>
+        </div>
+        <button type="button" x-ref="kvkkClose" @click="kvkkOpen = false" class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-slate-200 text-ink hover:border-ink" :aria-label="L('a11y.close')">
+          <span x-html="icon('x', 'h-4 w-4')"></span>
+        </button>
+      </div>
+      <div class="overflow-y-auto p-6 text-sm leading-relaxed text-slate-600">
+        <p x-text="t(data.legal.kvkk.intro)"></p>
+        <template x-for="(sec, si) in data.legal.kvkk.sections" :key="si">
+          <div class="mt-5">
+            <h3 class="font-display font-semibold text-ink" x-text="(si + 1) + '. ' + t(sec.h)"></h3>
+            <p class="mt-1.5" x-text="t(sec.p)"></p>
+          </div>
+        </template>
+      </div>
+      <div class="border-t border-slate-200 p-4 text-right">
+        <button type="button" @click="kvkkOpen = false" class="btn-primary px-5 py-2.5" x-text="L('legal.ok')"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== GALERİ IŞIK KUTUSU ============================== -->
+  <div x-show="lightbox !== null" x-cloak x-transition.opacity class="fixed inset-0 z-[60] flex items-center justify-center bg-ink/95 p-4"
+       role="dialog" aria-modal="true" @keydown.escape.window="lightbox = null"
+       @keydown.arrow-right.window="lightbox !== null && (lightbox = (lightbox + 1) % data.gallery.length)"
+       @keydown.arrow-left.window="lightbox !== null && (lightbox = (lightbox - 1 + data.gallery.length) % data.gallery.length)">
+    <button type="button" @click="lightbox = null" class="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white" :aria-label="L('a11y.close')">
+      <span x-html="icon('x', 'h-5 w-5')"></span>
+    </button>
+    <template x-if="lightbox !== null && data.gallery[lightbox]">
+      <figure class="max-w-5xl">
+        <img :src="data.gallery[lightbox].src" :alt="t(data.gallery[lightbox].alt)" class="max-h-[80vh] w-auto rounded-xl" />
+        <figcaption class="mt-3 text-center text-sm text-slate-300" x-text="t(data.gallery[lightbox].alt)"></figcaption>
+      </figure>
+    </template>
+  </div>
 
   <!-- =====================================================================
        MERKEZİ VERİ — Tüm dinamik içerik buradan gelir.
@@ -778,7 +1309,14 @@
       meta: {
         acronym: "ISSDT 2027",
         monogram: "SDT",
+        logo: "", // Kurumsal logo hazır olunca: "assets/img/logo.svg"
         submissionUrl: "https://easychair.org/",
+        programPdf: "assets/docs/ISSDT2027_Program.pdf",
+        // Faz tarihleri: öncesi = çağrı (cfp), arası = canlı (live), sonrası = arşiv (archive).
+        // Önizleme için adres çubuğuna ?phase=live veya ?phase=archive ekleyin.
+        startDate: "2027-05-13T08:30:00+03:00",
+        endDate: "2027-05-14T16:30:00+03:00",
+        phaseOverride: "", // "cfp" | "live" | "archive" — boş bırakılırsa otomatik
         countdownTarget: "2027-05-13T09:30:00+03:00",
         titleLead: { tr: "Sürdürülebilir Gelecek İçin", en: "Rethinking Digital Transformation" },
         titleAccent: { tr: "Dijital Dönüşümü Yeniden Düşünmek", en: "for a Sustainable Future" },
@@ -786,6 +1324,7 @@
           tr: "3. Uluslararası Sürdürülebilir Dijital Dönüşüm Sempozyumu",
           en: "3rd International Symposium on Sustainable Digital Transformation"
         },
+        copyrightHolder: { tr: "Kuzey Ufuk Üniversitesi", en: "Northern Horizon University" },
         tagline: {
           tr: "Yapay zekâ, veri bilimi, yeşil teknolojiler ve dijital toplum alanlarında çalışan araştırmacıları; disiplinler arası, açık bilim odaklı ve hakemli bir platformda buluşturuyoruz.",
           en: "Bringing together researchers in artificial intelligence, data science, green technologies and digital society on an interdisciplinary, open-science oriented, peer-reviewed platform."
@@ -800,6 +1339,14 @@
           { icon: "monitor-smartphone", label: { tr: "Format", en: "Format" }, value: { tr: "Hibrit (Yüz yüze + Çevrim içi)", en: "Hybrid (On-site + Online)" } },
           { icon: "languages", label: { tr: "Dil", en: "Language" }, value: { tr: "Türkçe · İngilizce", en: "Turkish · English" } }
         ]
+      },
+
+      // Üst duyuru şeridi. Yeni duyuruda "id"yi değiştirin (kapatanlara yeniden görünür).
+      announcement: {
+        active: true,
+        id: "2026-11-abstract-extension",
+        text: { tr: "Özet gönderim süresi 29 Aralık 2026’ya uzatılmıştır.", en: "The abstract submission deadline has been extended to 29 December 2026." },
+        href: "#dates"
       },
 
       about: {
@@ -817,6 +1364,19 @@
         publication: {
           tr: "Kabul edilen ve sunulan tam metinler ISBN'li Tam Metin Bildiri Kitabı'nda yayımlanacaktır. Seçilmiş çalışmalar, hakem sürecinin ardından ULAKBİM TR Dizin ve ESCI kapsamındaki ortak dergilerin özel sayılarında değerlendirilecektir.",
           en: "Accepted and presented full papers will be published in the Proceedings Book with ISBN. Selected papers will be considered, after peer review, for special issues of partner journals indexed in ULAKBİM TR Index and ESCI."
+        }
+      },
+
+      // Akademik Teşvik / ÜAK Doçentlik bilgi kartı. Sayılar kurul ve konuşmacı verisinden otomatik hesaplanır.
+      incentive: {
+        title: { tr: "Akademik Teşvik ve Doçentlik Başvuruları", en: "Academic Incentive & Associate Professorship Applications" },
+        text: {
+          tr: "Sempozyum; uluslararası bilim kurulu, yurt dışından davetli konuşmacılar, çift kör hakemlik ve ISBN'li bildiri kitabı ile Akademik Teşvik Ödeneği Yönetmeliği ve ÜAK Doçentlik başvuru şartlarında tanımlanan uluslararası bilimsel toplantı niteliği gözetilerek planlanmıştır.",
+          en: "With an international scientific committee, keynote speakers from abroad, double-blind review and proceedings with ISBN, the symposium is planned to meet the definition of an international scientific meeting used in Türkiye's Academic Incentive Regulation and ÜAK associate professorship criteria."
+        },
+        disclaimer: {
+          tr: "Puanlama, ilgili yılın yürürlükteki mevzuatına ve başvurulan komisyonun değerlendirmesine tabidir. Katılımcı ülke sayısı ve yabancı bildiri oranı sempozyum sonrasında bildiri kitabında ayrıca raporlanacaktır.",
+          en: "Scoring is subject to the regulations in force for the relevant year and to the evaluating committee. Participant country count and the share of international papers will be reported in the proceedings after the event."
         }
       },
 
@@ -867,48 +1427,50 @@
       ],
 
       // Tarihler +03:00 (TSİ) gün sonu olarak girilir; durum (tamamlandı/aktif/yaklaşan) otomatik hesaplanır.
+      // Süre uzatma: "date" yeni (geçerli) tarih, "oldDate" eski tarih, "isExtended": true → eski tarih üstü çizilir + "Uzatıldı" rozeti.
+      // "key" alanları kodda kullanılır (abstract, fullpaper, earlyreg); silmeyin.
       importantDates: [
         {
-          date: "2026-09-15T23:59:59+03:00",
+          key: "cfp", date: "2026-09-15T23:59:59+03:00",
           title: { tr: "Bildiri Çağrısı Yayımlandı", en: "Call for Papers Announced" },
           desc: { tr: "Konu başlıkları ve gönderim koşulları ilan edildi.", en: "Tracks and submission requirements were announced." }
         },
         {
-          date: "2026-12-15T23:59:59+03:00",
+          key: "abstract", date: "2026-12-29T23:59:59+03:00", oldDate: "2026-12-15T23:59:59+03:00", isExtended: true,
           title: { tr: "Özet Gönderimi Son Tarihi", en: "Abstract Submission Deadline" },
           desc: { tr: "300–500 kelimelik genişletilmiş özetlerin EasyChair üzerinden gönderimi.", en: "Submission of 300–500 word extended abstracts via EasyChair." }
         },
         {
-          date: "2027-01-20T23:59:59+03:00",
+          key: "notification", date: "2027-01-25T23:59:59+03:00",
           title: { tr: "Özet Kabul Bildirimleri", en: "Abstract Acceptance Notification" },
           desc: { tr: "Çift kör hakem değerlendirmesi sonuçlarının yazarlara iletilmesi.", en: "Double-blind peer review results sent to authors." }
         },
         {
-          date: "2027-03-15T23:59:59+03:00",
+          key: "fullpaper", date: "2027-03-15T23:59:59+03:00",
           title: { tr: "Tam Metin Gönderimi", en: "Full Paper Submission" },
-          desc: { tr: "Bildiri kitabında yer alacak tam metinlerin şablona uygun gönderimi.", en: "Template-compliant submission of full papers for the proceedings." }
+          desc: { tr: "Bildiri kitabında yer alacak tam metinlerin şablona uygun gönderimi ve telif devir formu.", en: "Template-compliant full papers for the proceedings, together with the copyright transfer form." }
         },
         {
-          date: "2027-04-01T23:59:59+03:00",
+          key: "earlyreg", date: "2027-04-01T23:59:59+03:00",
           title: { tr: "Erken Kayıt Son Günü", en: "Early Registration Deadline" },
           desc: { tr: "İndirimli katılım ücreti için son gün.", en: "Last day for the discounted registration fee." }
         },
         {
-          date: "2027-04-25T23:59:59+03:00",
+          key: "program", date: "2027-04-25T23:59:59+03:00",
           title: { tr: "Kesin Programın İlanı", en: "Final Programme Release" },
           desc: { tr: "Oturum, salon ve sunum saatlerinin yayımlanması.", en: "Publication of sessions, halls and presentation times." }
         },
         {
-          date: "2027-05-13T23:59:59+03:00",
+          key: "event", date: "2027-05-13T23:59:59+03:00",
           title: { tr: "Sempozyum Günleri", en: "Symposium Days" },
           desc: { tr: "13–14 Mayıs 2027 · Kongre ve Kültür Merkezi, Ankara.", en: "13–14 May 2027 · Congress & Culture Center, Ankara." }
         }
       ],
 
-      // photo alanına "assets/speakers/ad-soyad.jpg" gibi bir yol yazılırsa portre görseli kullanılır.
+      // photo alanına "assets/img/speakers/ad-soyad.jpg" gibi bir yol yazılırsa portre görseli kullanılır.
       speakers: [
         {
-          name: "Elif Karaman", day: 1, accent: "emerald", photo: "",
+          name: "Elif Karaman", day: 1, accent: "emerald", photo: "", country: "NL",
           title: { tr: "Prof. Dr.", en: "Professor" },
           affiliation: { tr: "Delft Teknik Üniversitesi, Hollanda", en: "Delft University of Technology, NL" },
           talk: { tr: "Sorumlu Yapay Zekâ: Etikten Mühendisliğe", en: "Responsible AI: From Ethics to Engineering" },
@@ -918,7 +1480,7 @@
           }
         },
         {
-          name: "James O. Whitfield", day: 1, accent: "amber", photo: "",
+          name: "James O. Whitfield", day: 1, accent: "amber", photo: "", country: "UK",
           title: { tr: "Prof. Dr.", en: "Professor" },
           affiliation: { tr: "Edinburgh Üniversitesi, Birleşik Krallık", en: "University of Edinburgh, UK" },
           talk: { tr: "Karbon Farkındalıklı Hesaplama", en: "Carbon-Aware Computing at Scale" },
@@ -928,7 +1490,7 @@
           }
         },
         {
-          name: "Ayşe Nur Yalçın", day: 2, accent: "emerald", photo: "",
+          name: "Ayşe Nur Yalçın", day: 2, accent: "emerald", photo: "", country: "TR",
           title: { tr: "Prof. Dr.", en: "Professor" },
           affiliation: { tr: "Orta Doğu Teknik Üniversitesi", en: "Middle East Technical University" },
           talk: { tr: "Dijital İkizlerle Dirençli Şehirler", en: "Resilient Cities with Digital Twins" },
@@ -938,7 +1500,7 @@
           }
         },
         {
-          name: "Marta Lindqvist", day: 2, accent: "amber", photo: "",
+          name: "Marta Lindqvist", day: 2, accent: "amber", photo: "", country: "SE",
           title: { tr: "Doç. Dr.", en: "Associate Professor" },
           affiliation: { tr: "KTH Kraliyet Teknoloji Enstitüsü, İsveç", en: "KTH Royal Institute of Technology, SE" },
           talk: { tr: "Kapsayıcı Dijital Kamu Hizmetleri", en: "Inclusive Digital Public Services" },
@@ -993,13 +1555,21 @@
         ]
       },
 
+      // Salonlar. onlineUrl doluysa programda "Çevrim içi katıl" bağlantısı görünür.
+      // GÜVENLİK: Toplantı şifresini buraya yazmayın; şifreleri kayıtlı katılımcılara e-postayla gönderin.
+      halls: [
+        { id: "main", parallel: false, name: { tr: "Büyük Salon", en: "Main Hall" }, onlineUrl: "" },
+        { id: "A", parallel: true, name: { tr: "Salon A", en: "Hall A" }, onlineUrl: "" },
+        { id: "B", parallel: true, name: { tr: "Salon B", en: "Hall B" }, onlineUrl: "" }
+      ],
+
       program: [
         {
           date: "2027-05-13",
           sessions: [
             { start: "08:30", end: "09:30", type: "registration", title: { tr: "Kayıt ve Karşılama Kahvesi", en: "Registration & Welcome Coffee" }, hall: { tr: "Fuaye", en: "Foyer" } },
-            { start: "09:30", end: "10:15", type: "ceremony", title: { tr: "Açılış Töreni ve Protokol Konuşmaları", en: "Opening Ceremony & Welcome Addresses" }, hall: { tr: "Büyük Salon", en: "Main Hall" } },
-            { start: "10:15", end: "11:00", type: "keynote", title: { tr: "Sorumlu Yapay Zekâ: Etikten Mühendisliğe", en: "Responsible AI: From Ethics to Engineering" }, speaker: "Prof. Dr. Elif Karaman", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Selin Erdem" },
+            { start: "09:30", end: "10:15", type: "ceremony", hallId: "main", title: { tr: "Açılış Töreni ve Protokol Konuşmaları", en: "Opening Ceremony & Welcome Addresses" }, hall: { tr: "Büyük Salon", en: "Main Hall" } },
+            { start: "10:15", end: "11:00", type: "keynote", hallId: "main", title: { tr: "Sorumlu Yapay Zekâ: Etikten Mühendisliğe", en: "Responsible AI: From Ethics to Engineering" }, speaker: "Prof. Dr. Elif Karaman", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Selin Erdem" },
             { start: "11:00", end: "11:20", type: "break", title: { tr: "Kahve Arası", en: "Coffee Break" } },
             {
               start: "11:20", end: "12:40", type: "session", hallId: "A",
@@ -1020,7 +1590,7 @@
               ]
             },
             { start: "12:40", end: "13:40", type: "break", title: { tr: "Öğle Yemeği", en: "Lunch" }, hall: { tr: "Kampüs Restoranı", en: "Campus Restaurant" } },
-            { start: "13:40", end: "14:25", type: "keynote", title: { tr: "Karbon Farkındalıklı Hesaplama", en: "Carbon-Aware Computing at Scale" }, speaker: "Prof. Dr. James O. Whitfield", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Doç. Dr. Burak Öztürk" },
+            { start: "13:40", end: "14:25", type: "keynote", hallId: "main", title: { tr: "Karbon Farkındalıklı Hesaplama", en: "Carbon-Aware Computing at Scale" }, speaker: "Prof. Dr. James O. Whitfield", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Doç. Dr. Burak Öztürk" },
             {
               start: "14:30", end: "15:50", type: "session", hallId: "A",
               title: { tr: "Oturum 2A · Veri Bilimi", en: "Session 2A · Data Science" }, hall: { tr: "Salon A", en: "Hall A" }, chair: "Prof. Dr. Nermin Özkan",
@@ -1040,14 +1610,14 @@
               ]
             },
             { start: "15:50", end: "16:10", type: "break", title: { tr: "Kahve Arası", en: "Coffee Break" } },
-            { start: "16:10", end: "17:30", type: "panel", title: { tr: "Panel · Dijital Dönüşümde Kamu–Sanayi–Üniversite İş Birliği", en: "Panel · Public–Industry–University Collaboration in Digital Transformation" }, hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Kemal Aydın", speaker: "Prof. Dr. Ayhan Bilgin · Dr. Oğuz Şen · Doç. Dr. Tuba Eren" },
+            { start: "16:10", end: "17:30", type: "panel", hallId: "main", title: { tr: "Panel · Dijital Dönüşümde Kamu–Sanayi–Üniversite İş Birliği", en: "Panel · Public–Industry–University Collaboration in Digital Transformation" }, hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Kemal Aydın", speaker: "Prof. Dr. Ayhan Bilgin · Dr. Oğuz Şen · Doç. Dr. Tuba Eren" },
             { start: "19:30", end: "22:00", type: "social", title: { tr: "Gala Yemeği", en: "Gala Dinner" }, hall: { tr: "Rektörlük Konukevi", en: "University Guesthouse" } }
           ]
         },
         {
           date: "2027-05-14",
           sessions: [
-            { start: "09:00", end: "09:45", type: "keynote", title: { tr: "Dijital İkizlerle Dirençli Şehirler", en: "Resilient Cities with Digital Twins" }, speaker: "Prof. Dr. Ayşe Nur Yalçın", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Doç. Dr. Gizem Şahin" },
+            { start: "09:00", end: "09:45", type: "keynote", hallId: "main", title: { tr: "Dijital İkizlerle Dirençli Şehirler", en: "Resilient Cities with Digital Twins" }, speaker: "Prof. Dr. Ayşe Nur Yalçın", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Doç. Dr. Gizem Şahin" },
             {
               start: "09:50", end: "11:10", type: "session", hallId: "A",
               title: { tr: "Oturum 3A · Akıllı Şehirler ve Mobilite", en: "Session 3A · Smart Cities & Mobility" }, hall: { tr: "Salon A", en: "Hall A" }, chair: "Prof. Dr. Ayhan Bilgin",
@@ -1069,7 +1639,7 @@
             { start: "11:10", end: "11:30", type: "break", title: { tr: "Kahve Arası", en: "Coffee Break" } },
             { start: "11:30", end: "12:30", type: "poster", title: { tr: "Poster Oturumu ve Genç Araştırmacılar Sergisi", en: "Poster Session & Early-Career Researchers Exhibition" }, hall: { tr: "Fuaye", en: "Foyer" } },
             { start: "12:30", end: "13:30", type: "break", title: { tr: "Öğle Yemeği", en: "Lunch" }, hall: { tr: "Kampüs Restoranı", en: "Campus Restaurant" } },
-            { start: "13:30", end: "14:15", type: "keynote", title: { tr: "Kapsayıcı Dijital Kamu Hizmetleri", en: "Inclusive Digital Public Services" }, speaker: "Doç. Dr. Marta Lindqvist", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Kemal Aydın" },
+            { start: "13:30", end: "14:15", type: "keynote", hallId: "main", title: { tr: "Kapsayıcı Dijital Kamu Hizmetleri", en: "Inclusive Digital Public Services" }, speaker: "Doç. Dr. Marta Lindqvist", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Kemal Aydın" },
             {
               start: "14:20", end: "15:40", type: "session", hallId: "A",
               title: { tr: "Oturum 4A · Dijital Toplum ve Ekonomi", en: "Session 4A · Digital Society & Economy" }, hall: { tr: "Salon A", en: "Hall A" }, chair: "Doç. Dr. Tuba Eren",
@@ -1088,10 +1658,32 @@
                 { title: { tr: "Bulut geçişinde toplam sahip olma maliyeti", en: "Total cost of ownership in cloud migration" }, authors: "Y. Kaplan, N. Ay" }
               ]
             },
-            { start: "15:45", end: "16:30", type: "ceremony", title: { tr: "Ödül Töreni ve Kapanış Oturumu", en: "Awards & Closing Session" }, hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Selin Erdem" }
+            { start: "15:45", end: "16:30", type: "ceremony", hallId: "main", title: { tr: "Ödül Töreni ve Kapanış Oturumu", en: "Awards & Closing Session" }, hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Selin Erdem" }
           ]
         }
       ],
+
+      // Kabul edilen bildiriler. Liste boşsa bölüm ve menü bağlantısı otomatik gizlenir.
+      // type: "oral" | "poster" | "online"; track: tracks[].id
+      acceptedPapers: {
+        pdf: "assets/docs/ISSDT2027_Kabul_Edilen_Bildiriler.pdf",
+        list: [
+          { id: "ISSDT-014", title: "Kamu hizmetlerinde açıklanabilir karar destek modelleri", authors: "A. Yılmaz, B. Kurt", track: "ai", type: "oral" },
+          { id: "ISSDT-021", title: "Türkçe büyük dil modellerinde önyargı ölçümü", authors: "E. Taşdemir, C. Polat", track: "ai", type: "oral" },
+          { id: "ISSDT-027", title: "Yapay zekâ okuryazarlığı ölçeği: geçerlik ve güvenirlik çalışması", authors: "F. Güler, D. Ak", track: "edu", type: "oral" },
+          { id: "ISSDT-033", title: "Emission reduction through workload shifting in data centres", authors: "M. Arı, J. Weber", track: "green", type: "oral" },
+          { id: "ISSDT-038", title: "Elektronik atıklarda döngüsel ekonomi göstergeleri", authors: "S. Uçar, L. Bianchi", track: "green", type: "online" },
+          { id: "ISSDT-045", title: "Açık veri portallarında kalite değerlendirmesi", authors: "T. Eren, K. Sarı", track: "data", type: "oral" },
+          { id: "ISSDT-052", title: "Federated learning on health data under GDPR constraints", authors: "N. Haddad, R. Işık", track: "data", type: "online" },
+          { id: "ISSDT-058", title: "Kritik altyapılarda anomali tespiti", authors: "O. Şen, G. Ateş", track: "security", type: "oral" },
+          { id: "ISSDT-063", title: "KVKK uyumlu sentetik veri üretimi", authors: "İ. Çelik, A. Korkmaz", track: "security", type: "poster" },
+          { id: "ISSDT-071", title: "Graph neural networks for transit demand forecasting", authors: "B. Altun, S. Er", track: "cities", type: "oral" },
+          { id: "ISSDT-077", title: "Deprem sonrası hasar tespitinde uydu görüntüleri", authors: "G. Yurt, A. N. Yalçın", track: "cities", type: "poster" },
+          { id: "ISSDT-084", title: "Platform emeği ve sosyal güvenlik", authors: "S. Erdem, Y. Bulut", track: "society", type: "oral" },
+          { id: "ISSDT-090", title: "Measuring the digital divide in rural areas", authors: "D. Okafor, Z. Kara", track: "society", type: "online" },
+          { id: "ISSDT-096", title: "Öğrenme analitiğiyle erken uyarı sistemleri", authors: "D. Arslan, H. Öz", track: "edu", type: "poster" }
+        ]
+      },
 
       guidelines: [
         {
@@ -1115,52 +1707,187 @@
             { tr: "Gövde metni 11 punto, 1,15 satır aralığı; kaynakça APA 7 stiline uygun olmalıdır.", en: "Body text 11 pt, 1.15 line spacing; references in APA 7 style." },
             { tr: "Şekil ve tablolar en az 300 dpi çözünürlükte, numaralı ve başlıklı olmalıdır.", en: "Figures and tables must be at least 300 dpi, numbered and captioned." },
             { tr: "Benzerlik oranı (iThenticate) %20'yi aşmamalı; etik kurul onayı gerektiren çalışmalarda onay belgesi eklenmelidir.", en: "Similarity (iThenticate) must not exceed 20%; studies requiring ethics approval must include the approval document." },
-            { tr: "Sunulmayan bildiriler bildiri kitabında yayımlanmaz.", en: "Papers that are not presented will not be published in the proceedings." }
+            { tr: "İmzalı Telif Devir Formu tam metinle birlikte yüklenmelidir; sunulmayan bildiriler kitapta yayımlanmaz.", en: "The signed Copyright Transfer Form must be uploaded with the full paper; papers not presented are not published." }
           ]
         }
       ],
 
-      // Dosyaları "assets/" klasörüne yerleştirin; href yolları buna göredir.
-      downloads: [
+      presentationRules: [
         {
-          href: "assets/ISSDT2027_Sablon.docx", ext: ".docx", size: "48 KB", icon: "file-type-2", tone: "bg-sky-50 text-sky-700",
-          title: { tr: "Word Şablonu", en: "Word Template" },
-          desc: { tr: "Özet ve tam metin için biçimlendirilmiş şablon", en: "Formatted template for abstracts and full papers" }
+          icon: "presentation", value: { tr: "15 + 5 dk", en: "15 + 5 min" },
+          title: { tr: "Sözlü Sunum", en: "Oral Presentation" },
+          details: [
+            { tr: "15 dakika sunum, 5 dakika soru-cevap.", en: "15 minutes talk, 5 minutes Q&A." },
+            { tr: "Sunum dosyası (.pptx/.pdf) oturumdan 15 dk önce salon görevlisine teslim edilmelidir.", en: "Hand your slides (.pptx/.pdf) to the hall assistant 15 min before the session." },
+            { tr: "16:9 sunum şablonunun kullanılması önerilir.", en: "Use of the 16:9 slide template is recommended." }
+          ]
         },
         {
-          href: "assets/ISSDT2027_LaTeX.zip", ext: ".zip", size: "212 KB", icon: "file-code-2", tone: "bg-brand-50 text-brand-700",
+          icon: "layout-panel-top", value: { tr: "70 × 100 cm", en: "70 × 100 cm" },
+          title: { tr: "Poster Sunumu", en: "Poster Presentation" },
+          details: [
+            { tr: "Dikey (portre) yönde, en az 24 pt gövde metni.", en: "Portrait orientation, body text at least 24 pt." },
+            { tr: "Posterler 13 Mayıs 09:00'a kadar fuayedeki panolara asılmalıdır.", en: "Mount posters on the foyer boards by 13 May, 09:00." },
+            { tr: "Poster oturumu boyunca en az bir yazar posterin başında bulunmalıdır.", en: "At least one author must stand by the poster during the session." }
+          ]
+        },
+        {
+          icon: "video", value: { tr: "15 + 5 dk", en: "15 + 5 min" },
+          title: { tr: "Çevrim İçi Sunum", en: "Online Presentation" },
+          details: [
+            { tr: "Oturumdan 10 dk önce bağlantıya katılın; kamera açık olmalıdır.", en: "Join 10 min before your session; camera must be on." },
+            { tr: "Bağlantı bilgileri yalnızca kayıtlı sunuculara e-postayla iletilir.", en: "Connection details are emailed to registered presenters only." },
+            { tr: "Önceden kaydedilmiş video kabul edilmez.", en: "Pre-recorded videos are not accepted." }
+          ]
+        }
+      ],
+
+      // Dosyaları "assets/docs/" klasörüne yerleştirin; href yolları buna göredir.
+      downloads: [
+        {
+          href: "assets/docs/ISSDT2027_Ozet_Sablonu.docx", ext: ".docx", size: "38 KB", icon: "file-type-2", tone: "bg-sky-50 text-sky-700",
+          title: { tr: "Özet Şablonu", en: "Abstract Template" },
+          desc: { tr: "Genişletilmiş özet için Word şablonu", en: "Word template for extended abstracts" }
+        },
+        {
+          href: "assets/docs/ISSDT2027_Tam_Metin_Sablonu.docx", ext: ".docx", size: "52 KB", icon: "file-text", tone: "bg-sky-50 text-sky-700",
+          title: { tr: "Tam Metin Şablonu", en: "Full Paper Template" },
+          desc: { tr: "Bildiri kitabı için Word şablonu", en: "Word template for the proceedings" }
+        },
+        {
+          href: "assets/docs/ISSDT2027_LaTeX.zip", ext: ".zip", size: "212 KB", icon: "file-code-2", tone: "bg-brand-50 text-brand-700",
           title: { tr: "LaTeX Şablonu", en: "LaTeX Template" },
           desc: { tr: "Overleaf uyumlu sınıf dosyası ve örnek belge", en: "Overleaf-ready class file and sample document" }
         },
         {
-          href: "assets/ISSDT2027_Afis.pdf", ext: ".pdf", size: "1,8 MB", icon: "image", tone: "bg-accent-50 text-accent-700",
+          href: "assets/docs/ISSDT2027_Telif_Devir_Formu.pdf", ext: ".pdf", size: "96 KB", icon: "file-pen-line", tone: "bg-rose-50 text-rose-700",
+          title: { tr: "Telif Devir Formu", en: "Copyright Transfer Form" },
+          desc: { tr: "Tüm yazarlarca imzalanıp tam metinle yüklenir", en: "Signed by all authors, uploaded with the full paper" }
+        },
+        {
+          href: "assets/docs/ISSDT2027_Sunum_Sablonu.pptx", ext: ".pptx", size: "1,1 MB", icon: "presentation", tone: "bg-accent-50 text-accent-700",
+          title: { tr: "Sunum Şablonu", en: "Slide Template" },
+          desc: { tr: "16:9 PowerPoint sunum şablonu", en: "16:9 PowerPoint slide template" }
+        },
+        {
+          href: "assets/docs/ISSDT2027_Afis.pdf", ext: ".pdf", size: "1,8 MB", icon: "image", tone: "bg-slate-100 text-slate-700",
           title: { tr: "Sempozyum Afişi", en: "Symposium Poster" },
           desc: { tr: "Baskıya hazır A3 afiş", en: "Print-ready A3 poster" }
         }
       ],
 
+      // Ücretsiz sempozyumda isFree: true yapın → büyük "Katılım Ücretsizdir" kartı gösterilir.
+      registration: {
+        isFree: false,
+        lead: {
+          tr: "Her bildiri için en az bir yazarın kayıt yaptırması gerekir. Ödeme sonrası dekontunuzu formla iletin.",
+          en: "At least one author must register for each paper. After payment, submit your receipt via the form."
+        },
+        fees: [
+          { id: "academic", category: { tr: "Akademisyen", en: "Academic" }, early: "2.500 TL", late: "3.000 TL" },
+          { id: "student", category: { tr: "Lisansüstü Öğrenci", en: "Graduate Student" }, note: { tr: "Öğrenci belgesi gereklidir", en: "Proof of enrolment required" }, early: "1.250 TL", late: "1.500 TL" },
+          { id: "intl", category: { tr: "Yurt Dışı Katılımcı", en: "International Participant" }, early: "€150", late: "€200" },
+          { id: "extra", category: { tr: "Ek Bildiri", en: "Additional Paper" }, note: { tr: "Aynı yazarın ikinci bildirisi", en: "Second paper by the same author" }, early: "750 TL", late: "1.000 TL" }
+        ],
+        includes: [
+          { tr: "ISBN'li bildiri kitabında yayın", en: "Publication in ISBN proceedings" },
+          { tr: "Katılım ve sunum belgesi", en: "Certificate of attendance & presentation" },
+          { tr: "Kahve araları ve öğle yemekleri", en: "Coffee breaks and lunches" },
+          { tr: "Sempozyum çantası ve yaka kartı", en: "Symposium bag and badge" }
+        ],
+        bank: {
+          holder: { tr: "Kuzey Ufuk Üniversitesi Döner Sermaye İşletmesi", en: "Northern Horizon University Revolving Fund" },
+          name: { tr: "Örnek Bankası · Kampüs Şubesi (1234)", en: "Örnek Bank · Campus Branch (1234)" },
+          iban: "TR00 0000 0000 0000 0000 0000 00",
+          descriptionTemplate: { tr: "ISSDT2027 – Ad Soyad – Bildiri No", en: "ISSDT2027 – Name Surname – Paper ID" }
+        },
+        receiptFormUrl: "https://forms.gle/"
+      },
+
+      hotels: [
+        { name: "Kuzey Ufuk Konukevi", type: { tr: "Konukevi", en: "Guesthouse" }, distance: "0,3 km", price: { tr: "1.400 TL / gece", en: "1,400 TRY / night" }, note: { tr: "Kampüs içinde; rezervasyonda 'ISSDT' belirtin.", en: "On campus; mention 'ISSDT' when booking." }, url: "#" },
+        { name: "Bilim Park Otel", type: { tr: "Anlaşmalı Otel", en: "Partner Hotel" }, distance: "1,2 km", price: { tr: "2.200 TL / gece", en: "2,200 TRY / night" }, note: { tr: "Kahvaltı dahil, %15 indirim kodu: ISSDT27", en: "Breakfast incl., 15% off with code ISSDT27" }, url: "#" },
+        { name: "Çankaya City Suites", type: { tr: "Anlaşmalı Otel", en: "Partner Hotel" }, distance: "3,5 km", price: { tr: "2.800 TL / gece", en: "2,800 TRY / night" }, note: { tr: "Metro durağına 200 m.", en: "200 m from the metro station." }, url: "#" },
+        { name: "Kızılay Merkez Otel", type: { tr: "Otel", en: "Hotel" }, distance: "6,0 km", price: { tr: "1.900 TL / gece", en: "1,900 TRY / night" }, note: { tr: "Şehir merkezinde, ekonomik seçenek.", en: "City centre, budget option." }, url: "#" }
+      ],
+      hotelsNote: {
+        tr: "Fiyatlar bilgi amaçlıdır; indirimli kontenjan 15 Nisan 2027'ye kadar geçerlidir. Rezervasyonlar doğrudan otelle yapılır.",
+        en: "Prices are indicative; discounted allotments are valid until 15 April 2027. Book directly with the hotel."
+      },
+
       faq: [
         {
+          q: { tr: "Bu sempozyum Akademik Teşvik ve Doçentlik başvurularında geçerli mi?", en: "Does this symposium count for Academic Incentive and associate professorship applications?" },
+          a: { tr: "Sempozyum; uluslararası bilim kurulu, yurt dışından davetli konuşmacılar ve ISBN'li tam metin bildiri kitabı ile uluslararası bilimsel toplantı niteliği gözetilerek planlanmıştır. Puanlama, başvuru yılındaki mevzuata ve ilgili komisyonun değerlendirmesine tabidir. Ayrıntılar için Hakkında bölümündeki bilgi kartına bakınız.", en: "The symposium is planned as an international scientific meeting, with an international scientific committee, keynote speakers from abroad and proceedings with ISBN. Scoring depends on the regulations in force and the evaluating committee. See the information card in the About section." }
+        },
+        {
           q: { tr: "Katılım ücreti ne kadar ve neleri kapsıyor?", en: "What is the registration fee and what does it cover?" },
-          a: { tr: "Erken kayıt ücreti akademisyenler için 2.500 TL, lisansüstü öğrenciler için 1.250 TL'dir. Ücret; bildiri kitabı yayını, katılım belgesi, kahve araları ve öğle yemeklerini kapsar. Gala yemeği isteğe bağlıdır.", en: "Early registration is 2,500 TRY for academics and 1,250 TRY for graduate students. It covers proceedings publication, certificate of attendance, coffee breaks and lunches. The gala dinner is optional." }
+          a: { tr: "Ücretler Kayıt & Ücretler bölümünde listelenmiştir. Ücret; bildiri kitabı yayını, katılım belgesi, kahve araları ve öğle yemeklerini kapsar. Gala yemeği isteğe bağlıdır.", en: "Fees are listed in the Registration & Fees section. They cover proceedings publication, certificates, coffee breaks and lunches. The gala dinner is optional." }
         },
         {
           q: { tr: "Çevrim içi sunum yapabilir miyim?", en: "Can I present online?" },
-          a: { tr: "Evet. Sempozyum hibrit formatta düzenlenecektir. Çevrim içi sunumlar için ayrılmış sanal salonlarda canlı sunum yapılacaktır; önceden kaydedilmiş videolar kabul edilmemektedir.", en: "Yes. The symposium is hybrid. Online presentations take place live in dedicated virtual halls; pre-recorded videos are not accepted." }
+          a: { tr: "Evet. Sempozyum hibrit formatta düzenlenecektir. Çevrim içi sunumlar sanal salonlarda canlı yapılır; bağlantı bilgileri kayıtlı sunuculara e-postayla iletilir. Önceden kaydedilmiş videolar kabul edilmemektedir.", en: "Yes. The symposium is hybrid. Online presentations take place live in virtual halls; connection details are emailed to registered presenters. Pre-recorded videos are not accepted." }
         },
         {
           q: { tr: "Bir bildiride kaç yazar yer alabilir?", en: "How many authors can a paper have?" },
           a: { tr: "Bir bildiride en fazla beş yazar yer alabilir. Her bildiri için en az bir yazarın kayıt yaptırması gerekmektedir.", en: "A paper may have up to five authors. At least one author must register for each paper." }
         },
         {
-          q: { tr: "Katılım belgesi ne zaman verilecek?", en: "When will certificates be issued?" },
-          a: { tr: "Katılım ve sunum belgeleri, sempozyumun ardından iki hafta içinde e-posta ile dijital olarak gönderilecektir.", en: "Attendance and presentation certificates will be emailed digitally within two weeks after the symposium." }
+          q: { tr: "Katılım belgesi ne zaman ve nasıl verilecek?", en: "When and how will certificates be issued?" },
+          a: { tr: "Katılım ve sunum belgeleri sempozyumdan sonraki iki hafta içinde kayıtlı e-posta adresinize gönderilir; ayrıca bu sitede sertifika indirme bağlantısı yayımlanır.", en: "Attendance and presentation certificates are emailed to your registered address within two weeks after the symposium; a download link is also published on this site." }
         },
         {
           q: { tr: "Konaklama desteği var mı?", en: "Is accommodation support available?" },
-          a: { tr: "Kampüse yakın anlaşmalı otellerde katılımcılara özel indirimli fiyatlar sunulmaktadır. Ayrıntılı liste kayıt sonrası paylaşılacaktır.", en: "Discounted rates are available at partner hotels near campus. A detailed list will be shared after registration." }
+          a: { tr: "Kampüse yakın anlaşmalı otellerde indirimli fiyatlar sunulmaktadır. Liste Ulaşım & Konaklama bölümündedir.", en: "Discounted rates are available at partner hotels near campus. See the Travel & Stay section." }
         }
       ],
+
+      // Arşiv dönemi (sempozyum sonrası) içerikleri
+      proceedings: [
+        { title: { tr: "Tam Metin Bildiri Kitabı", en: "Full Paper Proceedings" }, isbn: "978-000-00000-0-0", url: "assets/docs/ISSDT2027_Tam_Metin_Kitabi.pdf", size: "PDF · 18 MB" },
+        { title: { tr: "Özet Kitabı", en: "Book of Abstracts" }, isbn: "978-000-00000-1-7", url: "assets/docs/ISSDT2027_Ozet_Kitabi.pdf", size: "PDF · 4 MB" }
+      ],
+      certificates: {
+        url: "#",
+        note: {
+          tr: "Belgeler kayıtlı e-posta adreslerine gönderilmiştir. İndirme klasöründe dosyalar bildiri numarasıyla adlandırılmıştır (ör. ISSDT-014.pdf).",
+          en: "Certificates have been emailed to registered addresses. Files in the download folder are named by paper ID (e.g. ISSDT-014.pdf)."
+        }
+      },
+      archive: {
+        thanks: {
+          tr: "ISSDT 2027'ye katkı sunan tüm konuşmacı, hakem ve katılımcılara teşekkür ederiz. Bildiri kitapları ve sertifikalar aşağıda.",
+          en: "Thank you to all speakers, reviewers and participants of ISSDT 2027. Proceedings and certificates are available below."
+        },
+        stats: [
+          { value: "212", label: { tr: "Katılımcı", en: "Participants" } },
+          { value: "14", label: { tr: "Ülke", en: "Countries" } },
+          { value: "96", label: { tr: "Bildiri", en: "Papers" } },
+          { value: "24", label: { tr: "Oturum", en: "Sessions" } }
+        ]
+      },
+      // Fotoğraflar eklendiğinde galeri bölümü görünür: { src: "assets/img/gallery/01.jpg", alt: { tr: "...", en: "..." } }
+      gallery: [],
+
+      legal: {
+        kvkk: {
+          title: { tr: "Kişisel Verilerin Korunması Aydınlatma Metni", en: "Personal Data Protection Notice" },
+          updated: "2026-10-23",
+          intro: {
+            tr: "Kuzey Ufuk Üniversitesi (\"Üniversite\") olarak, ISSDT 2027 sempozyumu kapsamında elde edilen kişisel verilerinizi 6698 sayılı Kişisel Verilerin Korunması Kanunu (\"KVKK\") uyarınca veri sorumlusu sıfatıyla işlemekteyiz.",
+            en: "As data controller, Northern Horizon University (the \"University\") processes personal data obtained within the scope of the ISSDT 2027 symposium in accordance with Turkish Law No. 6698 on the Protection of Personal Data (\"KVKK\")."
+          },
+          sections: [
+            { h: { tr: "İşlenen Kişisel Veriler", en: "Personal Data Processed" }, p: { tr: "Ad-soyad, unvan, kurum, e-posta, telefon, bildiri içeriği ve yazar bilgileri, ödeme dekontu ve fatura bilgileri; etkinlik sırasında çekilen fotoğraf ve video kayıtları.", en: "Name, title, institution, email, phone, paper content and author details, payment receipt and invoice details; photographs and video recordings taken during the event." } },
+            { h: { tr: "İşleme Amaçları", en: "Purposes of Processing" }, p: { tr: "Bildiri gönderim ve hakem süreçlerinin yürütülmesi, kayıt ve ödeme işlemleri, bildiri kitabının yayımlanması, katılım belgelerinin düzenlenmesi, etkinlikle ilgili bilgilendirme yapılması.", en: "Managing submission and review, registration and payment, publishing the proceedings, issuing certificates and sending event-related information." } },
+            { h: { tr: "Hukuki Sebepler", en: "Legal Grounds" }, p: { tr: "KVKK m.5/2-(c) sözleşmenin kurulması ve ifası, (ç) hukuki yükümlülüğün yerine getirilmesi ve (f) veri sorumlusunun meşru menfaati. Fotoğraf ve videoların tanıtım amacıyla kullanımı açık rızanıza dayanır.", en: "KVKK Art. 5/2-(c) performance of a contract, (ç) compliance with legal obligations and (f) legitimate interests. Use of photos and videos for promotion relies on your explicit consent." } },
+            { h: { tr: "Aktarım", en: "Transfers" }, p: { tr: "Verileriniz; bildiri gönderim sistemi hizmet sağlayıcısına (yurt dışında bulunabilir, KVKK m.9 kapsamında), yayın sürecindeki matbaa/yayınevine ve yasal yükümlülükler çerçevesinde yetkili kamu kurumlarına aktarılabilir. Kabul edilen bildirilerin başlık ve yazar adları programda ve bildiri kitabında kamuya açık olarak yayımlanır.", en: "Data may be transferred to the submission system provider (which may be located abroad, under KVKK Art. 9), the printer/publisher of the proceedings and competent public authorities as legally required. Titles and author names of accepted papers are published in the programme and proceedings." } },
+            { h: { tr: "Saklama Süresi", en: "Retention" }, p: { tr: "Veriler, sempozyumun tamamlanmasından itibaren ilgili mevzuatta öngörülen süreler boyunca, bu sürelerin bulunmadığı hâllerde 2 yıl süreyle saklanır ve ardından silinir veya anonim hâle getirilir.", en: "Data is retained for the periods required by law, or 2 years after the symposium where no such period applies, and is then deleted or anonymised." } },
+            { h: { tr: "Bu İnternet Sitesi", en: "This Website" }, p: { tr: "Bu site çerez kullanmaz. Dil tercihi ve kapatılan duyurular yalnızca tarayıcınızın yerel deposunda tutulur. Sayfa; yazı tipleri, kütüphaneler ve harita için üçüncü taraf sunuculardan (Google Fonts, jsDelivr, unpkg, Tailwind CDN, OpenStreetMap) içerik yükler; bu sırada IP adresiniz bu sağlayıcılara iletilebilir.", en: "This site uses no cookies. Your language preference and dismissed announcements are stored only in your browser's local storage. The page loads fonts, libraries and the map from third-party servers (Google Fonts, jsDelivr, unpkg, Tailwind CDN, OpenStreetMap), which may receive your IP address." } },
+            { h: { tr: "Haklarınız", en: "Your Rights" }, p: { tr: "KVKK m.11 kapsamındaki haklarınıza ilişkin taleplerinizi issdt2027@example.org adresine veya Üniversitenin KVKK başvuru kanallarına iletebilirsiniz.", en: "You may submit requests regarding your rights under KVKK Art. 11 to issdt2027@example.org or through the University's KVKK application channels." } }
+          ]
+        }
+      },
 
       organizers: [
         { short: "KUÜ", name: { tr: "Kuzey Ufuk Üniversitesi", en: "Northern Horizon University" }, url: "#", logo: "" },
@@ -1175,8 +1902,9 @@
         mapEmbed: "https://www.openstreetmap.org/export/embed.html?bbox=32.76%2C39.87%2C32.80%2C39.90&layer=mapnik",
         mapLink: "https://www.openstreetmap.org/#map=15/39.885/32.780",
         transport: [
-          { icon: "plane", title: { tr: "Havalimanından", en: "From the Airport" }, desc: { tr: "Esenboğa Havalimanı'ndan HAVAŞ ile AŞTİ'ye (45 dk), oradan metro ile kampüse (15 dk).", en: "From Esenboğa Airport take HAVAŞ to AŞTİ (45 min), then the metro to campus (15 min)." } },
-          { icon: "train-front", title: { tr: "Metro ile", en: "By Metro" }, desc: { tr: "M2 Koru–Kızılay hattı, Üniversite durağı; kampüs girişine 5 dakikalık yürüme.", en: "M2 Koru–Kızılay line, Üniversite station; 5-minute walk to the campus gate." } },
+          { icon: "plane", title: { tr: "Havalimanından", en: "From the Airport" }, desc: { tr: "Esenboğa Havalimanı'ndan HAVAŞ ile AŞTİ'ye (45 dk), oradan metro ile kampüse (15 dk). Taksi ile yaklaşık 40 dk.", en: "From Esenboğa Airport take HAVAŞ to AŞTİ (45 min), then the metro to campus (15 min). About 40 min by taxi." } },
+          { icon: "train-front", title: { tr: "Metro ve YHT", en: "Metro & High-Speed Train" }, desc: { tr: "Ankara Garı'ndan Ankaray ile Kızılay'a, oradan M2 hattı ile Üniversite durağına; kampüs girişine 5 dk yürüme.", en: "From Ankara Station take Ankaray to Kızılay, then line M2 to Üniversite station; 5-minute walk to the gate." } },
+          { icon: "bus", title: { tr: "Ring Servisi", en: "Shuttle" }, desc: { tr: "Sempozyum günlerinde metro durağı ile kongre merkezi arasında 08:00–18:00 arası 15 dakikada bir ücretsiz ring.", en: "Free shuttle every 15 min between the metro station and the congress centre, 08:00–18:00 on symposium days." } },
           { icon: "car", title: { tr: "Otopark", en: "Parking" }, desc: { tr: "Kongre merkezi yanındaki açık otopark katılımcılara ücretsizdir.", en: "The open car park next to the congress centre is free for participants." } }
         ]
       },
@@ -1197,74 +1925,122 @@
     // ---------------------------------------------------------------------
     const uiText = {
       tr: {
+        'a11y.skip': 'İçeriğe geç', 'a11y.close': 'Kapat', 'a11y.menu': 'Menü',
+        'common.copy': 'Kopyala', 'common.copied': 'Kopyalandı', 'common.clear': 'Filtreyi temizle',
         'nav.about': 'Hakkında', 'nav.dates': 'Tarihler', 'nav.speakers': 'Konuşmacılar', 'nav.committees': 'Kurullar',
-        'nav.program': 'Program', 'nav.guidelines': 'Yazım Kuralları', 'nav.faq': 'SSS',
-        'cta.abstract': 'Özet Gönder', 'cta.paper': 'Bildiri Gönder', 'cta.template': 'Şablonu İndir',
-        'countdown.label': 'Geri Sayım', 'countdown.live': 'Sempozyum başladı',
+        'nav.program': 'Program', 'nav.guidelines': 'Yazım Kuralları', 'nav.faq': 'SSS', 'nav.more': 'Daha Fazla',
+        'nav.registration': 'Kayıt', 'nav.travel': 'Ulaşım & Konaklama', 'nav.accepted': 'Kabul Edilen Bildiriler', 'nav.gallery': 'Galeri',
+        'cta.abstract': 'Özet Gönder', 'cta.paper': 'Bildiri Gönder', 'cta.fullpaper': 'Tam Metin Gönder', 'cta.register': 'Kayıt Ol',
+        'cta.template': 'Şablonu İndir', 'cta.live': 'Canlı Program', 'cta.proceedings': 'Bildiri Kitabı',
+        'countdown.label': 'Geri Sayım',
         'cd.days': 'Gün', 'cd.hours': 'Saat', 'cd.minutes': 'Dakika', 'cd.seconds': 'Saniye',
+        'live.badge': 'Canlı', 'live.dayProgram': 'Sempozyum Başladı · Gün {n} Programını Gör', 'live.pdf': 'Programı PDF Olarak İndir',
+        'live.now': 'Şu an', 'live.next': 'Sıradaki', 'live.nothingNow': 'Şu anda devam eden bir oturum yok.',
+        'archive.badge': 'Arşiv', 'archive.download': 'İndir:', 'archive.certTitle': 'Katılım Belgeleri', 'archive.certButton': 'Belgeleri İndir',
         'about.eyebrow': 'Hakkında & Konular', 'about.title': 'Disiplinler arası bir buluşma',
         'about.lead': 'Yedi ana tema altında özgün araştırma, uygulama ve politika çalışmalarını davet ediyoruz.',
         'about.publication': 'Yayın Olanakları',
         'stat.days': 'Gün', 'stat.tracks': 'Tema', 'stat.keynotes': 'Davetli', 'stat.sessions': 'Oturum',
+        'incentive.eyebrow': 'Akademik Teşvik · ÜAK Doçentlik',
+        'inc.countries': 'ülkeden bilim kurulu üyesi', 'inc.foreignMembers': 'yurt dışı kurumlu bilim kurulu üyesi',
+        'inc.foreignKeynotes': 'yurt dışından davetli konuşmacı', 'inc.isbn': 'ISBN’li tam metin bildiri kitabı', 'inc.review': 'Çift kör hakem değerlendirmesi',
+        'inc.languages': 'Sunum dili: Türkçe ve İngilizce',
         'dates.eyebrow': 'Önemli Tarihler', 'dates.title': 'Sempozyum takvimi',
         'dates.lead': 'Tüm son tarihler Türkiye saati (UTC+3) ile gün sonu 23:59’dur.',
-        'dates.progress': 'İlerleme', 'dates.next': 'Sıradaki adım:', 'dates.daysLeft': 'gün kaldı',
+        'dates.progress': 'İlerleme', 'dates.next': 'Sıradaki adım:', 'dates.daysLeft': 'gün kaldı', 'dates.extended': 'Uzatıldı!',
         'status.done': 'Tamamlandı', 'status.active': 'Aktif', 'status.upcoming': 'Yaklaşan',
         'speakers.eyebrow': 'Davetli Konuşmacılar', 'speakers.title': 'Alanına yön veren isimler',
         'speakers.lead': 'Her iki günün genel oturumlarında uluslararası davetli konuşmacılar ana konuşmalarını gerçekleştirecek.',
         'speakers.talk': 'Konuşma', 'speakers.details': 'Ayrıntılar', 'speakers.hide': 'Gizle',
         'committees.eyebrow': 'Kurullar', 'committees.title': 'Sempozyum kurulları',
         'committees.honorary': 'Onur Kurulu', 'committees.organizing': 'Düzenleme Kurulu', 'committees.scientific': 'Bilim Kurulu',
-        'committees.search': 'İsim, üniversite veya alan ara…', 'committees.members': 'üye gösteriliyor',
-        'committees.empty': 'Aramanızla eşleşen kurul üyesi bulunamadı.', 'committees.clear': 'Aramayı temizle',
+        'committees.search': 'İsim, üniversite veya alan ara…', 'committees.members': 'üye gösteriliyor', 'committees.countries': 'ülke',
+        'committees.empty': 'Aramanızla eşleşen kurul üyesi bulunamadı.',
         'program.eyebrow': 'Sempozyum Programı', 'program.title': 'İki gün, dolu bir akış',
         'program.lead': 'Genel oturumlar Büyük Salon’da; paralel oturumlar Salon A ve Salon B’de gerçekleştirilecektir.',
-        'program.day': 'Gün', 'program.chair': 'Oturum Başkanı',
+        'program.day': 'Gün', 'program.chair': 'Oturum Başkanı', 'program.joinOnline': 'Çevrim içi katıl',
         'program.note': 'Program taslak niteliğindedir; kesin program 25 Nisan 2027’de ilan edilecektir.',
         'hall.all': 'Tüm Salonlar',
         'type.keynote': 'Ana Konuşma', 'type.session': 'Paralel Oturum', 'type.panel': 'Panel', 'type.break': 'Ara',
         'type.ceremony': 'Tören', 'type.registration': 'Kayıt', 'type.poster': 'Poster', 'type.social': 'Sosyal Program',
+        'accepted.eyebrow': 'Kabul Edilen Bildiriler', 'accepted.title': 'Hakem sürecinden geçen çalışmalar',
+        'accepted.search': 'Bildiri no, başlık veya yazar ara…', 'accepted.allTracks': 'Tümü', 'accepted.count': 'bildiri',
+        'accepted.empty': 'Eşleşen bildiri bulunamadı.', 'accepted.pdf': 'Listeyi PDF İndir',
+        'paperType.oral': 'Sözlü', 'paperType.poster': 'Poster', 'paperType.online': 'Çevrim içi',
         'guide.eyebrow': 'Yazım Kuralları & İndirmeler', 'guide.title': 'Gönderime hazırlık',
         'guide.lead': 'Gönderimlerin değerlendirmeye alınabilmesi için aşağıdaki kurallara ve resmî şablonlara uyulması zorunludur.',
-        'guide.download': 'İndir',
+        'guide.download': 'İndir', 'guide.presentation': 'Sunum Kuralları', 'guide.downloads': 'Şablonlar ve Formlar',
+        'reg.eyebrow': 'Kayıt & Ücretler', 'reg.title': 'Katılım ve ödeme',
+        'reg.free': 'Katılım Ücretsizdir', 'reg.freeNote': 'Sempozyuma katılım ve bildiri yayını için herhangi bir ücret alınmamaktadır.',
+        'reg.early': 'Erken Kayıt', 'reg.late': 'Normal Kayıt', 'reg.earlyUntil': 'Erken kayıt son günü:',
+        'reg.includes': 'Ücrete dahil olanlar', 'reg.bank': 'Banka Bilgileri', 'reg.holder': 'Hesap Sahibi', 'reg.bankName': 'Banka / Şube',
+        'reg.description': 'Açıklama alanına yazılacak', 'reg.upload': 'Dekont Yükleme Formu',
+        'reg.kvkkNote': 'Formda paylaştığınız kişisel veriler yalnızca kayıt ve faturalama amacıyla işlenir. Ayrıntılar:',
+        'travel.eyebrow': 'Ulaşım & Konaklama', 'travel.title': 'Kampüse nasıl gelinir?', 'travel.hotels': 'Konaklama Seçenekleri',
+        'gallery.eyebrow': 'Galeri', 'gallery.title': 'Sempozyumdan kareler',
         'faq.eyebrow': 'SSS', 'faq.title': 'Sıkça sorulan sorular', 'faq.lead': 'Yanıtını bulamadığınız sorular için bize yazın: ',
-        'footer.organizers': 'Düzenleyen ve Destekleyen Kurumlar', 'footer.venue': 'Mekân & Ulaşım', 'footer.map': 'Harita',
-        'footer.directions': 'Yol tarifi al', 'footer.rights': 'Tüm hakları saklıdır.', 'footer.top': 'Başa dön'
+        'footer.organizers': 'Düzenleyen ve Destekleyen Kurumlar', 'footer.venue': 'Mekân', 'footer.quick': 'Hızlı Bağlantılar',
+        'footer.directions': 'Yol tarifi al', 'footer.travelGuide': 'Ulaşım ve konaklama rehberi', 'footer.rights': 'Tüm hakları saklıdır.', 'footer.top': 'Başa dön',
+        'legal.kvkk': 'KVKK Aydınlatma Metni', 'legal.law': '6698 sayılı KVKK', 'legal.updated': 'Son güncelleme:', 'legal.ok': 'Okudum, anladım'
       },
       en: {
+        'a11y.skip': 'Skip to content', 'a11y.close': 'Close', 'a11y.menu': 'Menu',
+        'common.copy': 'Copy', 'common.copied': 'Copied', 'common.clear': 'Clear filter',
         'nav.about': 'About', 'nav.dates': 'Dates', 'nav.speakers': 'Speakers', 'nav.committees': 'Committees',
-        'nav.program': 'Programme', 'nav.guidelines': 'Guidelines', 'nav.faq': 'FAQ',
-        'cta.abstract': 'Submit Abstract', 'cta.paper': 'Submit Paper', 'cta.template': 'Download Template',
-        'countdown.label': 'Countdown', 'countdown.live': 'The symposium is live',
+        'nav.program': 'Programme', 'nav.guidelines': 'Guidelines', 'nav.faq': 'FAQ', 'nav.more': 'More',
+        'nav.registration': 'Registration', 'nav.travel': 'Travel & Stay', 'nav.accepted': 'Accepted Papers', 'nav.gallery': 'Gallery',
+        'cta.abstract': 'Submit Abstract', 'cta.paper': 'Submit Paper', 'cta.fullpaper': 'Submit Full Paper', 'cta.register': 'Register',
+        'cta.template': 'Download Template', 'cta.live': 'Live Programme', 'cta.proceedings': 'Proceedings',
+        'countdown.label': 'Countdown',
         'cd.days': 'Days', 'cd.hours': 'Hours', 'cd.minutes': 'Minutes', 'cd.seconds': 'Seconds',
+        'live.badge': 'Live', 'live.dayProgram': 'The Symposium Is On · View Day {n} Programme', 'live.pdf': 'Download Programme (PDF)',
+        'live.now': 'Now', 'live.next': 'Up next', 'live.nothingNow': 'No session is running right now.',
+        'archive.badge': 'Archive', 'archive.download': 'Download:', 'archive.certTitle': 'Certificates', 'archive.certButton': 'Download Certificates',
         'about.eyebrow': 'About & Tracks', 'about.title': 'An interdisciplinary meeting',
         'about.lead': 'We invite original research, practice and policy work across seven core tracks.',
         'about.publication': 'Publication',
         'stat.days': 'Days', 'stat.tracks': 'Tracks', 'stat.keynotes': 'Keynotes', 'stat.sessions': 'Sessions',
+        'incentive.eyebrow': 'Academic Incentive · ÜAK',
+        'inc.countries': 'countries on the scientific committee', 'inc.foreignMembers': 'committee members at institutions abroad',
+        'inc.foreignKeynotes': 'keynote speakers from abroad', 'inc.isbn': 'Full-paper proceedings with ISBN', 'inc.review': 'Double-blind peer review',
+        'inc.languages': 'Presentation languages: Turkish & English',
         'dates.eyebrow': 'Important Dates', 'dates.title': 'Symposium timeline',
         'dates.lead': 'All deadlines are 23:59 Türkiye time (UTC+3).',
-        'dates.progress': 'Progress', 'dates.next': 'Next step:', 'dates.daysLeft': 'days left',
+        'dates.progress': 'Progress', 'dates.next': 'Next step:', 'dates.daysLeft': 'days left', 'dates.extended': 'Extended!',
         'status.done': 'Completed', 'status.active': 'Active', 'status.upcoming': 'Upcoming',
         'speakers.eyebrow': 'Keynote Speakers', 'speakers.title': 'Voices shaping the field',
         'speakers.lead': 'International keynote speakers will address the plenary sessions on both days.',
         'speakers.talk': 'Talk', 'speakers.details': 'Details', 'speakers.hide': 'Hide',
         'committees.eyebrow': 'Committees', 'committees.title': 'Symposium committees',
         'committees.honorary': 'Honorary Committee', 'committees.organizing': 'Organizing Committee', 'committees.scientific': 'Scientific Committee',
-        'committees.search': 'Search name, university or field…', 'committees.members': 'members shown',
-        'committees.empty': 'No committee member matches your search.', 'committees.clear': 'Clear search',
+        'committees.search': 'Search name, university or field…', 'committees.members': 'members shown', 'committees.countries': 'countries',
+        'committees.empty': 'No committee member matches your search.',
         'program.eyebrow': 'Programme', 'program.title': 'Two days, a full agenda',
         'program.lead': 'Plenary sessions take place in the Main Hall; parallel sessions in Hall A and Hall B.',
-        'program.day': 'Day', 'program.chair': 'Chair',
+        'program.day': 'Day', 'program.chair': 'Chair', 'program.joinOnline': 'Join online',
         'program.note': 'This is a draft programme; the final programme will be released on 25 April 2027.',
         'hall.all': 'All Halls',
         'type.keynote': 'Keynote', 'type.session': 'Parallel Session', 'type.panel': 'Panel', 'type.break': 'Break',
         'type.ceremony': 'Ceremony', 'type.registration': 'Registration', 'type.poster': 'Posters', 'type.social': 'Social Event',
+        'accepted.eyebrow': 'Accepted Papers', 'accepted.title': 'Peer-reviewed contributions',
+        'accepted.search': 'Search paper ID, title or author…', 'accepted.allTracks': 'All', 'accepted.count': 'papers',
+        'accepted.empty': 'No matching paper found.', 'accepted.pdf': 'Download List (PDF)',
+        'paperType.oral': 'Oral', 'paperType.poster': 'Poster', 'paperType.online': 'Online',
         'guide.eyebrow': 'Guidelines & Downloads', 'guide.title': 'Preparing your submission',
         'guide.lead': 'Submissions must follow the rules below and use the official templates to be considered for review.',
-        'guide.download': 'Download',
+        'guide.download': 'Download', 'guide.presentation': 'Presentation Rules', 'guide.downloads': 'Templates & Forms',
+        'reg.eyebrow': 'Registration & Fees', 'reg.title': 'Attendance and payment',
+        'reg.free': 'Participation Is Free', 'reg.freeNote': 'No fee is charged for attending the symposium or for publication.',
+        'reg.early': 'Early Bird', 'reg.late': 'Regular', 'reg.earlyUntil': 'Early registration ends on',
+        'reg.includes': 'Included in the fee', 'reg.bank': 'Bank Details', 'reg.holder': 'Account Holder', 'reg.bankName': 'Bank / Branch',
+        'reg.description': 'Payment reference', 'reg.upload': 'Receipt Upload Form',
+        'reg.kvkkNote': 'Personal data shared in the form is processed only for registration and invoicing. Details:',
+        'travel.eyebrow': 'Travel & Stay', 'travel.title': 'Getting to campus', 'travel.hotels': 'Accommodation',
+        'gallery.eyebrow': 'Gallery', 'gallery.title': 'Moments from the symposium',
         'faq.eyebrow': 'FAQ', 'faq.title': 'Frequently asked questions', 'faq.lead': 'Can’t find your answer? Write to us: ',
-        'footer.organizers': 'Organizing & Supporting Institutions', 'footer.venue': 'Venue & Travel', 'footer.map': 'Map',
-        'footer.directions': 'Get directions', 'footer.rights': 'All rights reserved.', 'footer.top': 'Back to top'
+        'footer.organizers': 'Organizing & Supporting Institutions', 'footer.venue': 'Venue', 'footer.quick': 'Quick Links',
+        'footer.directions': 'Get directions', 'footer.travelGuide': 'Travel and accommodation guide', 'footer.rights': 'All rights reserved.', 'footer.top': 'Back to top',
+        'legal.kvkk': 'Privacy Notice (KVKK)', 'legal.law': 'Turkish Law No. 6698', 'legal.updated': 'Last updated:', 'legal.ok': 'I understand'
       }
     };
 
@@ -1279,29 +2055,35 @@
         activeSection: '',
         committeeTab: 'honorary',
         search: '',
+        paperSearch: '',
+        paperTrack: 'all',
         dayTab: 0,
         hallFilter: 'all',
         openFaq: 0,
+        kvkkOpen: false,
+        lightbox: null,
+        copied: '',
+        announcementDismissed: false,
+        previewPhase: '',
         now: Date.now(),
 
-        navLinks: [
-          { id: 'about', key: 'nav.about' },
-          { id: 'dates', key: 'nav.dates' },
-          { id: 'speakers', key: 'nav.speakers' },
-          { id: 'committees', key: 'nav.committees' },
-          { id: 'program', key: 'nav.program' },
-          { id: 'guidelines', key: 'nav.guidelines' },
-          { id: 'faq', key: 'nav.faq' }
+        navItems: [
+          { id: 'about', key: 'nav.about', icon: 'info', primary: true },
+          { id: 'dates', key: 'nav.dates', icon: 'calendar-days', primary: true },
+          { id: 'speakers', key: 'nav.speakers', icon: 'mic', primary: true },
+          { id: 'program', key: 'nav.program', icon: 'list-checks', primary: true },
+          { id: 'guidelines', key: 'nav.guidelines', icon: 'file-text', primary: true },
+          { id: 'registration', key: 'nav.registration', icon: 'ticket', primary: true },
+          { id: 'committees', key: 'nav.committees', icon: 'users' },
+          { id: 'accepted', key: 'nav.accepted', icon: 'file-check', when: (d) => d.acceptedPapers.list.length > 0 },
+          { id: 'travel', key: 'nav.travel', icon: 'map' },
+          { id: 'gallery', key: 'nav.gallery', icon: 'images', when: (d) => d.gallery.length > 0 },
+          { id: 'faq', key: 'nav.faq', icon: 'circle-help' }
         ],
         committeeTabs: [
           { id: 'honorary', key: 'committees.honorary' },
           { id: 'organizing', key: 'committees.organizing' },
           { id: 'scientific', key: 'committees.scientific' }
-        ],
-        halls: [
-          { id: 'all', label: { tr: 'Tüm Salonlar', en: 'All Halls' } },
-          { id: 'A', label: { tr: 'Salon A', en: 'Hall A' } },
-          { id: 'B', label: { tr: 'Salon B', en: 'Hall B' } }
         ],
 
         init() {
@@ -1309,16 +2091,23 @@
             const saved = localStorage.getItem('issdt-lang');
             if (saved === 'tr' || saved === 'en') this.lang = saved;
             else if ((navigator.language || '').toLowerCase().startsWith('en')) this.lang = 'en';
+            this.announcementDismissed = localStorage.getItem('issdt-announcement') === this.data.announcement.id;
           } catch (e) { /* depolama erişilemez */ }
           document.documentElement.lang = this.lang;
+
+          const p = new URLSearchParams(location.search).get('phase');
+          if (['cfp', 'live', 'archive'].includes(p)) this.previewPhase = p;
+          if (this.phase === 'live') this.dayTab = this.liveDayIndex;
 
           setInterval(() => { this.now = Date.now(); }, 1000);
 
           // Görünürdeki bölümü menüde vurgula
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => { if (entry.isIntersecting) this.activeSection = entry.target.id; });
-          }, { rootMargin: '-45% 0px -50% 0px' });
-          this.navLinks.forEach((l) => { const el = document.getElementById(l.id); if (el) observer.observe(el); });
+          this.$nextTick(() => {
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => { if (entry.isIntersecting) this.activeSection = entry.target.id; });
+            }, { rootMargin: '-45% 0px -50% 0px' });
+            this.navItems.forEach((l) => { const el = document.getElementById(l.id); if (el) observer.observe(el); });
+          });
         },
 
         setLang(l) {
@@ -1342,7 +2131,7 @@
           const key = name.split('-').map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join('');
           let node = lib[key];
           if (!node) return '';
-          if (node[0] === 'svg') node = node[2]; // eski sürüm biçimi
+          if (node[0] === 'svg') node = node[2];
           const inner = node.map(([tag, attrs]) =>
             '<' + tag + ' ' + Object.entries(attrs).map(([k, v]) => k + '="' + v + '"').join(' ') + '/>'
           ).join('');
@@ -1352,6 +2141,8 @@
         initials(name) {
           return name.split(/\s+/).filter((p) => p && !p.endsWith('.')).map((p) => p.charAt(0)).slice(0, 2).join('').toLocaleUpperCase('tr');
         },
+
+        trackCode(i) { return 'T' + String(i + 1).padStart(2, '0'); },
 
         formatDate(iso, withWeekday = false) {
           const d = new Date(iso.length === 10 ? iso + 'T12:00:00+03:00' : iso);
@@ -1364,28 +2155,92 @@
           return (s || '').toLocaleLowerCase('tr').replace(/ı/g, 'i').normalize('NFD').replace(/[̀-ͯ]/g, '');
         },
 
-        // ---- Geri sayım ----
-        get countdown() {
-          const diff = new Date(this.data.meta.countdownTarget).getTime() - this.now;
-          const finished = diff <= 0;
-          const s = Math.max(0, Math.floor(diff / 1000));
-          return {
-            finished,
-            days: Math.floor(s / 86400),
-            hours: Math.floor((s % 86400) / 3600),
-            minutes: Math.floor((s % 3600) / 60),
-            seconds: s % 60
-          };
+        dateOf(key) {
+          const d = this.data.importantDates.find((x) => x.key === key);
+          return d ? d.date : '';
         },
+
+        async copy(text, id) {
+          try { await navigator.clipboard.writeText(text); } catch (e) { return; }
+          this.copied = id;
+          setTimeout(() => { if (this.copied === id) this.copied = ''; }, 2000);
+        },
+
+        // ---- Faz (çağrı → canlı → arşiv) ----
+        get phase() {
+          const o = this.previewPhase || this.data.meta.phaseOverride;
+          if (o) return o;
+          if (this.now < new Date(this.data.meta.startDate).getTime()) return 'cfp';
+          if (this.now <= new Date(this.data.meta.endDate).getTime()) return 'live';
+          return 'archive';
+        },
+        get cta() {
+          if (this.phase === 'live') return { key: 'cta.live', href: '#program', icon: 'radio', external: false };
+          if (this.phase === 'archive') return { key: 'cta.proceedings', href: (this.data.proceedings[0] || {}).url || '#', icon: 'book-down', external: false };
+          const url = this.data.meta.submissionUrl;
+          if (this.now < new Date(this.dateOf('abstract')).getTime()) return { key: 'cta.abstract', href: url, icon: 'send', external: true };
+          if (this.now < new Date(this.dateOf('fullpaper')).getTime()) return { key: 'cta.fullpaper', href: url, icon: 'send', external: true };
+          return { key: 'cta.register', href: '#registration', icon: 'ticket', external: false };
+        },
+        get announcementVisible() {
+          return this.data.announcement.active && !this.announcementDismissed && this.phase === 'cfp';
+        },
+        dismissAnnouncement() {
+          this.announcementDismissed = true;
+          try { localStorage.setItem('issdt-announcement', this.data.announcement.id); } catch (e) { /* yoksay */ }
+        },
+
+        // ---- Menü ----
+        get visibleNav() { return this.navItems.filter((l) => !l.when || l.when(this.data)); },
+        get primaryNav() { return this.visibleNav.filter((l) => l.primary); },
+        get secondaryNav() { return this.visibleNav.filter((l) => !l.primary); },
+
+        // ---- Geri sayım ----
         get countdownUnits() {
-          const c = this.countdown;
+          const s = Math.max(0, Math.floor((new Date(this.data.meta.countdownTarget).getTime() - this.now) / 1000));
           const pad = (n) => String(n).padStart(2, '0');
           return [
-            { key: 'cd.days', value: String(c.days).padStart(3, '0') },
-            { key: 'cd.hours', value: pad(c.hours) },
-            { key: 'cd.minutes', value: pad(c.minutes) },
-            { key: 'cd.seconds', value: pad(c.seconds) }
+            { key: 'cd.days', value: String(Math.floor(s / 86400)).padStart(3, '0') },
+            { key: 'cd.hours', value: pad(Math.floor((s % 86400) / 3600)) },
+            { key: 'cd.minutes', value: pad(Math.floor((s % 3600) / 60)) },
+            { key: 'cd.seconds', value: pad(s % 60) }
           ];
+        },
+
+        // ---- Canlı mod ----
+        get istanbulNow() {
+          const parts = new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+          }).formatToParts(new Date(this.now));
+          const g = (type) => parts.find((p) => p.type === type).value;
+          return { date: g('year') + '-' + g('month') + '-' + g('day'), time: g('hour') + ':' + g('minute') };
+        },
+        get liveDayIndex() {
+          const i = this.data.program.findIndex((d) => d.date === this.istanbulNow.date);
+          return i < 0 ? 0 : i;
+        },
+        get isEventDay() { return this.data.program.some((d) => d.date === this.istanbulNow.date); },
+        get liveNow() {
+          if (!this.isEventDay) return [];
+          const t = this.istanbulNow.time;
+          return this.data.program[this.liveDayIndex].sessions.filter((s) => s.start <= t && t < s.end);
+        },
+        get liveNext() {
+          const t = this.isEventDay ? this.istanbulNow.time : '00:00';
+          return this.data.program[this.liveDayIndex].sessions.find((s) => s.start > t) || null;
+        },
+        isLiveSession(s) {
+          return this.phase === 'live' && this.dayTab === this.liveDayIndex && this.liveNow.includes(s);
+        },
+        hallLink(s) {
+          const h = this.data.halls.find((x) => x.id === s.hallId);
+          return h && h.onlineUrl ? h.onlineUrl : '';
+        },
+        goToDay(i) {
+          this.dayTab = i;
+          this.hallFilter = 'all';
+          document.getElementById('program').scrollIntoView({ behavior: 'smooth' });
         },
 
         // ---- Hakkında istatistikleri (veriden türetilir) ----
@@ -1396,6 +2251,21 @@
             { key: 'stat.tracks', value: String(this.data.tracks.length).padStart(2, '0') },
             { key: 'stat.keynotes', value: String(this.data.speakers.length).padStart(2, '0') },
             { key: 'stat.sessions', value: String(sessions).padStart(2, '0') }
+          ];
+        },
+        get countryCount() {
+          return new Set(this.data.committees.scientific.map((m) => m.country.en)).size;
+        },
+        get incentiveFacts() {
+          const foreignMembers = this.data.committees.scientific.filter((m) => m.country.en !== 'Türkiye').length;
+          const foreignKeynotes = this.data.speakers.filter((s) => s.country !== 'TR').length;
+          return [
+            { key: 'inc.countries', value: this.countryCount },
+            { key: 'inc.foreignMembers', value: foreignMembers },
+            { key: 'inc.foreignKeynotes', value: foreignKeynotes },
+            { key: 'inc.isbn', value: 'ISBN' },
+            { key: 'inc.review', value: '2× blind' },
+            { key: 'inc.languages', value: 'TR · EN' }
           ];
         },
 
@@ -1414,6 +2284,9 @@
         get timelineDone() { return this.timeline.filter((d) => d.status === 'done').length; },
         get activeDate() { return this.timeline.find((d) => d.status === 'active'); },
 
+        // ---- Kayıt ----
+        get earlyBird() { return this.now < new Date(this.dateOf('earlyreg')).getTime(); },
+
         // ---- Bilim kurulu filtresi ----
         get scientificFiltered() {
           const q = this.norm(this.search.trim());
@@ -1423,11 +2296,20 @@
           );
         },
 
+        // ---- Kabul edilen bildiriler filtresi ----
+        get papersFiltered() {
+          const q = this.norm(this.paperSearch.trim());
+          return this.data.acceptedPapers.list.filter((p) =>
+            (this.paperTrack === 'all' || p.track === this.paperTrack) &&
+            (!q || this.norm([p.id, p.title, p.authors].join(' ')).includes(q))
+          );
+        },
+
         // ---- Program ----
         get programItems() {
           const day = this.data.program[this.dayTab];
           if (this.hallFilter === 'all') return day.sessions;
-          return day.sessions.filter((s) => !s.hallId || s.hallId === this.hallFilter);
+          return day.sessions.filter((s) => s.type !== 'session' || s.hallId === this.hallFilter);
         },
         typeStyle(type) {
           return {
