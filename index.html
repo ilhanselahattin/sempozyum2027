@@ -1,0 +1,1454 @@
+<!doctype html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ISSDT 2027 · Uluslararası Sürdürülebilir Dijital Dönüşüm Sempozyumu</title>
+  <meta name="description" content="ISSDT 2027 — Uluslararası Sürdürülebilir Dijital Dönüşüm Sempozyumu, 13–14 Mayıs 2027, Ankara." />
+  <meta name="theme-color" content="#0B0F19" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0B0F19',
+            paper: '#F8FAFC',
+            // Kurumsal vurgu rengi (Zümrüt) — değiştirmek için yalnızca bu paleti güncelleyin
+            brand: {
+              50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7', 400: '#34d399',
+              500: '#10b981', 600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b'
+            },
+            // İkincil vurgu (Kehribar)
+            accent: {
+              50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24',
+              500: '#f59e0b', 600: '#D97706', 700: '#b45309', 800: '#92400e', 900: '#78350f'
+            }
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .card { @apply rounded-2xl border border-slate-200 bg-white transition duration-300 ease-out hover:-translate-y-1 hover:border-brand-600; }
+      .card-dark { @apply rounded-2xl border border-white/10 bg-white/[0.03] transition duration-300 ease-out hover:-translate-y-1 hover:border-brand-500; }
+      .eyebrow { @apply inline-flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand-700; }
+      .section-title { @apply font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl; }
+      .btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2; }
+      .btn-ghost { @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2; }
+      .tab { @apply relative whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600; }
+    }
+  </style>
+  <style>
+    [x-cloak] { display: none !important; }
+    html { scroll-padding-top: 88px; }
+    body { background-color: #F8FAFC; }
+    .tabular { font-variant-numeric: tabular-nums; }
+    /* Silik arka plan desenleri */
+    .bg-grid {
+      background-image:
+        linear-gradient(to right, rgba(15, 23, 42, .045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, .045) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+    .bg-dots { background-image: radial-gradient(rgba(15, 23, 42, .09) 1px, transparent 1px); background-size: 22px 22px; }
+    .bg-dots-dark { background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px); background-size: 22px 22px; }
+    .mask-fade { -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 40%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 40%, transparent 100%); }
+    .mask-fade-b { -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent); mask-image: linear-gradient(to bottom, #000 50%, transparent); }
+    @keyframes ping-soft { 0% { transform: scale(1); opacity: .55; } 80%, 100% { transform: scale(2.4); opacity: 0; } }
+    .ping-soft { animation: ping-soft 1.8s cubic-bezier(0, 0, .2, 1) infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .ping-soft { animation: none; }
+      *, *::before, *::after { transition-duration: 0ms !important; }
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { scrollbar-width: none; }
+  </style>
+
+  <!-- Lucide Icons (Alpine'den önce yüklenmeli) -->
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <!-- Alpine.js (Collapse eklentisi çekirdekten önce yüklenmeli) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.8/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+</head>
+
+<body x-data="symposiumApp()" x-init="init()" class="font-sans text-slate-700 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- ============================== NAVBAR ============================== -->
+  <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
+    <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8" aria-label="Ana menü">
+      <!-- Logo -->
+      <a href="#top" class="flex shrink-0 items-center gap-3" aria-label="Ana sayfa">
+        <span class="grid h-9 w-9 place-items-center rounded-lg bg-ink font-display text-sm font-extrabold text-white">
+          <span x-text="data.meta.monogram"></span>
+        </span>
+        <span class="leading-tight">
+          <span class="block font-display text-sm font-bold text-ink" x-text="data.meta.acronym"></span>
+          <span class="hidden font-mono text-[10px] uppercase tracking-widest text-slate-500 sm:block" x-text="t(data.meta.shortDate)"></span>
+        </span>
+      </a>
+
+      <!-- Masaüstü linkler -->
+      <ul class="hidden items-center gap-1 lg:flex">
+        <template x-for="link in navLinks" :key="link.id">
+          <li>
+            <a :href="'#' + link.id"
+               class="rounded-full px-3 py-2 text-sm font-medium transition"
+               :class="activeSection === link.id ? 'text-ink bg-slate-100' : 'text-slate-600 hover:text-ink'"
+               x-text="L(link.key)"></a>
+          </li>
+        </template>
+      </ul>
+
+      <div class="flex items-center gap-2">
+        <!-- Dil anahtarı -->
+        <div class="flex items-center rounded-full border border-slate-200 bg-white p-0.5 font-mono text-xs font-semibold" role="group" aria-label="Dil / Language">
+          <button type="button" @click="setLang('tr')" class="rounded-full px-2.5 py-1 transition" :class="lang === 'tr' ? 'bg-ink text-white' : 'text-slate-500 hover:text-ink'" :aria-pressed="lang === 'tr'">TR</button>
+          <button type="button" @click="setLang('en')" class="rounded-full px-2.5 py-1 transition" :class="lang === 'en' ? 'bg-ink text-white' : 'text-slate-500 hover:text-ink'" :aria-pressed="lang === 'en'">EN</button>
+        </div>
+        <!-- CTA -->
+        <a :href="data.meta.submissionUrl" target="_blank" rel="noopener" class="hidden items-center gap-2 rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700 sm:inline-flex">
+          <span x-text="L('cta.abstract')"></span>
+          <span x-html="icon('arrow-up-right', 'h-4 w-4')"></span>
+        </a>
+        <!-- Mobil menü butonu -->
+        <button type="button" @click="mobileMenu = !mobileMenu" class="grid h-9 w-9 place-items-center rounded-full border border-slate-200 bg-white text-ink lg:hidden" :aria-expanded="mobileMenu" aria-label="Menü">
+          <span x-show="!mobileMenu" x-html="icon('menu', 'h-4 w-4')"></span>
+          <span x-show="mobileMenu" x-cloak x-html="icon('x', 'h-4 w-4')"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobil menü -->
+    <div x-show="mobileMenu" x-cloak x-transition.opacity.duration.200ms @click.outside="mobileMenu = false" class="border-t border-slate-200 bg-white/95 backdrop-blur-md lg:hidden">
+      <ul class="mx-auto grid max-w-7xl gap-1 px-4 py-4 sm:px-6">
+        <template x-for="link in navLinks" :key="link.id">
+          <li>
+            <a :href="'#' + link.id" @click="mobileMenu = false" class="flex items-center justify-between rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-slate-100">
+              <span x-text="L(link.key)"></span>
+              <span class="text-slate-400" x-html="icon('chevron-right', 'h-4 w-4')"></span>
+            </a>
+          </li>
+        </template>
+        <li class="pt-2">
+          <a :href="data.meta.submissionUrl" target="_blank" rel="noopener" class="btn-primary w-full">
+            <span x-text="L('cta.abstract')"></span>
+            <span x-html="icon('arrow-up-right', 'h-4 w-4')"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============================== HERO ============================== -->
+    <section class="relative overflow-hidden border-b border-slate-200">
+      <div class="pointer-events-none absolute inset-0 bg-grid mask-fade" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 sm:pt-20 lg:px-8 lg:pb-24 lg:pt-28">
+        <!-- Rozet -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-ink">
+            <span class="relative flex h-2 w-2">
+              <span class="ping-soft absolute inline-flex h-full w-full rounded-full bg-brand-500"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-brand-600"></span>
+            </span>
+            <span class="font-mono tabular" x-text="t(data.meta.dateRange)"></span>
+            <span class="text-slate-300">/</span>
+            <span x-text="t(data.meta.city)"></span>
+          </span>
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-accent-200 bg-accent-50 px-3 py-1.5 text-xs font-medium text-accent-800">
+            <span x-html="icon('sparkles', 'h-3.5 w-3.5')"></span>
+            <span x-text="t(data.meta.edition)"></span>
+          </span>
+        </div>
+
+        <!-- Başlık -->
+        <h1 class="mt-8 max-w-5xl font-display text-4xl font-extrabold leading-[1.04] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+          <span x-text="t(data.meta.titleLead)"></span>
+          <span class="text-brand-600" x-text="t(data.meta.titleAccent)"></span>
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600" x-text="t(data.meta.tagline)"></p>
+
+        <!-- Butonlar -->
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <a :href="data.meta.submissionUrl" target="_blank" rel="noopener" class="btn-primary">
+            <span x-html="icon('send', 'h-4 w-4')"></span>
+            <span x-text="L('cta.paper')"></span>
+          </a>
+          <a :href="data.downloads[0].href" download class="btn-ghost">
+            <span x-html="icon('file-down', 'h-4 w-4')"></span>
+            <span x-text="L('cta.template')"></span>
+          </a>
+        </div>
+
+        <!-- Geri sayım -->
+        <div class="mt-14 grid gap-4 lg:grid-cols-12">
+          <div class="relative overflow-hidden rounded-2xl bg-ink p-6 text-white sm:p-8 lg:col-span-8">
+            <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
+            <div class="relative flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-400" x-text="countdown.finished ? L('countdown.live') : L('countdown.label')"></p>
+                <p class="mt-1 text-sm text-slate-400" x-text="t(data.meta.openingNote)"></p>
+              </div>
+              <span class="hidden font-mono text-xs text-slate-500 sm:block">UTC+03:00</span>
+            </div>
+            <div class="relative mt-6 grid grid-cols-4 gap-2 sm:gap-4" role="timer" aria-live="off">
+              <template x-for="unit in countdownUnits" :key="unit.key">
+                <div class="rounded-xl border border-white/10 bg-white/[0.04] px-2 py-4 text-center sm:px-4 sm:py-5">
+                  <div class="font-mono text-3xl font-semibold tabular text-white sm:text-5xl lg:text-6xl" x-text="unit.value"></div>
+                  <div class="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400 sm:text-xs" x-text="L(unit.key)"></div>
+                </div>
+              </template>
+            </div>
+          </div>
+          <!-- Kısa bilgiler -->
+          <div class="grid grid-cols-2 gap-4 lg:col-span-4 lg:grid-cols-1">
+            <template x-for="fact in data.meta.facts" :key="fact.icon">
+              <div class="card flex items-start gap-3 p-4 sm:p-5">
+                <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-700" x-html="icon(fact.icon, 'h-4 w-4')"></span>
+                <div class="min-w-0">
+                  <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500" x-text="t(fact.label)"></p>
+                  <p class="mt-0.5 text-sm font-semibold text-ink" x-text="t(fact.value)"></p>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== HAKKINDA & KONULAR ============================== -->
+    <section id="about" class="relative py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-2xl">
+            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('about.eyebrow')"></span></span>
+            <h2 class="section-title mt-4" x-text="L('about.title')"></h2>
+          </div>
+          <p class="max-w-md text-slate-600" x-text="L('about.lead')"></p>
+        </div>
+
+        <!-- Bento Grid -->
+        <div class="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12">
+          <!-- Amaç kartı -->
+          <article class="relative overflow-hidden rounded-2xl bg-ink p-8 text-white sm:col-span-2 lg:col-span-6 lg:row-span-2">
+            <div class="pointer-events-none absolute inset-0 bg-dots-dark mask-fade-b" aria-hidden="true"></div>
+            <div class="relative flex h-full flex-col">
+              <span class="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-400" x-html="icon('target', 'h-5 w-5')"></span>
+              <h3 class="mt-6 font-display text-2xl font-bold sm:text-3xl" x-text="t(data.about.title)"></h3>
+              <div class="mt-4 space-y-4 text-slate-300">
+                <template x-for="(p, i) in data.about.paragraphs" :key="i">
+                  <p class="leading-relaxed" x-text="t(p)"></p>
+                </template>
+              </div>
+              <dl class="mt-auto grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 pt-0 sm:grid-cols-4 lg:mt-10">
+                <template x-for="stat in aboutStats" :key="stat.key">
+                  <div class="bg-ink p-4">
+                    <dt class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400" x-text="L(stat.key)"></dt>
+                    <dd class="mt-1 font-mono text-2xl font-semibold tabular text-white" x-text="stat.value"></dd>
+                  </div>
+                </template>
+              </dl>
+            </div>
+          </article>
+
+          <!-- Konu kutuları -->
+          <template x-for="(track, i) in data.tracks" :key="track.id">
+            <article class="card group relative flex flex-col p-6" :class="track.span">
+              <div class="flex items-start justify-between">
+                <span class="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-paper text-ink transition group-hover:border-brand-600 group-hover:bg-brand-600 group-hover:text-white" x-html="icon(track.icon, 'h-5 w-5')"></span>
+                <span class="font-mono text-xs text-slate-400 tabular" x-text="'T' + String(i + 1).padStart(2, '0')"></span>
+              </div>
+              <h3 class="mt-5 font-display text-lg font-bold text-ink" :class="track.featured && 'sm:text-xl'" x-text="t(track.title)"></h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-600" x-text="t(track.desc)"></p>
+              <ul x-show="track.featured" class="mt-auto flex flex-wrap gap-2 pt-5">
+                <template x-for="kw in (t(track.keywords) || [])" :key="kw">
+                  <li class="rounded-full border border-slate-200 bg-paper px-2.5 py-1 text-xs text-slate-600" x-text="kw"></li>
+                </template>
+              </ul>
+            </article>
+          </template>
+
+          <!-- Yayın kartı -->
+          <article class="card flex flex-col justify-between gap-6 border-accent-200 bg-accent-50 p-6 hover:border-accent-600 sm:col-span-2 lg:col-span-4">
+            <div class="flex items-center gap-3">
+              <span class="grid h-11 w-11 place-items-center rounded-xl bg-accent-600 text-white" x-html="icon('book-open-check', 'h-5 w-5')"></span>
+              <p class="font-mono text-xs uppercase tracking-[0.16em] text-accent-800" x-text="L('about.publication')"></p>
+            </div>
+            <p class="text-sm leading-relaxed text-accent-900" x-text="t(data.about.publication)"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== ÖNEMLİ TARİHLER ============================== -->
+    <section id="dates" class="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
+      <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
+      <div class="relative mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+        <div class="lg:col-span-4">
+          <div class="lg:sticky lg:top-28">
+            <span class="eyebrow text-brand-400"><span class="h-px w-6 bg-brand-400"></span><span x-text="L('dates.eyebrow')"></span></span>
+            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl" x-text="L('dates.title')"></h2>
+            <p class="mt-4 text-slate-400" x-text="L('dates.lead')"></p>
+
+            <!-- İlerleme -->
+            <div class="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <div class="flex items-center justify-between font-mono text-xs uppercase tracking-[0.16em] text-slate-400">
+                <span x-text="L('dates.progress')"></span>
+                <span class="tabular text-white" x-text="timelineDone + ' / ' + timeline.length"></span>
+              </div>
+              <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
+                <div class="h-full rounded-full bg-brand-500 transition-all duration-700" :style="'width:' + (timelineDone / timeline.length * 100) + '%'"></div>
+              </div>
+              <template x-if="activeDate">
+                <p class="mt-4 text-sm text-slate-300">
+                  <span x-text="L('dates.next')"></span>
+                  <span class="font-semibold text-white" x-text="t(activeDate.title)"></span>
+                  —
+                  <span class="font-mono tabular text-brand-400" x-text="activeDate.daysLeft + ' ' + L('dates.daysLeft')"></span>
+                </p>
+              </template>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zaman çizelgesi -->
+        <ol class="relative lg:col-span-8" role="list">
+          <div class="absolute bottom-3 left-[15px] top-3 w-px bg-white/10" aria-hidden="true"></div>
+          <template x-for="(item, i) in timeline" :key="item.date">
+            <li class="relative pb-6 pl-12 last:pb-0">
+              <!-- Düğüm -->
+              <span class="absolute left-0 top-5 grid h-[31px] w-[31px] place-items-center rounded-full border"
+                    :class="{
+                      'border-white/15 bg-ink text-slate-500': item.status === 'done',
+                      'border-brand-500 bg-brand-600 text-white shadow-[0_0_0_6px_rgba(5,150,105,0.18)]': item.status === 'active',
+                      'border-white/20 bg-ink text-slate-300': item.status === 'upcoming'
+                    }">
+                <span x-show="item.status === 'done'" x-html="icon('check', 'h-3.5 w-3.5')"></span>
+                <span x-show="item.status === 'active'" class="relative flex h-2 w-2">
+                  <span class="ping-soft absolute inline-flex h-full w-full rounded-full bg-white"></span>
+                  <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
+                </span>
+                <span x-show="item.status === 'upcoming'" class="font-mono text-[10px] tabular" x-text="String(i + 1).padStart(2, '0')"></span>
+              </span>
+
+              <!-- Kart -->
+              <div class="rounded-2xl border p-5 transition duration-300 sm:p-6"
+                   :class="{
+                     'border-white/5 bg-white/[0.015] opacity-50 hover:opacity-80': item.status === 'done',
+                     'border-brand-500/60 bg-brand-500/[0.08] shadow-[0_0_40px_-12px_rgba(16,185,129,0.55)]': item.status === 'active',
+                     'border-white/10 bg-white/[0.03] hover:-translate-y-1 hover:border-brand-500': item.status === 'upcoming'
+                   }">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <time class="font-mono text-sm font-medium tabular" :class="item.status === 'active' ? 'text-brand-300' : 'text-slate-300'" :datetime="item.date" x-text="formatDate(item.date)"></time>
+                  <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]"
+                        :class="{
+                          'bg-white/5 text-slate-400': item.status === 'done',
+                          'bg-brand-500 text-ink': item.status === 'active',
+                          'border border-white/10 text-slate-400': item.status === 'upcoming'
+                        }"
+                        x-text="L('status.' + item.status)"></span>
+                </div>
+                <h3 class="mt-3 font-display text-lg font-bold text-white sm:text-xl" :class="item.status === 'done' && 'line-through decoration-white/30'" x-text="t(item.title)"></h3>
+                <p class="mt-1.5 text-sm leading-relaxed text-slate-400" x-text="t(item.desc)"></p>
+                <p x-show="item.status === 'active'" class="mt-4 inline-flex items-center gap-2 font-mono text-xs text-brand-300">
+                  <span x-html="icon('hourglass', 'h-3.5 w-3.5')"></span>
+                  <span class="tabular" x-text="item.daysLeft + ' ' + L('dates.daysLeft')"></span>
+                </p>
+              </div>
+            </li>
+          </template>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================== DAVETLİ KONUŞMACILAR ============================== -->
+    <section id="speakers" class="py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-2xl">
+            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('speakers.eyebrow')"></span></span>
+            <h2 class="section-title mt-4" x-text="L('speakers.title')"></h2>
+          </div>
+          <p class="max-w-md text-slate-600" x-text="L('speakers.lead')"></p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <template x-for="sp in data.speakers" :key="sp.name">
+            <article x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" @focusin="open = true" @focusout="open = false"
+                     class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-brand-600">
+              <!-- Portre -->
+              <div class="relative aspect-[3/4] overflow-hidden bg-ink">
+                <template x-if="sp.photo">
+                  <img :src="sp.photo" :alt="sp.name" loading="lazy" class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0" />
+                </template>
+                <template x-if="!sp.photo">
+                  <div class="absolute inset-0 transition duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-dots-dark"></div>
+                    <div class="absolute -right-10 -top-10 h-48 w-48 rounded-full border border-white/10"></div>
+                    <div class="absolute -right-2 -top-2 h-32 w-32 rounded-full border border-white/10"></div>
+                    <div class="absolute inset-0 grid place-items-center">
+                      <span class="font-display text-7xl font-extrabold tracking-tighter text-white/90" x-text="initials(sp.name)"></span>
+                    </div>
+                    <div class="absolute bottom-0 left-0 h-1 w-full" :class="sp.accent === 'amber' ? 'bg-accent-600' : 'bg-brand-600'"></div>
+                  </div>
+                </template>
+
+                <!-- Gün etiketi -->
+                <span class="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink backdrop-blur" x-text="L('program.day') + ' ' + sp.day"></span>
+
+                <!-- Hover detay -->
+                <div class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink via-ink/95 to-ink/80 p-5 text-white transition duration-500 ease-out"
+                     :class="open && 'translate-y-0'">
+                  <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-400" x-text="L('speakers.talk')"></p>
+                  <p class="mt-1 font-display text-sm font-semibold leading-snug" x-text="t(sp.talk)"></p>
+                  <p class="mt-3 text-xs leading-relaxed text-slate-300" x-text="t(sp.bio)"></p>
+                </div>
+              </div>
+              <!-- Bilgi -->
+              <div class="p-5">
+                <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate-500" x-text="t(sp.title)"></p>
+                <h3 class="mt-1 font-display text-lg font-bold text-ink" x-text="sp.name"></h3>
+                <p class="mt-1 flex items-center gap-1.5 text-sm text-slate-600">
+                  <span class="text-slate-400" x-html="icon('building-2', 'h-3.5 w-3.5')"></span>
+                  <span x-text="t(sp.affiliation)"></span>
+                </p>
+                <button type="button" @click="open = !open" class="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-700 lg:hidden">
+                  <span x-text="open ? L('speakers.hide') : L('speakers.details')"></span>
+                  <span x-html="icon('chevron-down', 'h-3.5 w-3.5')" class="transition" :class="open && 'rotate-180'"></span>
+                </button>
+              </div>
+            </article>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== KURULLAR ============================== -->
+    <section id="committees" class="border-y border-slate-200 bg-white py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+          <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('committees.eyebrow')"></span></span>
+          <h2 class="section-title mt-4" x-text="L('committees.title')"></h2>
+        </div>
+
+        <!-- Sekmeler -->
+        <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div class="no-scrollbar -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+            <div class="inline-flex gap-1 rounded-full border border-slate-200 bg-paper p-1" role="tablist">
+              <template x-for="tab in committeeTabs" :key="tab.id">
+                <button type="button" role="tab" @click="committeeTab = tab.id" :aria-selected="committeeTab === tab.id"
+                        class="tab" :class="committeeTab === tab.id ? 'bg-ink text-white' : 'text-slate-600 hover:text-ink'">
+                  <span x-text="L(tab.key)"></span>
+                  <span class="ml-1 font-mono text-[10px] tabular opacity-60" x-text="data.committees[tab.id].length"></span>
+                </button>
+              </template>
+            </div>
+          </div>
+
+          <!-- Bilim kurulu arama -->
+          <div x-show="committeeTab === 'scientific'" x-transition.opacity class="relative w-full sm:w-80">
+            <span class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" x-html="icon('search', 'h-4 w-4')"></span>
+            <input type="search" x-model="search" :placeholder="L('committees.search')" :aria-label="L('committees.search')"
+                   class="w-full rounded-full border border-slate-200 bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-slate-400 focus:border-brand-600 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-600/10" />
+          </div>
+        </div>
+
+        <!-- Onur & Düzenleme kurulu -->
+        <template x-for="tabId in ['honorary', 'organizing']" :key="tabId">
+          <div x-show="committeeTab === tabId" x-transition.opacity.duration.250ms class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" role="tabpanel">
+            <template x-for="m in data.committees[tabId]" :key="m.name">
+              <div class="card flex items-center gap-4 p-5">
+                <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-slate-200 bg-paper font-display text-sm font-bold text-ink" x-text="initials(m.name)"></span>
+                <div class="min-w-0">
+                  <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-brand-700" x-text="t(m.role)"></p>
+                  <p class="mt-0.5 font-display font-semibold text-ink"><span class="font-normal text-slate-500" x-text="m.title + ' '"></span><span x-text="m.name"></span></p>
+                  <p class="truncate text-sm text-slate-500" x-text="t(m.affiliation)"></p>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+
+        <!-- Bilim kurulu -->
+        <div x-show="committeeTab === 'scientific'" x-transition.opacity.duration.250ms class="mt-8" role="tabpanel">
+          <p class="mb-4 font-mono text-xs text-slate-500 tabular">
+            <span x-text="scientificFiltered.length"></span> / <span x-text="data.committees.scientific.length"></span>
+            <span x-text="L('committees.members')"></span>
+          </p>
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <template x-for="m in scientificFiltered" :key="m.name">
+              <div class="card flex items-start gap-3 p-4">
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-paper font-display text-xs font-bold text-ink ring-1 ring-slate-200" x-text="initials(m.name)"></span>
+                <div class="min-w-0">
+                  <p class="font-display text-sm font-semibold text-ink"><span class="font-normal text-slate-500" x-text="m.title + ' '"></span><span x-text="m.name"></span></p>
+                  <p class="text-sm text-slate-600" x-text="t(m.affiliation)"></p>
+                  <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-400" x-text="t(m.field) + ' · ' + t(m.country)"></p>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div x-show="scientificFiltered.length === 0" x-cloak class="rounded-2xl border border-dashed border-slate-300 p-10 text-center">
+            <span class="mx-auto grid h-10 w-10 place-items-center rounded-full bg-paper text-slate-400" x-html="icon('search-x', 'h-5 w-5')"></span>
+            <p class="mt-3 text-sm text-slate-600" x-text="L('committees.empty')"></p>
+            <button type="button" @click="search = ''" class="mt-3 text-sm font-semibold text-brand-700 hover:underline" x-text="L('committees.clear')"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PROGRAM ============================== -->
+    <section id="program" class="relative py-20 sm:py-28">
+      <div class="pointer-events-none absolute inset-0 bg-dots opacity-60 mask-fade-b" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-2xl">
+            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('program.eyebrow')"></span></span>
+            <h2 class="section-title mt-4" x-text="L('program.title')"></h2>
+          </div>
+          <p class="max-w-md text-slate-600" x-text="L('program.lead')"></p>
+        </div>
+
+        <div class="mt-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <!-- Gün sekmeleri -->
+          <div class="grid grid-cols-2 gap-2 sm:inline-flex" role="tablist">
+            <template x-for="(day, i) in data.program" :key="day.date">
+              <button type="button" role="tab" @click="dayTab = i" :aria-selected="dayTab === i"
+                      class="flex flex-col items-start rounded-2xl border px-5 py-3 text-left transition"
+                      :class="dayTab === i ? 'border-ink bg-ink text-white' : 'border-slate-200 bg-white text-ink hover:border-brand-600'">
+                <span class="font-mono text-[10px] uppercase tracking-[0.16em]" :class="dayTab === i ? 'text-brand-400' : 'text-slate-500'" x-text="L('program.day') + ' ' + (i + 1)"></span>
+                <span class="font-display text-sm font-semibold" x-text="formatDate(day.date, true)"></span>
+              </button>
+            </template>
+          </div>
+          <!-- Salon filtresi -->
+          <div class="no-scrollbar -mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
+            <div class="inline-flex gap-1 rounded-full border border-slate-200 bg-white p-1">
+              <template x-for="h in halls" :key="h.id">
+                <button type="button" @click="hallFilter = h.id" class="tab text-xs"
+                        :class="hallFilter === h.id ? 'bg-brand-600 text-white' : 'text-slate-600 hover:text-ink'"
+                        x-text="t(h.label)"></button>
+              </template>
+            </div>
+          </div>
+        </div>
+
+        <!-- Akış -->
+        <ol class="mt-8 space-y-3" role="tabpanel">
+          <template x-for="(s, i) in programItems" :key="dayTab + '-' + i + '-' + s.start">
+            <li class="grid grid-cols-1 gap-2 sm:grid-cols-[120px_1fr] sm:gap-6">
+              <!-- Saat -->
+              <div class="flex items-center gap-2 pt-1 sm:flex-col sm:items-end sm:gap-0 sm:pt-5">
+                <span class="font-mono text-sm font-semibold tabular text-ink" x-text="s.start"></span>
+                <span class="font-mono text-xs tabular text-slate-400"><span class="sm:hidden">– </span><span x-text="s.end"></span></span>
+              </div>
+              <!-- Kart -->
+              <div class="rounded-2xl border p-5 transition duration-300 sm:p-6"
+                   :class="s.type === 'break' ? 'border-dashed border-slate-200 bg-transparent' : 'border-slate-200 bg-white hover:-translate-y-1 hover:border-brand-600'">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]" :class="typeStyle(s.type)">
+                    <span x-html="icon(typeIcon(s.type), 'h-3 w-3')"></span>
+                    <span x-text="L('type.' + s.type)"></span>
+                  </span>
+                  <span x-show="s.hall" class="inline-flex items-center gap-1 rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600">
+                    <span x-html="icon('map-pin', 'h-3 w-3')"></span>
+                    <span x-text="t(s.hall)"></span>
+                  </span>
+                </div>
+                <h3 class="mt-3 font-display font-bold" :class="s.type === 'break' ? 'text-base text-slate-500' : 'text-lg text-ink'" x-text="t(s.title)"></h3>
+                <p x-show="s.speaker" class="mt-1 text-sm text-slate-600" x-text="s.speaker"></p>
+                <p x-show="s.chair" class="mt-2 text-xs text-slate-500">
+                  <span class="font-mono uppercase tracking-[0.12em]" x-text="L('program.chair') + ':'"></span>
+                  <span class="text-slate-700" x-text="s.chair"></span>
+                </p>
+                <ul x-show="s.papers && s.papers.length" class="mt-4 divide-y divide-slate-100 border-t border-slate-100">
+                  <template x-for="(paper, pi) in (s.papers || [])" :key="pi">
+                    <li class="flex gap-3 py-2.5 text-sm">
+                      <span class="font-mono text-xs tabular text-slate-400" x-text="String(pi + 1).padStart(2, '0')"></span>
+                      <span class="min-w-0"><span class="text-ink" x-text="t(paper.title)"></span> <span class="text-slate-500" x-text="'— ' + paper.authors"></span></span>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </li>
+          </template>
+        </ol>
+        <p class="mt-8 flex items-center gap-2 text-xs text-slate-500">
+          <span x-html="icon('info', 'h-3.5 w-3.5')"></span>
+          <span x-text="L('program.note')"></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== YAZIM KURALLARI & İNDİRMELER ============================== -->
+    <section id="guidelines" class="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
+      <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+          <span class="eyebrow text-brand-400"><span class="h-px w-6 bg-brand-400"></span><span x-text="L('guide.eyebrow')"></span></span>
+          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl" x-text="L('guide.title')"></h2>
+          <p class="mt-4 text-slate-400" x-text="L('guide.lead')"></p>
+        </div>
+
+        <div class="mt-12 grid gap-4 lg:grid-cols-2">
+          <template x-for="g in data.guidelines" :key="g.id">
+            <article class="card-dark p-6 sm:p-8">
+              <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                  <span class="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-400" x-html="icon(g.icon, 'h-5 w-5')"></span>
+                  <h3 class="font-display text-xl font-bold" x-text="t(g.title)"></h3>
+                </div>
+                <span class="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-400 tabular" x-text="t(g.limit)"></span>
+              </div>
+              <ul class="mt-6 space-y-3">
+                <template x-for="(rule, ri) in g.rules" :key="ri">
+                  <li class="flex gap-3 text-sm leading-relaxed text-slate-300">
+                    <span class="mt-0.5 shrink-0 text-brand-400" x-html="icon('check', 'h-4 w-4')"></span>
+                    <span x-text="t(rule)"></span>
+                  </li>
+                </template>
+              </ul>
+            </article>
+          </template>
+        </div>
+
+        <!-- İndirme kartları -->
+        <div class="mt-4 grid gap-4 sm:grid-cols-3">
+          <template x-for="d in data.downloads" :key="d.href">
+            <a :href="d.href" download class="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white p-6 text-ink transition duration-300 hover:-translate-y-1 hover:border-brand-500">
+              <div class="flex items-start justify-between">
+                <span class="grid h-12 w-12 place-items-center rounded-xl" :class="d.tone" x-html="icon(d.icon, 'h-6 w-6')"></span>
+                <span class="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-slate-400" x-text="d.ext"></span>
+              </div>
+              <h3 class="mt-6 font-display text-lg font-bold" x-text="t(d.title)"></h3>
+              <p class="mt-1 text-sm text-slate-500" x-text="t(d.desc)"></p>
+              <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                <span class="font-mono text-xs tabular text-slate-500" x-text="d.size"></span>
+                <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700">
+                  <span x-text="L('guide.download')"></span>
+                  <span class="transition group-hover:translate-y-0.5" x-html="icon('download', 'h-4 w-4')"></span>
+                </span>
+              </div>
+            </a>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== SSS ============================== -->
+    <section id="faq" class="py-20 sm:py-28">
+      <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+        <div class="lg:col-span-4">
+          <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('faq.eyebrow')"></span></span>
+          <h2 class="section-title mt-4" x-text="L('faq.title')"></h2>
+          <p class="mt-4 text-slate-600">
+            <span x-text="L('faq.lead')"></span>
+            <a :href="'mailto:' + data.contact.email" class="font-semibold text-brand-700 hover:underline" x-text="data.contact.email"></a>
+          </p>
+        </div>
+        <div class="space-y-3 lg:col-span-8">
+          <template x-for="(f, i) in data.faq" :key="i">
+            <div class="rounded-2xl border bg-white transition" :class="openFaq === i ? 'border-brand-600' : 'border-slate-200 hover:border-slate-300'">
+              <button type="button" @click="openFaq = openFaq === i ? null : i" :aria-expanded="openFaq === i"
+                      class="flex w-full items-center justify-between gap-4 p-5 text-left sm:p-6">
+                <span class="font-display font-semibold text-ink" x-text="t(f.q)"></span>
+                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-slate-200 text-ink transition" :class="openFaq === i && 'rotate-45 border-brand-600 bg-brand-600 text-white'" x-html="icon('plus', 'h-4 w-4')"></span>
+              </button>
+              <div x-show="openFaq === i" x-collapse.duration.250ms x-cloak>
+                <p class="px-5 pb-6 text-sm leading-relaxed text-slate-600 sm:px-6" x-text="t(f.a)"></p>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer id="contact" class="relative overflow-hidden bg-ink text-slate-400">
+    <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8">
+      <!-- Düzenleyen kurumlar -->
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500" x-text="L('footer.organizers')"></p>
+        <div class="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4">
+          <template x-for="org in data.organizers" :key="org.short">
+            <a :href="org.url" target="_blank" rel="noopener" class="group flex h-24 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 transition hover:border-brand-500">
+              <template x-if="org.logo">
+                <img :src="org.logo" :alt="t(org.name)" class="max-h-12 w-auto opacity-70 grayscale transition group-hover:opacity-100 group-hover:grayscale-0" />
+              </template>
+              <template x-if="!org.logo">
+                <span class="flex items-center gap-3">
+                  <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-white/15 font-display text-xs font-extrabold text-white" x-text="org.short"></span>
+                  <span class="text-xs leading-snug text-slate-300" x-text="t(org.name)"></span>
+                </span>
+              </template>
+            </a>
+          </template>
+        </div>
+      </div>
+
+      <div class="mt-14 grid gap-10 border-t border-white/10 pt-14 lg:grid-cols-12">
+        <!-- Marka & iletişim -->
+        <div class="lg:col-span-4">
+          <div class="flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-lg bg-white font-display text-sm font-extrabold text-ink" x-text="data.meta.monogram"></span>
+            <div>
+              <p class="font-display font-bold text-white" x-text="data.meta.acronym"></p>
+              <p class="text-xs text-slate-500" x-text="t(data.meta.dateRange)"></p>
+            </div>
+          </div>
+          <p class="mt-5 text-sm leading-relaxed" x-text="t(data.meta.fullTitle)"></p>
+          <div class="mt-6 space-y-3 text-sm">
+            <a :href="'mailto:' + data.contact.email" class="flex items-center gap-2.5 text-white hover:text-brand-400">
+              <span x-html="icon('mail', 'h-4 w-4')"></span><span x-text="data.contact.email"></span>
+            </a>
+            <a :href="'tel:' + data.contact.phone.replace(/\s/g, '')" class="flex items-center gap-2.5 hover:text-white">
+              <span x-html="icon('phone', 'h-4 w-4')"></span><span class="font-mono tabular" x-text="data.contact.phone"></span>
+            </a>
+          </div>
+          <div class="mt-6 flex gap-2">
+            <template x-for="s in data.contact.social" :key="s.icon">
+              <a :href="s.url" target="_blank" rel="noopener" :aria-label="s.label" class="grid h-9 w-9 place-items-center rounded-full border border-white/10 transition hover:border-brand-500 hover:text-white" x-html="icon(s.icon, 'h-4 w-4')"></a>
+            </template>
+          </div>
+        </div>
+
+        <!-- Mekan & ulaşım -->
+        <div class="lg:col-span-4">
+          <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500" x-text="L('footer.venue')"></p>
+          <p class="mt-4 font-display font-semibold text-white" x-text="t(data.venue.name)"></p>
+          <p class="mt-1 text-sm" x-text="t(data.venue.address)"></p>
+          <ul class="mt-6 space-y-4">
+            <template x-for="tr in data.venue.transport" :key="tr.icon">
+              <li class="flex gap-3 text-sm">
+                <span class="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/10 text-brand-400" x-html="icon(tr.icon, 'h-4 w-4')"></span>
+                <span>
+                  <span class="block font-medium text-slate-200" x-text="t(tr.title)"></span>
+                  <span class="block text-xs leading-relaxed" x-text="t(tr.desc)"></span>
+                </span>
+              </li>
+            </template>
+          </ul>
+        </div>
+
+        <!-- Harita -->
+        <div class="lg:col-span-4">
+          <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500" x-text="L('footer.map')"></p>
+          <div class="mt-4 overflow-hidden rounded-2xl border border-white/10">
+            <iframe :src="data.venue.mapEmbed" :title="t(data.venue.name)" class="h-56 w-full grayscale invert-[.92] hue-rotate-180" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <a :href="data.venue.mapLink" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-400 hover:text-brand-300">
+            <span x-text="L('footer.directions')"></span>
+            <span x-html="icon('arrow-up-right', 'h-4 w-4')"></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-14 flex flex-col gap-3 border-t border-white/10 py-8 text-xs sm:flex-row sm:items-center sm:justify-between">
+        <p>© <span class="font-mono tabular" x-text="new Date().getFullYear()"></span> <span x-text="data.meta.acronym"></span> · <span x-text="L('footer.rights')"></span></p>
+        <a href="#top" class="inline-flex items-center gap-1.5 hover:text-white">
+          <span x-text="L('footer.top')"></span>
+          <span x-html="icon('arrow-up', 'h-3.5 w-3.5')"></span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       MERKEZİ VERİ — Tüm dinamik içerik buradan gelir.
+       Metinler { tr: "...", en: "..." } biçimindedir.
+       ===================================================================== -->
+  <script>
+    const symposiumData = {
+      meta: {
+        acronym: "ISSDT 2027",
+        monogram: "SDT",
+        submissionUrl: "https://easychair.org/",
+        countdownTarget: "2027-05-13T09:30:00+03:00",
+        titleLead: { tr: "Sürdürülebilir Gelecek İçin", en: "Rethinking Digital Transformation" },
+        titleAccent: { tr: "Dijital Dönüşümü Yeniden Düşünmek", en: "for a Sustainable Future" },
+        fullTitle: {
+          tr: "3. Uluslararası Sürdürülebilir Dijital Dönüşüm Sempozyumu",
+          en: "3rd International Symposium on Sustainable Digital Transformation"
+        },
+        tagline: {
+          tr: "Yapay zekâ, veri bilimi, yeşil teknolojiler ve dijital toplum alanlarında çalışan araştırmacıları; disiplinler arası, açık bilim odaklı ve hakemli bir platformda buluşturuyoruz.",
+          en: "Bringing together researchers in artificial intelligence, data science, green technologies and digital society on an interdisciplinary, open-science oriented, peer-reviewed platform."
+        },
+        dateRange: { tr: "13–14 Mayıs 2027", en: "13–14 May 2027" },
+        shortDate: { tr: "13–14.05.2027 · Ankara", en: "13–14.05.2027 · Ankara" },
+        city: { tr: "Ankara, Türkiye", en: "Ankara, Türkiye" },
+        edition: { tr: "3. Uluslararası Sempozyum", en: "3rd International Edition" },
+        openingNote: { tr: "Açılış oturumuna kalan süre", en: "Time remaining until the opening session" },
+        facts: [
+          { icon: "map-pin", label: { tr: "Mekân", en: "Venue" }, value: { tr: "Kongre ve Kültür Merkezi", en: "Congress & Culture Center" } },
+          { icon: "monitor-smartphone", label: { tr: "Format", en: "Format" }, value: { tr: "Hibrit (Yüz yüze + Çevrim içi)", en: "Hybrid (On-site + Online)" } },
+          { icon: "languages", label: { tr: "Dil", en: "Language" }, value: { tr: "Türkçe · İngilizce", en: "Turkish · English" } }
+        ]
+      },
+
+      about: {
+        title: { tr: "Sempozyumun Amacı", en: "Purpose of the Symposium" },
+        paragraphs: [
+          {
+            tr: "ISSDT 2027, dijital dönüşümün çevresel, ekonomik ve toplumsal sürdürülebilirlik ile kesiştiği noktaları bilimsel bir çerçevede tartışmayı amaçlamaktadır.",
+            en: "ISSDT 2027 aims to discuss, within a scientific framework, where digital transformation intersects with environmental, economic and social sustainability."
+          },
+          {
+            tr: "Akademi, kamu ve sanayiden araştırmacıları bir araya getirerek özgün çalışmaların paylaşılmasını, disiplinler arası iş birliklerinin kurulmasını ve genç araştırmacıların uluslararası ağlara katılımını desteklemeyi hedefliyoruz.",
+            en: "By bringing together researchers from academia, the public sector and industry, we seek to foster the sharing of original work, interdisciplinary collaboration and the inclusion of early-career researchers in international networks."
+          }
+        ],
+        publication: {
+          tr: "Kabul edilen ve sunulan tam metinler ISBN'li Tam Metin Bildiri Kitabı'nda yayımlanacaktır. Seçilmiş çalışmalar, hakem sürecinin ardından ULAKBİM TR Dizin ve ESCI kapsamındaki ortak dergilerin özel sayılarında değerlendirilecektir.",
+          en: "Accepted and presented full papers will be published in the Proceedings Book with ISBN. Selected papers will be considered, after peer review, for special issues of partner journals indexed in ULAKBİM TR Index and ESCI."
+        }
+      },
+
+      tracks: [
+        {
+          id: "ai", icon: "brain-circuit", featured: true, span: "sm:col-span-2 lg:col-span-6",
+          title: { tr: "Yapay Zekâ ve Sorumlu Algoritmalar", en: "AI & Responsible Algorithms" },
+          desc: {
+            tr: "Açıklanabilir yapay zekâ, algoritmik adalet, büyük dil modellerinin toplumsal etkileri ve yapay zekâ yönetişimi.",
+            en: "Explainable AI, algorithmic fairness, societal impacts of large language models and AI governance."
+          },
+          keywords: { tr: ["XAI", "Etik", "LLM", "Yönetişim"], en: ["XAI", "Ethics", "LLMs", "Governance"] }
+        },
+        {
+          id: "data", icon: "database", span: "lg:col-span-3",
+          title: { tr: "Veri Bilimi ve Analitik", en: "Data Science & Analytics" },
+          desc: { tr: "Büyük veri altyapıları, açık veri ve karar destek sistemleri.", en: "Big data infrastructures, open data and decision support systems." }
+        },
+        {
+          id: "green", icon: "leaf", span: "lg:col-span-3",
+          title: { tr: "Yeşil Bilişim", en: "Green Computing" },
+          desc: { tr: "Enerji verimli donanım, karbon ayak izi ölçümü ve döngüsel elektronik.", en: "Energy-efficient hardware, carbon footprint measurement and circular electronics." }
+        },
+        {
+          id: "cities", icon: "building", span: "lg:col-span-4",
+          title: { tr: "Akıllı Şehirler ve Mobilite", en: "Smart Cities & Mobility" },
+          desc: { tr: "Kentsel sensör ağları, dijital ikizler ve sürdürülebilir ulaşım modelleri.", en: "Urban sensor networks, digital twins and sustainable transport models." }
+        },
+        {
+          id: "security", icon: "shield-check", span: "lg:col-span-4",
+          title: { tr: "Siber Güvenlik ve Mahremiyet", en: "Cybersecurity & Privacy" },
+          desc: { tr: "Kritik altyapı güvenliği, mahremiyet koruyan hesaplama ve KVKK/GDPR uyumu.", en: "Critical infrastructure security, privacy-preserving computation and KVKK/GDPR compliance." }
+        },
+        {
+          id: "edu", icon: "graduation-cap", span: "lg:col-span-4",
+          title: { tr: "Dijital Eğitim", en: "Digital Education" },
+          desc: { tr: "Öğrenme analitiği, uyarlanabilir öğrenme ortamları ve dijital okuryazarlık.", en: "Learning analytics, adaptive learning environments and digital literacy." }
+        },
+        {
+          id: "society", icon: "users", featured: true, span: "sm:col-span-2 lg:col-span-8",
+          title: { tr: "Dijital Toplum, Ekonomi ve Politika", en: "Digital Society, Economy & Policy" },
+          desc: {
+            tr: "Dijital eşitsizlikler, platform ekonomisi, e-devlet uygulamaları ve sürdürülebilir kalkınma amaçlarına yönelik kamu politikaları.",
+            en: "Digital divides, the platform economy, e-government applications and public policies for the Sustainable Development Goals."
+          },
+          keywords: { tr: ["SKA", "E-Devlet", "Platform Ekonomisi", "Kapsayıcılık"], en: ["SDGs", "E-Government", "Platform Economy", "Inclusion"] }
+        }
+      ],
+
+      // Tarihler +03:00 (TSİ) gün sonu olarak girilir; durum (tamamlandı/aktif/yaklaşan) otomatik hesaplanır.
+      importantDates: [
+        {
+          date: "2026-09-15T23:59:59+03:00",
+          title: { tr: "Bildiri Çağrısı Yayımlandı", en: "Call for Papers Announced" },
+          desc: { tr: "Konu başlıkları ve gönderim koşulları ilan edildi.", en: "Tracks and submission requirements were announced." }
+        },
+        {
+          date: "2026-12-15T23:59:59+03:00",
+          title: { tr: "Özet Gönderimi Son Tarihi", en: "Abstract Submission Deadline" },
+          desc: { tr: "300–500 kelimelik genişletilmiş özetlerin EasyChair üzerinden gönderimi.", en: "Submission of 300–500 word extended abstracts via EasyChair." }
+        },
+        {
+          date: "2027-01-20T23:59:59+03:00",
+          title: { tr: "Özet Kabul Bildirimleri", en: "Abstract Acceptance Notification" },
+          desc: { tr: "Çift kör hakem değerlendirmesi sonuçlarının yazarlara iletilmesi.", en: "Double-blind peer review results sent to authors." }
+        },
+        {
+          date: "2027-03-15T23:59:59+03:00",
+          title: { tr: "Tam Metin Gönderimi", en: "Full Paper Submission" },
+          desc: { tr: "Bildiri kitabında yer alacak tam metinlerin şablona uygun gönderimi.", en: "Template-compliant submission of full papers for the proceedings." }
+        },
+        {
+          date: "2027-04-01T23:59:59+03:00",
+          title: { tr: "Erken Kayıt Son Günü", en: "Early Registration Deadline" },
+          desc: { tr: "İndirimli katılım ücreti için son gün.", en: "Last day for the discounted registration fee." }
+        },
+        {
+          date: "2027-04-25T23:59:59+03:00",
+          title: { tr: "Kesin Programın İlanı", en: "Final Programme Release" },
+          desc: { tr: "Oturum, salon ve sunum saatlerinin yayımlanması.", en: "Publication of sessions, halls and presentation times." }
+        },
+        {
+          date: "2027-05-13T23:59:59+03:00",
+          title: { tr: "Sempozyum Günleri", en: "Symposium Days" },
+          desc: { tr: "13–14 Mayıs 2027 · Kongre ve Kültür Merkezi, Ankara.", en: "13–14 May 2027 · Congress & Culture Center, Ankara." }
+        }
+      ],
+
+      // photo alanına "assets/speakers/ad-soyad.jpg" gibi bir yol yazılırsa portre görseli kullanılır.
+      speakers: [
+        {
+          name: "Elif Karaman", day: 1, accent: "emerald", photo: "",
+          title: { tr: "Prof. Dr.", en: "Professor" },
+          affiliation: { tr: "Delft Teknik Üniversitesi, Hollanda", en: "Delft University of Technology, NL" },
+          talk: { tr: "Sorumlu Yapay Zekâ: Etikten Mühendisliğe", en: "Responsible AI: From Ethics to Engineering" },
+          bio: {
+            tr: "Algoritmik hesap verebilirlik ve değer odaklı tasarım üzerine çalışan Karaman, Avrupa Komisyonu yapay zekâ uzman grubunda görev almaktadır.",
+            en: "Working on algorithmic accountability and value-sensitive design, Karaman serves on the European Commission's expert group on AI."
+          }
+        },
+        {
+          name: "James O. Whitfield", day: 1, accent: "amber", photo: "",
+          title: { tr: "Prof. Dr.", en: "Professor" },
+          affiliation: { tr: "Edinburgh Üniversitesi, Birleşik Krallık", en: "University of Edinburgh, UK" },
+          talk: { tr: "Karbon Farkındalıklı Hesaplama", en: "Carbon-Aware Computing at Scale" },
+          bio: {
+            tr: "Veri merkezlerinin enerji verimliliği ve sürdürülebilir bulut mimarileri alanında 120'den fazla yayını bulunmaktadır.",
+            en: "Author of more than 120 publications on data-centre energy efficiency and sustainable cloud architectures."
+          }
+        },
+        {
+          name: "Ayşe Nur Yalçın", day: 2, accent: "emerald", photo: "",
+          title: { tr: "Prof. Dr.", en: "Professor" },
+          affiliation: { tr: "Orta Doğu Teknik Üniversitesi", en: "Middle East Technical University" },
+          talk: { tr: "Dijital İkizlerle Dirençli Şehirler", en: "Resilient Cities with Digital Twins" },
+          bio: {
+            tr: "Kentsel bilişim ve afet yönetimi alanında ulusal ve uluslararası projelerin yürütücülüğünü yapmaktadır.",
+            en: "Principal investigator of national and international projects in urban informatics and disaster management."
+          }
+        },
+        {
+          name: "Marta Lindqvist", day: 2, accent: "amber", photo: "",
+          title: { tr: "Doç. Dr.", en: "Associate Professor" },
+          affiliation: { tr: "KTH Kraliyet Teknoloji Enstitüsü, İsveç", en: "KTH Royal Institute of Technology, SE" },
+          talk: { tr: "Kapsayıcı Dijital Kamu Hizmetleri", en: "Inclusive Digital Public Services" },
+          bio: {
+            tr: "Dijital yönetişim ve erişilebilirlik politikaları üzerine çalışmakta; İskandinav e-devlet reformlarına danışmanlık vermektedir.",
+            en: "Researches digital governance and accessibility policy, advising Nordic e-government reforms."
+          }
+        }
+      ],
+
+      committees: {
+        honorary: [
+          { title: "Prof. Dr.", name: "Mehmet Ali Gürsoy", role: { tr: "Onursal Başkan · Rektör", en: "Honorary Chair · Rector" }, affiliation: { tr: "Kuzey Ufuk Üniversitesi", en: "Northern Horizon University" } },
+          { title: "Prof. Dr.", name: "Zeynep Aksoy", role: { tr: "Rektör Yardımcısı", en: "Vice-Rector" }, affiliation: { tr: "Kuzey Ufuk Üniversitesi", en: "Northern Horizon University" } },
+          { title: "Prof. Dr.", name: "Hasan Tekin", role: { tr: "Dekan", en: "Dean" }, affiliation: { tr: "Mühendislik ve Doğa Bilimleri Fakültesi", en: "Faculty of Engineering & Natural Sciences" } }
+        ],
+        organizing: [
+          { title: "Prof. Dr.", name: "Selin Erdem", role: { tr: "Sempozyum Başkanı", en: "Symposium Chair" }, affiliation: { tr: "Bilgisayar Mühendisliği Bölümü", en: "Dept. of Computer Engineering" } },
+          { title: "Doç. Dr.", name: "Burak Öztürk", role: { tr: "Eş Başkan", en: "Co-Chair" }, affiliation: { tr: "Yönetim Bilişim Sistemleri Bölümü", en: "Dept. of Management Information Systems" } },
+          { title: "Doç. Dr.", name: "Gizem Şahin", role: { tr: "Bilim Kurulu Koordinatörü", en: "Scientific Committee Coordinator" }, affiliation: { tr: "Endüstri Mühendisliği Bölümü", en: "Dept. of Industrial Engineering" } },
+          { title: "Dr. Öğr. Üyesi", name: "Emre Kılıç", role: { tr: "Program Koordinatörü", en: "Programme Coordinator" }, affiliation: { tr: "Bilgisayar Mühendisliği Bölümü", en: "Dept. of Computer Engineering" } },
+          { title: "Dr. Öğr. Üyesi", name: "Deniz Arslan", role: { tr: "Yayın Koordinatörü", en: "Publications Coordinator" }, affiliation: { tr: "Kütüphane ve Dokümantasyon Daire Bşk.", en: "Library & Documentation Office" } },
+          { title: "Dr.", name: "Cansu Yıldız", role: { tr: "Genel Sekreter", en: "General Secretary" }, affiliation: { tr: "Yazılım Mühendisliği Bölümü", en: "Dept. of Software Engineering" } },
+          { title: "Arş. Gör.", name: "Kaan Doğan", role: { tr: "Web ve İletişim", en: "Web & Communications" }, affiliation: { tr: "Bilgisayar Mühendisliği Bölümü", en: "Dept. of Computer Engineering" } },
+          { title: "Arş. Gör.", name: "İrem Çelik", role: { tr: "Kayıt ve Lojistik", en: "Registration & Logistics" }, affiliation: { tr: "Endüstri Mühendisliği Bölümü", en: "Dept. of Industrial Engineering" } }
+        ],
+        scientific: [
+          { title: "Prof. Dr.", name: "Ahmet Karaca", affiliation: { tr: "Boğaziçi Üniversitesi", en: "Boğaziçi University" }, field: { tr: "Makine Öğrenmesi", en: "Machine Learning" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Prof. Dr.", name: "Anna Müller", affiliation: { tr: "Münih Teknik Üniversitesi", en: "Technical University of Munich" }, field: { tr: "Enerji Sistemleri", en: "Energy Systems" }, country: { tr: "Almanya", en: "Germany" } },
+          { title: "Prof. Dr.", name: "Ayhan Bilgin", affiliation: { tr: "İstanbul Teknik Üniversitesi", en: "Istanbul Technical University" }, field: { tr: "Akıllı Şehirler", en: "Smart Cities" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Prof. Dr.", name: "Carlos Mendes", affiliation: { tr: "Lizbon Üniversitesi", en: "University of Lisbon" }, field: { tr: "Bilgi Sistemleri", en: "Information Systems" }, country: { tr: "Portekiz", en: "Portugal" } },
+          { title: "Prof. Dr.", name: "Fatma Güler", affiliation: { tr: "Hacettepe Üniversitesi", en: "Hacettepe University" }, field: { tr: "Eğitim Teknolojileri", en: "Educational Technology" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Prof. Dr.", name: "Hiroshi Tanaka", affiliation: { tr: "Tokyo Üniversitesi", en: "University of Tokyo" }, field: { tr: "Robotik", en: "Robotics" }, country: { tr: "Japonya", en: "Japan" } },
+          { title: "Prof. Dr.", name: "Kemal Aydın", affiliation: { tr: "Ankara Üniversitesi", en: "Ankara University" }, field: { tr: "Kamu Yönetimi", en: "Public Administration" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Prof. Dr.", name: "Laura Bianchi", affiliation: { tr: "Milano Politeknik Üniversitesi", en: "Politecnico di Milano" }, field: { tr: "Sürdürülebilir Tasarım", en: "Sustainable Design" }, country: { tr: "İtalya", en: "Italy" } },
+          { title: "Prof. Dr.", name: "Mustafa Demirci", affiliation: { tr: "Gazi Üniversitesi", en: "Gazi University" }, field: { tr: "Siber Güvenlik", en: "Cybersecurity" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Prof. Dr.", name: "Nermin Özkan", affiliation: { tr: "Ege Üniversitesi", en: "Ege University" }, field: { tr: "Veri Madenciliği", en: "Data Mining" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Prof. Dr.", name: "Peter Novak", affiliation: { tr: "Ljubljana Üniversitesi", en: "University of Ljubljana" }, field: { tr: "Dağıtık Sistemler", en: "Distributed Systems" }, country: { tr: "Slovenya", en: "Slovenia" } },
+          { title: "Prof. Dr.", name: "Serkan Uçar", affiliation: { tr: "Dokuz Eylül Üniversitesi", en: "Dokuz Eylül University" }, field: { tr: "Yöneylem Araştırması", en: "Operations Research" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Doç. Dr.", name: "Aslı Korkmaz", affiliation: { tr: "Bilkent Üniversitesi", en: "Bilkent University" }, field: { tr: "İnsan-Bilgisayar Etkileşimi", en: "Human-Computer Interaction" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Doç. Dr.", name: "Daniel Okafor", affiliation: { tr: "Lagos Üniversitesi", en: "University of Lagos" }, field: { tr: "Dijital Kalkınma", en: "Digital Development" }, country: { tr: "Nijerya", en: "Nigeria" } },
+          { title: "Doç. Dr.", name: "Ebru Taşdemir", affiliation: { tr: "Sabancı Üniversitesi", en: "Sabancı University" }, field: { tr: "Doğal Dil İşleme", en: "Natural Language Processing" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Doç. Dr.", name: "Farid Rahimi", affiliation: { tr: "Tahran Üniversitesi", en: "University of Tehran" }, field: { tr: "Nesnelerin İnterneti", en: "Internet of Things" }, country: { tr: "İran", en: "Iran" } },
+          { title: "Doç. Dr.", name: "Gökhan Yurt", affiliation: { tr: "Karadeniz Teknik Üniversitesi", en: "Karadeniz Technical University" }, field: { tr: "Coğrafi Bilgi Sistemleri", en: "Geographic Information Systems" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Doç. Dr.", name: "Sofia Papadopoulou", affiliation: { tr: "Atina Ulusal Teknik Üniversitesi", en: "National Technical University of Athens" }, field: { tr: "Enerji Verimliliği", en: "Energy Efficiency" }, country: { tr: "Yunanistan", en: "Greece" } },
+          { title: "Doç. Dr.", name: "Tuba Eren", affiliation: { tr: "Marmara Üniversitesi", en: "Marmara University" }, field: { tr: "Dijital Ekonomi", en: "Digital Economy" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Doç. Dr.", name: "Yusuf Kaplan", affiliation: { tr: "Selçuk Üniversitesi", en: "Selçuk University" }, field: { tr: "Bulut Bilişim", en: "Cloud Computing" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Dr. Öğr. Üyesi", name: "Berk Altun", affiliation: { tr: "Eskişehir Teknik Üniversitesi", en: "Eskişehir Technical University" }, field: { tr: "Ulaştırma Sistemleri", en: "Transportation Systems" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Dr. Öğr. Üyesi", name: "Merve Koç", affiliation: { tr: "Yıldız Teknik Üniversitesi", en: "Yıldız Technical University" }, field: { tr: "Bilgisayarlı Görü", en: "Computer Vision" }, country: { tr: "Türkiye", en: "Türkiye" } },
+          { title: "Dr.", name: "Nadia Haddad", affiliation: { tr: "Beyrut Amerikan Üniversitesi", en: "American University of Beirut" }, field: { tr: "Veri Etiği", en: "Data Ethics" }, country: { tr: "Lübnan", en: "Lebanon" } },
+          { title: "Dr.", name: "Oğuz Şen", affiliation: { tr: "TÜBİTAK BİLGEM", en: "TÜBİTAK BİLGEM" }, field: { tr: "Kriptografi", en: "Cryptography" }, country: { tr: "Türkiye", en: "Türkiye" } }
+        ]
+      },
+
+      program: [
+        {
+          date: "2027-05-13",
+          sessions: [
+            { start: "08:30", end: "09:30", type: "registration", title: { tr: "Kayıt ve Karşılama Kahvesi", en: "Registration & Welcome Coffee" }, hall: { tr: "Fuaye", en: "Foyer" } },
+            { start: "09:30", end: "10:15", type: "ceremony", title: { tr: "Açılış Töreni ve Protokol Konuşmaları", en: "Opening Ceremony & Welcome Addresses" }, hall: { tr: "Büyük Salon", en: "Main Hall" } },
+            { start: "10:15", end: "11:00", type: "keynote", title: { tr: "Sorumlu Yapay Zekâ: Etikten Mühendisliğe", en: "Responsible AI: From Ethics to Engineering" }, speaker: "Prof. Dr. Elif Karaman", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Selin Erdem" },
+            { start: "11:00", end: "11:20", type: "break", title: { tr: "Kahve Arası", en: "Coffee Break" } },
+            {
+              start: "11:20", end: "12:40", type: "session", hallId: "A",
+              title: { tr: "Oturum 1A · Yapay Zekâ ve Toplum", en: "Session 1A · AI & Society" }, hall: { tr: "Salon A", en: "Hall A" }, chair: "Prof. Dr. Ahmet Karaca",
+              papers: [
+                { title: { tr: "Kamu hizmetlerinde açıklanabilir karar destek modelleri", en: "Explainable decision-support models in public services" }, authors: "A. Yılmaz, B. Kurt" },
+                { title: { tr: "Türkçe büyük dil modellerinde önyargı ölçümü", en: "Measuring bias in Turkish large language models" }, authors: "E. Taşdemir, C. Polat" },
+                { title: { tr: "Yapay zekâ okuryazarlığı ölçeği: geçerlik çalışması", en: "An AI literacy scale: a validity study" }, authors: "F. Güler, D. Ak" }
+              ]
+            },
+            {
+              start: "11:20", end: "12:40", type: "session", hallId: "B",
+              title: { tr: "Oturum 1B · Yeşil Bilişim", en: "Session 1B · Green Computing" }, hall: { tr: "Salon B", en: "Hall B" }, chair: "Doç. Dr. Sofia Papadopoulou",
+              papers: [
+                { title: { tr: "Veri merkezlerinde iş yükü kaydırma ile emisyon azaltımı", en: "Emission reduction through workload shifting in data centres" }, authors: "M. Arı, J. Weber" },
+                { title: { tr: "Elektronik atıklarda döngüsel ekonomi göstergeleri", en: "Circular economy indicators for e-waste" }, authors: "S. Uçar, L. Bianchi" },
+                { title: { tr: "Kenar bilişimde enerji farkındalıklı zamanlama", en: "Energy-aware scheduling in edge computing" }, authors: "Y. Kaplan, H. Duman" }
+              ]
+            },
+            { start: "12:40", end: "13:40", type: "break", title: { tr: "Öğle Yemeği", en: "Lunch" }, hall: { tr: "Kampüs Restoranı", en: "Campus Restaurant" } },
+            { start: "13:40", end: "14:25", type: "keynote", title: { tr: "Karbon Farkındalıklı Hesaplama", en: "Carbon-Aware Computing at Scale" }, speaker: "Prof. Dr. James O. Whitfield", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Doç. Dr. Burak Öztürk" },
+            {
+              start: "14:30", end: "15:50", type: "session", hallId: "A",
+              title: { tr: "Oturum 2A · Veri Bilimi", en: "Session 2A · Data Science" }, hall: { tr: "Salon A", en: "Hall A" }, chair: "Prof. Dr. Nermin Özkan",
+              papers: [
+                { title: { tr: "Açık veri portallarında kalite değerlendirmesi", en: "Quality assessment of open data portals" }, authors: "T. Eren, K. Sarı" },
+                { title: { tr: "Zaman serisi tahmininde transformer mimarileri", en: "Transformer architectures for time-series forecasting" }, authors: "M. Koç, O. Bal" },
+                { title: { tr: "Sağlık verilerinde federatif öğrenme", en: "Federated learning on health data" }, authors: "N. Haddad, R. Işık" }
+              ]
+            },
+            {
+              start: "14:30", end: "15:50", type: "session", hallId: "B",
+              title: { tr: "Oturum 2B · Siber Güvenlik", en: "Session 2B · Cybersecurity" }, hall: { tr: "Salon B", en: "Hall B" }, chair: "Prof. Dr. Mustafa Demirci",
+              papers: [
+                { title: { tr: "Kritik altyapılarda anomali tespiti", en: "Anomaly detection in critical infrastructures" }, authors: "O. Şen, G. Ateş" },
+                { title: { tr: "KVKK uyumlu sentetik veri üretimi", en: "KVKK-compliant synthetic data generation" }, authors: "İ. Çelik, A. Korkmaz" },
+                { title: { tr: "Kuantum sonrası kriptografiye geçiş yol haritası", en: "A roadmap for post-quantum cryptography migration" }, authors: "E. Kılıç, P. Novak" }
+              ]
+            },
+            { start: "15:50", end: "16:10", type: "break", title: { tr: "Kahve Arası", en: "Coffee Break" } },
+            { start: "16:10", end: "17:30", type: "panel", title: { tr: "Panel · Dijital Dönüşümde Kamu–Sanayi–Üniversite İş Birliği", en: "Panel · Public–Industry–University Collaboration in Digital Transformation" }, hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Kemal Aydın", speaker: "Prof. Dr. Ayhan Bilgin · Dr. Oğuz Şen · Doç. Dr. Tuba Eren" },
+            { start: "19:30", end: "22:00", type: "social", title: { tr: "Gala Yemeği", en: "Gala Dinner" }, hall: { tr: "Rektörlük Konukevi", en: "University Guesthouse" } }
+          ]
+        },
+        {
+          date: "2027-05-14",
+          sessions: [
+            { start: "09:00", end: "09:45", type: "keynote", title: { tr: "Dijital İkizlerle Dirençli Şehirler", en: "Resilient Cities with Digital Twins" }, speaker: "Prof. Dr. Ayşe Nur Yalçın", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Doç. Dr. Gizem Şahin" },
+            {
+              start: "09:50", end: "11:10", type: "session", hallId: "A",
+              title: { tr: "Oturum 3A · Akıllı Şehirler ve Mobilite", en: "Session 3A · Smart Cities & Mobility" }, hall: { tr: "Salon A", en: "Hall A" }, chair: "Prof. Dr. Ayhan Bilgin",
+              papers: [
+                { title: { tr: "Toplu taşımada talep tahmini için grafik sinir ağları", en: "Graph neural networks for transit demand forecasting" }, authors: "B. Altun, S. Er" },
+                { title: { tr: "Deprem sonrası hasar tespitinde uydu görüntüleri", en: "Satellite imagery for post-earthquake damage assessment" }, authors: "G. Yurt, A. N. Yalçın" },
+                { title: { tr: "Kentsel ısı adalarının sensör ağlarıyla izlenmesi", en: "Monitoring urban heat islands with sensor networks" }, authors: "F. Rahimi, D. Uslu" }
+              ]
+            },
+            {
+              start: "09:50", end: "11:10", type: "session", hallId: "B",
+              title: { tr: "Oturum 3B · Dijital Eğitim", en: "Session 3B · Digital Education" }, hall: { tr: "Salon B", en: "Hall B" }, chair: "Prof. Dr. Fatma Güler",
+              papers: [
+                { title: { tr: "Uyarlanabilir öğrenme ortamlarında öğrenci başarısı", en: "Student achievement in adaptive learning environments" }, authors: "C. Yıldız, M. Tan" },
+                { title: { tr: "Yükseköğretimde üretken yapay zekâ politikaları", en: "Generative AI policies in higher education" }, authors: "K. Doğan, L. Ersoy" },
+                { title: { tr: "Öğrenme analitiğiyle erken uyarı sistemleri", en: "Early-warning systems with learning analytics" }, authors: "D. Arslan, H. Öz" }
+              ]
+            },
+            { start: "11:10", end: "11:30", type: "break", title: { tr: "Kahve Arası", en: "Coffee Break" } },
+            { start: "11:30", end: "12:30", type: "poster", title: { tr: "Poster Oturumu ve Genç Araştırmacılar Sergisi", en: "Poster Session & Early-Career Researchers Exhibition" }, hall: { tr: "Fuaye", en: "Foyer" } },
+            { start: "12:30", end: "13:30", type: "break", title: { tr: "Öğle Yemeği", en: "Lunch" }, hall: { tr: "Kampüs Restoranı", en: "Campus Restaurant" } },
+            { start: "13:30", end: "14:15", type: "keynote", title: { tr: "Kapsayıcı Dijital Kamu Hizmetleri", en: "Inclusive Digital Public Services" }, speaker: "Doç. Dr. Marta Lindqvist", hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Kemal Aydın" },
+            {
+              start: "14:20", end: "15:40", type: "session", hallId: "A",
+              title: { tr: "Oturum 4A · Dijital Toplum ve Ekonomi", en: "Session 4A · Digital Society & Economy" }, hall: { tr: "Salon A", en: "Hall A" }, chair: "Doç. Dr. Tuba Eren",
+              papers: [
+                { title: { tr: "Platform emeği ve sosyal güvenlik", en: "Platform labour and social security" }, authors: "S. Erdem, Y. Bulut" },
+                { title: { tr: "Kırsal bölgelerde dijital uçurumun ölçülmesi", en: "Measuring the digital divide in rural areas" }, authors: "D. Okafor, Z. Kara" },
+                { title: { tr: "E-devlet hizmetlerinde erişilebilirlik denetimi", en: "Accessibility auditing of e-government services" }, authors: "M. Lindqvist, E. Gök" }
+              ]
+            },
+            {
+              start: "14:20", end: "15:40", type: "session", hallId: "B",
+              title: { tr: "Oturum 4B · Bilgi Sistemleri", en: "Session 4B · Information Systems" }, hall: { tr: "Salon B", en: "Hall B" }, chair: "Prof. Dr. Carlos Mendes",
+              papers: [
+                { title: { tr: "KOBİ'lerde dijital olgunluk modelleri", en: "Digital maturity models for SMEs" }, authors: "B. Öztürk, F. Aksu" },
+                { title: { tr: "Tedarik zincirinde blokzincir tabanlı izlenebilirlik", en: "Blockchain-based traceability in supply chains" }, authors: "G. Şahin, R. Lopes" },
+                { title: { tr: "Bulut geçişinde toplam sahip olma maliyeti", en: "Total cost of ownership in cloud migration" }, authors: "Y. Kaplan, N. Ay" }
+              ]
+            },
+            { start: "15:45", end: "16:30", type: "ceremony", title: { tr: "Ödül Töreni ve Kapanış Oturumu", en: "Awards & Closing Session" }, hall: { tr: "Büyük Salon", en: "Main Hall" }, chair: "Prof. Dr. Selin Erdem" }
+          ]
+        }
+      ],
+
+      guidelines: [
+        {
+          id: "abstract", icon: "file-text",
+          title: { tr: "Özet Yazım Kuralları", en: "Abstract Guidelines" },
+          limit: { tr: "300–500 kelime", en: "300–500 words" },
+          rules: [
+            { tr: "Özetler Türkçe veya İngilizce yazılmalı; Türkçe özetlere İngilizce başlık ve özet eklenmelidir.", en: "Abstracts may be in Turkish or English; Turkish abstracts must include an English title and abstract." },
+            { tr: "Amaç, yöntem, bulgular ve sonuç bölümlerini içeren yapılandırılmış özet biçimi kullanılmalıdır.", en: "Use a structured format covering purpose, method, findings and conclusion." },
+            { tr: "3–5 anahtar kelime ve ilgili konu başlığı (T01–T07) belirtilmelidir.", en: "Provide 3–5 keywords and the relevant track (T01–T07)." },
+            { tr: "Çift kör hakemlik için yazar bilgileri yalnızca gönderim sistemine girilmeli, dosyada yer almamalıdır.", en: "For double-blind review, author details go only into the submission system, not the file." },
+            { tr: "Bir yazar en fazla iki bildiride sunucu olarak yer alabilir.", en: "Each author may present at most two papers." }
+          ]
+        },
+        {
+          id: "fullpaper", icon: "book-text",
+          title: { tr: "Tam Metin Yazım Kuralları", en: "Full Paper Guidelines" },
+          limit: { tr: "6–12 sayfa", en: "6–12 pages" },
+          rules: [
+            { tr: "Tam metinler resmî Word veya LaTeX şablonu kullanılarak A4, tek sütun biçiminde hazırlanmalıdır.", en: "Full papers must use the official Word or LaTeX template, A4 single-column." },
+            { tr: "Gövde metni 11 punto, 1,15 satır aralığı; kaynakça APA 7 stiline uygun olmalıdır.", en: "Body text 11 pt, 1.15 line spacing; references in APA 7 style." },
+            { tr: "Şekil ve tablolar en az 300 dpi çözünürlükte, numaralı ve başlıklı olmalıdır.", en: "Figures and tables must be at least 300 dpi, numbered and captioned." },
+            { tr: "Benzerlik oranı (iThenticate) %20'yi aşmamalı; etik kurul onayı gerektiren çalışmalarda onay belgesi eklenmelidir.", en: "Similarity (iThenticate) must not exceed 20%; studies requiring ethics approval must include the approval document." },
+            { tr: "Sunulmayan bildiriler bildiri kitabında yayımlanmaz.", en: "Papers that are not presented will not be published in the proceedings." }
+          ]
+        }
+      ],
+
+      // Dosyaları "assets/" klasörüne yerleştirin; href yolları buna göredir.
+      downloads: [
+        {
+          href: "assets/ISSDT2027_Sablon.docx", ext: ".docx", size: "48 KB", icon: "file-type-2", tone: "bg-sky-50 text-sky-700",
+          title: { tr: "Word Şablonu", en: "Word Template" },
+          desc: { tr: "Özet ve tam metin için biçimlendirilmiş şablon", en: "Formatted template for abstracts and full papers" }
+        },
+        {
+          href: "assets/ISSDT2027_LaTeX.zip", ext: ".zip", size: "212 KB", icon: "file-code-2", tone: "bg-brand-50 text-brand-700",
+          title: { tr: "LaTeX Şablonu", en: "LaTeX Template" },
+          desc: { tr: "Overleaf uyumlu sınıf dosyası ve örnek belge", en: "Overleaf-ready class file and sample document" }
+        },
+        {
+          href: "assets/ISSDT2027_Afis.pdf", ext: ".pdf", size: "1,8 MB", icon: "image", tone: "bg-accent-50 text-accent-700",
+          title: { tr: "Sempozyum Afişi", en: "Symposium Poster" },
+          desc: { tr: "Baskıya hazır A3 afiş", en: "Print-ready A3 poster" }
+        }
+      ],
+
+      faq: [
+        {
+          q: { tr: "Katılım ücreti ne kadar ve neleri kapsıyor?", en: "What is the registration fee and what does it cover?" },
+          a: { tr: "Erken kayıt ücreti akademisyenler için 2.500 TL, lisansüstü öğrenciler için 1.250 TL'dir. Ücret; bildiri kitabı yayını, katılım belgesi, kahve araları ve öğle yemeklerini kapsar. Gala yemeği isteğe bağlıdır.", en: "Early registration is 2,500 TRY for academics and 1,250 TRY for graduate students. It covers proceedings publication, certificate of attendance, coffee breaks and lunches. The gala dinner is optional." }
+        },
+        {
+          q: { tr: "Çevrim içi sunum yapabilir miyim?", en: "Can I present online?" },
+          a: { tr: "Evet. Sempozyum hibrit formatta düzenlenecektir. Çevrim içi sunumlar için ayrılmış sanal salonlarda canlı sunum yapılacaktır; önceden kaydedilmiş videolar kabul edilmemektedir.", en: "Yes. The symposium is hybrid. Online presentations take place live in dedicated virtual halls; pre-recorded videos are not accepted." }
+        },
+        {
+          q: { tr: "Bir bildiride kaç yazar yer alabilir?", en: "How many authors can a paper have?" },
+          a: { tr: "Bir bildiride en fazla beş yazar yer alabilir. Her bildiri için en az bir yazarın kayıt yaptırması gerekmektedir.", en: "A paper may have up to five authors. At least one author must register for each paper." }
+        },
+        {
+          q: { tr: "Katılım belgesi ne zaman verilecek?", en: "When will certificates be issued?" },
+          a: { tr: "Katılım ve sunum belgeleri, sempozyumun ardından iki hafta içinde e-posta ile dijital olarak gönderilecektir.", en: "Attendance and presentation certificates will be emailed digitally within two weeks after the symposium." }
+        },
+        {
+          q: { tr: "Konaklama desteği var mı?", en: "Is accommodation support available?" },
+          a: { tr: "Kampüse yakın anlaşmalı otellerde katılımcılara özel indirimli fiyatlar sunulmaktadır. Ayrıntılı liste kayıt sonrası paylaşılacaktır.", en: "Discounted rates are available at partner hotels near campus. A detailed list will be shared after registration." }
+        }
+      ],
+
+      organizers: [
+        { short: "KUÜ", name: { tr: "Kuzey Ufuk Üniversitesi", en: "Northern Horizon University" }, url: "#", logo: "" },
+        { short: "MDF", name: { tr: "Mühendislik ve Doğa Bilimleri Fakültesi", en: "Faculty of Engineering & Natural Sciences" }, url: "#", logo: "" },
+        { short: "SDM", name: { tr: "Sürdürülebilir Dijitalleşme Araştırma Merkezi", en: "Sustainable Digitalisation Research Centre" }, url: "#", logo: "" },
+        { short: "DTD", name: { tr: "Dijital Teknolojiler Derneği", en: "Digital Technologies Association" }, url: "#", logo: "" }
+      ],
+
+      venue: {
+        name: { tr: "Kuzey Ufuk Üniversitesi Kongre ve Kültür Merkezi", en: "Northern Horizon University Congress & Culture Center" },
+        address: { tr: "Merkez Kampüs, Üniversiteler Mah. Bilim Cad. No: 12, 06800 Çankaya / Ankara", en: "Main Campus, Üniversiteler Mah. Bilim Cad. No: 12, 06800 Çankaya / Ankara, Türkiye" },
+        mapEmbed: "https://www.openstreetmap.org/export/embed.html?bbox=32.76%2C39.87%2C32.80%2C39.90&layer=mapnik",
+        mapLink: "https://www.openstreetmap.org/#map=15/39.885/32.780",
+        transport: [
+          { icon: "plane", title: { tr: "Havalimanından", en: "From the Airport" }, desc: { tr: "Esenboğa Havalimanı'ndan HAVAŞ ile AŞTİ'ye (45 dk), oradan metro ile kampüse (15 dk).", en: "From Esenboğa Airport take HAVAŞ to AŞTİ (45 min), then the metro to campus (15 min)." } },
+          { icon: "train-front", title: { tr: "Metro ile", en: "By Metro" }, desc: { tr: "M2 Koru–Kızılay hattı, Üniversite durağı; kampüs girişine 5 dakikalık yürüme.", en: "M2 Koru–Kızılay line, Üniversite station; 5-minute walk to the campus gate." } },
+          { icon: "car", title: { tr: "Otopark", en: "Parking" }, desc: { tr: "Kongre merkezi yanındaki açık otopark katılımcılara ücretsizdir.", en: "The open car park next to the congress centre is free for participants." } }
+        ]
+      },
+
+      contact: {
+        email: "issdt2027@example.org",
+        phone: "+90 312 000 00 00",
+        social: [
+          { icon: "linkedin", label: "LinkedIn", url: "#" },
+          { icon: "twitter", label: "X / Twitter", url: "#" },
+          { icon: "youtube", label: "YouTube", url: "#" }
+        ]
+      }
+    };
+
+    // ---------------------------------------------------------------------
+    // Arayüz metinleri (statik etiketler)
+    // ---------------------------------------------------------------------
+    const uiText = {
+      tr: {
+        'nav.about': 'Hakkında', 'nav.dates': 'Tarihler', 'nav.speakers': 'Konuşmacılar', 'nav.committees': 'Kurullar',
+        'nav.program': 'Program', 'nav.guidelines': 'Yazım Kuralları', 'nav.faq': 'SSS',
+        'cta.abstract': 'Özet Gönder', 'cta.paper': 'Bildiri Gönder', 'cta.template': 'Şablonu İndir',
+        'countdown.label': 'Geri Sayım', 'countdown.live': 'Sempozyum başladı',
+        'cd.days': 'Gün', 'cd.hours': 'Saat', 'cd.minutes': 'Dakika', 'cd.seconds': 'Saniye',
+        'about.eyebrow': 'Hakkında & Konular', 'about.title': 'Disiplinler arası bir buluşma',
+        'about.lead': 'Yedi ana tema altında özgün araştırma, uygulama ve politika çalışmalarını davet ediyoruz.',
+        'about.publication': 'Yayın Olanakları',
+        'stat.days': 'Gün', 'stat.tracks': 'Tema', 'stat.keynotes': 'Davetli', 'stat.sessions': 'Oturum',
+        'dates.eyebrow': 'Önemli Tarihler', 'dates.title': 'Sempozyum takvimi',
+        'dates.lead': 'Tüm son tarihler Türkiye saati (UTC+3) ile gün sonu 23:59’dur.',
+        'dates.progress': 'İlerleme', 'dates.next': 'Sıradaki adım:', 'dates.daysLeft': 'gün kaldı',
+        'status.done': 'Tamamlandı', 'status.active': 'Aktif', 'status.upcoming': 'Yaklaşan',
+        'speakers.eyebrow': 'Davetli Konuşmacılar', 'speakers.title': 'Alanına yön veren isimler',
+        'speakers.lead': 'Her iki günün genel oturumlarında uluslararası davetli konuşmacılar ana konuşmalarını gerçekleştirecek.',
+        'speakers.talk': 'Konuşma', 'speakers.details': 'Ayrıntılar', 'speakers.hide': 'Gizle',
+        'committees.eyebrow': 'Kurullar', 'committees.title': 'Sempozyum kurulları',
+        'committees.honorary': 'Onur Kurulu', 'committees.organizing': 'Düzenleme Kurulu', 'committees.scientific': 'Bilim Kurulu',
+        'committees.search': 'İsim, üniversite veya alan ara…', 'committees.members': 'üye gösteriliyor',
+        'committees.empty': 'Aramanızla eşleşen kurul üyesi bulunamadı.', 'committees.clear': 'Aramayı temizle',
+        'program.eyebrow': 'Sempozyum Programı', 'program.title': 'İki gün, dolu bir akış',
+        'program.lead': 'Genel oturumlar Büyük Salon’da; paralel oturumlar Salon A ve Salon B’de gerçekleştirilecektir.',
+        'program.day': 'Gün', 'program.chair': 'Oturum Başkanı',
+        'program.note': 'Program taslak niteliğindedir; kesin program 25 Nisan 2027’de ilan edilecektir.',
+        'hall.all': 'Tüm Salonlar',
+        'type.keynote': 'Ana Konuşma', 'type.session': 'Paralel Oturum', 'type.panel': 'Panel', 'type.break': 'Ara',
+        'type.ceremony': 'Tören', 'type.registration': 'Kayıt', 'type.poster': 'Poster', 'type.social': 'Sosyal Program',
+        'guide.eyebrow': 'Yazım Kuralları & İndirmeler', 'guide.title': 'Gönderime hazırlık',
+        'guide.lead': 'Gönderimlerin değerlendirmeye alınabilmesi için aşağıdaki kurallara ve resmî şablonlara uyulması zorunludur.',
+        'guide.download': 'İndir',
+        'faq.eyebrow': 'SSS', 'faq.title': 'Sıkça sorulan sorular', 'faq.lead': 'Yanıtını bulamadığınız sorular için bize yazın: ',
+        'footer.organizers': 'Düzenleyen ve Destekleyen Kurumlar', 'footer.venue': 'Mekân & Ulaşım', 'footer.map': 'Harita',
+        'footer.directions': 'Yol tarifi al', 'footer.rights': 'Tüm hakları saklıdır.', 'footer.top': 'Başa dön'
+      },
+      en: {
+        'nav.about': 'About', 'nav.dates': 'Dates', 'nav.speakers': 'Speakers', 'nav.committees': 'Committees',
+        'nav.program': 'Programme', 'nav.guidelines': 'Guidelines', 'nav.faq': 'FAQ',
+        'cta.abstract': 'Submit Abstract', 'cta.paper': 'Submit Paper', 'cta.template': 'Download Template',
+        'countdown.label': 'Countdown', 'countdown.live': 'The symposium is live',
+        'cd.days': 'Days', 'cd.hours': 'Hours', 'cd.minutes': 'Minutes', 'cd.seconds': 'Seconds',
+        'about.eyebrow': 'About & Tracks', 'about.title': 'An interdisciplinary meeting',
+        'about.lead': 'We invite original research, practice and policy work across seven core tracks.',
+        'about.publication': 'Publication',
+        'stat.days': 'Days', 'stat.tracks': 'Tracks', 'stat.keynotes': 'Keynotes', 'stat.sessions': 'Sessions',
+        'dates.eyebrow': 'Important Dates', 'dates.title': 'Symposium timeline',
+        'dates.lead': 'All deadlines are 23:59 Türkiye time (UTC+3).',
+        'dates.progress': 'Progress', 'dates.next': 'Next step:', 'dates.daysLeft': 'days left',
+        'status.done': 'Completed', 'status.active': 'Active', 'status.upcoming': 'Upcoming',
+        'speakers.eyebrow': 'Keynote Speakers', 'speakers.title': 'Voices shaping the field',
+        'speakers.lead': 'International keynote speakers will address the plenary sessions on both days.',
+        'speakers.talk': 'Talk', 'speakers.details': 'Details', 'speakers.hide': 'Hide',
+        'committees.eyebrow': 'Committees', 'committees.title': 'Symposium committees',
+        'committees.honorary': 'Honorary Committee', 'committees.organizing': 'Organizing Committee', 'committees.scientific': 'Scientific Committee',
+        'committees.search': 'Search name, university or field…', 'committees.members': 'members shown',
+        'committees.empty': 'No committee member matches your search.', 'committees.clear': 'Clear search',
+        'program.eyebrow': 'Programme', 'program.title': 'Two days, a full agenda',
+        'program.lead': 'Plenary sessions take place in the Main Hall; parallel sessions in Hall A and Hall B.',
+        'program.day': 'Day', 'program.chair': 'Chair',
+        'program.note': 'This is a draft programme; the final programme will be released on 25 April 2027.',
+        'hall.all': 'All Halls',
+        'type.keynote': 'Keynote', 'type.session': 'Parallel Session', 'type.panel': 'Panel', 'type.break': 'Break',
+        'type.ceremony': 'Ceremony', 'type.registration': 'Registration', 'type.poster': 'Posters', 'type.social': 'Social Event',
+        'guide.eyebrow': 'Guidelines & Downloads', 'guide.title': 'Preparing your submission',
+        'guide.lead': 'Submissions must follow the rules below and use the official templates to be considered for review.',
+        'guide.download': 'Download',
+        'faq.eyebrow': 'FAQ', 'faq.title': 'Frequently asked questions', 'faq.lead': 'Can’t find your answer? Write to us: ',
+        'footer.organizers': 'Organizing & Supporting Institutions', 'footer.venue': 'Venue & Travel', 'footer.map': 'Map',
+        'footer.directions': 'Get directions', 'footer.rights': 'All rights reserved.', 'footer.top': 'Back to top'
+      }
+    };
+
+    // ---------------------------------------------------------------------
+    // Alpine bileşeni
+    // ---------------------------------------------------------------------
+    function symposiumApp() {
+      return {
+        data: symposiumData,
+        lang: 'tr',
+        mobileMenu: false,
+        activeSection: '',
+        committeeTab: 'honorary',
+        search: '',
+        dayTab: 0,
+        hallFilter: 'all',
+        openFaq: 0,
+        now: Date.now(),
+
+        navLinks: [
+          { id: 'about', key: 'nav.about' },
+          { id: 'dates', key: 'nav.dates' },
+          { id: 'speakers', key: 'nav.speakers' },
+          { id: 'committees', key: 'nav.committees' },
+          { id: 'program', key: 'nav.program' },
+          { id: 'guidelines', key: 'nav.guidelines' },
+          { id: 'faq', key: 'nav.faq' }
+        ],
+        committeeTabs: [
+          { id: 'honorary', key: 'committees.honorary' },
+          { id: 'organizing', key: 'committees.organizing' },
+          { id: 'scientific', key: 'committees.scientific' }
+        ],
+        halls: [
+          { id: 'all', label: { tr: 'Tüm Salonlar', en: 'All Halls' } },
+          { id: 'A', label: { tr: 'Salon A', en: 'Hall A' } },
+          { id: 'B', label: { tr: 'Salon B', en: 'Hall B' } }
+        ],
+
+        init() {
+          try {
+            const saved = localStorage.getItem('issdt-lang');
+            if (saved === 'tr' || saved === 'en') this.lang = saved;
+            else if ((navigator.language || '').toLowerCase().startsWith('en')) this.lang = 'en';
+          } catch (e) { /* depolama erişilemez */ }
+          document.documentElement.lang = this.lang;
+
+          setInterval(() => { this.now = Date.now(); }, 1000);
+
+          // Görünürdeki bölümü menüde vurgula
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => { if (entry.isIntersecting) this.activeSection = entry.target.id; });
+          }, { rootMargin: '-45% 0px -50% 0px' });
+          this.navLinks.forEach((l) => { const el = document.getElementById(l.id); if (el) observer.observe(el); });
+        },
+
+        setLang(l) {
+          this.lang = l;
+          document.documentElement.lang = l;
+          try { localStorage.setItem('issdt-lang', l); } catch (e) { /* yoksay */ }
+        },
+
+        // Çok dilli değer → aktif dildeki metin
+        t(v) {
+          if (v && typeof v === 'object' && !Array.isArray(v)) return v[this.lang] ?? v.tr;
+          return v;
+        },
+        // Arayüz etiketi
+        L(key) { return uiText[this.lang][key] ?? key; },
+
+        // Lucide ikonunu satır içi SVG olarak üretir (Alpine ile reaktif kalır)
+        icon(name, cls = 'h-5 w-5') {
+          const lib = window.lucide && window.lucide.icons;
+          if (!lib) return '';
+          const key = name.split('-').map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+          let node = lib[key];
+          if (!node) return '';
+          if (node[0] === 'svg') node = node[2]; // eski sürüm biçimi
+          const inner = node.map(([tag, attrs]) =>
+            '<' + tag + ' ' + Object.entries(attrs).map(([k, v]) => k + '="' + v + '"').join(' ') + '/>'
+          ).join('');
+          return '<svg xmlns="http://www.w3.org/2000/svg" class="' + cls + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
+        },
+
+        initials(name) {
+          return name.split(/\s+/).filter((p) => p && !p.endsWith('.')).map((p) => p.charAt(0)).slice(0, 2).join('').toLocaleUpperCase('tr');
+        },
+
+        formatDate(iso, withWeekday = false) {
+          const d = new Date(iso.length === 10 ? iso + 'T12:00:00+03:00' : iso);
+          const opts = { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Istanbul' };
+          if (withWeekday) { delete opts.year; opts.weekday = 'long'; }
+          return new Intl.DateTimeFormat(this.lang === 'tr' ? 'tr-TR' : 'en-GB', opts).format(d);
+        },
+
+        norm(s) {
+          return (s || '').toLocaleLowerCase('tr').replace(/ı/g, 'i').normalize('NFD').replace(/[̀-ͯ]/g, '');
+        },
+
+        // ---- Geri sayım ----
+        get countdown() {
+          const diff = new Date(this.data.meta.countdownTarget).getTime() - this.now;
+          const finished = diff <= 0;
+          const s = Math.max(0, Math.floor(diff / 1000));
+          return {
+            finished,
+            days: Math.floor(s / 86400),
+            hours: Math.floor((s % 86400) / 3600),
+            minutes: Math.floor((s % 3600) / 60),
+            seconds: s % 60
+          };
+        },
+        get countdownUnits() {
+          const c = this.countdown;
+          const pad = (n) => String(n).padStart(2, '0');
+          return [
+            { key: 'cd.days', value: String(c.days).padStart(3, '0') },
+            { key: 'cd.hours', value: pad(c.hours) },
+            { key: 'cd.minutes', value: pad(c.minutes) },
+            { key: 'cd.seconds', value: pad(c.seconds) }
+          ];
+        },
+
+        // ---- Hakkında istatistikleri (veriden türetilir) ----
+        get aboutStats() {
+          const sessions = this.data.program.reduce((n, d) => n + d.sessions.filter((s) => s.type === 'session').length, 0);
+          return [
+            { key: 'stat.days', value: String(this.data.program.length).padStart(2, '0') },
+            { key: 'stat.tracks', value: String(this.data.tracks.length).padStart(2, '0') },
+            { key: 'stat.keynotes', value: String(this.data.speakers.length).padStart(2, '0') },
+            { key: 'stat.sessions', value: String(sessions).padStart(2, '0') }
+          ];
+        },
+
+        // ---- Zaman çizelgesi ----
+        get timeline() {
+          let activeFound = false;
+          return this.data.importantDates.map((d) => {
+            const ts = new Date(d.date).getTime();
+            let status;
+            if (ts < this.now) status = 'done';
+            else if (!activeFound) { status = 'active'; activeFound = true; }
+            else status = 'upcoming';
+            return { ...d, status, daysLeft: Math.max(0, Math.ceil((ts - this.now) / 86400000)) };
+          });
+        },
+        get timelineDone() { return this.timeline.filter((d) => d.status === 'done').length; },
+        get activeDate() { return this.timeline.find((d) => d.status === 'active'); },
+
+        // ---- Bilim kurulu filtresi ----
+        get scientificFiltered() {
+          const q = this.norm(this.search.trim());
+          if (!q) return this.data.committees.scientific;
+          return this.data.committees.scientific.filter((m) =>
+            this.norm([m.title, m.name, m.affiliation.tr, m.affiliation.en, m.field.tr, m.field.en, m.country.tr, m.country.en].join(' ')).includes(q)
+          );
+        },
+
+        // ---- Program ----
+        get programItems() {
+          const day = this.data.program[this.dayTab];
+          if (this.hallFilter === 'all') return day.sessions;
+          return day.sessions.filter((s) => !s.hallId || s.hallId === this.hallFilter);
+        },
+        typeStyle(type) {
+          return {
+            keynote: 'bg-accent-100 text-accent-800',
+            session: 'bg-brand-50 text-brand-800',
+            panel: 'bg-ink text-white',
+            ceremony: 'bg-slate-900 text-white',
+            break: 'bg-slate-100 text-slate-500',
+            registration: 'bg-slate-100 text-slate-600',
+            poster: 'bg-sky-50 text-sky-800',
+            social: 'bg-rose-50 text-rose-800'
+          }[type] || 'bg-slate-100 text-slate-600';
+        },
+        typeIcon(type) {
+          return {
+            keynote: 'mic', session: 'presentation', panel: 'messages-square', ceremony: 'award',
+            break: 'coffee', registration: 'clipboard-check', poster: 'layout-panel-top', social: 'utensils'
+          }[type] || 'circle';
+        }
+      };
+    }
+  </script>
+</body>
+</html>
