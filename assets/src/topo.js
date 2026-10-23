@@ -1,4 +1,4 @@
-// Topografik kontur deseni üretir → assets/img/topo.svg
+// Topografik kontur deseni üretir → assets/img/topo-light.svg ve topo-dark.svg
 // Çalıştırma: node assets/src/topo.js   (tohum değiştirilerek farklı desen elde edilir)
 const fs = require('fs');
 const path = require('path');
@@ -80,7 +80,10 @@ const d = lines.filter((l) => l.length > 6).map((l) => {
   return 'M' + s.map((p) => Math.round(p[0]) + ' ' + Math.round(p[1])).join('L');
 }).join('');
 
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><path d="${d}" fill="none" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const outFile = path.join(__dirname, '..', 'img', 'topo.svg');
-fs.writeFileSync(outFile, svg);
-console.log('topo.svg', (svg.length / 1024).toFixed(1) + ' KB', lines.length + ' çizgi');
+// Temaya göre iki renkli sürüm (CSS'te background-image olarak kullanılır; maske yok → kaydırma ucuz)
+const variants = { light: 'rgba(47,75,55,0.16)', dark: 'rgba(169,198,159,0.12)' };
+for (const [name, color] of Object.entries(variants)) {
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid slice"><path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  fs.writeFileSync(path.join(__dirname, '..', 'img', 'topo-' + name + '.svg'), svg);
+  console.log('topo-' + name + '.svg', (svg.length / 1024).toFixed(1) + ' KB');
+}

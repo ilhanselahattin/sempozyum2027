@@ -8,7 +8,8 @@
   * { margin: 0; box-sizing: border-box; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
   body { background: #F3F1EA; color: #161A15; font-family: 'General Sans', sans-serif; padding: 64px 80px; display: flex; flex-direction: column; position: relative; }
-  .topo { position: absolute; inset: 0; background: rgba(47,75,55,.16); -webkit-mask: url(../img/topo.svg) center / cover no-repeat, radial-gradient(ellipse 70% 80% at 80% 40%, #000 30%, transparent 85%); -webkit-mask-composite: source-in; }
+  .topo { position: absolute; inset: 0; background: url(../img/topo-light.svg) center / cover no-repeat; }
+  .topo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 80% at 80% 40%, transparent 30%, #F3F1EA 85%); }
   .top, h1, .sub, .bottom { position: relative; }
   .top { display: flex; align-items: baseline; gap: 10px; font-family: 'Sentient', serif; font-size: 30px; }
   .top small { font-family: 'General Sans', sans-serif; font-size: 18px; color: #7F877B; }
