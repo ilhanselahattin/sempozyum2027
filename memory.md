@@ -1,91 +1,52 @@
 # memory.md — Proje Hafızası (AI oturumları için kısa özet)
 
-> Yeni oturumda önce bunu oku. Her adımdan sonra "Adım Günlüğü"ne 1–3 satır ekle, yol haritasında tamamlananları [x] yap.
-> İşaretler: [x] bitti · [~] kod hazır, gerçek veri/dosya/karar bekliyor · [ ] yapılmadı · (+) = AI'ın eklediği madde
+> Yeni oturumda önce bunu oku. Her adımdan sonra "Adım Günlüğü"ne 1–3 satır ekle, yapılacaklarda tamamlananları [x] yap.
+> İşaretler: [x] bitti · [~] kod hazır, gerçek veri bekliyor · [ ] yapılmadı
 
-## Proje
-- Canlı: https://ilhanselahattin.github.io/sempozyum2027/ · Repo: github.com/ilhanselahattin/sempozyum2027 (main'e push = otomatik yayın, ~1 dk)
-- **ETKİNLİK TÜRÜ: ÇALIŞTAY (sempozyum DEĞİL).** Kesin tarih: **18–19 Ocak 2027** (Pzt–Salı). Kaynak: hocanın mesajı (2026-10-23).
-- Amaç: Akademik çalıştay için tek sayfalık site → GitHub Pages. Ad/konu/kurum henüz bilinmiyor → yer tutucu "SDT 2027 · Uluslararası Sürdürülebilir Dijital Dönüşüm Çalıştayı".
-- Kod değişken adları (`symposiumData`, `symposiumApp`) bilerek değiştirilmedi; görünür metinlerin tamamı "çalıştay/workshop".
-- Build yok. Dosyalar: `index.html` (tüm site + veri), `404.html`, `favicon.ico`, `robots.txt`, `sitemap.xml`, `.nojekyll`,
-  `assets/img/` (favicon.svg, apple-touch-icon.png, og-image.png), `assets/src/og-image.html` (OG görsel kaynağı), `memory.md`.
-- Stack: Tailwind CDN 3.4.16, Alpine.js 3.14.8 + Collapse eklentisi, Lucide 0.460.0 (UMD), Google Fonts (Plus Jakarta Sans / Inter / JetBrains Mono).
+## Etkinlik (KESİN BİLGİLER)
+- **Workshop on Environment, Clean Energy, and Economic Policy** (kullanıcı "Envinment" yazmıştı → düzeltildi). TR çeviri önerimiz: "Çevre, Temiz Enerji ve Ekonomi Politikası Çalıştayı". Kısaltma **ECEP 2027** bizim önerimiz (onaylanmadı).
+- Tür: **ÇALIŞTAY** (sempozyum değil, hakemli değil). Tarih: **18–19 Ocak 2027** (Pzt–Salı). Yer: **YTÜ Davutpaşa Kampüsü**, Esenler/İstanbul (OSM: 41.025615, 28.89368; M1A Davutpaşa–YTÜ istasyonu).
+- Düzenleyen: **YTÜ İİBF İktisat Bölümü**. Danışman: Ahmet Hoca.
+- **Sitenin amacı:** TÜBİTAK **2223-B** Yurt İçi Bilimsel Etkinlik Düzenleme Desteği başvurusunda "Etkinlik İnternet Adresi" olarak verilecek. Hoca: "çok aman aman olmasına gerek yok", Facebook/LinkedIn değil kendi sayfası olmalı, başvuru alınmayabilir → buton "Başvurular henüz başlamadı" modalı açar. Katılımcılar çoğunlukla kurum içi + öğrenciler. Broşür sonra gelecek → tema/renkler ona göre güncellenecek.
+- **Başvuru son günü: 27 Ekim 2026 Salı 17:30** (2026/3 dönemi). Site bu saatte TAMAM ve yayında olmalı; sonraki değişiklikler değerlendirilmez.
 
-## Mimari (index.html)
-- Tüm içerik `symposiumData` (sayfa sonu `<script>`). Metinler `{tr, en}` → `t(obj)`. Arayüz etiketleri `uiText.tr/en` → `L('anahtar')`.
-- Alpine bileşeni `symposiumApp()` (body `x-data`).
-- İkon: `icon('kebab-isim','sınıflar')` + `x-html` (lucide.createIcons KULLANMA, Alpine'i bozar). Yeni ikon adı eklenince Lucide 0.460'ta var mı kontrol et.
-- **Faz sistemi** (`phase` getter): `meta.startDate` öncesi `cfp`, arası `live`, sonrası `archive`. Zorlamak: `meta.phaseOverride`. Önizleme: `index.html?phase=live|archive`.
-  - cfp: geri sayım + gönder/şablon butonları. CTA tarihe göre: Özet Gönder → Tam Metin Gönder → Kayıt Ol.
-  - live: kırmızı CANLI rozeti, "Gün X Programını Gör" + Program PDF, "Şu an / Sıradaki" paneli, programda canlı oturum vurgusu.
-  - archive: hero'da en büyük butonlar = `proceedings[]` (ISBN), sertifika paneli, `archive.stats`.
-- `importantDates[].key` kodda kullanılır (abstract, fullpaper, earlyreg). Uzatma: `date`=yeni, `oldDate`=eski, `isExtended:true`.
-  - Tam metin tarihi etkinlikten SONRAYSA CTA "Tam Metin Gönder" aşamasını atlar (Özet Gönder → Kayıt Ol).
-- Program oturum tipleri: keynote, session, panel, workshop (grup çalışması/tematik masalar; `papers` alanı masa listesi olarak kullanılır), break, ceremony, registration, poster, social.
-- Koşullu bölümler: `acceptedPapers.list` boşsa #accepted gizli; `gallery` boşsa #gallery gizli; `registration.isFree:true` → "Katılım Ücretsizdir".
-- `halls[].onlineUrl` doluysa programda "Çevrim içi katıl" linki çıkar (şifre YAZMA).
-- `announcement` → üst turuncu şerit (yalnız cfp fazında; yeni duyuruda `id` değiştir).
-- Renkler: `brand` zümrüt #059669, `accent` kehribar #D97706, `ink` #0B0F19, `paper` #F8FAFC (tailwind.config).
-- localStorage: `sdt-lang`, `sdt-announcement`. Çerez yok.
-- Bölüm id'leri: about(+incentive) · dates · speakers · committees · program · accepted · guidelines · registration · travel · gallery · faq · contact(footer). KVKK = modal (`kvkkOpen`).
+## TÜBİTAK 2223-B site şartları (çağrı metni 2026)
+- 4.1.7: Sitede **düzenleme kurulu + bilim kurulu üyeleri, konu, amaç, kapsam, yer, tarih** açıkça olmalı. Başka sitedeki duyuru/afiş sayılmaz.
+- 4.1.10: Düzenleme kurulu **en az 3 farklı üniversite/kurum** mensubundan oluşmalı; yoksa "kurum içi etkinlik" sayılıp İADE. (Hocaya iletilmeli — "biz bize" ifadesi riskli.)
+- Çalıştay için 100 katılımcı, hakemlilik, 4 yıl aralık, 3. kez düzenlenme şartları ARANMAZ.
+- Değerlendirmede artı: program (taslak olabilir), ana temalar, davetli konuşmacılar, hedef kitle, yaygın etki/kalıcılık, TÜBİTAK desteğinin katkısı → hepsi sitede var.
+- 4.1.12: Hiçbir marka/firma öne çıkarılmamalı. 8.5: Destek ALINIRSA tüm duyurularda TÜBİTAK desteği + logo zorunlu. Şu an logo YOK, sadece "başvurulmuştur" ibaresi (destek almadan logo kullanmak yanıltıcı olur).
+- Çağrı PDF: https://tubitak.gov.tr/sites/default/files/2026-02/2223-B_18.02.2026.pdf
+
+## Teknik
+- Canlı: https://ilhanselahattin.github.io/sempozyum2027/ · Repo: github.com/ilhanselahattin/sempozyum2027 (main'e push = ~1 dk'da yayın). Repo adını `calistay2027` yapmak önerildi (karar bekliyor; değişirse canonical/og/JSON-LD/robots/sitemap URL'leri güncellenmeli).
+- Build yok. Dosyalar: `index.html` (tüm site + veri), `404.html`, `favicon.ico`, `robots.txt`, `sitemap.xml`, `.nojekyll`, `assets/img/` (favicon.svg, apple-touch-icon.png, og-image.png), `assets/src/og-image.html`.
+- Stack: Tailwind CDN 3.4.16, Alpine.js 3.14.8 + Collapse, Lucide 0.460.0 (UMD), Google Fonts.
+- Veri: `symposiumData` (değişken adı tarihsel, bilerek değiştirilmedi). Metinler `{tr,en}` → `t()`; etiketler `uiText` → `L()`.
+- İkon: `icon('kebab-isim','sınıf')` + `x-html` (lucide.createIcons KULLANMA). Yeni ikon adını Lucide 0.460'ta doğrula.
+- Faz: `meta.startDate` öncesi `cfp`, arası `live`, sonrası `archive`; önizleme `?phase=live|archive`.
+- Boş veri → otomatik yer tutucu: `committees.organizing/scientific: []` → "yakında ilan edilecek"; `speakers: []` → 4 "Belirlenecek" kartı; `downloads[].href: ""` → "Yakında"; `contact.email: ""` → "yakında eklenecek".
+- `importantDates[].date` boşsa `dateText` gösterilir; tarihli bir madde geçince önceki tarihsizler de "tamamlandı" sayılır.
+- Bölüm id'leri: about · themes · dates · committees · speakers · program · news · venue · support · faq · contact(footer). Başvuru = modal (`applyOpen`).
+- localStorage: `ecep-lang`, `ecep-announcement`. Çerez yok.
 
 ## Görsel üretimi (Pillow yok → headless Chrome)
 - OG: `chrome --headless=new --window-size=1200,630 --screenshot=assets/img/og-image.png file:///.../assets/src/og-image.html`
-- Favicon: favicon.svg'yi 32/48/180 px HTML'de render → PNG; 32+48 PNG'ler Node ile `favicon.ico`'ya paketlendi.
-- Not: headless Chrome Windows'ta pencereyi ~500px'ten dar açmıyor; mobil test için 390px iframe içinde render et.
+- Favicon: favicon.svg'yi 32/48/180 px HTML'de render → PNG; 32+48 PNG'ler Node ile favicon.ico'ya paketlenir.
+- Headless Chrome Windows'ta ~500px'ten dar pencere açmıyor → mobil test için 390px iframe içinde render et.
 
-## Yol Haritası
-
-### Faz 1 — Kurulum ve İskelet (şu an)
-- [ ] Subdomain başvurusu (BİDB, ör. sempozyum2027.xxx.edu.tr) → DNS'te `CNAME → <kullanıcı>.github.io`, repoya `CNAME` dosyası, Pages'te "Enforce HTTPS". **İlk iş başlatılmalı (1–2 hafta).** Alan adı gelince: canonical, og:url, og:image, JSON-LD, robots.txt, sitemap.xml içindeki `sempozyum2027.example.edu.tr` değiştirilecek.
-- [~] Kurumsal kimlik: geçici favicon (svg/ico/apple-touch) ve OG görseli (1200×630) üretildi. Resmî logo gelince `meta.logo` + favicon + og-image yeniden üretilecek.
-- [x] Çoklu dil (TR/EN) altyapısı — tüm veri `{tr,en}`.
-- [~] KVKK aydınlatma metni modalı (footer + dekont formu yanında). Metin taslak → **üniversitenin KVKK birimi/hukuk onayı şart**.
-- [x] (+) SEO: meta description, Open Graph/Twitter etiketleri, schema.org Event JSON-LD, robots.txt, sitemap.xml.
-- [x] (+) GitHub Pages yardımcıları: `.nojekyll`, `404.html`.
-- [x] (+) Erişilebilirlik temel: "İçeriğe geç" linki, aria etiketleri, reduced-motion, Esc ile modal kapatma.
-- [x] (+) Tarihe göre otomatik faz geçişi (cfp/live/archive) + `?phase=` önizleme.
-- [ ] (+) Yayın öncesi performans/KVKK: Tailwind CDN yerine derlenmiş CSS (CDN konsola "production'da kullanma" uyarısı basar) ve Google Fonts'u self-host (IP aktarımı KVKK riski).
-- [ ] (+) Analitik gerekiyorsa çerezsiz bir araç (GoatCounter/Plausible) → çerez banner'ı gerekmez.
-- [x] GitHub'a gönderildi + Pages açık (main / root). Repo: https://github.com/ilhanselahattin/sempozyum2027 · Canlı: https://ilhanselahattin.github.io/sempozyum2027/ (`gh` CLI yok; push HTTPS ile çalışıyor).
-
-### Faz 2 — Çağrı ve Bildiri Toplama (2–4 ay önce)
-- [~] Gönderim sistemi entegrasyonu: butonlar `meta.submissionUrl`'e bağlı (şu an genel easychair.org). Sistem seçilince gerçek link girilecek.
-- [~] Şablonlar `assets/docs/` yollarına bağlandı: Özet .docx, Tam Metin .docx, LaTeX .zip, Telif Devir Formu .pdf, (+) Sunum Şablonu .pptx, Afiş .pdf. **Dosyalar henüz yok.**
-- [x] "Süre Uzatıldı" modu (`oldDate` + `isExtended` → üstü çizili eski tarih + "Uzatıldı!" rozeti). (+) Üst duyuru şeridi.
-- [x] Akademik Teşvik & Doçentlik kartı (Hakkında, `#incentive`) + SSS sorusu. Ülke/yabancı üye/yabancı konuşmacı sayıları veriden otomatik. **Değerlendirme:** kesin "karşılar" denmedi; mevzuat yıllara göre değiştiği için ifade "gözetilerek planlanmıştır" + uyarı notu. Resmî kriter metniyle düzenleme kurulu teyit etmeli.
-- [~] Ücret & dekont: ücret kartları (erken/normal otomatik vurgulu), IBAN + kopyala, açıklama şablonu, dekont formu linki; `isFree:true` ile "Katılım Ücretsizdir". IBAN/banka/form linki örnek.
-
-### Faz 3 — Kabul İlanı ve Program (2–4 hafta önce)
-- [x] Kabul edilen bildiriler: aranabilir liste + tema filtresi + PDF linki (`acceptedPapers`). Şu an ÖRNEK veri dolu → gerçek ilan tarihine kadar `list: []` yapılmalı.
-- [x] Detaylı program: gün sekmeleri, salon filtresi, oturum başkanı, bildiriler, salon başına çevrim içi link alanı.
-- [x] Konaklama ve ulaşım rehberi (`#travel`): OSM harita, ulaşım kartları, otel/konukevi kartları. (Google Maps yerine OSM: anahtar/çerez gerektirmez.)
-- [x] Sunum kuralları kartları (sözlü 15+5, poster 70×100 dikey, çevrim içi).
-- [ ] (+) Program PDF'i (`meta.programPdf`) hazırlanıp yüklenecek.
-- [ ] (+) İsteğe bağlı: takvime ekle (.ics) dosyası.
-
-### Faz 4 — Sempozyum Günü (Canlı Mod)
-- [x] Hero "Canlı Mod" (otomatik; tarih aralığında). "Şu an / Sıradaki" oturum paneli (+).
-- [~] Hibrit bağlantılar: `halls[].onlineUrl` alanı hazır. **Değerlendirme:** Zoom/Teams şifrelerini herkese açık sitede yayınlamak "zoombombing" riskidir → bekleme odası açın, şifreleri yalnızca kayıtlılara e-postayla gönderin.
-- [ ] QR kod (afiş/yaka kartı → `<alanadı>/#program`). **Alan adı kesinleşmeden üretilmemeli** (basılı QR sonradan değişemez).
-
-### Faz 5 — Sempozyum Sonrası (Arşiv)
-- [~] Bildiri kitapları: arşiv fazında hero'da en büyük butonlar (`proceedings[]`, ISBN). PDF ve ISBN'ler gelecek. (+) Öneri: kitapları Zenodo'ya da yükleyip DOI almak (link kalıcılığı, teşvik denetimi).
-- [~] Sertifika: arşiv panelinde indirme linki (`certificates.url`). **Değerlendirme:** "isimle arama" herkese açık isim listesi demektir (KVKK) → bildiri no ile adlandırılmış dosyalar veya doğrulama kodu tercih edildi.
-- [~] Fotoğraf galerisi + ışık kutusu hazır; `gallery[]` doldurulunca görünür. Fotoğraf kullanımı için KVKK metninde açık rıza maddesi var.
-
-## Açık işler / Notlar
-- **ZAMAN BASKISI:** Çalıştaya ~3 ay var. Örnek takvim: çağrı 2 Kas · özet 30 Kas · kabul 10 Ara · kayıt 25 Ara · program 8 Oca · çalıştay 18–19 Oca · tam metin 15 Şub (sonrası). Ara tarihler ÖRNEK, düzenleme kurulu onaylamalı. Yol haritasındaki "2–4 ay önce" fazları sıkıştı: çağrı ve gönderim sistemi bu hafta netleşmeli.
-- Alan adı (BİDB) 1–2 hafta sürebilir → çağrı ilk etapta github.io linkiyle duyurulabilir.
-- Hocadan öğrenilecek: çalıştayın adı/konusu, düzenleyen kurum, ulusal mı uluslararası mı, ücretli mi, bildiri kitabı (ISBN) olacak mı, davetli konuşmacı var mı.
-- Repo adı `sempozyum2027` → `calistay2027` olarak değiştirilmesi önerildi (GitHub Settings > Rename; eski adres yönlenir ama Pages URL'si değişir). Kullanıcı kararı bekleniyor.
-- TÜM veriler örnektir (kurgusal "Kuzey Ufuk Üniversitesi", kurgusal kişiler, örnek IBAN, example.org e-posta).
-- `assets/docs/` klasörü yok (tüm indirme linkleri şu an 404).
+## Yapılacaklar (27 Ekim 17:30'a kadar)
+- [ ] **Düzenleme kurulu** isim/unvan/kurum (en az 3 farklı üniversite!) → `committees.organizing`
+- [ ] **Bilim kurulu** isim/unvan/kurum → `committees.scientific`
+- [ ] Konu/amaç/kapsam/tema metinlerini hocaya onaylat (şu an AI taslağı, iktisat odaklı)
+- [ ] İletişim e-postası → `contact.email`
+- [ ] TR başlık çevirisi ve "ECEP 2027" kısaltması onayı
+- [ ] Repo adı kararı (sempozyum2027 → calistay2027?) — TÜBİTAK formuna link girilmeden ÖNCE
+- [~] Broşür → `downloads[0].href` + broşür teması (renkler `tailwind.config` brand/accent)
+- [ ] Davetli konuşmacılar (varsa) → `speakers`
+- [ ] Destek kararı gelirse: `support.status` metni + TÜBİTAK logosu
 
 ## Adım Günlüğü
-- 2026-10-23 · Adım 1: `index.html` ilk sürüm (9 bölüm + SSS, TR/EN). Node ile mantık testi OK; Lucide ikonları doğrulandı.
-- 2026-10-23 · Adım 2: git init + ilk commit (b618515). GitHub push bekliyor (repo URL yok, gh CLI yok).
-- 2026-10-23 · Adım 3: Yol haritası eklendi ve değerlendirildi. index.html v2: faz sistemi, duyuru şeridi, uzatma modu, teşvik kartı, kayıt/ücret/IBAN, kabul edilen bildiriler, sunum kuralları, 6 indirme, ulaşım+konaklama, galeri+ışık kutusu, KVKK modalı, "Daha Fazla" menüsü, SEO/OG/JSON-LD. 404/robots/sitemap/.nojekyll, favicon + OG görseli üretildi. Node ile 5 tarih senaryosu test edildi, headless Chrome ile masaüstü/mobil/canlı mod ekran görüntüleri kontrol edildi.
-- 2026-10-23 · Adım 4: GitHub'a push (repo sempozyum2027), Pages açıldı. Canlı kontrol: index/favicon/og/robots/sitemap 200, 404 sayfası çalışıyor, 4 CDN 200, headless Chrome ile JS render (geri sayım, ikonlar, tüm bölümler) doğrulandı. assets/docs/ dosyaları hâlâ 404 (beklenen).
-- 2026-10-23 · Adım 5: Etkinlik ÇALIŞTAY olarak düzeltildi, tarih 18–19 Ocak 2027. Tüm görünür metinler sempozyum→çalıştay (TR ekleri dahil) / symposium→workshop; ISSDT→SDT. Takvim baştan kuruldu (uzatma örneği kaldırıldı, tam metin çalıştay sonrasına), duyuru 'tarihler kesinleşti', 2. gün öğleden sonra 'Grup Çalışmaları · Tematik Masalar' + 'Sonuç Bildirgesi ve Kapanış', yeni 'workshop' oturum tipi. CTA mantığı tam metin sonra ise atlayacak şekilde düzeltildi. OG görseli yeniden üretildi. 5 tarih senaryosu + ekran görüntüleriyle doğrulandı.
+- 2026-10-23 · 1–4: İlk site (sempozyum şablonu), yol haritası, GitHub Pages yayını.
+- 2026-10-23 · 5: Çalıştay + 18–19 Ocak 2027'ye çevrildi (örnek verilerle).
+- 2026-10-23 · 6: Hocanın mesajları + TÜBİTAK 2223-B çağrı metni incelendi. Site BAŞTAN yazıldı: tüm sahte/örnek veri (kişiler, IBAN, bildiriler, oteller, teşvik kartı, KVKK, ücretler) kaldırıldı. Yeni yapı: Hero (YTÜ Davutpaşa, İİBF İktisat) · Konu/Amaç/Kapsam + Hedef kitle/Yöntem/Çıktılar · 6 tema · takvim (tarihsiz maddeler destekli) · kurullar (boş → yakında) · konuşmacılar (Belirlenecek) · taslak program · Duyurular · Mekân/ulaşım (OSM, M1A) · TÜBİTAK destek ibaresi + katkılar + belgeler (broşür yakında) · SSS · "Başvurular henüz başlamadı" modalı. Favicon/OG/404/robots/sitemap güncellendi. 49 ikon doğrulandı, faz/takvim testleri ve ekran görüntüleri OK.

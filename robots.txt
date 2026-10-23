@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sempozyum2027.example.edu.tr/sitemap.xml
+Sitemap: https://ilhanselahattin.github.io/sempozyum2027/sitemap.xml
