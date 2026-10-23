@@ -3,45 +3,32 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8" />
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=sentient@300,300i&f[]=general-sans@400,500&display=swap" />
 <style>
   * { margin: 0; box-sizing: border-box; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
-  body {
-    background: #0B0F19;
-    background-image: radial-gradient(rgba(255,255,255,.08) 1.2px, transparent 1.2px);
-    background-size: 26px 26px;
-    color: #fff; font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
-    padding: 64px 80px; display: flex; flex-direction: column; position: relative;
-  }
-  .top { display: flex; align-items: center; gap: 18px; }
-  .logo { width: 64px; height: 64px; border-radius: 14px; background: #fff; color: #0B0F19; display: grid; place-items: center; font-weight: 800; font-size: 17px; }
-  .acr { font-weight: 800; font-size: 28px; }
-  .mono { font-family: 'JetBrains Mono', monospace; font-size: 18px; letter-spacing: .14em; text-transform: uppercase; color: #34d399; }
-  h1 { margin-top: 48px; font-size: 60px; line-height: 1.08; font-weight: 800; letter-spacing: -.02em; max-width: 1040px; }
-  h1 span { color: #10b981; }
-  .sub { margin-top: 18px; font-size: 26px; font-weight: 600; color: #94a3b8; }
-  .bottom { margin-top: auto; display: flex; gap: 14px; }
-  .pill { border: 1.5px solid rgba(255,255,255,.18); border-radius: 999px; padding: 12px 22px; font-size: 22px; font-weight: 600; }
-  .pill.amber { background: #D97706; border-color: #D97706; color: #0B0F19; }
-  .bar { position: absolute; left: 0; bottom: 0; height: 10px; width: 100%; background: linear-gradient(90deg, #059669 0 70%, #D97706 70% 100%); }
+  body { background: #F3F1EA; color: #161A15; font-family: 'General Sans', sans-serif; padding: 64px 80px; display: flex; flex-direction: column; position: relative; }
+  .topo { position: absolute; inset: 0; background: rgba(47,75,55,.16); -webkit-mask: url(../img/topo.svg) center / cover no-repeat, radial-gradient(ellipse 70% 80% at 80% 40%, #000 30%, transparent 85%); -webkit-mask-composite: source-in; }
+  .top, h1, .sub, .bottom { position: relative; }
+  .top { display: flex; align-items: baseline; gap: 10px; font-family: 'Sentient', serif; font-size: 30px; }
+  .top small { font-family: 'General Sans', sans-serif; font-size: 18px; color: #7F877B; }
+  .kicker { position: relative; margin-top: 58px; font-size: 22px; color: #7F877B; }
+  h1 { margin-top: 10px; font-family: 'Sentient', serif; font-weight: 300; font-size: 76px; line-height: 1; letter-spacing: -.035em; }
+  h1 em { font-style: italic; color: #2F4B37; }
+  .bottom { margin-top: auto; display: flex; gap: 12px; align-items: center; font-size: 21px; color: #4A5147; }
+  .pill { padding: 10px 20px; border-radius: 999px; background: #FBFAF6; border: 1px solid rgba(30,36,28,.1); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #B4843A; display: inline-block; margin-right: 10px; vertical-align: middle; }
 </style>
 </head>
 <body>
-  <div class="top">
-    <div class="logo">ECEP</div>
-    <div>
-      <div class="acr">ECEP 2027</div>
-      <div class="mono">YTÜ İİBF · İktisat Bölümü</div>
-    </div>
-  </div>
-  <h1>Workshop on Environment,<br><span>Clean Energy, and Economic Policy</span></h1>
-  <div class="sub">Çevre, Temiz Enerji ve Ekonomi Politikası Çalıştayı</div>
+  <div class="topo"></div>
+  <div class="top">ECEP <small>2027</small></div>
+  <p class="kicker">Workshop on</p>
+  <h1>Environment, <em>Clean Energy,</em><br>and Economic Policy</h1>
   <div class="bottom">
-    <div class="pill">18–19 Ocak 2027</div>
-    <div class="pill">YTÜ Davutpaşa Kampüsü · İstanbul</div>
-    <div class="pill amber">Çalıştay</div>
+    <span class="pill"><span class="dot"></span>18–19 Ocak 2027</span>
+    <span class="pill">YTÜ Davutpaşa Kampüsü, İstanbul</span>
+    <span class="pill">YTÜ İİBF İktisat Bölümü</span>
   </div>
-  <div class="bar"></div>
 </body>
 </html>

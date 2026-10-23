@@ -21,14 +21,21 @@
 ## Teknik
 - Canlı: https://ilhanselahattin.github.io/sempozyum2027/ · Repo: github.com/ilhanselahattin/sempozyum2027 (main'e push = ~1 dk'da yayın). Repo adını `calistay2027` yapmak önerildi (karar bekliyor; değişirse canonical/og/JSON-LD/robots/sitemap URL'leri güncellenmeli).
 - Build yok. Dosyalar: `index.html` (tüm site + veri), `404.html`, `favicon.ico`, `robots.txt`, `sitemap.xml`, `.nojekyll`, `assets/img/` (favicon.svg, apple-touch-icon.png, og-image.png), `assets/src/og-image.html`.
-- Stack: Tailwind CDN 3.4.16, Alpine.js 3.14.8 + Collapse, Lucide 0.460.0 (UMD), Google Fonts.
-- Veri: `symposiumData` (değişken adı tarihsel, bilerek değiştirilmedi). Metinler `{tr,en}` → `t()`; etiketler `uiText` → `L()`.
-- İkon: `icon('kebab-isim','sınıf')` + `x-html` (lucide.createIcons KULLANMA). Yeni ikon adını Lucide 0.460'ta doğrula.
+- Stack (v4 tasarım, 2026-10-24): **Tailwind ve Lucide YOK** → elle yazılmış CSS (`<style>` içinde, CSS değişkenleriyle). Alpine.js 3.14.8 + Collapse. Fontlar **Fontshare**: Sentient (serif başlık, italik vurgular) + General Sans (metin).
+- Tasarım dili (kullanıcı isteği: "AI slop olmasın", 21st.dev gibi yumuşak sekme/kutular, Apple akıcılığı, koyu mod):
+  - Palet: keten `#F3F1EA` zemin, yosun `#2F4B37` vurgu, güneş okeri `#B4843A` (yalnız küçük işaretler), gökyüzü `#4F6E78`. Koyu: `#0E110F` zemin, adaçayı `#A9C69F`.
+  - Tema: `<html data-theme>`; head'deki satır içi betik ilk boyamadan önce ayarlar; `localStorage ecep-theme`; önizleme `?theme=dark`. Geçiş View Transitions ile tıklanan noktadan daire.
+  - Bileşenler: `.card` `.list` (satırlar ince çizgiyle; seçici `:not(template)` — Alpine template'i saymamak için) `.seg` (kayan göstergeli sekme, `segmented()` bileşeni) `.btn` `.pill` `.chip`.
+  - Animasyon: `[data-reveal]` + IntersectionObserver ile bulanıklıktan beliriş; yay eğrisi `--spring`; girişteki topografik dokuda hafif paralaks; `prefers-reduced-motion` desteklenir.
+  - Doku: `assets/img/topo.svg` (kontur çizgileri, `node assets/src/topo.js` ile üretilir) CSS `mask` olarak kullanılır → renk temadan gelir.
+  - **İkon kuralı:** Hugeicons (ücretsiz stroke-rounded) yalnız ARAÇLARDA (menü, kapat, tema, ok, artı, yukarı, dış bağlantı). Metin/kart içinde ikon KULLANMA. SVG yolları `ICONS` nesnesinde gömülü; yeni ikon için `cdn.jsdelivr.net/npm/@hugeicons/core-free-icons@4.3.5/dist/cjs/<Ad>Icon.js` dosyasından yolları al.
+- Veri: `symposiumData` (değişken adı tarihsel, bilerek değiştirilmedi). Metinler `{tr,en}` → `t()`; etiketler `uiText` → `L()` (bölüm başlıklarında `<em>` italik vurgu için `x-html`).
+- Hakkında sekmeleri: `about.tabs[]` (items listesi veya text). Tema kartı vurgusu: `tracks[].featured: "accent"`, genişlik `span: "b-4|b-5|b-7|b-12"`.
 - Faz: `meta.startDate` öncesi `cfp`, arası `live`, sonrası `archive`; önizleme `?phase=live|archive`.
 - Boş veri → otomatik yer tutucu: `committees.organizing/scientific: []` → "yakında ilan edilecek"; `speakers: []` → 4 "Belirlenecek" kartı; `downloads[].href: ""` → "Yakında"; `contact.email: ""` → "yakında eklenecek".
 - `importantDates[].date` boşsa `dateText` gösterilir; tarihli bir madde geçince önceki tarihsizler de "tamamlandı" sayılır.
-- Bölüm id'leri: about · themes · dates · committees · speakers · program · news · venue · support · faq · contact(footer). Başvuru = modal (`applyOpen`).
-- localStorage: `ecep-lang`, `ecep-announcement`. Çerez yok.
+- Bölüm id'leri: about · themes · dates · committees · speakers · program · news · venue · support · faq · contact(footer). Başvuru = iOS tarzı alt sayfa modalı (`applyOpen`).
+- localStorage: `ecep-lang`, `ecep-theme`. Çerez yok.
 
 ## Görsel üretimi (Pillow yok → headless Chrome)
 - OG: `chrome --headless=new --window-size=1200,630 --screenshot=assets/img/og-image.png file:///.../assets/src/og-image.html`
@@ -50,3 +57,4 @@
 - 2026-10-23 · 1–4: İlk site (sempozyum şablonu), yol haritası, GitHub Pages yayını.
 - 2026-10-23 · 5: Çalıştay + 18–19 Ocak 2027'ye çevrildi (örnek verilerle).
 - 2026-10-23 · 6: Hocanın mesajları + TÜBİTAK 2223-B çağrı metni incelendi. Site BAŞTAN yazıldı: tüm sahte/örnek veri (kişiler, IBAN, bildiriler, oteller, teşvik kartı, KVKK, ücretler) kaldırıldı. Yeni yapı: Hero (YTÜ Davutpaşa, İİBF İktisat) · Konu/Amaç/Kapsam + Hedef kitle/Yöntem/Çıktılar · 6 tema · takvim (tarihsiz maddeler destekli) · kurullar (boş → yakında) · konuşmacılar (Belirlenecek) · taslak program · Duyurular · Mekân/ulaşım (OSM, M1A) · TÜBİTAK destek ibaresi + katkılar + belgeler (broşür yakında) · SSS · "Başvurular henüz başlamadı" modalı. Favicon/OG/404/robots/sitemap güncellendi. 49 ikon doğrulandı, faz/takvim testleri ve ekran görüntüleri OK.
+- 2026-10-24 · 7: Tasarım baştan (kullanıcı: 'AI slop gibi', 21st.dev/Apple hissi, koyu mod, Fontshare, Hugeicons yalnız araçlarda). Tailwind+Lucide kaldırıldı, elle CSS; Sentient+General Sans; keten/yosun/oker paleti; topografik kontur dokusu (topo.svg, node ile üretildi); kayan göstergeli sekmeler; cam yüzer menü; görünürken beliriş; paralaks; View Transitions ile koyu mod; iOS alt sayfa modalı. Hakkında 5 sekmeye toplandı (Amaç/Kapsam/Hedef kitle/Yöntem/Çıktılar). Favicon, OG, 404 yeni kimliğe uyarlandı. Masaüstü+mobil (390px) açık/koyu ekran görüntüleriyle doğrulandı; mobil taşma ve rozet kırılması düzeltildi.

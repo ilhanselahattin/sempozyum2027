@@ -1,20 +1,19 @@
 <!doctype html>
-<html lang="tr" class="scroll-smooth">
+<html lang="tr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ECEP 2027 · Çevre, Temiz Enerji ve Ekonomi Politikası Çalıştayı</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ECEP 2027 · Workshop on Environment, Clean Energy, and Economic Policy</title>
   <meta name="description" content="Workshop on Environment, Clean Energy, and Economic Policy (ECEP 2027) — 18–19 Ocak 2027, Yıldız Teknik Üniversitesi Davutpaşa Kampüsü, İstanbul. Düzenleyen: YTÜ İİBF İktisat Bölümü." />
-  <meta name="theme-color" content="#0B0F19" />
-  <!-- Site adresi değişirse SITE_URL geçen tüm yerleri güncelleyin (canonical, og:url, og:image, JSON-LD, robots.txt, sitemap.xml) -->
+  <meta name="theme-color" content="#F3F1EA" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0E110F" media="(prefers-color-scheme: dark)" />
+  <!-- Site adresi değişirse bu URL'yi geçen tüm yerleri güncelleyin (canonical, og, JSON-LD, robots.txt, sitemap.xml) -->
   <link rel="canonical" href="https://ilhanselahattin.github.io/sempozyum2027/" />
 
-  <!-- Favicon -->
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
 
-  <!-- Open Graph / sosyal medya önizlemesi (1200x630) -->
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="tr_TR" />
   <meta property="og:locale:alternate" content="en_GB" />
@@ -31,7 +30,6 @@
   <meta name="twitter:description" content="18–19 January 2027 · Yildiz Technical University, Davutpasa Campus, Istanbul." />
   <meta name="twitter:image" content="https://ilhanselahattin.github.io/sempozyum2027/assets/img/og-image.png" />
 
-  <!-- Arama motorları için yapılandırılmış veri (schema.org Event) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -55,602 +53,772 @@
   }
   </script>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS (CDN) -->
-  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <!-- Tema ilk boyamadan önce belirlenir (yanıp sönmeyi önler) -->
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink: '#0B0F19',
-            paper: '#F8FAFC',
-            // Vurgu rengi (Zümrüt) — broşür teması gelince yalnızca bu paletler güncellenir
-            brand: {
-              50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7', 400: '#34d399',
-              500: '#10b981', 600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b'
-            },
-            // İkincil vurgu (Kehribar)
-            accent: {
-              50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24',
-              500: '#f59e0b', 600: '#D97706', 700: '#b45309', 800: '#92400e', 900: '#78350f'
-            }
-          },
-          fontFamily: {
-            display: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
-          }
-        }
-      }
-    };
+    (function () {
+      var d = document.documentElement, t = null;
+      try { t = localStorage.getItem('ecep-theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      var q = new URLSearchParams(location.search).get('theme'); // önizleme: ?theme=dark
+      if (q === 'light' || q === 'dark') t = q;
+      d.setAttribute('data-theme', t);
+      d.classList.add('js');
+    })();
   </script>
-  <style type="text/tailwindcss">
-    @layer components {
-      .card { @apply rounded-2xl border border-slate-200 bg-white transition duration-300 ease-out hover:-translate-y-1 hover:border-brand-600; }
-      .card-dark { @apply rounded-2xl border border-white/10 bg-white/[0.03] transition duration-300 ease-out hover:-translate-y-1 hover:border-brand-500; }
-      .eyebrow { @apply inline-flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand-700; }
-      .section-title { @apply font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl; }
-      .btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2; }
-      .btn-ghost { @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2; }
-      .tab { @apply relative whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600; }
-      .chip { @apply rounded-full border border-slate-200 bg-paper px-2.5 py-1 text-xs text-slate-600; }
-      .search-input { @apply w-full rounded-full border border-slate-200 bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-slate-400 focus:border-brand-600 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-600/10; }
-    }
-  </style>
+
+  <!-- Yazı tipleri: Fontshare (Sentient + General Sans) -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=sentient@300,400,300i,400i&f[]=general-sans@400,500,600&display=swap" />
+
   <style>
-    [x-cloak] { display: none !important; }
-    html { scroll-padding-top: 88px; }
-    body { background-color: #F8FAFC; }
-    .tabular { font-variant-numeric: tabular-nums; }
-    /* Silik arka plan desenleri */
-    .bg-grid {
-      background-image:
-        linear-gradient(to right, rgba(15, 23, 42, .045) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(15, 23, 42, .045) 1px, transparent 1px);
-      background-size: 56px 56px;
+    /* =================================================================
+       Tasarım belirteçleri — renkler konudan: keten, yosun, adaçayı, güneş okeri
+       ================================================================= */
+    :root {
+      color-scheme: light;
+      --bg: #F3F1EA;
+      --bg-elev: #FBFAF6;
+      --bg-sunken: #ECE9E0;
+      --line: rgba(30, 36, 28, .085);
+      --line-strong: rgba(30, 36, 28, .16);
+      --ink: #161A15;
+      --ink-2: #4A5147;
+      --ink-3: #7F877B;
+      --accent: #2F4B37;
+      --accent-ink: #F3F1EA;
+      --accent-soft: rgba(47, 75, 55, .075);
+      --sun: #B4843A;
+      --sky: #4F6E78;
+      --topo: rgba(47, 75, 55, .15);
+      --map-filter: saturate(.55) contrast(.95) brightness(1.02);
+      --shadow: 0 1px 0 rgba(255, 255, 255, .7) inset, 0 1px 2px rgba(22, 26, 20, .04), 0 10px 30px -18px rgba(22, 26, 20, .18);
+      --shadow-hover: 0 1px 0 rgba(255, 255, 255, .7) inset, 0 2px 4px rgba(22, 26, 20, .04), 0 22px 44px -22px rgba(22, 26, 20, .28);
+
+      --serif: 'Sentient', 'Iowan Old Style', Georgia, serif;
+      --sans: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --spring: cubic-bezier(.34, 1.36, .64, 1);
+      --r: 20px;
+      --r-lg: 28px;
     }
-    .bg-dots { background-image: radial-gradient(rgba(15, 23, 42, .09) 1px, transparent 1px); background-size: 22px 22px; }
-    .bg-dots-dark { background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px); background-size: 22px 22px; }
-    .mask-fade { -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 40%, transparent 100%); mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 40%, transparent 100%); }
-    .mask-fade-b { -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent); mask-image: linear-gradient(to bottom, #000 50%, transparent); }
-    @keyframes ping-soft { 0% { transform: scale(1); opacity: .55; } 80%, 100% { transform: scale(2.4); opacity: 0; } }
-    .ping-soft { animation: ping-soft 1.8s cubic-bezier(0, 0, .2, 1) infinite; }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0E110F;
+      --bg-elev: #151916;
+      --bg-sunken: #0B0D0B;
+      --line: rgba(226, 233, 219, .075);
+      --line-strong: rgba(226, 233, 219, .15);
+      --ink: #ECEFE7;
+      --ink-2: #A7AFA2;
+      --ink-3: #6E776B;
+      --accent: #A9C69F;
+      --accent-ink: #0E110F;
+      --accent-soft: rgba(169, 198, 159, .09);
+      --sun: #D8B169;
+      --sky: #8DAEB8;
+      --topo: rgba(169, 198, 159, .11);
+      --map-filter: invert(.9) hue-rotate(180deg) saturate(.45) brightness(.95) contrast(.9);
+      --shadow: 0 1px 0 rgba(255, 255, 255, .035) inset, 0 12px 32px -18px rgba(0, 0, 0, .7);
+      --shadow-hover: 0 1px 0 rgba(255, 255, 255, .05) inset, 0 24px 48px -22px rgba(0, 0, 0, .8);
+    }
+
+    /* ============================== Temel ============================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    [x-cloak] { display: none !important; }
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+      scroll-padding-top: 104px;
+      background: var(--bg);
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      -webkit-tap-highlight-color: transparent;
+      font-feature-settings: "ss01", "kern";
+    }
+    body.locked { overflow: hidden; }
+    ::selection { background: var(--accent); color: var(--accent-ink); }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding-left: max(22px, env(safe-area-inset-left)); padding-right: max(22px, env(safe-area-inset-right)); }
+    @media (min-width: 768px) { .wrap { padding-left: 40px; padding-right: 40px; } }
+    .num { font-variant-numeric: tabular-nums; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .ico { width: 18px; height: 18px; flex: none; display: block; }
+    .ico svg { width: 100%; height: 100%; display: block; }
+
+    /* Tema geçişi (View Transitions) */
+    ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+
+    /* Topografik doku */
+    .topo {
+      position: absolute; inset: 0; pointer-events: none;
+      background: var(--topo);
+      -webkit-mask: url(assets/img/topo.svg) center / cover no-repeat;
+      mask: url(assets/img/topo.svg) center / cover no-repeat;
+    }
+
+    /* Izgara öğeleri içerikleri (ör. kaydırılabilir sekmeler) yüzünden genişlemesin */
+    .rv, .head > * { min-width: 0; }
+
+    /* Görünüme girerken yumuşak beliriş */
+    .js [data-reveal] {
+      opacity: 0; transform: translateY(18px); filter: blur(6px);
+      transition: opacity 1s var(--ease) var(--d, 0ms), transform 1.1s var(--ease) var(--d, 0ms), filter 1s var(--ease) var(--d, 0ms);
+    }
+    .js [data-reveal].in { opacity: 1; transform: none; filter: none; }
+
+    /* ============================== Bileşenler ============================== */
+    .card {
+      position: relative;
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow);
+      transition: transform .6s var(--ease), box-shadow .6s var(--ease), border-color .6s var(--ease), background-color .5s var(--ease);
+    }
+    .card.lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--line-strong); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      height: 50px; padding: 0 24px; border-radius: 999px;
+      font-size: 15px; font-weight: 500; letter-spacing: .005em; text-decoration: none; white-space: nowrap;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform .25s var(--ease), background-color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease), color .35s var(--ease);
+    }
+    .btn:active { transform: scale(.965); }
+    .btn .ico { transition: transform .45s var(--ease); }
+    .btn:hover .ico { transform: translateX(3px); }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 10px 24px -12px var(--accent); }
+    .btn-primary:hover { background: color-mix(in oklab, var(--accent) 86%, var(--ink)); }
+    .btn-ghost { background: var(--bg-elev); color: var(--ink); border-color: var(--line); box-shadow: var(--shadow); }
+    .btn-ghost:hover { border-color: var(--line-strong); }
+    .btn.sm { height: 40px; padding: 0 16px; font-size: 14px; gap: 8px; }
+
+    .icon-btn {
+      width: 40px; height: 40px; flex: none; display: grid; place-items: center;
+      border-radius: 999px; border: 1px solid var(--line); background: var(--bg-elev); color: var(--ink);
+      cursor: pointer; transition: transform .25s var(--ease), border-color .3s var(--ease), background-color .3s var(--ease);
+    }
+    .icon-btn:hover { border-color: var(--line-strong); }
+    .icon-btn:active { transform: scale(.9); }
+
+    /* Kayan göstergeli sekmeler (segmented control) */
+    .seg {
+      position: relative; display: inline-flex; max-width: 100%;
+      padding: 4px; border-radius: 999px;
+      background: var(--bg-sunken); border: 1px solid var(--line);
+      overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    }
+    .seg::-webkit-scrollbar { display: none; }
+    .seg button {
+      position: relative; z-index: 1; flex: none;
+      border: 0; background: none; cursor: pointer;
+      padding: 9px 18px; border-radius: 999px;
+      font-size: 14.5px; font-weight: 500; color: var(--ink-3); white-space: nowrap;
+      transition: color .35s var(--ease);
+    }
+    .seg button:hover { color: var(--ink-2); }
+    .seg button[aria-selected="true"] { color: var(--ink); }
+    .seg .thumb {
+      position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 0;
+      border-radius: 999px; background: var(--bg-elev);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 1px var(--line), 0 6px 16px -10px rgba(0, 0, 0, .25);
+      transition: transform .55s var(--spring), width .55s var(--spring);
+    }
+    .seg.sm { padding: 3px; }
+    .seg.sm button { padding: 5px 11px; font-size: 12.5px; letter-spacing: .02em; }
+    .seg.sm .thumb { top: 3px; bottom: 3px; }
+    .seg.block { display: flex; width: 100%; }
+    .seg.block button { flex: 1 0 auto; }
+
+    .chip { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 12.5px; color: var(--ink-2); background: var(--bg-sunken); border: 1px solid var(--line); }
+    .pill { display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 12.5px; font-weight: 500; color: var(--ink-3); border: 1px solid var(--line); white-space: nowrap; }
+    .pill.next { color: var(--ink); background: color-mix(in oklab, var(--sun) 14%, transparent); border-color: color-mix(in oklab, var(--sun) 32%, transparent); }
+    .pill.live { color: #fff; background: #C2453A; border-color: transparent; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sun); flex: none; }
+    .dot.pulse { animation: pulse 2.4s var(--ease) infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--sun) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 9px transparent; } }
+
+    /* Liste kabı (satırlar ince çizgilerle ayrılır) */
+    .list { border-radius: var(--r-lg); background: var(--bg-elev); border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden; }
+    /* <template> (Alpine x-for) elemanlarını atlayarak yalnızca satırlar arasına çizgi */
+    .list > :not(template) + :not(template) { border-top: 1px solid var(--line); }
+
+    /* ============================== Menü ============================== */
+    .nav { position: fixed; z-index: 50; left: 0; right: 0; top: 0; padding: max(12px, env(safe-area-inset-top)) 12px 0; pointer-events: none; }
+    .nav-bar {
+      pointer-events: auto; position: relative;
+      max-width: 1180px; height: 60px; margin: 0 auto;
+      display: flex; align-items: center; gap: 8px; padding: 0 8px 0 20px;
+      border-radius: 999px; border: 1px solid var(--line);
+      background: color-mix(in oklab, var(--bg-elev) 72%, transparent);
+      -webkit-backdrop-filter: saturate(1.8) blur(22px); backdrop-filter: saturate(1.8) blur(22px);
+      box-shadow: var(--shadow);
+      transition: box-shadow .5s var(--ease), background-color .5s var(--ease);
+    }
+    .nav.scrolled .nav-bar { box-shadow: var(--shadow-hover); }
+    .brand { display: flex; align-items: baseline; gap: 8px; text-decoration: none; flex: none; }
+    .brand b { font-family: var(--serif); font-weight: 400; font-size: 21px; letter-spacing: -.01em; }
+    .brand small { font-size: 12.5px; color: var(--ink-3); }
+    .nav-links { position: relative; display: none; gap: 2px; margin: 0 auto; }
+    @media (min-width: 1120px) { .nav-links { display: flex; } }
+    .nav-links a { position: relative; z-index: 1; padding: 8px 14px; border-radius: 999px; font-size: 14.5px; color: var(--ink-2); text-decoration: none; transition: color .3s var(--ease); }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .nav-hover { position: absolute; z-index: 0; top: 50%; left: 0; height: 36px; margin-top: -18px; border-radius: 999px; background: var(--accent-soft); opacity: 0; transition: transform .5s var(--ease), width .5s var(--ease), opacity .35s var(--ease); }
+    .nav-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+    @media (min-width: 1120px) { .nav-actions { margin-left: 0; } .menu-btn { display: none !important; } }
+    .nav-cta { display: none; }
+    @media (min-width: 640px) { .nav-cta { display: inline-flex; } }
+    .sheet {
+      pointer-events: auto; max-width: 1180px; margin: 10px auto 0; padding: 10px;
+      border-radius: var(--r-lg); border: 1px solid var(--line);
+      background: color-mix(in oklab, var(--bg-elev) 92%, transparent);
+      -webkit-backdrop-filter: saturate(1.8) blur(22px); backdrop-filter: saturate(1.8) blur(22px);
+      box-shadow: var(--shadow-hover);
+      max-height: calc(100dvh - 100px); overflow-y: auto;
+    }
+    .sheet a { display: flex; align-items: center; justify-content: space-between; padding: 15px 16px; border-radius: 18px; text-decoration: none; font-size: 17px; color: var(--ink); transition: background-color .3s var(--ease); }
+    .sheet a:active, .sheet a:hover { background: var(--accent-soft); }
+    .sheet a .ico { color: var(--ink-3); }
+    .sheet .btn { width: 100%; margin-top: 8px; }
+
+    /* Geçiş sınıfları (Alpine x-transition) */
+    .t-fade { transition: opacity .45s var(--ease), transform .55s var(--ease); }
+    .t-from { opacity: 0; transform: translateY(-8px) scale(.985); }
+    .t-to { opacity: 1; transform: none; }
+    .t-up-from { opacity: 0; transform: translateY(28px) scale(.985); }
+
+    /* ============================== Hero ============================== */
+    .hero { position: relative; overflow: hidden; padding: clamp(150px, 19vw, 210px) 0 clamp(72px, 9vw, 110px); }
+    .hero .topo {
+      inset: -6% -4% -6% -4%;
+      -webkit-mask: url(assets/img/topo.svg) center / cover no-repeat, radial-gradient(ellipse 75% 70% at 70% 30%, #000 30%, transparent 80%);
+      -webkit-mask-composite: source-in;
+      mask: url(assets/img/topo.svg) center / cover no-repeat, radial-gradient(ellipse 75% 70% at 70% 30%, #000 30%, transparent 80%);
+      mask-composite: intersect;
+      will-change: transform;
+    }
+    .badge { display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px 7px 12px; border-radius: 999px; font-size: 13.5px; color: var(--ink-2); background: var(--bg-elev); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .badge .sep { width: 1px; height: 12px; background: var(--line-strong); }
+    .badge > span { white-space: nowrap; }
+    @media (max-width: 480px) { .badge { font-size: 12.5px; gap: 8px; padding: 6px 12px 6px 10px; } }
+    .kicker { margin: 44px 0 14px; font-size: 15px; color: var(--ink-3); letter-spacing: .01em; }
+    .hero h1 {
+      margin: 0; max-width: 15ch;
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(2.9rem, 7.6vw, 6.8rem); line-height: .98; letter-spacing: -.035em;
+      text-wrap: balance;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); white-space: nowrap; }
+    @media (max-width: 640px) { .hero h1 { max-width: none; font-size: clamp(2.4rem, 11.2vw, 3.4rem); } }
+    .hero-tr { margin: 26px 0 0; font-size: clamp(1.05rem, 1.7vw, 1.3rem); color: var(--ink-2); }
+    .hero-grid { display: grid; gap: 18px; margin-top: 56px; }
+    @media (min-width: 980px) { .hero-grid { grid-template-columns: 1fr 1fr; align-items: end; gap: 40px; } }
+    .hero-lead { margin: 0; max-width: 48ch; color: var(--ink-2); }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    @media (max-width: 520px) { .actions .btn { flex: 1 1 100%; } }
+
+    .count { padding: 24px 26px 26px; }
+    .count-top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; font-size: 13.5px; color: var(--ink-3); }
+    .units { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 18px; }
+    .unit { padding-left: 18px; border-left: 1px solid var(--line); }
+    .unit:first-child { padding-left: 0; border-left: 0; }
+    .unit b { display: block; font-weight: 500; font-size: clamp(2.1rem, 4.6vw, 3.4rem); line-height: 1; letter-spacing: -.035em; font-variant-numeric: tabular-nums; }
+    .unit span { display: block; margin-top: 8px; font-size: 12.5px; color: var(--ink-3); }
+
+    .facts { display: grid; margin-top: 18px; }
+    @media (min-width: 760px) { .facts { grid-template-columns: repeat(3, 1fr); } .facts > :not(template) + :not(template) { border-top: 0; border-left: 1px solid var(--line); } }
+    .fact { padding: 20px 24px; }
+    .fact span { display: block; font-size: 12.5px; color: var(--ink-3); }
+    .fact p { margin: 4px 0 0; font-size: 15.5px; font-weight: 500; line-height: 1.4; color: var(--ink); }
+
+    /* ============================== Bölümler ============================== */
+    .section { position: relative; padding: clamp(84px, 11vw, 140px) 0; }
+    .section.tint { background: color-mix(in oklab, var(--bg-sunken) 55%, var(--bg)); }
+    .head { display: grid; gap: 18px; margin-bottom: clamp(36px, 5vw, 56px); }
+    @media (min-width: 900px) { .head { grid-template-columns: 1.15fr .85fr; align-items: end; gap: 48px; } }
+    .eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 13.5px; color: var(--ink-3); }
+    .eyebrow b { font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+    .eyebrow i { width: 22px; height: 1px; background: var(--line-strong); }
+    .title { margin: 14px 0 0; font-family: var(--serif); font-weight: 400; font-size: clamp(2.15rem, 4.6vw, 3.6rem); line-height: 1.04; letter-spacing: -.025em; text-wrap: balance; }
+    .title em { font-style: italic; color: var(--accent); }
+    .lead { margin: 0; max-width: 46ch; color: var(--ink-2); }
+
+    /* Hakkında */
+    .about-grid { display: grid; gap: 16px; }
+    @media (min-width: 980px) { .about-grid { grid-template-columns: 1.1fr .9fr; } }
+    .subject { padding: clamp(28px, 4vw, 44px); overflow: hidden; }
+    .subject .topo { opacity: .7; -webkit-mask-size: 1600px auto; mask-size: 1600px auto; }
+    .subject > * { position: relative; }
+    .subject h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.3rem); line-height: 1.12; letter-spacing: -.02em; }
+    .subject p { margin: 18px 0 0; color: var(--ink-2); }
+    .label { font-size: 13px; color: var(--ink-3); margin-bottom: 14px; }
+    .tabs { padding: 10px; display: flex; flex-direction: column; }
+    .panel { padding: 22px 16px 14px; }
+    .panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .panel li { position: relative; padding-left: 26px; color: var(--ink-2); }
+    .panel li::before { content: ""; position: absolute; left: 2px; top: .78em; width: 12px; height: 1px; background: var(--accent); }
+    .panel p { margin: 0; color: var(--ink-2); }
+
+    /* Temalar */
+    .bento { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .bento { grid-template-columns: repeat(12, 1fr); } }
+    .bento > .rv { display: flex; }
+    @media (min-width: 720px) and (max-width: 1023px) { .b-7, .b-12 { grid-column: span 2; } }
+    @media (min-width: 1024px) { .b-4 { grid-column: span 4; } .b-5 { grid-column: span 5; } .b-7 { grid-column: span 7; } .b-12 { grid-column: span 12; } }
+    .theme { flex: 1; display: flex; flex-direction: column; padding: 28px; min-height: 230px; overflow: hidden; }
+    .theme .n { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--ink-3); }
+    .theme h3 { margin: 18px 0 0; font-family: var(--serif); font-weight: 400; font-size: clamp(1.45rem, 2.2vw, 1.75rem); line-height: 1.15; letter-spacing: -.015em; max-width: 22ch; }
+    .theme p { margin: 12px 0 0; font-size: 15.5px; color: var(--ink-2); max-width: 52ch; }
+    .theme .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 24px; }
+    .theme.feature { background: var(--accent); border-color: transparent; color: var(--accent-ink); }
+    .theme.feature .topo { background: color-mix(in oklab, var(--accent-ink) 16%, transparent); }
+    .theme.feature > * { position: relative; }
+    .theme.feature .n, .theme.feature p { color: color-mix(in oklab, var(--accent-ink) 78%, transparent); }
+    .theme.feature .chip { background: color-mix(in oklab, var(--accent-ink) 12%, transparent); border-color: color-mix(in oklab, var(--accent-ink) 18%, transparent); color: var(--accent-ink); }
+
+    /* Takvim / duyurular / program satırları */
+    .row { display: grid; gap: 6px; padding: 22px 26px; transition: background-color .4s var(--ease); }
+    .row:hover { background: color-mix(in oklab, var(--bg-sunken) 40%, transparent); }
+    @media (min-width: 780px) { .row { grid-template-columns: 190px 1fr auto; align-items: center; gap: 28px; } }
+    .row .when { font-size: 15px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+    .row h3 { margin: 0; font-size: 17px; font-weight: 500; line-height: 1.35; }
+    .row p { margin: 4px 0 0; font-size: 15px; color: var(--ink-3); }
+    .row > .pill { justify-self: start; margin-top: 6px; }
+    @media (min-width: 780px) { .row > .pill { justify-self: end; margin-top: 0; } }
+    .row.done { opacity: .5; }
+    .row.done h3 { text-decoration: line-through; text-decoration-color: var(--line-strong); }
+    .progress { display: flex; align-items: center; gap: 14px; margin-top: 22px; font-size: 13.5px; color: var(--ink-3); }
+    .progress .bar { flex: 1; max-width: 220px; height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; }
+    .progress .bar i { display: block; height: 100%; background: var(--accent); border-radius: 3px; transition: width 1.2s var(--ease); }
+
+    /* Kurullar / konuşmacılar */
+    .bar-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 20px; }
+    .search { position: relative; width: 100%; max-width: 320px; }
+    .search input { width: 100%; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-elev); color: var(--ink); font: inherit; font-size: 15px; outline: none; transition: border-color .3s var(--ease), box-shadow .3s var(--ease); }
+    .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+    .empty { position: relative; overflow: hidden; padding: clamp(48px, 7vw, 80px) 24px; text-align: center; }
+    .empty .topo { opacity: .6; -webkit-mask-size: 1400px auto; mask-size: 1400px auto; }
+    .empty > *:not(.topo) { position: relative; }
+    .empty h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(1.5rem, 2.6vw, 2rem); letter-spacing: -.015em; }
+    .empty p { margin: 10px auto 0; max-width: 42ch; color: var(--ink-3); font-size: 15.5px; }
+    .people { display: grid; gap: 12px; }
+    @media (min-width: 640px) { .people { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .people { grid-template-columns: repeat(3, 1fr); } }
+    .person { display: flex; align-items: center; gap: 16px; padding: 18px 20px; }
+    .avatar { width: 46px; height: 46px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--bg-sunken); border: 1px solid var(--line); font-family: var(--serif); font-size: 16px; }
+    .person b { display: block; font-weight: 500; }
+    .person small { display: block; color: var(--ink-3); font-size: 14px; }
+    .speakers { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 1024px) { .speakers { grid-template-columns: repeat(4, 1fr); } }
+    .speakers > .rv { display: flex; }
+    .speaker { flex: 1; aspect-ratio: 4 / 5; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; overflow: hidden; background: linear-gradient(160deg, var(--bg-elev), var(--bg-sunken)); }
+    .speaker .n { font-family: var(--serif); font-style: italic; color: var(--ink-3); }
+    .speaker b { font-family: var(--serif); font-weight: 400; font-size: clamp(1.25rem, 2vw, 1.5rem); letter-spacing: -.01em; }
+    .speaker small { display: block; margin-top: 4px; color: var(--ink-3); font-size: 13.5px; }
+
+    /* Program */
+    .slot { display: grid; gap: 8px; padding: 22px 26px; transition: background-color .4s var(--ease); }
+    @media (min-width: 780px) { .slot { grid-template-columns: 150px 1fr; gap: 28px; } }
+    .slot:hover { background: color-mix(in oklab, var(--bg-sunken) 40%, transparent); }
+    .slot .time { font-size: 15px; color: var(--ink-2); font-variant-numeric: tabular-nums; padding-top: 1px; }
+    .slot .type { font-size: 12.5px; font-weight: 500; letter-spacing: .02em; }
+    .slot h3 { margin: 4px 0 0; font-size: 17.5px; font-weight: 500; line-height: 1.35; }
+    .slot p { margin: 6px 0 0; font-size: 14.5px; color: var(--ink-3); }
+    .slot.break { padding-top: 14px; padding-bottom: 14px; background: color-mix(in oklab, var(--bg-sunken) 45%, transparent); }
+    .slot.break h3 { font-size: 15px; font-weight: 400; color: var(--ink-3); margin: 0; }
+    .slot.is-live { background: color-mix(in oklab, #C2453A 7%, transparent); }
+    .t-keynote { color: var(--sun); } .t-session { color: var(--accent); } .t-panel { color: var(--sky); } .t-ceremony, .t-registration, .t-workshop { color: var(--ink-3); }
+    .note { margin-top: 18px; font-size: 13.5px; color: var(--ink-3); }
+
+    /* Mekân */
+    .venue-grid { display: grid; gap: 16px; }
+    @media (min-width: 980px) { .venue-grid { grid-template-columns: 1.25fr .75fr; } }
+    .map { overflow: hidden; min-height: 360px; padding: 0; }
+    .map iframe { display: block; width: 100%; height: 100%; min-height: 360px; border: 0; filter: var(--map-filter); transition: filter .6s var(--ease); }
+    .stack { display: flex; flex-direction: column; gap: 16px; }
+    .info { padding: 24px 26px; }
+    .info b { display: block; font-weight: 500; }
+    .info p { margin: 6px 0 0; color: var(--ink-2); font-size: 15.5px; }
+    .info small { display: block; margin-top: 10px; color: var(--ink-3); font-size: 14px; }
+    .transit { padding: 18px 26px; }
+    .transit b { display: block; font-weight: 500; font-size: 15.5px; }
+    .transit p { margin: 4px 0 0; color: var(--ink-3); font-size: 14.5px; }
+
+    /* Destek */
+    .support { display: grid; gap: 16px; }
+    @media (min-width: 980px) { .support { grid-template-columns: 1.15fr .85fr; } }
+    .support-main { padding: clamp(28px, 4vw, 44px); background: var(--accent-soft); border-color: transparent; box-shadow: none; }
+    .support-main p { margin: 0; color: var(--ink-2); }
+    .support-main ul { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 12px; }
+    .support-main li { position: relative; padding-left: 26px; color: var(--ink-2); font-size: 15.5px; }
+    .support-main li::before { content: ""; position: absolute; left: 2px; top: .78em; width: 12px; height: 1px; background: var(--accent); }
+    .doc { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 26px; }
+    .doc b { display: block; font-weight: 500; }
+    .doc small { display: block; color: var(--ink-3); font-size: 14px; }
+
+    /* SSS */
+    .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 26px; border: 0; background: none; text-align: left; cursor: pointer; font-size: 17px; font-weight: 500; }
+    .faq-q .icon-btn { width: 34px; height: 34px; pointer-events: none; }
+    .faq-q .icon-btn .ico { transition: transform .5s var(--spring); }
+    .faq-q[aria-expanded="true"] .icon-btn .ico { transform: rotate(45deg); }
+    .faq-a { padding: 0 26px 26px; margin: 0; max-width: 70ch; color: var(--ink-2); }
+
+    /* Alt bilgi */
+    .footer { position: relative; overflow: hidden; padding: clamp(80px, 10vw, 120px) 0 calc(28px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); }
+    .footer .topo { opacity: .5; -webkit-mask: url(assets/img/topo.svg) center / cover no-repeat, linear-gradient(to top, #000, transparent 90%); -webkit-mask-composite: source-in; mask: url(assets/img/topo.svg) center / cover no-repeat, linear-gradient(to top, #000, transparent 90%); mask-composite: intersect; }
+    .footer > .wrap { position: relative; }
+    .footer-mark { margin: 0; font-family: var(--serif); font-weight: 300; font-size: clamp(2.2rem, 6vw, 5rem); line-height: 1; letter-spacing: -.035em; max-width: 18ch; text-wrap: balance; }
+    .footer-mark em { font-style: italic; color: var(--accent); }
+    .footer-cols { display: grid; gap: 32px; margin-top: 64px; }
+    @media (min-width: 820px) { .footer-cols { grid-template-columns: 1.2fr 1fr 1fr; } }
+    .footer-cols h4 { margin: 0 0 12px; font-size: 13px; font-weight: 500; color: var(--ink-3); }
+    .footer-cols p, .footer-cols a { margin: 0; font-size: 15px; color: var(--ink-2); text-decoration: none; line-height: 1.75; }
+    .footer-cols a:hover { color: var(--ink); }
+    .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--ink-3); }
+
+    /* Başvuru penceresi (iOS sayfası gibi) */
+    .modal { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-end; justify-content: center; }
+    @media (min-width: 640px) { .modal { align-items: center; padding: 24px; } }
+    .backdrop { position: absolute; inset: 0; background: rgba(10, 12, 10, .32); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+    .dialog { position: relative; width: 100%; max-width: 480px; padding: 12px 28px calc(28px + env(safe-area-inset-bottom)); border-radius: 30px 30px 0 0; background: var(--bg-elev); border: 1px solid var(--line); box-shadow: var(--shadow-hover); }
+    @media (min-width: 640px) { .dialog { border-radius: 30px; padding: 28px; } .grabber { display: none; } }
+    .grabber { width: 38px; height: 5px; margin: 0 auto 18px; border-radius: 5px; background: var(--line-strong); }
+    .dialog h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 1.85rem; line-height: 1.1; letter-spacing: -.02em; }
+    .dialog p { margin: 12px 0 0; color: var(--ink-2); }
+    .dialog .actions { margin-top: 24px; }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .ping-soft { animation: none; }
-      *, *::before, *::after { transition-duration: 0ms !important; }
+      *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+      .js [data-reveal] { opacity: 1; transform: none; filter: none; }
     }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { scrollbar-width: none; }
   </style>
 
-  <!-- Lucide Icons (Alpine'den önce yüklenmeli) -->
-  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
-  <!-- Alpine.js (Collapse eklentisi çekirdekten önce yüklenmeli) -->
+  <!-- Alpine.js (Collapse eklentisi çekirdekten önce) -->
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.8/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 </head>
 
-<body x-data="symposiumApp()" x-init="init()"
-      x-effect="document.body.classList.toggle('overflow-hidden', applyOpen)"
-      class="font-sans text-slate-700 antialiased selection:bg-brand-100 selection:text-brand-900">
+<body x-data="symposiumApp()" x-init="init()" :class="{ locked: applyOpen || menuOpen }">
 
-  <a href="#top" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-white" x-text="L('a11y.skip')"></a>
-
-  <!-- ============================== DUYURU ŞERİDİ ============================== -->
-  <div x-show="announcementVisible" x-cloak class="relative z-50 bg-accent-600 text-white">
-    <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 text-sm sm:px-6 lg:px-8">
-      <a :href="data.announcement.href" class="flex min-w-0 items-center gap-2 font-medium hover:underline">
-        <span class="shrink-0" x-html="icon('megaphone', 'h-4 w-4')"></span>
-        <span class="truncate" x-text="t(data.announcement.text)"></span>
-      </a>
-      <button type="button" @click="dismissAnnouncement()" class="grid h-7 w-7 shrink-0 place-items-center rounded-full hover:bg-white/15" :aria-label="L('a11y.close')">
-        <span x-html="icon('x', 'h-4 w-4')"></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ============================== NAVBAR ============================== -->
-  <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
-    <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8" aria-label="Ana menü">
-      <!-- Logo -->
-      <a href="#top" class="flex shrink-0 items-center gap-3" aria-label="Ana sayfa">
-        <template x-if="data.meta.logo">
-          <img :src="data.meta.logo" :alt="data.meta.acronym" class="h-9 w-auto" />
-        </template>
-        <template x-if="!data.meta.logo">
-          <span class="grid h-9 w-9 place-items-center rounded-lg bg-ink font-display text-[10px] font-extrabold tracking-tight text-white" x-text="data.meta.monogram"></span>
-        </template>
-        <span class="leading-tight">
-          <span class="block font-display text-sm font-bold text-ink" x-text="data.meta.acronym"></span>
-          <span class="hidden font-mono text-[10px] uppercase tracking-widest text-slate-500 sm:block" x-text="t(data.meta.shortDate)"></span>
-        </span>
+  <!-- ============================== MENÜ ============================== -->
+  <header class="nav" :class="{ scrolled: scrolled }">
+    <div class="nav-bar">
+      <a href="#top" class="brand" aria-label="ECEP 2027">
+        <b>ECEP</b><small class="num">2027</small>
       </a>
 
-      <!-- Masaüstü linkler -->
-      <ul class="hidden items-center gap-0.5 xl:flex">
+      <nav class="nav-links" x-ref="links" @mouseleave="hoverLink(null)" aria-label="Bölümler">
+        <span class="nav-hover" :style="hoverStyle" aria-hidden="true"></span>
         <template x-for="link in primaryNav" :key="link.id">
-          <li>
-            <a :href="'#' + link.id"
-               class="rounded-full px-3 py-2 text-sm font-medium transition"
-               :class="activeSection === link.id ? 'bg-slate-100 text-ink' : 'text-slate-600 hover:text-ink'"
-               x-text="L(link.key)"></a>
-          </li>
+          <a :href="'#' + link.id" :class="{ active: activeSection === link.id }" @mouseenter="hoverLink($event.target)" x-text="L(link.key)"></a>
         </template>
-        <li x-data="{ more: false }" class="relative" @click.outside="more = false" @keydown.escape="more = false">
-          <button type="button" @click="more = !more" :aria-expanded="more"
-                  class="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition"
-                  :class="secondaryNav.some(l => l.id === activeSection) ? 'bg-slate-100 text-ink' : 'text-slate-600 hover:text-ink'">
-            <span x-text="L('nav.more')"></span>
-            <span class="transition" :class="more && 'rotate-180'" x-html="icon('chevron-down', 'h-3.5 w-3.5')"></span>
-          </button>
-          <div x-show="more" x-cloak x-transition.origin.top.duration.150ms class="absolute right-0 top-full mt-2 w-56 rounded-2xl border border-slate-200 bg-white p-1.5">
-            <template x-for="link in secondaryNav" :key="link.id">
-              <a :href="'#' + link.id" @click="more = false"
-                 class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm transition"
-                 :class="activeSection === link.id ? 'bg-slate-100 text-ink' : 'text-slate-600 hover:bg-slate-50 hover:text-ink'">
-                <span class="text-slate-400" x-html="icon(link.icon, 'h-4 w-4')"></span>
-                <span x-text="L(link.key)"></span>
-              </a>
-            </template>
-          </div>
-        </li>
-      </ul>
+      </nav>
 
-      <div class="flex items-center gap-2">
-        <!-- Dil anahtarı -->
-        <div class="flex items-center rounded-full border border-slate-200 bg-white p-0.5 font-mono text-xs font-semibold" role="group" aria-label="Dil / Language">
-          <button type="button" @click="setLang('tr')" class="rounded-full px-2.5 py-1 transition" :class="lang === 'tr' ? 'bg-ink text-white' : 'text-slate-500 hover:text-ink'" :aria-pressed="lang === 'tr'">TR</button>
-          <button type="button" @click="setLang('en')" class="rounded-full px-2.5 py-1 transition" :class="lang === 'en' ? 'bg-ink text-white' : 'text-slate-500 hover:text-ink'" :aria-pressed="lang === 'en'">EN</button>
+      <div class="nav-actions">
+        <div class="seg sm" role="tablist" aria-label="Dil / Language" x-data="segmented()" x-effect="lang; $nextTick(() => update($el))">
+          <span class="thumb" :style="thumb" aria-hidden="true"></span>
+          <button type="button" role="tab" :aria-selected="lang === 'tr'" @click="setLang('tr')">TR</button>
+          <button type="button" role="tab" :aria-selected="lang === 'en'" @click="setLang('en')">EN</button>
         </div>
-        <!-- CTA -->
-        <button type="button" @click="openApply()" x-show="phase === 'cfp'"
-                class="hidden items-center gap-2 rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700 sm:inline-flex">
-          <span x-text="L('cta.apply')"></span>
-          <span x-html="icon('arrow-up-right', 'h-4 w-4')"></span>
+        <button type="button" class="icon-btn" @click="toggleTheme($event)" :aria-label="L('a11y.theme')">
+          <span class="ico" x-html="theme === 'dark' ? icon('sun') : icon('moon')"></span>
         </button>
-        <a href="#program" x-show="phase === 'live'" x-cloak
-           class="hidden items-center gap-2 rounded-full bg-rose-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-700 sm:inline-flex">
-          <span x-text="L('cta.live')"></span>
-          <span x-html="icon('radio', 'h-4 w-4')"></span>
-        </a>
-        <!-- Mobil menü butonu -->
-        <button type="button" @click="mobileMenu = !mobileMenu" class="grid h-9 w-9 place-items-center rounded-full border border-slate-200 bg-white text-ink xl:hidden" :aria-expanded="mobileMenu" :aria-label="L('a11y.menu')">
-          <span x-show="!mobileMenu" x-html="icon('menu', 'h-4 w-4')"></span>
-          <span x-show="mobileMenu" x-cloak x-html="icon('x', 'h-4 w-4')"></span>
+        <button type="button" class="btn btn-primary sm nav-cta" x-show="phase === 'cfp'" @click="applyOpen = true">
+          <span x-text="L('cta.apply')"></span>
+        </button>
+        <button type="button" class="icon-btn menu-btn" @click="menuOpen = !menuOpen" :aria-expanded="menuOpen" :aria-label="L('a11y.menu')">
+          <span class="ico" x-html="menuOpen ? icon('close') : icon('menu')"></span>
         </button>
       </div>
-    </nav>
+    </div>
 
-    <!-- Mobil menü -->
-    <div x-show="mobileMenu" x-cloak x-transition.opacity.duration.200ms @click.outside="mobileMenu = false" class="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-slate-200 bg-white/95 backdrop-blur-md xl:hidden">
-      <ul class="mx-auto grid max-w-7xl gap-1 px-4 py-4 sm:grid-cols-2 sm:px-6">
-        <template x-for="link in primaryNav.concat(secondaryNav)" :key="link.id">
-          <li>
-            <a :href="'#' + link.id" @click="mobileMenu = false" class="flex items-center gap-3 rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-slate-100">
-              <span class="text-slate-400" x-html="icon(link.icon, 'h-4 w-4')"></span>
-              <span x-text="L(link.key)"></span>
-            </a>
-          </li>
-        </template>
-        <li class="pt-2 sm:col-span-2" x-show="phase === 'cfp'">
-          <button type="button" @click="mobileMenu = false; openApply()" class="btn-primary w-full">
-            <span x-text="L('cta.apply')"></span>
-            <span x-html="icon('arrow-up-right', 'h-4 w-4')"></span>
-          </button>
-        </li>
-      </ul>
+    <div class="sheet" x-show="menuOpen" x-cloak @click.outside="menuOpen = false" @keydown.escape.window="menuOpen = false"
+         x-transition:enter="t-fade" x-transition:enter-start="t-from" x-transition:enter-end="t-to"
+         x-transition:leave="t-fade" x-transition:leave-start="t-to" x-transition:leave-end="t-from">
+      <template x-for="link in primaryNav.concat(secondaryNav)" :key="'m-' + link.id">
+        <a :href="'#' + link.id" @click="menuOpen = false">
+          <span x-text="L(link.key)"></span>
+          <span class="ico" x-html="icon('arrow')"></span>
+        </a>
+      </template>
+      <button type="button" class="btn btn-primary" x-show="phase === 'cfp'" @click="menuOpen = false; applyOpen = true" x-text="L('cta.apply')"></button>
     </div>
   </header>
 
   <main id="top">
-    <!-- ============================== HERO ============================== -->
-    <section class="relative overflow-hidden border-b border-slate-200">
-      <div class="pointer-events-none absolute inset-0 bg-grid mask-fade" aria-hidden="true"></div>
-      <div class="relative mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 sm:pt-20 lg:px-8 lg:pb-24 lg:pt-24">
-        <!-- Rozetler -->
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1.5 text-xs font-medium text-ink"
-                :class="phase === 'live' ? 'border-rose-200' : 'border-slate-200'">
-            <span class="relative flex h-2 w-2">
-              <span class="ping-soft absolute inline-flex h-full w-full rounded-full" :class="phase === 'live' ? 'bg-rose-500' : 'bg-brand-500'"></span>
-              <span class="relative inline-flex h-2 w-2 rounded-full" :class="phase === 'live' ? 'bg-rose-600' : 'bg-brand-600'"></span>
-            </span>
-            <template x-if="phase === 'live'">
-              <span class="font-mono font-semibold uppercase tracking-[0.14em] text-rose-700" x-text="L('live.badge') + ' · ' + L('program.day') + ' ' + (liveDayIndex + 1)"></span>
-            </template>
-            <template x-if="phase !== 'live'">
-              <span class="font-mono tabular" x-text="t(data.meta.dateRange)"></span>
-            </template>
-            <span class="text-slate-300">/</span>
+    <!-- ============================== GİRİŞ ============================== -->
+    <section class="hero">
+      <div class="topo" x-ref="heroTopo" aria-hidden="true"></div>
+      <div class="wrap">
+        <div data-reveal>
+          <span class="badge">
+            <span class="dot pulse" aria-hidden="true"></span>
+            <span class="num" x-text="phase === 'live' ? L('live.badge') : t(data.meta.dateRange)"></span>
+            <span class="sep" aria-hidden="true"></span>
             <span x-text="t(data.meta.city)"></span>
           </span>
-          <span class="inline-flex items-center gap-1.5 rounded-full border border-accent-200 bg-accent-50 px-3 py-1.5 text-xs font-medium text-accent-800">
-            <span x-html="icon('landmark', 'h-3.5 w-3.5')"></span>
-            <span x-text="t(data.meta.organizerShort)"></span>
-          </span>
-          <span x-show="phase === 'archive'" x-cloak class="inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1.5 text-xs font-medium text-white">
-            <span x-html="icon('archive', 'h-3.5 w-3.5')"></span>
-            <span x-text="L('archive.badge')"></span>
-          </span>
         </div>
 
-        <!-- Başlık -->
-        <p class="mt-8 font-mono text-xs font-medium uppercase tracking-[0.2em] text-brand-700" x-text="t(data.meta.kicker)"></p>
-        <h1 class="mt-3 max-w-5xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-7xl">
-          <span x-text="data.meta.titleLead"></span>
-          <span class="text-brand-600" x-text="data.meta.titleAccent"></span>
+        <p class="kicker" data-reveal style="--d: 80ms" x-text="data.meta.kicker"></p>
+        <h1 data-reveal style="--d: 140ms">
+          <span x-text="data.meta.titleA"></span>
+          <em x-text="data.meta.titleB"></em><span x-text="data.meta.titleC"></span>
         </h1>
-        <p class="mt-4 font-display text-lg font-semibold text-slate-500 sm:text-xl" x-text="t(data.meta.altTitle)"></p>
-        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600"
-           x-text="phase === 'archive' ? t(data.archive.thanks) : t(data.meta.tagline)"></p>
+        <p class="hero-tr" data-reveal style="--d: 220ms" x-text="lang === 'tr' ? data.meta.trName : t(data.meta.organizerLine)"></p>
 
-        <!-- Butonlar -->
-        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
-          <template x-if="phase === 'cfp'">
-            <button type="button" @click="openApply()" class="btn-primary">
-              <span x-html="icon('send', 'h-4 w-4')"></span>
-              <span x-text="L('cta.apply')"></span>
-            </button>
-          </template>
-          <template x-if="phase === 'live'">
-            <button type="button" @click="goToDay(liveDayIndex)" class="btn-primary bg-rose-600 hover:bg-rose-700 focus-visible:ring-rose-600">
-              <span x-html="icon('radio', 'h-4 w-4')"></span>
-              <span x-text="L('live.dayProgram').replace('{n}', liveDayIndex + 1)"></span>
-            </button>
-          </template>
-          <template x-if="phase === 'archive' && data.archive.report">
-            <a :href="data.archive.report" download class="btn-primary">
-              <span x-html="icon('book-down', 'h-4 w-4')"></span>
-              <span x-text="L('archive.report')"></span>
-            </a>
-          </template>
-          <a href="#about" class="btn-ghost">
-            <span x-html="icon('info', 'h-4 w-4')"></span>
-            <span x-text="L('cta.about')"></span>
-          </a>
-        </div>
-
-        <!-- Alt panel -->
-        <div class="mt-14 grid gap-4 lg:grid-cols-12">
-          <!-- Geri sayım (öncesi) -->
-          <div x-show="phase === 'cfp'" class="relative overflow-hidden rounded-2xl bg-ink p-6 text-white sm:p-8 lg:col-span-8">
-            <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
-            <div class="relative flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-400" x-text="L('countdown.label')"></p>
-                <p class="mt-1 text-sm text-slate-400" x-text="L('countdown.note')"></p>
-              </div>
-              <span class="hidden font-mono text-xs text-slate-500 sm:block">UTC+03:00</span>
-            </div>
-            <div class="relative mt-6 grid grid-cols-4 gap-2 sm:gap-4" role="timer" aria-live="off">
-              <template x-for="unit in countdownUnits" :key="unit.key">
-                <div class="rounded-xl border border-white/10 bg-white/[0.04] px-2 py-4 text-center sm:px-4 sm:py-5">
-                  <div class="font-mono text-3xl font-semibold tabular text-white sm:text-5xl lg:text-6xl" x-text="unit.value"></div>
-                  <div class="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400 sm:text-xs" x-text="L(unit.key)"></div>
-                </div>
-              </template>
+        <div class="hero-grid">
+          <div data-reveal style="--d: 300ms">
+            <p class="hero-lead" x-text="phase === 'archive' ? t(data.archive.thanks) : t(data.meta.tagline)"></p>
+            <div class="actions">
+              <button type="button" class="btn btn-primary" x-show="phase === 'cfp'" @click="applyOpen = true">
+                <span x-text="L('cta.apply')"></span><span class="ico" x-html="icon('arrow')"></span>
+              </button>
+              <button type="button" class="btn btn-primary" x-show="phase === 'live'" x-cloak @click="goToDay(liveDayIndex)">
+                <span x-text="L('live.dayProgram').replace('{n}', liveDayIndex + 1)"></span><span class="ico" x-html="icon('arrow')"></span>
+              </button>
+              <a class="btn btn-primary" x-show="phase === 'archive' && data.archive.report" x-cloak :href="data.archive.report || null" download>
+                <span x-text="L('archive.report')"></span><span class="ico" x-html="icon('arrow')"></span>
+              </a>
+              <a href="#about" class="btn btn-ghost"><span x-text="L('cta.about')"></span></a>
             </div>
           </div>
 
-          <!-- Şu an / sıradaki (canlı mod) -->
-          <div x-show="phase === 'live'" x-cloak class="relative overflow-hidden rounded-2xl bg-ink p-6 text-white sm:p-8 lg:col-span-8">
-            <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
-            <div class="relative flex items-center justify-between">
-              <p class="font-mono text-xs uppercase tracking-[0.2em] text-rose-400" x-text="L('live.now')"></p>
-              <span class="font-mono text-sm tabular text-slate-300" x-text="istanbulNow.time + ' TSİ'"></span>
+          <div data-reveal style="--d: 380ms">
+            <!-- Geri sayım -->
+            <div class="card count" x-show="phase === 'cfp'">
+              <div class="count-top">
+                <span x-text="L('countdown.label')"></span>
+                <span class="num" x-text="t(data.meta.startLabel)"></span>
+              </div>
+              <div class="units" role="timer" aria-live="off">
+                <template x-for="unit in countdownUnits" :key="unit.key">
+                  <div class="unit"><b x-text="unit.value"></b><span x-text="L(unit.key)"></span></div>
+                </template>
+              </div>
             </div>
-            <div class="relative mt-5 space-y-3">
+            <!-- Canlı -->
+            <div class="card count" x-show="phase === 'live'" x-cloak>
+              <div class="count-top"><span x-text="L('live.now')"></span><span class="num" x-text="istanbulNow.time"></span></div>
               <template x-for="(s, si) in liveNow" :key="'now-' + si">
-                <div class="rounded-xl border border-rose-500/40 bg-rose-500/10 p-4">
-                  <p class="font-mono text-xs tabular text-rose-300" x-text="s.start + '–' + s.end + (s.hall ? ' · ' + t(s.hall) : '')"></p>
-                  <p class="mt-1 font-display font-semibold" x-text="t(s.title)"></p>
-                </div>
+                <p style="margin: 14px 0 0; font-family: var(--serif); font-size: 1.6rem; line-height: 1.15; letter-spacing: -.015em" x-text="t(s.title)"></p>
               </template>
-              <p x-show="liveNow.length === 0" class="text-sm text-slate-400" x-text="L('live.nothingNow')"></p>
-              <template x-if="liveNext">
-                <div class="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                  <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400" x-text="L('live.next')"></p>
-                  <p class="mt-1 font-mono text-xs tabular text-slate-300" x-text="liveNext.start + '–' + liveNext.end + (liveNext.hall ? ' · ' + t(liveNext.hall) : '')"></p>
-                  <p class="mt-1 font-display font-semibold" x-text="t(liveNext.title)"></p>
-                </div>
-              </template>
+              <p x-show="liveNow.length === 0" style="margin: 14px 0 0; color: var(--ink-2)" x-text="L('live.nothingNow')"></p>
+              <p x-show="liveNext" style="margin: 14px 0 0; font-size: 14.5px; color: var(--ink-3)" x-text="liveNext ? L('live.next') + ' · ' + liveNext.start + ' · ' + t(liveNext.title) : ''"></p>
+            </div>
+            <!-- Arşiv -->
+            <div class="card count" x-show="phase === 'archive'" x-cloak>
+              <div class="count-top"><span x-text="L('archive.title')"></span></div>
+              <p style="margin: 12px 0 0; color: var(--ink-2)" x-text="L('archive.text')"></p>
             </div>
           </div>
-
-          <!-- Arşiv modu -->
-          <div x-show="phase === 'archive'" x-cloak class="relative overflow-hidden rounded-2xl bg-ink p-6 text-white sm:p-8 lg:col-span-8">
-            <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
-            <div class="relative">
-              <span class="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-400" x-html="icon('archive', 'h-5 w-5')"></span>
-              <h2 class="mt-4 font-display text-xl font-bold" x-text="L('archive.title')"></h2>
-              <p class="mt-2 max-w-xl text-sm leading-relaxed text-slate-400" x-text="L('archive.text')"></p>
-            </div>
-          </div>
-
-          <!-- Kısa bilgiler -->
-          <div class="grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 lg:col-span-4 lg:grid-cols-1">
-            <template x-for="fact in data.meta.facts" :key="fact.icon">
-              <div class="card flex items-start gap-3 p-4 sm:p-5">
-                <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-700" x-html="icon(fact.icon, 'h-4 w-4')"></span>
-                <div class="min-w-0">
-                  <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500" x-text="t(fact.label)"></p>
-                  <p class="mt-0.5 text-sm font-semibold text-ink" x-text="t(fact.value)"></p>
-                </div>
-              </div>
-            </template>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== HAKKINDA: KONU · AMAÇ · KAPSAM ============================== -->
-    <section id="about" class="relative py-20 sm:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div class="max-w-2xl">
-            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('about.eyebrow')"></span></span>
-            <h2 class="section-title mt-4" x-text="L('about.title')"></h2>
-          </div>
-          <p class="max-w-md text-slate-600" x-text="L('about.lead')"></p>
         </div>
 
-        <!-- Konu / Amaç / Kapsam -->
-        <div class="mt-12 grid gap-4 lg:grid-cols-12">
-          <article class="relative overflow-hidden rounded-2xl bg-ink p-8 text-white lg:col-span-7 lg:row-span-2">
-            <div class="pointer-events-none absolute inset-0 bg-dots-dark mask-fade-b" aria-hidden="true"></div>
-            <div class="relative">
-              <span class="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-400" x-html="icon('book-open', 'h-5 w-5')"></span>
-              <p class="mt-6 font-mono text-xs uppercase tracking-[0.18em] text-brand-400" x-text="L('about.subject')"></p>
-              <h3 class="mt-2 font-display text-2xl font-bold sm:text-3xl" x-text="t(data.about.subject.title)"></h3>
-              <div class="mt-4 space-y-4 text-slate-300">
-                <template x-for="(p, i) in data.about.subject.paragraphs" :key="i">
-                  <p class="leading-relaxed" x-text="t(p)"></p>
-                </template>
-              </div>
-            </div>
-          </article>
-          <template x-for="block in [data.about.purpose, data.about.scope]" :key="block.icon">
-            <article class="card p-6 sm:p-7 lg:col-span-5">
-              <div class="flex items-center gap-3">
-                <span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-brand-700" x-html="icon(block.icon, 'h-5 w-5')"></span>
-                <h3 class="font-display text-lg font-bold text-ink" x-text="t(block.title)"></h3>
-              </div>
-              <ul class="mt-4 space-y-2.5">
-                <template x-for="(item, ii) in block.items" :key="ii">
-                  <li class="flex gap-2.5 text-sm leading-relaxed text-slate-600">
-                    <span class="mt-0.5 shrink-0 text-brand-600" x-html="icon('check', 'h-4 w-4')"></span>
-                    <span x-text="t(item)"></span>
-                  </li>
-                </template>
-              </ul>
-            </article>
-          </template>
-        </div>
-
-        <!-- Hedef kitle / Yöntem / Çıktılar -->
-        <div class="mt-4 grid gap-4 md:grid-cols-3">
-          <template x-for="block in data.about.extras" :key="block.icon">
-            <article class="card p-6">
-              <span class="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-paper text-ink" x-html="icon(block.icon, 'h-5 w-5')"></span>
-              <h3 class="mt-5 font-display text-lg font-bold text-ink" x-text="t(block.title)"></h3>
-              <p class="mt-2 text-sm leading-relaxed text-slate-600" x-text="t(block.text)"></p>
-            </article>
+        <div class="list facts" data-reveal style="--d: 460ms">
+          <template x-for="fact in data.meta.facts" :key="fact.key">
+            <div class="fact"><span x-text="t(fact.label)"></span><p x-text="t(fact.value)"></p></div>
           </template>
         </div>
       </div>
     </section>
 
-    <!-- ============================== TEMALAR (Bento) ============================== -->
-    <section id="themes" class="border-y border-slate-200 bg-white py-20 sm:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div class="max-w-2xl">
-            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('themes.eyebrow')"></span></span>
-            <h2 class="section-title mt-4" x-text="L('themes.title')"></h2>
+    <!-- ============================== HAKKINDA ============================== -->
+    <section id="about" class="section">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <span class="eyebrow"><b>01</b><i></i><span x-text="L('about.eyebrow')"></span></span>
+            <h2 class="title" x-html="L('about.title')"></h2>
           </div>
-          <p class="max-w-md text-slate-600" x-text="L('themes.lead')"></p>
+          <p class="lead" data-reveal style="--d: 100ms" x-text="L('about.lead')"></p>
         </div>
-        <div class="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12">
+
+        <div class="about-grid">
+          <div class="rv" data-reveal>
+            <article class="card subject" style="height: 100%">
+              <div class="topo" aria-hidden="true"></div>
+              <p class="label" x-text="L('about.subject')"></p>
+              <h3 x-text="t(data.about.subject.title)"></h3>
+              <template x-for="(p, i) in data.about.subject.paragraphs" :key="i">
+                <p x-text="t(p)"></p>
+              </template>
+            </article>
+          </div>
+
+          <div class="rv" data-reveal style="--d: 120ms">
+            <article class="card tabs" style="height: 100%">
+              <div class="seg block" role="tablist" x-data="segmented()" x-effect="lang; aboutTab; $nextTick(() => update($el))">
+                <span class="thumb" :style="thumb" aria-hidden="true"></span>
+                <template x-for="tab in data.about.tabs" :key="tab.id">
+                  <button type="button" role="tab" :aria-selected="aboutTab === tab.id" @click="aboutTab = tab.id" x-text="t(tab.label)"></button>
+                </template>
+              </div>
+              <template x-for="tab in data.about.tabs" :key="'p-' + tab.id">
+                <div class="panel" role="tabpanel" x-show="aboutTab === tab.id"
+                     x-transition:enter="t-fade" x-transition:enter-start="t-up-from" x-transition:enter-end="t-to">
+                  <ul x-show="tab.items">
+                    <template x-for="(item, ii) in (tab.items || [])" :key="ii"><li x-text="t(item)"></li></template>
+                  </ul>
+                  <p x-show="tab.text" x-text="t(tab.text)"></p>
+                </div>
+              </template>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== TEMALAR ============================== -->
+    <section id="themes" class="section tint">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <span class="eyebrow"><b>02</b><i></i><span x-text="L('themes.eyebrow')"></span></span>
+            <h2 class="title" x-html="L('themes.title')"></h2>
+          </div>
+          <p class="lead" data-reveal style="--d: 100ms" x-text="L('themes.lead')"></p>
+        </div>
+
+        <div class="bento">
           <template x-for="(track, i) in data.tracks" :key="track.id">
-            <article class="card group relative flex flex-col p-6" :class="track.span">
-              <div class="flex items-start justify-between">
-                <span class="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-paper text-ink transition group-hover:border-brand-600 group-hover:bg-brand-600 group-hover:text-white" x-html="icon(track.icon, 'h-5 w-5')"></span>
-                <span class="font-mono text-xs tabular text-slate-400" x-text="'T' + String(i + 1).padStart(2, '0')"></span>
-              </div>
-              <h3 class="mt-5 font-display text-lg font-bold text-ink" :class="track.featured && 'sm:text-xl'" x-text="t(track.title)"></h3>
-              <p class="mt-2 text-sm leading-relaxed text-slate-600" x-text="t(track.desc)"></p>
-              <ul x-show="track.featured" class="mt-auto flex flex-wrap gap-2 pt-5">
-                <template x-for="kw in (t(track.keywords) || [])" :key="kw">
-                  <li class="chip" x-text="kw"></li>
-                </template>
-              </ul>
-            </article>
+            <div class="rv" data-reveal :style="'--d:' + (i * 70) + 'ms'" :class="track.span">
+              <article class="card lift theme" :class="{ feature: track.featured === 'accent' }">
+                <div class="topo" x-show="track.featured === 'accent'" aria-hidden="true"></div>
+                <span class="n num" x-text="String(i + 1).padStart(2, '0')"></span>
+                <h3 x-text="t(track.title)"></h3>
+                <p x-text="t(track.desc)"></p>
+                <div class="chips" x-show="track.keywords">
+                  <template x-for="kw in (t(track.keywords) || [])" :key="kw"><span class="chip" x-text="kw"></span></template>
+                </div>
+              </article>
+            </div>
           </template>
         </div>
       </div>
     </section>
 
-    <!-- ============================== ÖNEMLİ TARİHLER ============================== -->
-    <section id="dates" class="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
-      <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
-      <div class="relative mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
-        <div class="lg:col-span-4">
-          <div class="lg:sticky lg:top-28">
-            <span class="eyebrow text-brand-400"><span class="h-px w-6 bg-brand-400"></span><span x-text="L('dates.eyebrow')"></span></span>
-            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl" x-text="L('dates.title')"></h2>
-            <p class="mt-4 text-slate-400" x-text="L('dates.lead')"></p>
-            <div class="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-              <div class="flex items-center justify-between font-mono text-xs uppercase tracking-[0.16em] text-slate-400">
-                <span x-text="L('dates.progress')"></span>
-                <span class="tabular text-white" x-text="timelineDone + ' / ' + timeline.length"></span>
-              </div>
-              <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
-                <div class="h-full rounded-full bg-brand-500 transition-all duration-700" :style="'width:' + (timelineDone / timeline.length * 100) + '%'"></div>
-              </div>
+    <!-- ============================== TAKVİM ============================== -->
+    <section id="dates" class="section">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <span class="eyebrow"><b>03</b><i></i><span x-text="L('dates.eyebrow')"></span></span>
+            <h2 class="title" x-html="L('dates.title')"></h2>
+          </div>
+          <div data-reveal style="--d: 100ms">
+            <p class="lead" x-text="L('dates.lead')"></p>
+            <div class="progress">
+              <span class="num" x-text="timelineDone + ' / ' + timeline.length"></span>
+              <span class="bar"><i :style="'width:' + (timelineDone / timeline.length * 100) + '%'"></i></span>
             </div>
           </div>
         </div>
 
-        <ol class="relative lg:col-span-8">
-          <li class="absolute bottom-3 left-[15px] top-3 w-px bg-white/10" aria-hidden="true"></li>
-          <template x-for="(item, i) in timeline" :key="item.key">
-            <li class="relative pb-6 pl-12 last:pb-0">
-              <span class="absolute left-0 top-5 grid h-[31px] w-[31px] place-items-center rounded-full border"
-                    :class="{
-                      'border-white/15 bg-ink text-slate-500': item.status === 'done',
-                      'border-brand-500 bg-brand-600 text-white shadow-[0_0_0_6px_rgba(5,150,105,0.18)]': item.status === 'active',
-                      'border-white/20 bg-ink text-slate-300': item.status === 'upcoming'
-                    }">
-                <span x-show="item.status === 'done'" x-html="icon('check', 'h-3.5 w-3.5')"></span>
-                <span x-show="item.status === 'active'" class="relative flex h-2 w-2">
-                  <span class="ping-soft absolute inline-flex h-full w-full rounded-full bg-white"></span>
-                  <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
-                </span>
-                <span x-show="item.status === 'upcoming'" class="font-mono text-[10px] tabular" x-text="String(i + 1).padStart(2, '0')"></span>
-              </span>
-              <div class="rounded-2xl border p-5 transition duration-300 sm:p-6"
-                   :class="{
-                     'border-white/5 bg-white/[0.015] opacity-50 hover:opacity-80': item.status === 'done',
-                     'border-brand-500/60 bg-brand-500/[0.08] shadow-[0_0_40px_-12px_rgba(16,185,129,0.55)]': item.status === 'active',
-                     'border-white/10 bg-white/[0.03] hover:-translate-y-1 hover:border-brand-500': item.status === 'upcoming'
-                   }">
-                <div class="flex flex-wrap items-center justify-between gap-3">
-                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <del x-show="item.isExtended && item.oldDate" class="font-mono text-sm tabular text-slate-500 decoration-accent-500 decoration-2" x-text="item.oldDate ? formatDate(item.oldDate) : ''"></del>
-                    <time class="font-mono text-sm font-medium tabular" :class="item.status === 'active' ? 'text-brand-300' : 'text-slate-300'" :datetime="item.date || ''" x-text="item.date ? formatDate(item.date) : t(item.dateText)"></time>
-                    <span x-show="item.isExtended" class="inline-flex items-center gap-1 rounded-full bg-accent-500 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-ink">
-                      <span x-html="icon('calendar-clock', 'h-3 w-3')"></span><span x-text="L('dates.extended')"></span>
-                    </span>
-                  </div>
-                  <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]"
-                        :class="{
-                          'bg-white/5 text-slate-400': item.status === 'done',
-                          'bg-brand-500 text-ink': item.status === 'active',
-                          'border border-white/10 text-slate-400': item.status === 'upcoming'
-                        }"
-                        x-text="L('status.' + item.status)"></span>
-                </div>
-                <h3 class="mt-3 font-display text-lg font-bold text-white sm:text-xl" :class="item.status === 'done' && 'line-through decoration-white/30'" x-text="t(item.title)"></h3>
-                <p class="mt-1.5 text-sm leading-relaxed text-slate-400" x-text="t(item.desc)"></p>
-                <p x-show="item.status === 'active' && item.date" class="mt-4 inline-flex items-center gap-2 font-mono text-xs text-brand-300">
-                  <span x-html="icon('hourglass', 'h-3.5 w-3.5')"></span>
-                  <span class="tabular" x-text="item.daysLeft + ' ' + L('dates.daysLeft')"></span>
-                </p>
+        <div class="list" data-reveal style="--d: 160ms">
+          <template x-for="item in timeline" :key="item.key">
+            <div class="row" :class="{ done: item.status === 'done' }">
+              <span class="when" x-text="item.date ? formatDate(item.date) : t(item.dateText)"></span>
+              <div>
+                <h3 x-text="t(item.title)"></h3>
+                <p x-text="t(item.desc)"></p>
               </div>
-            </li>
+              <span class="pill" :class="{ next: item.status === 'active' }">
+                <span class="dot" :class="{ pulse: item.status === 'active' }" x-show="item.status === 'active'" aria-hidden="true"></span>
+                <span x-text="L('status.' + item.status)"></span>
+              </span>
+            </div>
           </template>
-        </ol>
+        </div>
       </div>
     </section>
 
     <!-- ============================== KURULLAR ============================== -->
-    <section id="committees" class="py-20 sm:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div class="max-w-2xl">
-            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('committees.eyebrow')"></span></span>
-            <h2 class="section-title mt-4" x-text="L('committees.title')"></h2>
+    <section id="committees" class="section tint">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <span class="eyebrow"><b>04</b><i></i><span x-text="L('committees.eyebrow')"></span></span>
+            <h2 class="title" x-html="L('committees.title')"></h2>
           </div>
-          <p class="max-w-md text-slate-600" x-text="L('committees.lead')"></p>
+          <p class="lead" data-reveal style="--d: 100ms" x-text="L('committees.lead')"></p>
         </div>
 
-        <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div class="no-scrollbar -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-            <div class="inline-flex gap-1 rounded-full border border-slate-200 bg-white p-1" role="tablist">
+        <div data-reveal style="--d: 140ms">
+          <div class="bar-top">
+            <div class="seg" role="tablist" x-data="segmented()" x-effect="lang; committeeTab; $nextTick(() => update($el))">
+              <span class="thumb" :style="thumb" aria-hidden="true"></span>
               <template x-for="tab in committeeTabs" :key="tab.id">
-                <button type="button" role="tab" @click="committeeTab = tab.id; search = ''" :aria-selected="committeeTab === tab.id"
-                        class="tab" :class="committeeTab === tab.id ? 'bg-ink text-white' : 'text-slate-600 hover:text-ink'">
+                <button type="button" role="tab" :aria-selected="committeeTab === tab.id" @click="committeeTab = tab.id; search = ''">
                   <span x-text="L(tab.key)"></span>
-                  <span x-show="data.committees[tab.id].length" class="ml-1 font-mono text-[10px] tabular opacity-60" x-text="data.committees[tab.id].length"></span>
+                  <span class="num" style="margin-left: 6px; opacity: .55" x-show="data.committees[tab.id].length" x-text="data.committees[tab.id].length"></span>
                 </button>
               </template>
             </div>
+            <label class="search" x-show="data.committees[committeeTab].length > 6" x-transition.opacity>
+              <span class="sr-only" x-text="L('committees.search')"></span>
+              <input type="search" x-model="search" :placeholder="L('committees.search')" />
+            </label>
           </div>
-          <div x-show="data.committees[committeeTab].length > 6" x-transition.opacity class="relative w-full sm:w-80">
-            <span class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" x-html="icon('search', 'h-4 w-4')"></span>
-            <input type="search" x-model="search" :placeholder="L('committees.search')" :aria-label="L('committees.search')" class="search-input" />
-          </div>
-        </div>
 
-        <!-- Üye listesi -->
-        <div x-show="committeeFiltered.length > 0" class="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" role="tabpanel">
-          <template x-for="m in committeeFiltered" :key="committeeTab + m.name">
-            <div class="card flex items-center gap-4 p-5">
-              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-slate-200 bg-paper font-display text-sm font-bold text-ink" x-text="initials(m.name)"></span>
-              <div class="min-w-0">
-                <p x-show="m.role" class="font-mono text-[10px] uppercase tracking-[0.14em] text-brand-700" x-text="t(m.role)"></p>
-                <p class="mt-0.5 font-display font-semibold text-ink"><span class="font-normal text-slate-500" x-text="m.title + ' '"></span><span x-text="m.name"></span></p>
-                <p class="text-sm text-slate-500" x-text="t(m.affiliation)"></p>
+          <div class="people" x-show="committeeFiltered.length > 0">
+            <template x-for="m in committeeFiltered" :key="committeeTab + m.name">
+              <div class="card person">
+                <span class="avatar" x-text="initials(m.name)"></span>
+                <div>
+                  <b><span style="color: var(--ink-3); font-weight: 400" x-text="m.title + ' '"></span><span x-text="m.name"></span></b>
+                  <small x-text="(m.role ? t(m.role) + ' · ' : '') + t(m.affiliation)"></small>
+                </div>
               </div>
-            </div>
-          </template>
-        </div>
+            </template>
+          </div>
 
-        <!-- Henüz ilan edilmedi -->
-        <div x-show="data.committees[committeeTab].length === 0" class="mt-8 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center sm:p-14">
-          <span class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-paper text-slate-400" x-html="icon('users', 'h-6 w-6')"></span>
-          <p class="mt-4 font-display text-lg font-semibold text-ink" x-text="L('committees.tbaTitle')"></p>
-          <p class="mx-auto mt-2 max-w-md text-sm text-slate-600" x-text="L('committees.tbaText')"></p>
-        </div>
-        <div x-show="data.committees[committeeTab].length > 0 && committeeFiltered.length === 0" x-cloak class="mt-8 rounded-2xl border border-dashed border-slate-300 p-10 text-center">
-          <p class="text-sm text-slate-600" x-text="L('committees.empty')"></p>
-          <button type="button" @click="search = ''" class="mt-3 text-sm font-semibold text-brand-700 hover:underline" x-text="L('common.clear')"></button>
+          <div class="card empty" x-show="data.committees[committeeTab].length === 0">
+            <div class="topo" aria-hidden="true"></div>
+            <h3 x-text="L('committees.tbaTitle')"></h3>
+            <p x-text="L('committees.tbaText')"></p>
+          </div>
+          <div class="card empty" x-show="data.committees[committeeTab].length > 0 && committeeFiltered.length === 0" x-cloak>
+            <p x-text="L('committees.empty')"></p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================== DAVETLİ KONUŞMACILAR ============================== -->
-    <section id="speakers" class="border-y border-slate-200 bg-white py-20 sm:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div class="max-w-2xl">
-            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('speakers.eyebrow')"></span></span>
-            <h2 class="section-title mt-4" x-text="L('speakers.title')"></h2>
+    <!-- ============================== KONUŞMACILAR ============================== -->
+    <section id="speakers" class="section">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <span class="eyebrow"><b>05</b><i></i><span x-text="L('speakers.eyebrow')"></span></span>
+            <h2 class="title" x-html="L('speakers.title')"></h2>
           </div>
-          <p class="max-w-md text-slate-600" x-text="L('speakers.lead')"></p>
+          <p class="lead" data-reveal style="--d: 100ms" x-text="L('speakers.lead')"></p>
         </div>
 
-        <div x-show="data.speakers.length > 0" class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          <template x-for="sp in data.speakers" :key="sp.name">
-            <article x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" @focusin="open = true" @focusout="open = false"
-                     class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-brand-600">
-              <div class="relative aspect-[3/4] overflow-hidden bg-ink">
-                <template x-if="sp.photo">
-                  <img :src="sp.photo" :alt="sp.name" loading="lazy" class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0" />
-                </template>
-                <template x-if="!sp.photo">
-                  <div class="absolute inset-0 grid place-items-center bg-dots-dark transition duration-500 group-hover:scale-105">
-                    <span class="font-display text-7xl font-extrabold tracking-tighter text-white/90" x-text="initials(sp.name)"></span>
-                  </div>
-                </template>
-                <div class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink via-ink/95 to-ink/80 p-5 text-white transition duration-500 ease-out" :class="open && 'translate-y-0'">
-                  <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-400" x-text="L('speakers.talk')"></p>
-                  <p class="mt-1 font-display text-sm font-semibold leading-snug" x-text="t(sp.talk)"></p>
-                  <p class="mt-3 text-xs leading-relaxed text-slate-300" x-text="t(sp.bio)"></p>
+        <div class="speakers">
+          <template x-for="(sp, i) in (data.speakers.length ? data.speakers : [{}, {}, {}, {}])" :key="'sp-' + i">
+            <div class="rv" data-reveal :style="'--d:' + (i * 80) + 'ms'">
+              <article class="card lift speaker">
+                <span class="n num" x-text="String(i + 1).padStart(2, '0')"></span>
+                <div>
+                  <b x-text="sp.name || L('speakers.tba')"></b>
+                  <small x-text="sp.name ? t(sp.affiliation) : L('speakers.tbaNote')"></small>
                 </div>
-              </div>
-              <div class="p-5">
-                <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate-500" x-text="t(sp.title)"></p>
-                <h3 class="mt-1 font-display text-lg font-bold text-ink" x-text="sp.name"></h3>
-                <p class="mt-1 text-sm text-slate-600" x-text="t(sp.affiliation)"></p>
-              </div>
-            </article>
-          </template>
-        </div>
-
-        <!-- Henüz ilan edilmedi -->
-        <div x-show="data.speakers.length === 0" class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <template x-for="n in 4" :key="'sp-tba-' + n">
-            <div class="flex aspect-[4/3] flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-paper p-6 text-center sm:aspect-[3/4]">
-              <span class="grid h-14 w-14 place-items-center rounded-full border border-slate-200 bg-white text-slate-400" x-html="icon('mic', 'h-6 w-6')"></span>
-              <p class="mt-4 font-display font-semibold text-ink" x-text="L('speakers.tba')"></p>
-              <p class="mt-1 text-xs text-slate-500" x-text="L('speakers.tbaNote')"></p>
+              </article>
             </div>
           </template>
         </div>
@@ -658,181 +826,161 @@
     </section>
 
     <!-- ============================== PROGRAM ============================== -->
-    <section id="program" class="relative py-20 sm:py-28">
-      <div class="pointer-events-none absolute inset-0 bg-dots opacity-60 mask-fade-b" aria-hidden="true"></div>
-      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div class="max-w-2xl">
-            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('program.eyebrow')"></span></span>
-            <h2 class="section-title mt-4" x-text="L('program.title')"></h2>
+    <section id="program" class="section tint">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <span class="eyebrow"><b>06</b><i></i><span x-text="L('program.eyebrow')"></span></span>
+            <h2 class="title" x-html="L('program.title')"></h2>
           </div>
-          <p class="max-w-md text-slate-600" x-text="L('program.lead')"></p>
+          <p class="lead" data-reveal style="--d: 100ms" x-text="L('program.lead')"></p>
         </div>
 
-        <div class="mt-10 grid grid-cols-2 gap-2 sm:inline-flex" role="tablist">
-          <template x-for="(day, i) in data.program" :key="day.date">
-            <button type="button" role="tab" @click="dayTab = i" :aria-selected="dayTab === i"
-                    class="flex flex-col items-start rounded-2xl border px-5 py-3 text-left transition"
-                    :class="dayTab === i ? 'border-ink bg-ink text-white' : 'border-slate-200 bg-white text-ink hover:border-brand-600'">
-              <span class="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em]" :class="dayTab === i ? 'text-brand-400' : 'text-slate-500'">
-                <span x-text="L('program.day') + ' ' + (i + 1)"></span>
-                <span x-show="phase === 'live' && liveDayIndex === i" class="rounded bg-rose-600 px-1 text-white" x-text="L('live.badge')"></span>
-              </span>
-              <span class="font-display text-sm font-semibold" x-text="formatDate(day.date, true)"></span>
-            </button>
-          </template>
-        </div>
+        <div data-reveal style="--d: 140ms">
+          <div class="bar-top">
+            <div class="seg" role="tablist" x-data="segmented()" x-effect="lang; dayTab; $nextTick(() => update($el))">
+              <span class="thumb" :style="thumb" aria-hidden="true"></span>
+              <template x-for="(day, i) in data.program" :key="day.date">
+                <button type="button" role="tab" :aria-selected="dayTab === i" @click="dayTab = i">
+                  <span x-text="L('program.day') + ' ' + (i + 1)"></span>
+                  <span style="opacity: .55; margin-left: 6px" x-text="formatDate(day.date, true)"></span>
+                </button>
+              </template>
+            </div>
+          </div>
 
-        <ol class="mt-8 space-y-3" role="tabpanel">
-          <template x-for="(s, i) in data.program[dayTab].sessions" :key="dayTab + '-' + i + '-' + s.start">
-            <li class="grid grid-cols-1 gap-2 sm:grid-cols-[120px_1fr] sm:gap-6">
-              <div class="flex items-center gap-2 pt-1 sm:flex-col sm:items-end sm:gap-0 sm:pt-5">
-                <span class="font-mono text-sm font-semibold tabular text-ink" x-text="s.start"></span>
-                <span class="font-mono text-xs tabular text-slate-400"><span class="sm:hidden">– </span><span x-text="s.end"></span></span>
-              </div>
-              <div class="rounded-2xl border p-5 transition duration-300 sm:p-6"
-                   :class="isLiveSession(s) ? 'border-rose-500 bg-white ring-4 ring-rose-500/10' : (s.type === 'break' ? 'border-dashed border-slate-200 bg-transparent' : 'border-slate-200 bg-white hover:-translate-y-1 hover:border-brand-600')">
-                <div class="flex flex-wrap items-center gap-2">
-                  <span x-show="isLiveSession(s)" class="inline-flex items-center gap-1.5 rounded-full bg-rose-600 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
-                    <span class="h-1.5 w-1.5 rounded-full bg-white"></span><span x-text="L('live.badge')"></span>
-                  </span>
-                  <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]" :class="typeStyle(s.type)">
-                    <span x-html="icon(typeIcon(s.type), 'h-3 w-3')"></span>
-                    <span x-text="L('type.' + s.type)"></span>
-                  </span>
-                  <span x-show="s.hall" class="inline-flex items-center gap-1 rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600">
-                    <span x-html="icon('map-pin', 'h-3 w-3')"></span>
-                    <span x-text="t(s.hall)"></span>
-                  </span>
+          <div class="list">
+            <template x-for="(s, i) in data.program[dayTab].sessions" :key="dayTab + '-' + i">
+              <div class="slot" :class="{ break: s.type === 'break', 'is-live': isLiveSession(s) }">
+                <span class="time" x-text="s.start + ' – ' + s.end"></span>
+                <div>
+                  <span class="type" :class="'t-' + s.type" x-show="s.type !== 'break'" x-text="isLiveSession(s) ? L('live.badge') + ' · ' + L('type.' + s.type) : L('type.' + s.type)"></span>
+                  <h3 x-text="t(s.title)"></h3>
+                  <p x-show="s.note" x-text="t(s.note)"></p>
                 </div>
-                <h3 class="mt-3 font-display font-bold" :class="s.type === 'break' ? 'text-base text-slate-500' : 'text-lg text-ink'" x-text="t(s.title)"></h3>
-                <p x-show="s.speaker" class="mt-1 text-sm text-slate-600" x-text="t(s.speaker)"></p>
-                <p x-show="s.note" class="mt-2 inline-flex items-center gap-1.5 rounded-full bg-paper px-2.5 py-1 text-xs text-slate-500">
-                  <span x-html="icon('clock', 'h-3 w-3')"></span><span x-text="t(s.note)"></span>
-                </p>
               </div>
-            </li>
-          </template>
-        </ol>
-        <p class="mt-8 flex items-center gap-2 text-xs text-slate-500">
-          <span class="shrink-0" x-html="icon('info', 'h-3.5 w-3.5')"></span>
-          <span x-text="L('program.note')"></span>
-        </p>
+            </template>
+          </div>
+          <p class="note" x-text="L('program.note')"></p>
+        </div>
       </div>
     </section>
 
     <!-- ============================== DUYURULAR ============================== -->
-    <section id="news" class="border-y border-slate-200 bg-white py-20 sm:py-28">
-      <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
-        <div class="lg:col-span-4">
-          <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('news.eyebrow')"></span></span>
-          <h2 class="section-title mt-4" x-text="L('news.title')"></h2>
-          <p class="mt-4 text-slate-600" x-text="L('news.lead')"></p>
+    <section id="news" class="section">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <span class="eyebrow"><b>07</b><i></i><span x-text="L('news.eyebrow')"></span></span>
+            <h2 class="title" x-html="L('news.title')"></h2>
+          </div>
+          <p class="lead" data-reveal style="--d: 100ms" x-text="L('news.lead')"></p>
         </div>
-        <ul class="space-y-3 lg:col-span-8">
+        <div class="list" data-reveal style="--d: 140ms">
           <template x-for="(n, ni) in data.news" :key="ni">
-            <li class="card flex flex-col gap-2 p-5 sm:flex-row sm:gap-6 sm:p-6">
-              <time class="w-36 shrink-0 font-mono text-xs font-semibold uppercase tracking-[0.12em] tabular text-brand-700" :datetime="n.date" x-text="formatDate(n.date)"></time>
+            <article class="row">
+              <time class="when" :datetime="n.date" x-text="formatDate(n.date)"></time>
               <div>
-                <p class="font-display font-semibold text-ink" x-text="t(n.title)"></p>
-                <p class="mt-1 text-sm leading-relaxed text-slate-600" x-text="t(n.text)"></p>
+                <h3 x-text="t(n.title)"></h3>
+                <p x-text="t(n.text)"></p>
               </div>
-            </li>
+              <span></span>
+            </article>
           </template>
-        </ul>
+        </div>
       </div>
     </section>
 
-    <!-- ============================== MEKÂN & ULAŞIM ============================== -->
-    <section id="venue" class="py-20 sm:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div class="max-w-2xl">
-            <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('venue.eyebrow')"></span></span>
-            <h2 class="section-title mt-4" x-text="t(data.venue.name)"></h2>
+    <!-- ============================== MEKÂN ============================== -->
+    <section id="venue" class="section tint">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <span class="eyebrow"><b>08</b><i></i><span x-text="L('venue.eyebrow')"></span></span>
+            <h2 class="title" x-html="L('venue.title')"></h2>
           </div>
-          <div class="max-w-md">
-            <p class="text-sm text-slate-600" x-text="t(data.venue.address)"></p>
-            <p class="mt-1 text-sm font-medium text-ink" x-text="t(data.venue.hallNote)"></p>
-          </div>
+          <p class="lead" data-reveal style="--d: 100ms" x-text="t(data.venue.address)"></p>
         </div>
 
-        <div class="mt-12 grid gap-4 lg:grid-cols-12">
-          <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white lg:col-span-7">
-            <iframe :src="data.venue.mapEmbed" :title="t(data.venue.name)" class="h-72 w-full lg:h-full lg:min-h-[420px]" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="venue-grid">
+          <div class="rv" data-reveal>
+            <div class="card map" style="height: 100%">
+              <iframe :src="data.venue.mapEmbed" :title="t(data.venue.name)" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </div>
-          <div class="grid gap-3 lg:col-span-5">
-            <template x-for="tr in data.venue.transport" :key="tr.icon">
-              <div class="card flex gap-4 p-5">
-                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700" x-html="icon(tr.icon, 'h-5 w-5')"></span>
-                <div>
-                  <p class="font-display font-semibold text-ink" x-text="t(tr.title)"></p>
-                  <p class="mt-1 text-sm leading-relaxed text-slate-600" x-text="t(tr.desc)"></p>
-                </div>
-              </div>
-            </template>
-            <a :href="data.venue.mapLink" target="_blank" rel="noopener" class="btn-ghost">
-              <span x-html="icon('navigation', 'h-4 w-4')"></span><span x-text="L('venue.directions')"></span>
+          <div class="stack rv" data-reveal style="--d: 120ms">
+            <div class="card info">
+              <b x-text="t(data.venue.name)"></b>
+              <p x-text="t(data.venue.address)"></p>
+              <small x-text="t(data.venue.hallNote)"></small>
+            </div>
+            <div class="list">
+              <template x-for="tr in data.venue.transport" :key="tr.key">
+                <div class="transit"><b x-text="t(tr.title)"></b><p x-text="t(tr.desc)"></p></div>
+              </template>
+            </div>
+            <a class="btn btn-ghost" :href="data.venue.mapLink" target="_blank" rel="noopener">
+              <span x-text="L('venue.directions')"></span><span class="ico" x-html="icon('external')"></span>
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================== DESTEK & BELGELER ============================== -->
-    <section id="support" class="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
-      <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
-      <div class="relative mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
-        <div class="lg:col-span-7">
-          <span class="eyebrow text-brand-400"><span class="h-px w-6 bg-brand-400"></span><span x-text="L('support.eyebrow')"></span></span>
-          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl" x-text="L('support.title')"></h2>
-          <p class="mt-4 max-w-2xl leading-relaxed text-slate-300" x-text="t(data.support.status)"></p>
-          <p class="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-slate-400" x-text="L('support.contrib')"></p>
-          <ul class="mt-4 grid gap-3 sm:grid-cols-2">
-            <template x-for="(c, ci) in data.support.contributions" :key="ci">
-              <li class="card-dark flex gap-3 p-5 text-sm leading-relaxed text-slate-300">
-                <span class="mt-0.5 shrink-0 text-brand-400" x-html="icon('check', 'h-4 w-4')"></span>
-                <span x-text="t(c)"></span>
-              </li>
-            </template>
-          </ul>
+    <!-- ============================== DESTEK ============================== -->
+    <section id="support" class="section">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <span class="eyebrow"><b>09</b><i></i><span x-text="L('support.eyebrow')"></span></span>
+            <h2 class="title" x-html="L('support.title')"></h2>
+          </div>
+          <p class="lead" data-reveal style="--d: 100ms" x-text="L('support.lead')"></p>
         </div>
-        <div class="flex flex-col gap-4 lg:col-span-5">
-          <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-400" x-text="L('support.docs')"></p>
-          <template x-for="d in data.downloads" :key="d.id">
-            <div class="flex items-center gap-4 rounded-2xl border border-white/10 bg-white p-5 text-ink">
-              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl" :class="d.tone" x-html="icon(d.icon, 'h-6 w-6')"></span>
-              <div class="min-w-0 flex-1">
-                <p class="font-display font-bold" x-text="t(d.title)"></p>
-                <p class="text-sm text-slate-500" x-text="t(d.desc)"></p>
-              </div>
-              <a x-show="d.href" :href="d.href || null" download class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
-                <span x-html="icon('download', 'h-4 w-4')"></span><span x-text="L('common.download')"></span>
-              </a>
-              <span x-show="!d.href" class="shrink-0 rounded-full border border-slate-200 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500" x-text="L('common.soon')"></span>
+
+        <div class="support">
+          <div class="rv" data-reveal>
+            <div class="card support-main" style="height: 100%">
+              <p x-text="t(data.support.status)"></p>
+              <p class="label" style="margin: 28px 0 0" x-text="L('support.contrib')"></p>
+              <ul>
+                <template x-for="(c, ci) in data.support.contributions" :key="ci"><li x-text="t(c)"></li></template>
+              </ul>
             </div>
-          </template>
+          </div>
+          <div class="rv" data-reveal style="--d: 120ms">
+            <div class="list">
+              <template x-for="d in data.downloads" :key="d.id">
+                <div class="doc">
+                  <div><b x-text="t(d.title)"></b><small x-text="t(d.desc)"></small></div>
+                  <a class="btn btn-ghost sm" x-show="d.href" :href="d.href || null" download x-text="L('common.download')"></a>
+                  <span class="pill" x-show="!d.href" x-text="L('common.soon')"></span>
+                </div>
+              </template>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ============================== SSS ============================== -->
-    <section id="faq" class="py-20 sm:py-28">
-      <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
-        <div class="lg:col-span-4">
-          <span class="eyebrow"><span class="h-px w-6 bg-brand-600"></span><span x-text="L('faq.eyebrow')"></span></span>
-          <h2 class="section-title mt-4" x-text="L('faq.title')"></h2>
+    <section id="faq" class="section tint">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <span class="eyebrow"><b>10</b><i></i><span x-text="L('faq.eyebrow')"></span></span>
+            <h2 class="title" x-html="L('faq.title')"></h2>
+          </div>
         </div>
-        <div class="space-y-3 lg:col-span-8">
+        <div class="list" data-reveal style="--d: 100ms">
           <template x-for="(f, i) in data.faq" :key="i">
-            <div class="rounded-2xl border bg-white transition" :class="openFaq === i ? 'border-brand-600' : 'border-slate-200 hover:border-slate-300'">
-              <button type="button" @click="openFaq = openFaq === i ? null : i" :aria-expanded="openFaq === i"
-                      class="flex w-full items-center justify-between gap-4 p-5 text-left sm:p-6">
-                <span class="font-display font-semibold text-ink" x-text="t(f.q)"></span>
-                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-slate-200 text-ink transition" :class="openFaq === i && 'rotate-45 border-brand-600 bg-brand-600 text-white'" x-html="icon('plus', 'h-4 w-4')"></span>
+            <div>
+              <button type="button" class="faq-q" @click="openFaq = openFaq === i ? null : i" :aria-expanded="openFaq === i">
+                <span x-text="t(f.q)"></span>
+                <span class="icon-btn" aria-hidden="true"><span class="ico" x-html="icon('plus')"></span></span>
               </button>
-              <div x-show="openFaq === i" x-collapse.duration.250ms x-cloak>
-                <p class="px-5 pb-6 text-sm leading-relaxed text-slate-600 sm:px-6" x-text="t(f.a)"></p>
+              <div x-show="openFaq === i" x-collapse.duration.400ms x-cloak>
+                <p class="faq-a" x-text="t(f.a)"></p>
               </div>
             </div>
           </template>
@@ -841,131 +989,98 @@
     </section>
   </main>
 
-  <!-- ============================== FOOTER ============================== -->
-  <footer id="contact" class="relative overflow-hidden bg-ink text-slate-400">
-    <div class="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true"></div>
-    <div class="relative mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8">
-      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
-        <!-- Kimlik -->
-        <div class="lg:col-span-5">
-          <div class="flex items-center gap-3">
-            <span class="grid h-10 w-10 place-items-center rounded-lg bg-white font-display text-[10px] font-extrabold tracking-tight text-ink" x-text="data.meta.monogram"></span>
-            <div>
-              <p class="font-display font-bold text-white" x-text="data.meta.acronym"></p>
-              <p class="text-xs text-slate-500" x-text="t(data.meta.dateRange)"></p>
-            </div>
-          </div>
-          <p class="mt-5 max-w-sm text-sm leading-relaxed text-slate-300" x-text="data.meta.officialName"></p>
-          <p class="mt-1 max-w-sm text-sm leading-relaxed text-slate-500" x-text="data.meta.trName"></p>
+  <!-- ============================== ALT BİLGİ ============================== -->
+  <footer class="footer" id="contact">
+    <div class="topo" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="footer-mark" data-reveal>
+        <span x-text="data.meta.titleA"></span>
+        <em x-text="data.meta.titleB"></em><span x-text="data.meta.titleC"></span>
+      </p>
+      <div class="footer-cols">
+        <div>
+          <h4 x-text="L('footer.organizer')"></h4>
+          <p x-text="t(data.organizer.university)"></p>
+          <p x-text="t(data.organizer.faculty)"></p>
+          <p x-text="t(data.organizer.department)"></p>
         </div>
-
-        <!-- Düzenleyen -->
-        <div class="lg:col-span-4">
-          <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500" x-text="L('footer.organizer')"></p>
-          <p class="mt-4 font-display font-semibold text-white" x-text="t(data.organizer.university)"></p>
-          <p class="mt-1 text-sm" x-text="t(data.organizer.faculty)"></p>
-          <p class="text-sm" x-text="t(data.organizer.department)"></p>
-          <div class="mt-5 space-y-2.5 text-sm">
-            <a x-show="data.contact.email" :href="'mailto:' + data.contact.email" class="flex items-center gap-2.5 text-white hover:text-brand-400">
-              <span x-html="icon('mail', 'h-4 w-4')"></span><span x-text="data.contact.email"></span>
-            </a>
-            <p x-show="!data.contact.email" class="flex items-center gap-2.5">
-              <span x-html="icon('mail', 'h-4 w-4')"></span><span x-text="L('footer.contactSoon')"></span>
-            </p>
-            <a href="#venue" class="flex items-center gap-2.5 hover:text-white">
-              <span x-html="icon('map-pin', 'h-4 w-4')"></span><span x-text="t(data.venue.short)"></span>
-            </a>
-          </div>
+        <div>
+          <h4 x-text="L('footer.event')"></h4>
+          <p class="num" x-text="t(data.meta.dateRange)"></p>
+          <p x-text="t(data.venue.short)"></p>
+          <a x-show="data.contact.email" :href="'mailto:' + data.contact.email" x-text="data.contact.email"></a>
+          <p x-show="!data.contact.email" x-text="L('footer.contactSoon')"></p>
         </div>
-
-        <!-- Bağlantılar -->
-        <div class="lg:col-span-3">
-          <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500" x-text="L('footer.quick')"></p>
-          <ul class="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm lg:grid-cols-1">
+        <div>
+          <h4 x-text="L('footer.quick')"></h4>
+          <div class="footer-links">
             <template x-for="link in primaryNav.concat(secondaryNav)" :key="'f-' + link.id">
-              <li><a :href="'#' + link.id" class="hover:text-white" x-text="L(link.key)"></a></li>
+              <a :href="'#' + link.id" x-text="L(link.key)"></a>
             </template>
-          </ul>
+          </div>
         </div>
       </div>
-
-      <div class="mt-14 flex flex-col gap-3 border-t border-white/10 py-8 text-xs sm:flex-row sm:items-center sm:justify-between">
-        <p>© <span class="font-mono tabular">2026</span> <span x-text="t(data.organizer.university) + ' · ' + t(data.organizer.department)"></span></p>
-        <a href="#top" class="inline-flex items-center gap-1.5 hover:text-white">
-          <span x-text="L('footer.top')"></span>
-          <span x-html="icon('arrow-up', 'h-3.5 w-3.5')"></span>
-        </a>
+      <div class="footer-bottom">
+        <span>© 2026 <span x-text="t(data.organizer.university) + ' · ' + t(data.organizer.department)"></span></span>
+        <a href="#top" class="icon-btn" :aria-label="L('footer.top')"><span class="ico" x-html="icon('up')"></span></a>
       </div>
     </div>
   </footer>
 
-  <!-- ============================== BAŞVURU MODALI ============================== -->
-  <div x-show="applyOpen" x-cloak class="fixed inset-0 z-[60] flex items-end justify-center sm:items-center sm:p-6"
-       role="dialog" aria-modal="true" aria-labelledby="apply-title" @keydown.escape.window="applyOpen = false">
-    <div x-show="applyOpen" x-transition.opacity class="absolute inset-0 bg-ink/60 backdrop-blur-sm" @click="applyOpen = false"></div>
-    <div x-show="applyOpen" x-transition x-effect="applyOpen && $nextTick(() => $refs.applyClose.focus())"
-         class="relative w-full max-w-lg overflow-hidden rounded-t-2xl bg-white sm:rounded-2xl">
-      <div class="p-6 sm:p-8">
-        <div class="flex items-start justify-between gap-4">
-          <span class="grid h-12 w-12 place-items-center rounded-2xl bg-accent-50 text-accent-700" x-html="icon('calendar-clock', 'h-6 w-6')"></span>
-          <button type="button" x-ref="applyClose" @click="applyOpen = false" class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-slate-200 text-ink hover:border-ink" :aria-label="L('a11y.close')">
-            <span x-html="icon('x', 'h-4 w-4')"></span>
-          </button>
-        </div>
-        <h2 id="apply-title" class="mt-5 font-display text-2xl font-bold text-ink" x-text="L('apply.title')"></h2>
-        <p class="mt-3 text-sm leading-relaxed text-slate-600" x-text="L('apply.text')"></p>
-        <div class="mt-6 flex flex-col gap-2 sm:flex-row">
-          <a href="#news" @click="applyOpen = false" class="btn-primary">
-            <span x-html="icon('megaphone', 'h-4 w-4')"></span><span x-text="L('apply.news')"></span>
-          </a>
-          <button type="button" @click="applyOpen = false" class="btn-ghost" x-text="L('a11y.close')"></button>
-        </div>
+  <!-- ============================== BAŞVURU PENCERESİ ============================== -->
+  <div class="modal" x-show="applyOpen" x-cloak role="dialog" aria-modal="true" aria-labelledby="apply-title" @keydown.escape.window="applyOpen = false">
+    <div class="backdrop" x-show="applyOpen" @click="applyOpen = false"
+         x-transition:enter="t-fade" x-transition:enter-start="t-from" x-transition:enter-end="t-to"
+         x-transition:leave="t-fade" x-transition:leave-start="t-to" x-transition:leave-end="t-from"></div>
+    <div class="dialog" x-show="applyOpen" x-effect="applyOpen && $nextTick(() => $refs.applyClose.focus())"
+         x-transition:enter="t-fade" x-transition:enter-start="t-up-from" x-transition:enter-end="t-to"
+         x-transition:leave="t-fade" x-transition:leave-start="t-to" x-transition:leave-end="t-up-from">
+      <div class="grabber" aria-hidden="true"></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px">
+        <span class="pill next"><span class="dot" aria-hidden="true"></span><span x-text="L('apply.badge')"></span></span>
+        <button type="button" class="icon-btn" x-ref="applyClose" @click="applyOpen = false" :aria-label="L('a11y.close')">
+          <span class="ico" x-html="icon('close')"></span>
+        </button>
+      </div>
+      <h2 id="apply-title" style="margin-top: 22px" x-text="L('apply.title')"></h2>
+      <p x-text="L('apply.text')"></p>
+      <div class="actions">
+        <a href="#news" class="btn btn-primary" @click="applyOpen = false"><span x-text="L('apply.news')"></span><span class="ico" x-html="icon('arrow')"></span></a>
+        <button type="button" class="btn btn-ghost" @click="applyOpen = false" x-text="L('a11y.close')"></button>
       </div>
     </div>
   </div>
 
   <!-- =====================================================================
-       MERKEZİ VERİ — Tüm dinamik içerik buradan gelir.
-       Metinler { tr: "...", en: "..." } biçimindedir.
+       MERKEZİ VERİ — Tüm içerik buradan gelir. Metinler { tr, en } biçimindedir.
        ===================================================================== -->
   <script>
     const symposiumData = {
       meta: {
-        acronym: "ECEP 2027",
-        monogram: "ECEP",
-        logo: "", // Logo/broşür teması gelince: "assets/img/logo.svg"
         officialName: "Workshop on Environment, Clean Energy, and Economic Policy",
         trName: "Çevre, Temiz Enerji ve Ekonomi Politikası Çalıştayı",
-        kicker: { tr: "Bilimsel Çalıştay · 18–19 Ocak 2027", en: "Scientific Workshop · 18–19 January 2027" },
-        titleLead: "Workshop on Environment,",
-        titleAccent: "Clean Energy, and Economic Policy",
-        altTitle: { tr: "Çevre, Temiz Enerji ve Ekonomi Politikası Çalıştayı", en: "Yildiz Technical University · Department of Economics" },
+        kicker: "Workshop on",
+        // Başlık üç parçalı: A + B (italik vurgu) + C
+        titleA: "Environment,",
+        titleB: "Clean Energy,",
+        titleC: " and Economic Policy",
+        organizerLine: { tr: "YTÜ İİBF İktisat Bölümü", en: "Yildiz Technical University · Department of Economics" },
         tagline: {
           tr: "Çevre, enerji ve iktisat alanlarında çalışan akademisyenleri, araştırmacıları ve lisansüstü öğrencileri; temiz enerji dönüşümünün ekonomik boyutlarını ve politika seçeneklerini tartışmak üzere bir araya getiriyoruz.",
           en: "Bringing together academics, researchers and graduate students working on environment, energy and economics to discuss the economic dimensions of the clean energy transition and the policy options it requires."
         },
         dateRange: { tr: "18–19 Ocak 2027", en: "18–19 January 2027" },
-        shortDate: { tr: "18–19.01.2027 · İstanbul", en: "18–19.01.2027 · Istanbul" },
-        city: { tr: "YTÜ Davutpaşa Kampüsü, İstanbul", en: "YTU Davutpaşa Campus, Istanbul" },
-        organizerShort: { tr: "YTÜ İİBF · İktisat Bölümü", en: "YTU · Department of Economics" },
+        startLabel: { tr: "18 Ocak 2027 · 09:00", en: "18 January 2027 · 09:00" },
+        city: { tr: "YTÜ Davutpaşa, İstanbul", en: "YTU Davutpaşa, Istanbul" },
         // Faz: öncesi = cfp, arası = live, sonrası = archive. Önizleme: ?phase=live | ?phase=archive
         startDate: "2027-01-18T09:00:00+03:00",
         endDate: "2027-01-19T17:00:00+03:00",
         phaseOverride: "",
-        countdownTarget: "2027-01-18T09:00:00+03:00",
         facts: [
-          { icon: "map-pin", label: { tr: "Yer", en: "Venue" }, value: { tr: "Yıldız Teknik Üniversitesi Davutpaşa Kampüsü", en: "Yildiz Technical University, Davutpaşa Campus" } },
-          { icon: "calendar-days", label: { tr: "Tarih", en: "Dates" }, value: { tr: "18–19 Ocak 2027 · Pazartesi–Salı", en: "18–19 January 2027 · Mon–Tue" } },
-          { icon: "landmark", label: { tr: "Düzenleyen", en: "Organizer" }, value: { tr: "YTÜ İİBF İktisat Bölümü", en: "YTU Department of Economics" } }
+          { key: "date", label: { tr: "Tarih", en: "Dates" }, value: { tr: "18–19 Ocak 2027, Pazartesi–Salı", en: "18–19 January 2027, Monday–Tuesday" } },
+          { key: "venue", label: { tr: "Yer", en: "Venue" }, value: { tr: "Yıldız Teknik Üniversitesi Davutpaşa Kampüsü", en: "Yildiz Technical University, Davutpaşa Campus" } },
+          { key: "org", label: { tr: "Düzenleyen", en: "Organizer" }, value: { tr: "YTÜ İİBF İktisat Bölümü", en: "YTU Department of Economics" } }
         ]
-      },
-
-      // Üst duyuru şeridi. Yeni duyuruda "id"yi değiştirin.
-      announcement: {
-        active: true,
-        id: "2026-10-site-launch",
-        text: { tr: "Çalıştay tarihleri belirlendi: 18–19 Ocak 2027, YTÜ Davutpaşa Kampüsü.", en: "Workshop dates set: 18–19 January 2027, YTU Davutpaşa Campus." },
-        href: "#news"
       },
 
       organizer: {
@@ -977,58 +1092,53 @@
       // TASLAK METİN — düzenleme kurulunca gözden geçirilmeli (TÜBİTAK 2223-B 4.1.7: konu, amaç, kapsam)
       about: {
         subject: {
-          title: { tr: "Çevre, temiz enerji ve ekonomi politikası", en: "Environment, clean energy and economic policy" },
+          title: { tr: "Temiz enerji dönüşümünün iktisadi boyutları", en: "The economics of the clean energy transition" },
           paragraphs: [
             {
               tr: "İklim değişikliği ve enerji arz güvenliği, ekonomi politikasının gündeminde giderek daha merkezi bir yer tutmaktadır. Temiz enerjiye geçiş; büyüme, istihdam, dış ticaret, kamu maliyesi ve bölgesel kalkınma üzerinde kapsamlı ekonomik sonuçlar doğurmaktadır.",
               en: "Climate change and energy security occupy an increasingly central place on the economic policy agenda. The transition to clean energy has wide-ranging consequences for growth, employment, trade, public finance and regional development."
             },
             {
-              tr: "Çalıştay, bu dönüşümün iktisadi boyutlarını ampirik bulgular ve politika tasarımı ekseninde ele alarak akademi, kamu ve uygulayıcılar arasında bilgi paylaşımını güçlendirmeyi hedeflemektedir.",
-              en: "The workshop examines the economic dimensions of this transition through empirical evidence and policy design, strengthening knowledge exchange among academia, the public sector and practitioners."
+              tr: "Çalıştay, bu dönüşümü ampirik bulgular ve politika tasarımı ekseninde ele alarak akademi, kamu ve uygulayıcılar arasında bilgi paylaşımını güçlendirmeyi hedeflemektedir.",
+              en: "The workshop examines this transition through empirical evidence and policy design, strengthening knowledge exchange among academia, the public sector and practitioners."
             }
           ]
         },
-        purpose: {
-          icon: "target",
-          title: { tr: "Amaç", en: "Purpose" },
-          items: [
-            { tr: "Çevre ve enerji ekonomisi alanındaki güncel araştırmaları ve yöntemleri tartışmaya açmak.", en: "Open current research and methods in environmental and energy economics to discussion." },
-            { tr: "Temiz enerji dönüşümüne yönelik politika seçeneklerini ekonomik etkileriyle birlikte değerlendirmek.", en: "Assess policy options for the clean energy transition together with their economic impacts." },
-            { tr: "Farklı üniversitelerden araştırmacılar arasında iş birliği zemini oluşturmak.", en: "Build a basis for collaboration among researchers from different universities." },
-            { tr: "Lisansüstü öğrencileri ve genç araştırmacıları alanın güncel gündemiyle buluşturmak.", en: "Connect graduate students and early-career researchers with the field's current agenda." }
-          ]
-        },
-        scope: {
-          icon: "layers",
-          title: { tr: "Kapsam", en: "Scope" },
-          items: [
-            { tr: "İki gün süren yüz yüze bilimsel çalıştay.", en: "A two-day, in-person scientific workshop." },
-            { tr: "Davetli konuşmalar, tematik oturumlar ve yuvarlak masa tartışması.", en: "Invited talks, thematic sessions and a round-table discussion." },
-            { tr: "Çevre ekonomisi, enerji piyasaları, karbon fiyatlaması, yeşil finans, enerji-makroekonomi ilişkisi ve adil dönüşüm temaları.", en: "Themes: environmental economics, energy markets, carbon pricing, green finance, energy and the macroeconomy, and just transition." },
-            { tr: "Tartışmaların özetlendiği bir sonuç raporu ile kapanış.", en: "Concludes with an outcome report summarising the discussions." }
-          ]
-        },
-        extras: [
+        tabs: [
           {
-            icon: "users",
-            title: { tr: "Hedef Kitle", en: "Target Audience" },
+            id: "purpose", label: { tr: "Amaç", en: "Purpose" },
+            items: [
+              { tr: "Çevre ve enerji ekonomisi alanındaki güncel araştırmaları ve yöntemleri tartışmaya açmak.", en: "Open current research and methods in environmental and energy economics to discussion." },
+              { tr: "Temiz enerji dönüşümüne yönelik politika seçeneklerini ekonomik etkileriyle birlikte değerlendirmek.", en: "Assess policy options for the clean energy transition together with their economic impacts." },
+              { tr: "Farklı üniversitelerden araştırmacılar arasında iş birliği zemini oluşturmak.", en: "Build a basis for collaboration among researchers from different universities." },
+              { tr: "Lisansüstü öğrencileri ve genç araştırmacıları alanın güncel gündemiyle buluşturmak.", en: "Connect graduate students and early-career researchers with the field's current agenda." }
+            ]
+          },
+          {
+            id: "scope", label: { tr: "Kapsam", en: "Scope" },
+            items: [
+              { tr: "İki gün süren yüz yüze bilimsel çalıştay.", en: "A two-day, in-person scientific workshop." },
+              { tr: "Davetli konuşmalar, tematik oturumlar ve yuvarlak masa tartışması.", en: "Invited talks, thematic sessions and a round-table discussion." },
+              { tr: "Çevre ekonomisi, enerji piyasaları, karbon fiyatlaması, yeşil finans, enerji ve makroekonomi ile adil dönüşüm temaları.", en: "Environmental economics, energy markets, carbon pricing, green finance, energy and the macroeconomy, and just transition." },
+              { tr: "Tartışmaların derlendiği bir sonuç raporu ile kapanış.", en: "Concludes with an outcome report compiling the discussions." }
+            ]
+          },
+          {
+            id: "audience", label: { tr: "Hedef kitle", en: "Audience" },
             text: {
               tr: "İktisat, enerji, çevre ve kamu politikası alanlarında çalışan akademisyenler, araştırmacılar ve lisansüstü öğrenciler ile konuyla ilgili kamu kurumu temsilcileri.",
               en: "Academics, researchers and graduate students in economics, energy, environment and public policy, together with representatives of relevant public institutions."
             }
           },
           {
-            icon: "presentation",
-            title: { tr: "Çalışma Yöntemi", en: "Format" },
+            id: "format", label: { tr: "Yöntem", en: "Format" },
             text: {
               tr: "Oturumlar, düzenleme ve bilim kurulunun belirlediği temalar etrafında davetli sunumlar ve moderatörlü tartışmalar biçiminde yürütülecektir. Ayrıntılar program kesinleştiğinde duyurulacaktır.",
               en: "Sessions will consist of invited presentations and moderated discussions around themes set by the organizing and scientific committees. Details will be announced once the programme is finalised."
             }
           },
           {
-            icon: "file-check",
-            title: { tr: "Beklenen Çıktılar", en: "Expected Outcomes" },
+            id: "outcomes", label: { tr: "Çıktılar", en: "Outcomes" },
             text: {
               tr: "Tartışmaların ve politika önerilerinin derlendiği sonuç raporu bu sitede herkese açık olarak yayımlanacaktır.",
               en: "An outcome report compiling the discussions and policy recommendations will be published openly on this website."
@@ -1037,119 +1147,85 @@
         ]
       },
 
-      // Ana temalar (TASLAK — düzenleme kurulunca gözden geçirilmeli)
+      // Ana temalar (TASLAK). featured: "accent" → yosun yeşili vurgulu kart
       tracks: [
         {
-          id: "env-econ", icon: "leaf", featured: true, span: "sm:col-span-2 lg:col-span-7",
-          title: { tr: "Çevre Ekonomisi ve İklim Politikaları", en: "Environmental Economics & Climate Policy" },
-          desc: {
-            tr: "Çevresel dışsallıklar, iklim politikalarının ekonomik etkileri ve emisyon azaltım hedeflerine yönelik politika araçları.",
-            en: "Environmental externalities, economic effects of climate policy and policy instruments for emission-reduction targets."
-          },
-          keywords: { tr: ["Dışsallıklar", "İklim politikası", "Emisyon azaltımı", "Politika araçları"], en: ["Externalities", "Climate policy", "Emission reduction", "Policy instruments"] }
+          id: "env-econ", featured: "accent", span: "b-7",
+          title: { tr: "Çevre ekonomisi ve iklim politikaları", en: "Environmental economics and climate policy" },
+          desc: { tr: "Çevresel dışsallıklar, iklim politikalarının ekonomik etkileri ve emisyon azaltım hedeflerine yönelik politika araçları.", en: "Environmental externalities, economic effects of climate policy and instruments for emission-reduction targets." },
+          keywords: { tr: ["Dışsallıklar", "İklim politikası", "Emisyon azaltımı"], en: ["Externalities", "Climate policy", "Emission reduction"] }
         },
         {
-          id: "energy", icon: "zap", span: "lg:col-span-5",
-          title: { tr: "Temiz Enerji Dönüşümü ve Enerji Piyasaları", en: "Clean Energy Transition & Energy Markets" },
+          id: "energy", span: "b-5",
+          title: { tr: "Temiz enerji dönüşümü ve enerji piyasaları", en: "Clean energy transition and energy markets" },
           desc: { tr: "Yenilenebilir enerji yatırımları, elektrik piyasaları, enerji fiyatları ve arz güvenliği.", en: "Renewable investment, electricity markets, energy prices and security of supply." }
         },
         {
-          id: "carbon", icon: "factory", span: "lg:col-span-4",
-          title: { tr: "Karbon Fiyatlaması ve Emisyon Ticareti", en: "Carbon Pricing & Emissions Trading" },
-          desc: { tr: "Karbon vergileri, emisyon ticaret sistemleri ve sınırda karbon düzenlemesinin dış ticarete etkileri.", en: "Carbon taxes, emissions trading systems and the trade effects of border carbon adjustment." }
+          id: "carbon", span: "b-4",
+          title: { tr: "Karbon fiyatlaması ve emisyon ticareti", en: "Carbon pricing and emissions trading" },
+          desc: { tr: "Karbon vergileri, emisyon ticaret sistemleri ve sınırda karbon düzenlemesinin dış ticarete etkileri.", en: "Carbon taxes, emissions trading and the trade effects of border carbon adjustment." }
         },
         {
-          id: "finance", icon: "landmark", span: "lg:col-span-4",
-          title: { tr: "Yeşil Finans ve Sürdürülebilir Yatırım", en: "Green Finance & Sustainable Investment" },
+          id: "finance", span: "b-4",
+          title: { tr: "Yeşil finans ve sürdürülebilir yatırım", en: "Green finance and sustainable investment" },
           desc: { tr: "Yeşil tahviller, iklim riskinin finansal sisteme yansımaları ve dönüşümün finansmanı.", en: "Green bonds, climate risk in the financial system and financing the transition." }
         },
         {
-          id: "macro", icon: "trending-up", span: "lg:col-span-4",
-          title: { tr: "Enerji ve Makroekonomi", en: "Energy & the Macroeconomy" },
+          id: "macro", span: "b-4",
+          title: { tr: "Enerji ve makroekonomi", en: "Energy and the macroeconomy" },
           desc: { tr: "Enerji şoklarının enflasyon, büyüme ve cari denge üzerindeki etkileri.", en: "Effects of energy shocks on inflation, growth and the current account." }
         },
         {
-          id: "just", icon: "scale", featured: true, span: "sm:col-span-2 lg:col-span-12",
-          title: { tr: "Adil Dönüşüm, İstihdam ve Bölgesel Kalkınma", en: "Just Transition, Employment & Regional Development" },
-          desc: {
-            tr: "Dönüşümün işgücü piyasası, gelir dağılımı ve bölgeler üzerindeki etkileri; kapsayıcı politika tasarımı ve ampirik değerlendirme yöntemleri.",
-            en: "Labour-market, distributional and regional effects of the transition; inclusive policy design and empirical evaluation methods."
-          },
+          id: "just", span: "b-12",
+          title: { tr: "Adil dönüşüm, istihdam ve bölgesel kalkınma", en: "Just transition, employment and regional development" },
+          desc: { tr: "Dönüşümün işgücü piyasası, gelir dağılımı ve bölgeler üzerindeki etkileri; kapsayıcı politika tasarımı ve ampirik değerlendirme yöntemleri.", en: "Labour-market, distributional and regional effects of the transition; inclusive policy design and empirical evaluation methods." },
           keywords: { tr: ["İstihdam", "Gelir dağılımı", "Bölgesel etkiler", "Ampirik yöntemler"], en: ["Employment", "Distribution", "Regional effects", "Empirical methods"] }
         }
       ],
 
-      // date boşsa "dateText" gösterilir (ör. "Duyurulacak"). "key" alanları benzersiz olmalı.
+      // date boşsa "dateText" gösterilir. Tarihli bir madde geçince öncekiler de tamamlanmış sayılır.
       importantDates: [
-        {
-          key: "site", date: "2026-10-23T12:00:00+03:00",
-          title: { tr: "Çalıştay Web Sitesinin Yayına Alınması", en: "Workshop Website Launched" },
-          desc: { tr: "Konu, amaç, kapsam, tarih ve yer bilgileri yayımlandı.", en: "Subject, purpose, scope, dates and venue published." }
-        },
-        {
-          key: "committees", date: "", dateText: { tr: "Duyurulacak", en: "To be announced" },
-          title: { tr: "Kurulların İlanı", en: "Committees Announced" },
-          desc: { tr: "Düzenleme ve bilim kurulu üyelerinin yayımlanması.", en: "Publication of organizing and scientific committee members." }
-        },
-        {
-          key: "apply", date: "", dateText: { tr: "Duyurulacak", en: "To be announced" },
-          title: { tr: "Katılım Başvurularının Açılması", en: "Participation Applications Open" },
-          desc: { tr: "Başvuru koşulları ve tarihleri Duyurular bölümünde ilan edilecektir.", en: "Application conditions and dates will be posted under News." }
-        },
-        {
-          key: "program", date: "", dateText: { tr: "Duyurulacak", en: "To be announced" },
-          title: { tr: "Programın İlanı", en: "Programme Release" },
-          desc: { tr: "Davetli konuşmacılar ve oturum ayrıntılarının yayımlanması.", en: "Publication of invited speakers and session details." }
-        },
-        {
-          key: "event", date: "2027-01-18T09:00:00+03:00",
-          title: { tr: "Çalıştay", en: "Workshop" },
-          desc: { tr: "18–19 Ocak 2027 · Yıldız Teknik Üniversitesi Davutpaşa Kampüsü, İstanbul.", en: "18–19 January 2027 · Yildiz Technical University, Davutpaşa Campus, Istanbul." }
-        },
-        {
-          key: "report", date: "", dateText: { tr: "Çalıştay sonrası", en: "After the workshop" },
-          title: { tr: "Sonuç Raporunun Yayımlanması", en: "Outcome Report Published" },
-          desc: { tr: "Çalıştay çıktılarının bu sitede herkese açık olarak paylaşılması.", en: "Workshop outcomes shared openly on this website." }
-        }
+        { key: "site", date: "2026-10-23T12:00:00+03:00", title: { tr: "Web sitesinin yayına alınması", en: "Website launched" }, desc: { tr: "Konu, amaç, kapsam, tarih ve yer bilgileri yayımlandı.", en: "Subject, purpose, scope, dates and venue published." } },
+        { key: "committees", date: "", dateText: { tr: "Duyurulacak", en: "To be announced" }, title: { tr: "Kurulların ilanı", en: "Committees announced" }, desc: { tr: "Düzenleme ve bilim kurulu üyelerinin yayımlanması.", en: "Publication of organizing and scientific committee members." } },
+        { key: "apply", date: "", dateText: { tr: "Duyurulacak", en: "To be announced" }, title: { tr: "Katılım başvurularının açılması", en: "Participation applications open" }, desc: { tr: "Başvuru koşulları ve tarihleri Duyurular bölümünde ilan edilecektir.", en: "Conditions and dates will be posted under News." } },
+        { key: "program", date: "", dateText: { tr: "Duyurulacak", en: "To be announced" }, title: { tr: "Programın ilanı", en: "Programme release" }, desc: { tr: "Davetli konuşmacılar ve oturum ayrıntılarının yayımlanması.", en: "Invited speakers and session details published." } },
+        { key: "event", date: "2027-01-18T09:00:00+03:00", title: { tr: "Çalıştay", en: "Workshop" }, desc: { tr: "18–19 Ocak 2027 · YTÜ Davutpaşa Kampüsü, İstanbul.", en: "18–19 January 2027 · YTU Davutpaşa Campus, Istanbul." } },
+        { key: "report", date: "", dateText: { tr: "Çalıştay sonrası", en: "After the workshop" }, title: { tr: "Sonuç raporunun yayımlanması", en: "Outcome report published" }, desc: { tr: "Çalıştay çıktılarının bu sitede herkese açık paylaşılması.", en: "Workshop outcomes shared openly on this website." } }
       ],
 
-      // Üye eklemek için: { title: "Prof. Dr.", name: "Ad Soyad", role: { tr: "Başkan", en: "Chair" }, affiliation: { tr: "Yıldız Teknik Üniversitesi", en: "Yildiz Technical University" } }
+      // Üye: { title: "Prof. Dr.", name: "Ad Soyad", role: { tr: "Başkan", en: "Chair" }, affiliation: { tr: "Yıldız Teknik Üniversitesi", en: "Yildiz Technical University" } }
       // TÜBİTAK 2223-B 4.1.10: düzenleme kurulu EN AZ 3 FARKLI üniversiteden olmalı.
-      committees: {
-        organizing: [],
-        scientific: []
-      },
+      committees: { organizing: [], scientific: [] },
 
-      // Boşsa "Belirlenecek" kartları gösterilir.
-      // { name: "Ad Soyad", title:{tr,en}, affiliation:{tr,en}, talk:{tr,en}, bio:{tr,en}, photo:"" }
+      // Boşsa 4 "Belirlenecek" kartı gösterilir. { name, affiliation: { tr, en } }
       speakers: [],
 
-      // TASLAK program iskeleti — oturum içerikleri sonradan açıklanacak
+      // TASLAK program iskeleti
       program: [
         {
           date: "2027-01-18",
           sessions: [
-            { start: "09:00", end: "09:30", type: "registration", title: { tr: "Kayıt ve Karşılama", en: "Registration & Welcome" } },
-            { start: "09:30", end: "10:00", type: "ceremony", title: { tr: "Açılış Konuşmaları", en: "Opening Remarks" } },
-            { start: "10:00", end: "10:45", type: "keynote", title: { tr: "Davetli Konuşma I", en: "Invited Talk I" }, note: { tr: "Konuşmacı daha sonra açıklanacak", en: "Speaker to be announced" } },
-            { start: "10:45", end: "11:00", type: "break", title: { tr: "Kahve Arası", en: "Coffee Break" } },
-            { start: "11:00", end: "12:30", type: "session", title: { tr: "Oturum 1 · Çevre Ekonomisi ve İklim Politikaları", en: "Session 1 · Environmental Economics & Climate Policy" }, note: { tr: "Sunumlar belirlenecek", en: "Presentations to be announced" } },
-            { start: "12:30", end: "13:30", type: "break", title: { tr: "Öğle Arası", en: "Lunch Break" } },
-            { start: "13:30", end: "15:00", type: "session", title: { tr: "Oturum 2 · Temiz Enerji Dönüşümü ve Enerji Piyasaları", en: "Session 2 · Clean Energy Transition & Energy Markets" }, note: { tr: "Sunumlar belirlenecek", en: "Presentations to be announced" } },
-            { start: "15:00", end: "15:15", type: "break", title: { tr: "Kahve Arası", en: "Coffee Break" } },
-            { start: "15:15", end: "16:45", type: "session", title: { tr: "Oturum 3 · Karbon Fiyatlaması ve Yeşil Finans", en: "Session 3 · Carbon Pricing & Green Finance" }, note: { tr: "Sunumlar belirlenecek", en: "Presentations to be announced" } }
+            { start: "09:00", end: "09:30", type: "registration", title: { tr: "Kayıt ve karşılama", en: "Registration and welcome" } },
+            { start: "09:30", end: "10:00", type: "ceremony", title: { tr: "Açılış konuşmaları", en: "Opening remarks" } },
+            { start: "10:00", end: "10:45", type: "keynote", title: { tr: "Davetli konuşma I", en: "Invited talk I" }, note: { tr: "Konuşmacı daha sonra açıklanacak", en: "Speaker to be announced" } },
+            { start: "10:45", end: "11:00", type: "break", title: { tr: "Kahve arası", en: "Coffee break" } },
+            { start: "11:00", end: "12:30", type: "session", title: { tr: "Çevre ekonomisi ve iklim politikaları", en: "Environmental economics and climate policy" }, note: { tr: "Sunumlar belirlenecek", en: "Presentations to be announced" } },
+            { start: "12:30", end: "13:30", type: "break", title: { tr: "Öğle arası", en: "Lunch break" } },
+            { start: "13:30", end: "15:00", type: "session", title: { tr: "Temiz enerji dönüşümü ve enerji piyasaları", en: "Clean energy transition and energy markets" }, note: { tr: "Sunumlar belirlenecek", en: "Presentations to be announced" } },
+            { start: "15:00", end: "15:15", type: "break", title: { tr: "Kahve arası", en: "Coffee break" } },
+            { start: "15:15", end: "16:45", type: "session", title: { tr: "Karbon fiyatlaması ve yeşil finans", en: "Carbon pricing and green finance" }, note: { tr: "Sunumlar belirlenecek", en: "Presentations to be announced" } }
           ]
         },
         {
           date: "2027-01-19",
           sessions: [
-            { start: "09:30", end: "10:15", type: "keynote", title: { tr: "Davetli Konuşma II", en: "Invited Talk II" }, note: { tr: "Konuşmacı daha sonra açıklanacak", en: "Speaker to be announced" } },
-            { start: "10:15", end: "11:45", type: "session", title: { tr: "Oturum 4 · Enerji ve Makroekonomi", en: "Session 4 · Energy & the Macroeconomy" }, note: { tr: "Sunumlar belirlenecek", en: "Presentations to be announced" } },
-            { start: "11:45", end: "13:00", type: "break", title: { tr: "Öğle Arası", en: "Lunch Break" } },
-            { start: "13:00", end: "14:30", type: "session", title: { tr: "Oturum 5 · Adil Dönüşüm, İstihdam ve Bölgesel Kalkınma", en: "Session 5 · Just Transition, Employment & Regional Development" }, note: { tr: "Sunumlar belirlenecek", en: "Presentations to be announced" } },
-            { start: "14:30", end: "14:45", type: "break", title: { tr: "Kahve Arası", en: "Coffee Break" } },
-            { start: "14:45", end: "16:15", type: "panel", title: { tr: "Yuvarlak Masa · Temiz Enerji Dönüşümünde Politika Öncelikleri", en: "Round Table · Policy Priorities in the Clean Energy Transition" }, note: { tr: "Katılımcılar belirlenecek", en: "Participants to be announced" } },
-            { start: "16:15", end: "17:00", type: "ceremony", title: { tr: "Değerlendirme ve Kapanış", en: "Wrap-up & Closing" } }
+            { start: "09:30", end: "10:15", type: "keynote", title: { tr: "Davetli konuşma II", en: "Invited talk II" }, note: { tr: "Konuşmacı daha sonra açıklanacak", en: "Speaker to be announced" } },
+            { start: "10:15", end: "11:45", type: "session", title: { tr: "Enerji ve makroekonomi", en: "Energy and the macroeconomy" }, note: { tr: "Sunumlar belirlenecek", en: "Presentations to be announced" } },
+            { start: "11:45", end: "13:00", type: "break", title: { tr: "Öğle arası", en: "Lunch break" } },
+            { start: "13:00", end: "14:30", type: "session", title: { tr: "Adil dönüşüm, istihdam ve bölgesel kalkınma", en: "Just transition, employment and regional development" }, note: { tr: "Sunumlar belirlenecek", en: "Presentations to be announced" } },
+            { start: "14:30", end: "14:45", type: "break", title: { tr: "Kahve arası", en: "Coffee break" } },
+            { start: "14:45", end: "16:15", type: "panel", title: { tr: "Temiz enerji dönüşümünde politika öncelikleri", en: "Policy priorities in the clean energy transition" }, note: { tr: "Katılımcılar belirlenecek", en: "Participants to be announced" } },
+            { start: "16:15", end: "17:00", type: "ceremony", title: { tr: "Değerlendirme ve kapanış", en: "Wrap-up and closing" } }
           ]
         }
       ],
@@ -1174,13 +1250,13 @@
         mapEmbed: "https://www.openstreetmap.org/export/embed.html?bbox=28.8836%2C41.0186%2C28.9046%2C41.0316&layer=mapnik&marker=41.025615%2C28.89368",
         mapLink: "https://www.openstreetmap.org/?mlat=41.025615&mlon=28.89368#map=16/41.025615/28.89368",
         transport: [
-          { icon: "train-front", title: { tr: "Metro (M1A)", en: "Metro (M1A)" }, desc: { tr: "M1A Yenikapı–Atatürk Havalimanı hattında Davutpaşa–YTÜ istasyonu; kampüse yürüme mesafesinde.", en: "Davutpaşa–YTÜ station on the M1A Yenikapı–Atatürk Airport line, within walking distance of the campus." } },
-          { icon: "tram-front", title: { tr: "Marmaray ve Yenikapı Aktarması", en: "Marmaray via Yenikapı" }, desc: { tr: "Marmaray veya M2 ile Yenikapı'ya gelip M1A hattına aktarma yaparak Davutpaşa–YTÜ istasyonunda inin.", en: "Take Marmaray or M2 to Yenikapı, transfer to M1A and get off at Davutpaşa–YTÜ." } },
-          { icon: "bus", title: { tr: "Otogar ve Metrobüs", en: "Bus Terminal & Metrobus" }, desc: { tr: "Esenler Otogarı'ndan M1A ile bir durak. Metrobüs kullananlar Cevizlibağ'da M1A hattına aktarma yapabilir.", en: "One stop on M1A from Esenler Bus Terminal. Metrobus users can transfer to M1A at Cevizlibağ." } }
+          { key: "m1a", title: { tr: "Metro · M1A", en: "Metro · M1A" }, desc: { tr: "Yenikapı–Atatürk Havalimanı hattında Davutpaşa–YTÜ istasyonu; kampüse yürüme mesafesinde.", en: "Davutpaşa–YTÜ station on the Yenikapı–Atatürk Airport line, within walking distance of campus." } },
+          { key: "marmaray", title: { tr: "Marmaray · Yenikapı aktarması", en: "Marmaray · via Yenikapı" }, desc: { tr: "Marmaray veya M2 ile Yenikapı'ya gelip M1A hattına aktarma yapın.", en: "Take Marmaray or M2 to Yenikapı and transfer to M1A." } },
+          { key: "bus", title: { tr: "Otogar ve metrobüs", en: "Bus terminal and Metrobus" }, desc: { tr: "Esenler Otogarı'ndan M1A ile bir durak; metrobüs kullananlar Cevizlibağ'da M1A'ya aktarma yapabilir.", en: "One stop on M1A from Esenler Bus Terminal; Metrobus users can transfer at Cevizlibağ." } }
         ]
       },
 
-      // TÜBİTAK: destek kararı gelince "status" metnini güncelleyin ve TÜBİTAK logosunu kurumsal standartlara uygun ekleyin (çağrı md. 8.5).
+      // TÜBİTAK: destek kararı gelince "status" metnini güncelleyin ve logoyu kurumsal standartlara uygun ekleyin (çağrı md. 8.5).
       support: {
         status: {
           tr: "Bu çalıştayın düzenlenmesi için TÜBİTAK 2223-B Yurt İçi Bilimsel Etkinlik Düzenleme Desteği Programı'na başvurulmuştur. Destek sağlanması hâlinde tüm duyuru ve yayınlarda TÜBİTAK desteği belirtilecektir.",
@@ -1194,172 +1270,190 @@
         ]
       },
 
-      // href boşsa "Yakında" rozeti gösterilir. Dosyaları assets/docs/ altına koyup yolu yazın.
+      // href boşsa "Yakında" gösterilir. Dosyaları assets/docs/ altına koyup yolu yazın.
       downloads: [
-        { id: "brochure", href: "", icon: "file-image", tone: "bg-accent-50 text-accent-700", title: { tr: "Çalıştay Broşürü", en: "Workshop Brochure" }, desc: { tr: "Tanıtım broşürü (PDF)", en: "Promotional brochure (PDF)" } },
-        { id: "program", href: "", icon: "file-text", tone: "bg-brand-50 text-brand-700", title: { tr: "Program Kitapçığı", en: "Programme Booklet" }, desc: { tr: "Ayrıntılı program (PDF)", en: "Detailed programme (PDF)" } }
+        { id: "brochure", href: "", title: { tr: "Çalıştay broşürü", en: "Workshop brochure" }, desc: { tr: "Tanıtım broşürü · PDF", en: "Promotional brochure · PDF" } },
+        { id: "program", href: "", title: { tr: "Program kitapçığı", en: "Programme booklet" }, desc: { tr: "Ayrıntılı program · PDF", en: "Detailed programme · PDF" } }
       ],
 
       faq: [
-        {
-          q: { tr: "Çalıştaya kimler katılabilir?", en: "Who can attend?" },
-          a: { tr: "Çalıştay; iktisat, enerji, çevre ve kamu politikası alanlarında çalışan akademisyenlere, araştırmacılara ve lisansüstü öğrencilere yöneliktir. Katılım koşulları Duyurular bölümünde ilan edilecektir.", en: "The workshop is aimed at academics, researchers and graduate students working in economics, energy, environment and public policy. Participation conditions will be posted under News." }
-        },
-        {
-          q: { tr: "Katılım başvuruları ne zaman başlayacak?", en: "When do applications open?" },
-          a: { tr: "Katılım başvuruları henüz başlamamıştır. Başvuru tarihleri ve yöntemi bu sayfada duyurulacaktır.", en: "Applications have not opened yet. Dates and procedure will be announced on this page." }
-        },
-        {
-          q: { tr: "Çalıştay hangi dilde yapılacak?", en: "What is the working language?" },
-          a: { tr: "Oturum dilleri program ile birlikte duyurulacaktır.", en: "Session languages will be announced with the programme." }
-        },
-        {
-          q: { tr: "Çalıştay sonunda bir yayın olacak mı?", en: "Will there be a publication?" },
-          a: { tr: "Tartışmaların ve önerilerin derlendiği sonuç raporu bu sitede herkese açık olarak yayımlanacaktır.", en: "An outcome report compiling the discussions and recommendations will be published openly on this website." }
-        }
+        { q: { tr: "Çalıştaya kimler katılabilir?", en: "Who can attend?" }, a: { tr: "Çalıştay; iktisat, enerji, çevre ve kamu politikası alanlarında çalışan akademisyenlere, araştırmacılara ve lisansüstü öğrencilere yöneliktir. Katılım koşulları Duyurular bölümünde ilan edilecektir.", en: "The workshop is aimed at academics, researchers and graduate students in economics, energy, environment and public policy. Participation conditions will be posted under News." } },
+        { q: { tr: "Katılım başvuruları ne zaman başlayacak?", en: "When do applications open?" }, a: { tr: "Katılım başvuruları henüz başlamamıştır. Başvuru tarihleri ve yöntemi bu sayfada duyurulacaktır.", en: "Applications have not opened yet. Dates and procedure will be announced on this page." } },
+        { q: { tr: "Çalıştay hangi dilde yapılacak?", en: "What is the working language?" }, a: { tr: "Oturum dilleri program ile birlikte duyurulacaktır.", en: "Session languages will be announced with the programme." } },
+        { q: { tr: "Çalıştay sonunda bir yayın olacak mı?", en: "Will there be a publication?" }, a: { tr: "Tartışmaların ve önerilerin derlendiği sonuç raporu bu sitede herkese açık olarak yayımlanacaktır.", en: "An outcome report compiling the discussions and recommendations will be published openly on this website." } }
       ],
 
-      // Çalıştay sonrası (arşiv) — rapor PDF'i hazır olunca "report" yolunu girin
+      // Çalıştay sonrası — rapor PDF'i hazır olunca "report" yolunu girin
       archive: {
         report: "",
-        thanks: {
-          tr: "Çalıştaya katkı sunan tüm konuşmacı ve katılımcılara teşekkür ederiz. Sonuç raporu bu sayfada yayımlanacaktır.",
-          en: "Thank you to all speakers and participants. The outcome report will be published on this page."
-        }
+        thanks: { tr: "Çalıştaya katkı sunan tüm konuşmacı ve katılımcılara teşekkür ederiz. Sonuç raporu bu sayfada yayımlanacaktır.", en: "Thank you to all speakers and participants. The outcome report will be published on this page." }
       },
 
-      contact: {
-        email: "" // İletişim e-postası belli olunca girin
-      }
+      contact: { email: "" } // İletişim e-postası belli olunca girin
+    };
+
+    // Hugeicons (stroke rounded, ücretsiz set) — yalnızca arayüz araçlarında kullanılır
+    const ICONS = {
+      menu: '<path d="M4 5L20 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path d="M4 12L20 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path d="M4 19L20 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>',
+      close: '<path d="M18 6L6.00081 17.9992M17.9992 18L6 6.00085" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>',
+      sun: '<path d="M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z" stroke="currentColor" stroke-width="1.5"/><path d="M12 2V3.5M12 20.5V22M19.0708 19.0713L18.0101 18.0106M5.98926 5.98926L4.9286 4.9286M22 12H20.5M3.5 12H2M19.0713 4.92871L18.0106 5.98937M5.98975 18.0107L4.92909 19.0714" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"/>',
+      moon: '<path d="M21.5 14.0784C20.3003 14.7189 18.9301 15.0821 17.4751 15.0821C12.7491 15.0821 8.91792 11.2509 8.91792 6.52485C8.91792 5.06986 9.28105 3.69968 9.92163 2.5C5.66765 3.49698 2.5 7.31513 2.5 11.8731C2.5 17.1899 6.8101 21.5 12.1269 21.5C16.6849 21.5 20.503 18.3324 21.5 14.0784Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>',
+      external: '<path d="M9 6.65032C9 6.65032 15.9383 6.10759 16.9154 7.08463C17.8924 8.06167 17.3496 15 17.3496 15M16.5 7.5L6.5 17.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>',
+      plus: '<path d="M12.001 5.00003V19.002" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path d="M19.002 12.002L4.99998 12.002" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>',
+      up: '<path d="M12 5.5V19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path d="M18 11C18 11 13.5811 5.00001 12 5C10.4188 4.99999 6 11 6 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>',
+      arrow: '<path d="M18.5 12L4.99997 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>'
     };
 
     // ---------------------------------------------------------------------
-    // Arayüz metinleri (statik etiketler)
+    // Arayüz metinleri
     // ---------------------------------------------------------------------
     const uiText = {
       tr: {
-        'a11y.skip': 'İçeriğe geç', 'a11y.close': 'Kapat', 'a11y.menu': 'Menü',
-        'common.clear': 'Aramayı temizle', 'common.download': 'İndir', 'common.soon': 'Yakında',
-        'nav.about': 'Hakkında', 'nav.themes': 'Temalar', 'nav.dates': 'Tarihler', 'nav.committees': 'Kurullar',
+        'a11y.close': 'Kapat', 'a11y.menu': 'Menü', 'a11y.theme': 'Açık / koyu tema',
+        'common.download': 'İndir', 'common.soon': 'Yakında',
+        'nav.about': 'Hakkında', 'nav.themes': 'Temalar', 'nav.dates': 'Takvim', 'nav.committees': 'Kurullar',
         'nav.program': 'Program', 'nav.venue': 'Mekân', 'nav.speakers': 'Konuşmacılar', 'nav.news': 'Duyurular',
-        'nav.support': 'Destek & Belgeler', 'nav.faq': 'SSS', 'nav.more': 'Daha Fazla',
-        'cta.apply': 'Katılım Başvurusu', 'cta.about': 'Çalıştay Hakkında', 'cta.live': 'Canlı Program',
-        'countdown.label': 'Geri Sayım', 'countdown.note': 'Çalıştayın başlamasına kalan süre',
-        'cd.days': 'Gün', 'cd.hours': 'Saat', 'cd.minutes': 'Dakika', 'cd.seconds': 'Saniye',
-        'live.badge': 'Canlı', 'live.dayProgram': 'Çalıştay Başladı · Gün {n} Programını Gör',
+        'nav.support': 'Destek', 'nav.faq': 'SSS',
+        'cta.apply': 'Katılım başvurusu', 'cta.about': 'Çalıştay hakkında',
+        'countdown.label': 'Çalıştaya kalan süre',
+        'cd.days': 'gün', 'cd.hours': 'saat', 'cd.minutes': 'dakika', 'cd.seconds': 'saniye',
+        'live.badge': 'Şu an devam ediyor', 'live.dayProgram': 'Gün {n} programı',
         'live.now': 'Şu an', 'live.next': 'Sıradaki', 'live.nothingNow': 'Şu anda devam eden bir oturum yok.',
-        'archive.badge': 'Tamamlandı', 'archive.report': 'Sonuç Raporunu İndir', 'archive.title': 'Çalıştay tamamlandı',
+        'archive.report': 'Sonuç raporunu indir', 'archive.title': 'Çalıştay tamamlandı',
         'archive.text': 'Sonuç raporu ve çalıştay çıktıları bu sayfada yayımlanacaktır.',
-        'about.eyebrow': 'Konu · Amaç · Kapsam', 'about.title': 'Çalıştay hakkında',
-        'about.lead': 'Temiz enerji dönüşümünün iktisadi boyutlarını bilimsel bir zeminde tartışmak için iki günlük bir buluşma.',
+        'about.eyebrow': 'Konu, amaç ve kapsam', 'about.title': 'Dönüşümün <em>iktisadını</em> birlikte düşünmek',
+        'about.lead': 'İki gün boyunca temiz enerji dönüşümünün ekonomik sonuçlarını bilimsel bir zeminde tartışacağız.',
         'about.subject': 'Konu',
-        'themes.eyebrow': 'Ana Temalar', 'themes.title': 'Tartışılacak başlıklar',
-        'themes.lead': 'Oturumlar aşağıdaki ana temalar etrafında yapılandırılacaktır.',
-        'dates.eyebrow': 'Önemli Tarihler', 'dates.title': 'Çalıştay takvimi',
+        'themes.eyebrow': 'Ana temalar', 'themes.title': 'Tartışmaya açılacak <em>başlıklar</em>',
+        'themes.lead': 'Oturumlar bu altı tema etrafında kurgulanacaktır.',
+        'dates.eyebrow': 'Takvim', 'dates.title': 'Önemli <em>tarihler</em>',
         'dates.lead': 'Kesinleşen tarihler bu takvimde ve Duyurular bölümünde ilan edilecektir.',
-        'dates.progress': 'İlerleme', 'dates.daysLeft': 'gün kaldı', 'dates.extended': 'Uzatıldı!',
         'status.done': 'Tamamlandı', 'status.active': 'Sıradaki', 'status.upcoming': 'Planlanan',
-        'committees.eyebrow': 'Kurullar', 'committees.title': 'Düzenleme ve bilim kurulu',
+        'committees.eyebrow': 'Kurullar', 'committees.title': 'Düzenleme ve <em>bilim</em> kurulu',
         'committees.lead': 'Çalıştay, farklı üniversitelerden bilim insanlarının yer aldığı kurullar tarafından yürütülmektedir.',
-        'committees.organizing': 'Düzenleme Kurulu', 'committees.scientific': 'Bilim Kurulu',
-        'committees.search': 'İsim veya kurum ara…', 'committees.empty': 'Aramanızla eşleşen üye bulunamadı.',
-        'committees.tbaTitle': 'Kurul üyeleri yakında ilan edilecektir',
+        'committees.organizing': 'Düzenleme kurulu', 'committees.scientific': 'Bilim kurulu',
+        'committees.search': 'İsim veya kurum ara', 'committees.empty': 'Aramanızla eşleşen üye bulunamadı.',
+        'committees.tbaTitle': 'Kurul üyeleri yakında ilan edilecek',
         'committees.tbaText': 'Üye listesi kesinleştiğinde bu bölümde yayımlanacaktır.',
-        'speakers.eyebrow': 'Davetli Konuşmacılar', 'speakers.title': 'Davetli konuşmacılar',
+        'speakers.eyebrow': 'Davetli konuşmacılar', 'speakers.title': 'Davetli <em>konuşmacılar</em>',
         'speakers.lead': 'Alanında uzman davetli konuşmacılar program kesinleştiğinde duyurulacaktır.',
-        'speakers.talk': 'Konuşma', 'speakers.tba': 'Belirlenecek', 'speakers.tbaNote': 'Daha sonra açıklanacak',
-        'program.eyebrow': 'Taslak Program', 'program.title': 'İki günlük akış',
-        'program.lead': 'Aşağıdaki akış taslaktır; konuşmacılar, sunumlar ve salon bilgisi daha sonra açıklanacaktır.',
+        'speakers.tba': 'Belirlenecek', 'speakers.tbaNote': 'Daha sonra açıklanacak',
+        'program.eyebrow': 'Taslak program', 'program.title': 'İki günlük <em>akış</em>',
+        'program.lead': 'Akış taslaktır; konuşmacılar, sunumlar ve salon bilgisi daha sonra açıklanacaktır.',
         'program.day': 'Gün', 'program.note': 'Program taslak niteliğindedir; güncellemeler Duyurular bölümünde paylaşılacaktır.',
-        'type.keynote': 'Davetli Konuşma', 'type.session': 'Oturum', 'type.panel': 'Yuvarlak Masa', 'type.break': 'Ara',
-        'type.ceremony': 'Açılış / Kapanış', 'type.registration': 'Kayıt', 'type.workshop': 'Grup Çalışması',
-        'news.eyebrow': 'Duyurular', 'news.title': 'Güncel duyurular', 'news.lead': 'Çalıştayla ilgili tüm duyurular bu bölümde yayımlanır.',
-        'venue.eyebrow': 'Mekân & Ulaşım', 'venue.directions': 'Yol tarifi al',
-        'support.eyebrow': 'Destek & Belgeler', 'support.title': 'Destek ve çalıştay belgeleri',
-        'support.contrib': 'Talep edilen desteğin çalıştaya katkısı', 'support.docs': 'Belgeler',
-        'faq.eyebrow': 'SSS', 'faq.title': 'Sıkça sorulan sorular',
-        'apply.title': 'Başvurular henüz başlamadı',
+        'type.keynote': 'Davetli konuşma', 'type.session': 'Oturum', 'type.panel': 'Yuvarlak masa', 'type.break': 'Ara',
+        'type.ceremony': 'Açılış / kapanış', 'type.registration': 'Kayıt', 'type.workshop': 'Grup çalışması',
+        'news.eyebrow': 'Duyurular', 'news.title': 'Güncel <em>duyurular</em>', 'news.lead': 'Çalıştayla ilgili tüm duyurular bu bölümde yayımlanır.',
+        'venue.eyebrow': 'Mekân ve ulaşım', 'venue.title': 'Davutpaşa <em>Kampüsü</em>', 'venue.directions': 'Yol tarifi al',
+        'support.eyebrow': 'Destek', 'support.title': 'Destek ve <em>belgeler</em>',
+        'support.lead': 'Çalıştayın desteklenmesine ilişkin bilgiler ve indirilebilir belgeler.',
+        'support.contrib': 'Talep edilen desteğin çalıştaya katkısı',
+        'faq.eyebrow': 'Sıkça sorulanlar', 'faq.title': 'Merak <em>edilenler</em>',
+        'apply.badge': 'Henüz açılmadı', 'apply.title': 'Başvurular henüz başlamadı',
         'apply.text': 'Çalıştaya katılım başvuruları henüz açılmamıştır. Başvuru koşulları ve tarihleri kesinleştiğinde bu sayfanın Duyurular bölümünde ilan edilecektir.',
         'apply.news': 'Duyurulara git',
-        'footer.organizer': 'Düzenleyen', 'footer.quick': 'Bağlantılar', 'footer.contactSoon': 'İletişim adresi yakında eklenecek', 'footer.top': 'Başa dön'
+        'footer.organizer': 'Düzenleyen', 'footer.event': 'Çalıştay', 'footer.quick': 'Bölümler',
+        'footer.contactSoon': 'İletişim adresi yakında eklenecek', 'footer.top': 'Başa dön'
       },
       en: {
-        'a11y.skip': 'Skip to content', 'a11y.close': 'Close', 'a11y.menu': 'Menu',
-        'common.clear': 'Clear search', 'common.download': 'Download', 'common.soon': 'Soon',
-        'nav.about': 'About', 'nav.themes': 'Themes', 'nav.dates': 'Dates', 'nav.committees': 'Committees',
+        'a11y.close': 'Close', 'a11y.menu': 'Menu', 'a11y.theme': 'Light / dark theme',
+        'common.download': 'Download', 'common.soon': 'Soon',
+        'nav.about': 'About', 'nav.themes': 'Themes', 'nav.dates': 'Timeline', 'nav.committees': 'Committees',
         'nav.program': 'Programme', 'nav.venue': 'Venue', 'nav.speakers': 'Speakers', 'nav.news': 'News',
-        'nav.support': 'Support & Documents', 'nav.faq': 'FAQ', 'nav.more': 'More',
-        'cta.apply': 'Apply to Attend', 'cta.about': 'About the Workshop', 'cta.live': 'Live Programme',
-        'countdown.label': 'Countdown', 'countdown.note': 'Time remaining until the workshop',
-        'cd.days': 'Days', 'cd.hours': 'Hours', 'cd.minutes': 'Minutes', 'cd.seconds': 'Seconds',
-        'live.badge': 'Live', 'live.dayProgram': 'The Workshop Is On · View Day {n} Programme',
+        'nav.support': 'Support', 'nav.faq': 'FAQ',
+        'cta.apply': 'Apply to attend', 'cta.about': 'About the workshop',
+        'countdown.label': 'Time until the workshop',
+        'cd.days': 'days', 'cd.hours': 'hours', 'cd.minutes': 'minutes', 'cd.seconds': 'seconds',
+        'live.badge': 'Happening now', 'live.dayProgram': 'Day {n} programme',
         'live.now': 'Now', 'live.next': 'Up next', 'live.nothingNow': 'No session is running right now.',
-        'archive.badge': 'Completed', 'archive.report': 'Download Outcome Report', 'archive.title': 'The workshop has concluded',
+        'archive.report': 'Download the outcome report', 'archive.title': 'The workshop has concluded',
         'archive.text': 'The outcome report and workshop outputs will be published on this page.',
-        'about.eyebrow': 'Subject · Purpose · Scope', 'about.title': 'About the workshop',
-        'about.lead': 'A two-day meeting to discuss the economic dimensions of the clean energy transition on a scientific footing.',
+        'about.eyebrow': 'Subject, purpose and scope', 'about.title': 'Thinking through the <em>economics</em> of transition',
+        'about.lead': 'Over two days we will discuss the economic consequences of the clean energy transition on a scientific footing.',
         'about.subject': 'Subject',
-        'themes.eyebrow': 'Main Themes', 'themes.title': 'Topics for discussion',
-        'themes.lead': 'Sessions will be organised around the following main themes.',
-        'dates.eyebrow': 'Important Dates', 'dates.title': 'Workshop timeline',
-        'dates.lead': 'Confirmed dates will be posted in this timeline and under News.',
-        'dates.progress': 'Progress', 'dates.daysLeft': 'days left', 'dates.extended': 'Extended!',
+        'themes.eyebrow': 'Main themes', 'themes.title': 'Topics on the <em>table</em>',
+        'themes.lead': 'Sessions will be built around these six themes.',
+        'dates.eyebrow': 'Timeline', 'dates.title': 'Key <em>dates</em>',
+        'dates.lead': 'Confirmed dates will be posted here and under News.',
         'status.done': 'Completed', 'status.active': 'Next', 'status.upcoming': 'Planned',
-        'committees.eyebrow': 'Committees', 'committees.title': 'Organizing & scientific committees',
+        'committees.eyebrow': 'Committees', 'committees.title': 'Organizing and <em>scientific</em> committees',
         'committees.lead': 'The workshop is run by committees of scholars from different universities.',
-        'committees.organizing': 'Organizing Committee', 'committees.scientific': 'Scientific Committee',
-        'committees.search': 'Search name or institution…', 'committees.empty': 'No member matches your search.',
+        'committees.organizing': 'Organizing committee', 'committees.scientific': 'Scientific committee',
+        'committees.search': 'Search name or institution', 'committees.empty': 'No member matches your search.',
         'committees.tbaTitle': 'Committee members will be announced soon',
         'committees.tbaText': 'The member list will be published here once finalised.',
-        'speakers.eyebrow': 'Invited Speakers', 'speakers.title': 'Invited speakers',
+        'speakers.eyebrow': 'Invited speakers', 'speakers.title': 'Invited <em>speakers</em>',
         'speakers.lead': 'Invited experts will be announced once the programme is finalised.',
-        'speakers.talk': 'Talk', 'speakers.tba': 'To be announced', 'speakers.tbaNote': 'Details coming soon',
-        'program.eyebrow': 'Draft Programme', 'program.title': 'Two-day schedule',
-        'program.lead': 'The schedule below is a draft; speakers, presentations and halls will be announced later.',
+        'speakers.tba': 'To be announced', 'speakers.tbaNote': 'Details coming soon',
+        'program.eyebrow': 'Draft programme', 'program.title': 'Two days, <em>in sequence</em>',
+        'program.lead': 'This schedule is a draft; speakers, presentations and halls will be announced later.',
         'program.day': 'Day', 'program.note': 'This programme is a draft; updates will be posted under News.',
-        'type.keynote': 'Invited Talk', 'type.session': 'Session', 'type.panel': 'Round Table', 'type.break': 'Break',
-        'type.ceremony': 'Opening / Closing', 'type.registration': 'Registration', 'type.workshop': 'Group Work',
-        'news.eyebrow': 'News', 'news.title': 'Latest announcements', 'news.lead': 'All workshop announcements are published here.',
-        'venue.eyebrow': 'Venue & Travel', 'venue.directions': 'Get directions',
-        'support.eyebrow': 'Support & Documents', 'support.title': 'Support and workshop documents',
-        'support.contrib': 'How the requested support contributes', 'support.docs': 'Documents',
-        'faq.eyebrow': 'FAQ', 'faq.title': 'Frequently asked questions',
-        'apply.title': 'Applications have not opened yet',
+        'type.keynote': 'Invited talk', 'type.session': 'Session', 'type.panel': 'Round table', 'type.break': 'Break',
+        'type.ceremony': 'Opening / closing', 'type.registration': 'Registration', 'type.workshop': 'Group work',
+        'news.eyebrow': 'News', 'news.title': 'Latest <em>news</em>', 'news.lead': 'All workshop announcements are published here.',
+        'venue.eyebrow': 'Venue and travel', 'venue.title': 'Davutpaşa <em>Campus</em>', 'venue.directions': 'Get directions',
+        'support.eyebrow': 'Support', 'support.title': 'Support and <em>documents</em>',
+        'support.lead': 'Information on support for the workshop and downloadable documents.',
+        'support.contrib': 'How the requested support contributes',
+        'faq.eyebrow': 'Frequently asked', 'faq.title': 'Common <em>questions</em>',
+        'apply.badge': 'Not open yet', 'apply.title': 'Applications have not opened yet',
         'apply.text': 'Participation applications are not open yet. Conditions and dates will be announced in the News section of this page once confirmed.',
         'apply.news': 'Go to News',
-        'footer.organizer': 'Organizer', 'footer.quick': 'Links', 'footer.contactSoon': 'Contact address coming soon', 'footer.top': 'Back to top'
+        'footer.organizer': 'Organizer', 'footer.event': 'Workshop', 'footer.quick': 'Sections',
+        'footer.contactSoon': 'Contact address coming soon', 'footer.top': 'Back to top'
       }
     };
 
+    // Kayan göstergeli sekme bileşeni
+    function segmented() {
+      return {
+        thumb: 'opacity: 0',
+        update(el) {
+          const active = el.querySelector('[aria-selected="true"]');
+          if (!active) return;
+          this.thumb = 'width:' + active.offsetWidth + 'px; transform: translateX(' + active.offsetLeft + 'px)';
+          if (el.scrollWidth > el.clientWidth) active.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+        },
+        init() {
+          const run = () => this.update(this.$el);
+          if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+          window.addEventListener('resize', run, { passive: true });
+        }
+      };
+    }
+
     // ---------------------------------------------------------------------
-    // Alpine bileşeni
+    // Alpine kök bileşeni
     // ---------------------------------------------------------------------
     function symposiumApp() {
       return {
         data: symposiumData,
         lang: 'tr',
-        mobileMenu: false,
+        theme: document.documentElement.getAttribute('data-theme') || 'light',
+        menuOpen: false,
+        applyOpen: false,
+        scrolled: false,
         activeSection: '',
+        hoverStyle: 'opacity: 0',
+        aboutTab: 'purpose',
         committeeTab: 'organizing',
         search: '',
         dayTab: 0,
         openFaq: 0,
-        applyOpen: false,
-        announcementDismissed: false,
         previewPhase: '',
         now: Date.now(),
 
         navItems: [
-          { id: 'about', key: 'nav.about', icon: 'info', primary: true },
-          { id: 'themes', key: 'nav.themes', icon: 'layout-grid', primary: true },
-          { id: 'dates', key: 'nav.dates', icon: 'calendar-days', primary: true },
-          { id: 'committees', key: 'nav.committees', icon: 'users', primary: true },
-          { id: 'program', key: 'nav.program', icon: 'list-checks', primary: true },
-          { id: 'venue', key: 'nav.venue', icon: 'map-pin', primary: true },
-          { id: 'speakers', key: 'nav.speakers', icon: 'mic' },
-          { id: 'news', key: 'nav.news', icon: 'megaphone' },
-          { id: 'support', key: 'nav.support', icon: 'file-text' },
-          { id: 'faq', key: 'nav.faq', icon: 'circle-help' }
+          { id: 'about', key: 'nav.about', primary: true },
+          { id: 'themes', key: 'nav.themes', primary: true },
+          { id: 'dates', key: 'nav.dates', primary: true },
+          { id: 'committees', key: 'nav.committees', primary: true },
+          { id: 'program', key: 'nav.program', primary: true },
+          { id: 'venue', key: 'nav.venue', primary: true },
+          { id: 'speakers', key: 'nav.speakers' },
+          { id: 'news', key: 'nav.news' },
+          { id: 'support', key: 'nav.support' },
+          { id: 'faq', key: 'nav.faq' }
         ],
         committeeTabs: [
           { id: 'organizing', key: 'committees.organizing' },
@@ -1371,7 +1465,6 @@
             const saved = localStorage.getItem('ecep-lang');
             if (saved === 'tr' || saved === 'en') this.lang = saved;
             else if ((navigator.language || '').toLowerCase().startsWith('en')) this.lang = 'en';
-            this.announcementDismissed = localStorage.getItem('ecep-announcement') === this.data.announcement.id;
           } catch (e) { /* depolama erişilemez */ }
           document.documentElement.lang = this.lang;
 
@@ -1381,12 +1474,43 @@
 
           setInterval(() => { this.now = Date.now(); }, 1000);
 
-          // Görünürdeki bölümü menüde vurgula
+          // Sistem teması değişirse (kullanıcı seçim yapmadıysa) uy
+          const mq = window.matchMedia('(prefers-color-scheme: dark)');
+          mq.addEventListener && mq.addEventListener('change', (e) => {
+            let saved = null;
+            try { saved = localStorage.getItem('ecep-theme'); } catch (err) { /* yoksay */ }
+            if (!saved) this.applyTheme(e.matches ? 'dark' : 'light', false);
+          });
+
+          // Kaydırma: menü gölgesi + girişteki dokuya hafif paralaks
+          const topo = this.$refs.heroTopo;
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          let ticking = false;
+          const onScroll = () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+              const y = window.scrollY;
+              this.scrolled = y > 8;
+              if (topo && !reduce && y < 1200) topo.style.transform = 'translate3d(0,' + (y * 0.18).toFixed(1) + 'px,0)';
+              ticking = false;
+            });
+          };
+          window.addEventListener('scroll', onScroll, { passive: true });
+          onScroll();
+
           this.$nextTick(() => {
-            const observer = new IntersectionObserver((entries) => {
-              entries.forEach((entry) => { if (entry.isIntersecting) this.activeSection = entry.target.id; });
+            // Görünümdeki bölümü menüde işaretle
+            const sectionObs = new IntersectionObserver((entries) => {
+              entries.forEach((en) => { if (en.isIntersecting) this.activeSection = en.target.id; });
             }, { rootMargin: '-45% 0px -50% 0px' });
-            this.navItems.forEach((l) => { const el = document.getElementById(l.id); if (el) observer.observe(el); });
+            this.navItems.forEach((l) => { const el = document.getElementById(l.id); if (el) sectionObs.observe(el); });
+
+            // Yumuşak beliriş
+            const revealObs = new IntersectionObserver((entries) => {
+              entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); revealObs.unobserve(en.target); } });
+            }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+            document.querySelectorAll('[data-reveal]').forEach((el) => revealObs.observe(el));
           });
         },
 
@@ -1396,46 +1520,58 @@
           try { localStorage.setItem('ecep-lang', l); } catch (e) { /* yoksay */ }
         },
 
-        // Çok dilli değer → aktif dildeki metin
+        applyTheme(next, persist = true) {
+          this.theme = next;
+          document.documentElement.setAttribute('data-theme', next);
+          if (persist) { try { localStorage.setItem('ecep-theme', next); } catch (e) { /* yoksay */ } }
+        },
+        // Koyu/açık tema — tıklanan noktadan dairesel açılan geçiş
+        toggleTheme(e) {
+          const next = this.theme === 'dark' ? 'light' : 'dark';
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (!document.startViewTransition || reduce) { this.applyTheme(next); return; }
+          const x = e.clientX, y = e.clientY;
+          const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+          const tr = document.startViewTransition(() => this.applyTheme(next));
+          tr.ready.then(() => {
+            document.documentElement.animate(
+              { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + r + 'px at ' + x + 'px ' + y + 'px)'] },
+              { duration: 700, easing: 'cubic-bezier(.22,1,.36,1)', pseudoElement: '::view-transition-new(root)' }
+            );
+          });
+        },
+
+        // Menüde üzerine gelinen bağlantının arkasında kayan zemin
+        hoverLink(el) {
+          const target = el || (this.$refs.links && this.$refs.links.querySelector('a.active'));
+          // Hedef yoksa son konumda kalarak solar (sonraki hover'da sıçrama olmaz)
+          if (!target) { this.hoverStyle = this.hoverStyle.replace('opacity:1', 'opacity:0'); return; }
+          this.hoverStyle = 'opacity:1; width:' + target.offsetWidth + 'px; transform: translateX(' + target.offsetLeft + 'px)';
+        },
+
         t(v) {
           if (v && typeof v === 'object' && !Array.isArray(v)) return v[this.lang] ?? v.tr;
           return v;
         },
-        // Arayüz etiketi
         L(key) { return uiText[this.lang][key] ?? key; },
-
-        // Lucide ikonunu satır içi SVG olarak üretir (Alpine ile reaktif kalır)
-        icon(name, cls = 'h-5 w-5') {
-          const lib = window.lucide && window.lucide.icons;
-          if (!lib) return '';
-          const key = name.split('-').map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join('');
-          let node = lib[key];
-          if (!node) return '';
-          if (node[0] === 'svg') node = node[2];
-          const inner = node.map(([tag, attrs]) =>
-            '<' + tag + ' ' + Object.entries(attrs).map(([k, v]) => k + '="' + v + '"').join(' ') + '/>'
-          ).join('');
-          return '<svg xmlns="http://www.w3.org/2000/svg" class="' + cls + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
+        icon(name) {
+          return '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' + (ICONS[name] || '') + '</svg>';
         },
-
         initials(name) {
           return name.split(/\s+/).filter((p) => p && !p.endsWith('.')).map((p) => p.charAt(0)).slice(0, 2).join('').toLocaleUpperCase('tr');
         },
-
         formatDate(iso, withWeekday = false) {
           const d = new Date(iso.length === 10 ? iso + 'T12:00:00+03:00' : iso);
-          const opts = { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Istanbul' };
-          if (withWeekday) { delete opts.year; opts.weekday = 'long'; }
+          const opts = withWeekday
+            ? { day: 'numeric', month: 'short', weekday: 'short', timeZone: 'Europe/Istanbul' }
+            : { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Istanbul' };
           return new Intl.DateTimeFormat(this.lang === 'tr' ? 'tr-TR' : 'en-GB', opts).format(d);
         },
-
         norm(s) {
           return (s || '').toLocaleLowerCase('tr').replace(/ı/g, 'i').normalize('NFD').replace(/[̀-ͯ]/g, '');
         },
 
-        openApply() { this.applyOpen = true; },
-
-        // ---- Faz (öncesi → canlı → arşiv) ----
+        // ---- Faz ----
         get phase() {
           const o = this.previewPhase || this.data.meta.phaseOverride;
           if (o) return o;
@@ -1443,21 +1579,13 @@
           if (this.now <= new Date(this.data.meta.endDate).getTime()) return 'live';
           return 'archive';
         },
-        get announcementVisible() {
-          return this.data.announcement.active && !this.announcementDismissed && this.phase === 'cfp';
-        },
-        dismissAnnouncement() {
-          this.announcementDismissed = true;
-          try { localStorage.setItem('ecep-announcement', this.data.announcement.id); } catch (e) { /* yoksay */ }
-        },
 
-        // ---- Menü ----
         get primaryNav() { return this.navItems.filter((l) => l.primary); },
         get secondaryNav() { return this.navItems.filter((l) => !l.primary); },
 
         // ---- Geri sayım ----
         get countdownUnits() {
-          const s = Math.max(0, Math.floor((new Date(this.data.meta.countdownTarget).getTime() - this.now) / 1000));
+          const s = Math.max(0, Math.floor((new Date(this.data.meta.startDate).getTime() - this.now) / 1000));
           const pad = (n) => String(n).padStart(2, '0');
           return [
             { key: 'cd.days', value: pad(Math.floor(s / 86400)) },
@@ -1498,18 +1626,17 @@
           document.getElementById('program').scrollIntoView({ behavior: 'smooth' });
         },
 
-        // ---- Zaman çizelgesi (tarihsiz maddeler "planlanan" sayılır) ----
+        // ---- Takvim ----
         get timeline() {
           let activeFound = false;
           // Tarihli bir madde geçtiyse, ondan önceki tarihsiz maddeler de tamamlanmış sayılır
           const lastDone = this.data.importantDates.reduce((acc, d, i) => (d.date && new Date(d.date).getTime() < this.now ? i : acc), -1);
           return this.data.importantDates.map((d, i) => {
-            const ts = d.date ? new Date(d.date).getTime() : null;
             let status;
             if (i <= lastDone) status = 'done';
             else if (!activeFound) { status = 'active'; activeFound = true; }
             else status = 'upcoming';
-            return { ...d, status, daysLeft: ts ? Math.max(0, Math.ceil((ts - this.now) / 86400000)) : null };
+            return { ...d, status };
           });
         },
         get timelineDone() { return this.timeline.filter((d) => d.status === 'done').length; },
@@ -1520,25 +1647,6 @@
           const q = this.norm(this.search.trim());
           if (!q) return list;
           return list.filter((m) => this.norm([m.title, m.name, this.t(m.affiliation), this.t(m.role)].join(' ')).includes(q));
-        },
-
-        // ---- Program ----
-        typeStyle(type) {
-          return {
-            keynote: 'bg-accent-100 text-accent-800',
-            session: 'bg-brand-50 text-brand-800',
-            workshop: 'bg-accent-50 text-accent-800',
-            panel: 'bg-ink text-white',
-            ceremony: 'bg-slate-900 text-white',
-            break: 'bg-slate-100 text-slate-500',
-            registration: 'bg-slate-100 text-slate-600'
-          }[type] || 'bg-slate-100 text-slate-600';
-        },
-        typeIcon(type) {
-          return {
-            keynote: 'mic', session: 'presentation', panel: 'messages-square', ceremony: 'flag',
-            workshop: 'users-round', break: 'coffee', registration: 'clipboard-check'
-          }[type] || 'circle';
         }
       };
     }
