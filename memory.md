@@ -5,7 +5,9 @@
 
 ## Proje
 - Canlı: https://ilhanselahattin.github.io/sempozyum2027/ · Repo: github.com/ilhanselahattin/sempozyum2027 (main'e push = otomatik yayın, ~1 dk)
-- Amaç: Akademik sempozyum (örnek ad: ISSDT 2027) için tek sayfalık site → GitHub Pages.
+- **ETKİNLİK TÜRÜ: ÇALIŞTAY (sempozyum DEĞİL).** Kesin tarih: **18–19 Ocak 2027** (Pzt–Salı). Kaynak: hocanın mesajı (2026-10-23).
+- Amaç: Akademik çalıştay için tek sayfalık site → GitHub Pages. Ad/konu/kurum henüz bilinmiyor → yer tutucu "SDT 2027 · Uluslararası Sürdürülebilir Dijital Dönüşüm Çalıştayı".
+- Kod değişken adları (`symposiumData`, `symposiumApp`) bilerek değiştirilmedi; görünür metinlerin tamamı "çalıştay/workshop".
 - Build yok. Dosyalar: `index.html` (tüm site + veri), `404.html`, `favicon.ico`, `robots.txt`, `sitemap.xml`, `.nojekyll`,
   `assets/img/` (favicon.svg, apple-touch-icon.png, og-image.png), `assets/src/og-image.html` (OG görsel kaynağı), `memory.md`.
 - Stack: Tailwind CDN 3.4.16, Alpine.js 3.14.8 + Collapse eklentisi, Lucide 0.460.0 (UMD), Google Fonts (Plus Jakarta Sans / Inter / JetBrains Mono).
@@ -19,11 +21,13 @@
   - live: kırmızı CANLI rozeti, "Gün X Programını Gör" + Program PDF, "Şu an / Sıradaki" paneli, programda canlı oturum vurgusu.
   - archive: hero'da en büyük butonlar = `proceedings[]` (ISBN), sertifika paneli, `archive.stats`.
 - `importantDates[].key` kodda kullanılır (abstract, fullpaper, earlyreg). Uzatma: `date`=yeni, `oldDate`=eski, `isExtended:true`.
+  - Tam metin tarihi etkinlikten SONRAYSA CTA "Tam Metin Gönder" aşamasını atlar (Özet Gönder → Kayıt Ol).
+- Program oturum tipleri: keynote, session, panel, workshop (grup çalışması/tematik masalar; `papers` alanı masa listesi olarak kullanılır), break, ceremony, registration, poster, social.
 - Koşullu bölümler: `acceptedPapers.list` boşsa #accepted gizli; `gallery` boşsa #gallery gizli; `registration.isFree:true` → "Katılım Ücretsizdir".
 - `halls[].onlineUrl` doluysa programda "Çevrim içi katıl" linki çıkar (şifre YAZMA).
 - `announcement` → üst turuncu şerit (yalnız cfp fazında; yeni duyuruda `id` değiştir).
 - Renkler: `brand` zümrüt #059669, `accent` kehribar #D97706, `ink` #0B0F19, `paper` #F8FAFC (tailwind.config).
-- localStorage: `issdt-lang`, `issdt-announcement`. Çerez yok.
+- localStorage: `sdt-lang`, `sdt-announcement`. Çerez yok.
 - Bölüm id'leri: about(+incentive) · dates · speakers · committees · program · accepted · guidelines · registration · travel · gallery · faq · contact(footer). KVKK = modal (`kvkkOpen`).
 
 ## Görsel üretimi (Pillow yok → headless Chrome)
@@ -72,6 +76,10 @@
 - [~] Fotoğraf galerisi + ışık kutusu hazır; `gallery[]` doldurulunca görünür. Fotoğraf kullanımı için KVKK metninde açık rıza maddesi var.
 
 ## Açık işler / Notlar
+- **ZAMAN BASKISI:** Çalıştaya ~3 ay var. Örnek takvim: çağrı 2 Kas · özet 30 Kas · kabul 10 Ara · kayıt 25 Ara · program 8 Oca · çalıştay 18–19 Oca · tam metin 15 Şub (sonrası). Ara tarihler ÖRNEK, düzenleme kurulu onaylamalı. Yol haritasındaki "2–4 ay önce" fazları sıkıştı: çağrı ve gönderim sistemi bu hafta netleşmeli.
+- Alan adı (BİDB) 1–2 hafta sürebilir → çağrı ilk etapta github.io linkiyle duyurulabilir.
+- Hocadan öğrenilecek: çalıştayın adı/konusu, düzenleyen kurum, ulusal mı uluslararası mı, ücretli mi, bildiri kitabı (ISBN) olacak mı, davetli konuşmacı var mı.
+- Repo adı `sempozyum2027` → `calistay2027` olarak değiştirilmesi önerildi (GitHub Settings > Rename; eski adres yönlenir ama Pages URL'si değişir). Kullanıcı kararı bekleniyor.
 - TÜM veriler örnektir (kurgusal "Kuzey Ufuk Üniversitesi", kurgusal kişiler, örnek IBAN, example.org e-posta).
 - `assets/docs/` klasörü yok (tüm indirme linkleri şu an 404).
 
@@ -80,3 +88,4 @@
 - 2026-10-23 · Adım 2: git init + ilk commit (b618515). GitHub push bekliyor (repo URL yok, gh CLI yok).
 - 2026-10-23 · Adım 3: Yol haritası eklendi ve değerlendirildi. index.html v2: faz sistemi, duyuru şeridi, uzatma modu, teşvik kartı, kayıt/ücret/IBAN, kabul edilen bildiriler, sunum kuralları, 6 indirme, ulaşım+konaklama, galeri+ışık kutusu, KVKK modalı, "Daha Fazla" menüsü, SEO/OG/JSON-LD. 404/robots/sitemap/.nojekyll, favicon + OG görseli üretildi. Node ile 5 tarih senaryosu test edildi, headless Chrome ile masaüstü/mobil/canlı mod ekran görüntüleri kontrol edildi.
 - 2026-10-23 · Adım 4: GitHub'a push (repo sempozyum2027), Pages açıldı. Canlı kontrol: index/favicon/og/robots/sitemap 200, 404 sayfası çalışıyor, 4 CDN 200, headless Chrome ile JS render (geri sayım, ikonlar, tüm bölümler) doğrulandı. assets/docs/ dosyaları hâlâ 404 (beklenen).
+- 2026-10-23 · Adım 5: Etkinlik ÇALIŞTAY olarak düzeltildi, tarih 18–19 Ocak 2027. Tüm görünür metinler sempozyum→çalıştay (TR ekleri dahil) / symposium→workshop; ISSDT→SDT. Takvim baştan kuruldu (uzatma örneği kaldırıldı, tam metin çalıştay sonrasına), duyuru 'tarihler kesinleşti', 2. gün öğleden sonra 'Grup Çalışmaları · Tematik Masalar' + 'Sonuç Bildirgesi ve Kapanış', yeni 'workshop' oturum tipi. CTA mantığı tam metin sonra ise atlayacak şekilde düzeltildi. OG görseli yeniden üretildi. 5 tarih senaryosu + ekran görüntüleriyle doğrulandı.
